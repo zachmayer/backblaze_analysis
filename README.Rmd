@@ -1,0 +1,92 @@
+---
+title: "Readme"
+output: md_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r analyze_data, echo=FALSE}
+library(data.table)
+library(binom)
+#source('1_download_data.R')  # Uncomment these lines the first time you run
+#source('2_unzip_data.R')
+#source('3_assemble_data.R')
+
+all_data <- fread('all_data.csv')
+
+# Aggregate data
+keys <- c('model', 'failure')
+setkeyv(all_data, keys)
+all_data <- all_data[,list(
+  N = sum(N),
+  capacity_tb=round(max(capacity_bytes)/1e+12, 1)
+), by=keys]
+
+# Reshape wide
+all_data[,failure := factor(failure, labels=c('No', 'Yes'))]
+all_data <- dcast.data.table(all_data, model + capacity_tb ~ failure, value.var = 'N')
+all_data[is.na(Yes), Yes := 0]
+
+# Calculate binomial probability
+# TODO: use poisson: 
+# https://datarobot.slack.com/archives/C030MTXJ3/p1599169013087900?thread_ts=1599165034.086300&cid=C030MTXJ3
+all_data[,bi_prob_mean := binom.confint(Yes, Yes+No, level=.95, methods='exact')[,'mean']]
+all_data[,bi_prob_95_upper := binom.confint(Yes, Yes+No, level=.95, methods='exact')[,'upper']]
+
+# Annualize teh daily failure rate
+days_to_year <- 365.2425
+all_data[,bi_prob_mean := 1-(1-bi_prob_mean)^days_to_year]
+all_data[,bi_prob_95_upper := 1-(1-bi_prob_95_upper)^days_to_year]
+setorderv(all_data, 'bi_prob_95_upper')
+
+# Round off for nice formatting
+all_data[,bi_prob_mean := sprintf("%1.2f%%", 100*bi_prob_mean)]
+all_data[,bi_prob_95_upper := sprintf("%1.2f%%", 100*bi_prob_95_upper)]
+
+# Choose best drive
+best_drive <- all_data[1, model]
+```
+
+# Data Sources
+I did this analysis using data from: [BackBlaze](https://www.backblaze.com/b2/hard-drive-test-data.html#downloading-the-raw-hard-drive-test-data).
+
+I used all the data they had available.  Here are some links to example files:  
+[2020 Data, Q2](https://f001.backblazeb2.com/file/Backblaze-Hard-Drive-Data/data_Q2_2020.zip)    
+[2020 Data, Q1](https://f001.backblazeb2.com/file/Backblaze-Hard-Drive-Data/data_Q1_2020.zip)    
+[2019 Data, Q4](https://f001.backblazeb2.com/file/Backblaze-Hard-Drive-Data/data_Q4_2019.zip)    
+[2019 Data, Q3](https://f001.backblazeb2.com/file/Backblaze-Hard-Drive-Data/data_Q3_2019.zip)    
+
+Download the files, unzip them, and put all the raw files in `data/`
+
+Some background on how to look at this data can be found on the [backblaze blog](https://www.backblaze.com/blog/backblaze-hard-drive-stats-q1-2020/). However, their formula to annualize failure rates is wrong: `Drive Failures / (Drive Days / 365)`.  The correct probability calculation is `1-(1-Drive Failures / Drive Days)^365`.  The difference is tiny, but it bothers me, so here we are.
+
+# Simple Analysis: assuming a constant failure rate
+## AKA Poisson probability
+We're going to use the binomial distribution to understand this data: each day, each drive either fails or doesn't fail.  We encode failure as 1, and not failing as 0.
+
+We then use R's exact binomial test to get a 95% confidence interval on that failure rate.  Specifically, we look at the upper confidence interval, as we want to pick drives that are least likely to have a high failure rate.  (Another way of saying this is that we want drives that were observed for long periods of time with low failure rates).
+
+In other words, we have 2 goals in this analysis:
+1. Holding observation time constant, we want lower failure rates (lower failure rate is better).
+2. olding failure rate constant we want longer observation time (this gives us more confidence in the failure rate).
+
+Using the binomial confidence interval is a good way to achieve both goals.
+
+For a lot more detail on why a binomial confidence interval is what we want to use here, read Evan Miller's blog post [How Not To Sort By Average Rating](https://www.evanmiller.org/how-not-to-sort-by-average-rating.html).
+
+This statistic is the daily failure rate, but we're not gonna use these drives for 1 day.  We're gonna use them for years, so we "annualize" the failure rate.
+
+Let's say a drive has a 0.5% daily failure rate.  This means it has a 99.5% daily passing rate.  We want to know the odds it will survive 1 year, which are .995^365 = 0.1604813.  So 0.5% daily failure rate is really bad, and is equivalent to an annual failure rate of 100-16 = 84%.  You wouldn't buy a drive with an 84% chance of failing in 1 year!
+
+Here's the results of our analysis.  The `r best_drive` is the most reliable drive in our sample of data:
+```{r data}
+knitr::kable(all_data)
+```
+
+# Complicated Analysis: allow for a variable failure rate (between serial numbners, and over time)
+## AKA Survival Analysis
+
+# Erratum
+![I nerd sniped myself](https://imgs.xkcd.com/comics/nerd_sniping.png)
