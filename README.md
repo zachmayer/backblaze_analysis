@@ -69,8 +69,8 @@ reliable drive in our sample of data:
 <th style="text-align: right;">Failures</th>
 <th style="text-align: right;">Drive_Years</th>
 <th style="text-align: right;">capacity_tb</th>
-<th style="text-align: left;">annual_drive_failure_rate</th>
-<th style="text-align: left;">annual_drive_failure_rate_95</th>
+<th style="text-align: left;">annual_drive_fail_rate</th>
+<th style="text-align: left;">ci_95</th>
 </tr>
 </thead>
 <tbody>

@@ -78,8 +78,8 @@ knitr::kable(all_data[
     Failures=Yes,
     Drive_Years=round((Yes+No)/days_to_year, 1),
     capacity_tb, 
-    annual_drive_failure_rate=sprintf("%1.2f%%", 100*annual_drive_failure_rate),
-    annual_drive_failure_rate_95=sprintf("%1.2f%%", 100*annual_drive_failure_rate_95))])
+    annual_drive_fail_rate=sprintf("%1.2f%%", 100*annual_drive_failure_rate),
+    ci_95=sprintf("%1.2f%%", 100*annual_drive_failure_rate_95))])
 ```
 
 # Complicated Analysis: allow for a variable failure rate (between serial numbners, and over time)
