@@ -66,6 +66,8 @@ reliable drive in our sample of data:
 <thead>
 <tr class="header">
 <th style="text-align: left;">model</th>
+<th style="text-align: right;">Failures</th>
+<th style="text-align: right;">Drive_Years</th>
 <th style="text-align: right;">capacity_tb</th>
 <th style="text-align: left;">annual_drive_failure_rate</th>
 <th style="text-align: left;">annual_drive_failure_rate_95</th>
@@ -74,381 +76,331 @@ reliable drive in our sample of data:
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">HGST HMS5C4040BLE640</td>
+<td style="text-align: right;">274</td>
+<td style="text-align: right;">21867106</td>
 <td style="text-align: right;">4.0</td>
 <td style="text-align: left;">0.46%</td>
 <td style="text-align: left;">0.52%</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">HGST HUH721212ALN604</td>
+<td style="text-align: right;">65</td>
+<td style="text-align: right;">4893547</td>
 <td style="text-align: right;">12.0</td>
 <td style="text-align: left;">0.49%</td>
 <td style="text-align: left;">0.62%</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">HGST HMS5C4040ALE640</td>
+<td style="text-align: right;">179</td>
+<td style="text-align: right;">12187880</td>
 <td style="text-align: right;">4.0</td>
 <td style="text-align: left;">0.54%</td>
 <td style="text-align: left;">0.62%</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">HGST HUH721212ALE600</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">669202</td>
 <td style="text-align: right;">12.0</td>
 <td style="text-align: left;">0.44%</td>
 <td style="text-align: left;">0.86%</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Hitachi HDS5C4040ALE630</td>
+<td style="text-align: right;">88</td>
+<td style="text-align: right;">4401851</td>
 <td style="text-align: right;">4.0</td>
 <td style="text-align: left;">0.73%</td>
 <td style="text-align: left;">0.90%</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Hitachi HDS5C3030ALA630</td>
+<td style="text-align: right;">150</td>
+<td style="text-align: right;">6641559</td>
 <td style="text-align: right;">3.0</td>
 <td style="text-align: left;">0.82%</td>
 <td style="text-align: left;">0.97%</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">HGST HUH728080ALE600</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">977265</td>
 <td style="text-align: right;">8.0</td>
 <td style="text-align: left;">0.64%</td>
 <td style="text-align: left;">1.02%</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">ST10000NM0086</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">1222596</td>
 <td style="text-align: right;">10.0</td>
 <td style="text-align: left;">0.75%</td>
 <td style="text-align: left;">1.10%</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">ST8000DM002</td>
+<td style="text-align: right;">393</td>
+<td style="text-align: right;">13572615</td>
 <td style="text-align: right;">8.0</td>
 <td style="text-align: left;">1.06%</td>
 <td style="text-align: left;">1.17%</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">ST6000DX000</td>
+<td style="text-align: right;">88</td>
+<td style="text-align: right;">3058616</td>
 <td style="text-align: right;">6.0</td>
 <td style="text-align: left;">1.05%</td>
 <td style="text-align: left;">1.29%</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">ST12000NM0008</td>
+<td style="text-align: right;">66</td>
+<td style="text-align: right;">2351553</td>
 <td style="text-align: right;">12.0</td>
 <td style="text-align: left;">1.03%</td>
 <td style="text-align: left;">1.30%</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">ST8000NM0055</td>
+<td style="text-align: right;">518</td>
+<td style="text-align: right;">15779767</td>
 <td style="text-align: right;">8.0</td>
 <td style="text-align: left;">1.20%</td>
 <td style="text-align: left;">1.31%</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">TOSHIBA MG07ACA14TA</td>
+<td style="text-align: right;">55</td>
+<td style="text-align: right;">1797240</td>
 <td style="text-align: right;">14.0</td>
 <td style="text-align: left;">1.12%</td>
 <td style="text-align: left;">1.45%</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">TOSHIBA MD04ABA400V</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">252425</td>
 <td style="text-align: right;">4.0</td>
 <td style="text-align: left;">0.72%</td>
 <td style="text-align: left;">1.69%</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Hitachi HDS722020ALA330</td>
+<td style="text-align: right;">235</td>
+<td style="text-align: right;">5306511</td>
 <td style="text-align: right;">2.0</td>
 <td style="text-align: left;">1.62%</td>
 <td style="text-align: left;">1.84%</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">ST12000NM0007</td>
+<td style="text-align: right;">1678</td>
+<td style="text-align: right;">27502834</td>
 <td style="text-align: right;">12.0</td>
 <td style="text-align: left;">2.23%</td>
 <td style="text-align: left;">2.34%</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Hitachi HDS723030ALA640</td>
+<td style="text-align: right;">73</td>
+<td style="text-align: right;">1429666</td>
 <td style="text-align: right;">3.0</td>
 <td style="text-align: left;">1.86%</td>
 <td style="text-align: left;">2.34%</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">ST4000DM000</td>
+<td style="text-align: right;">3976</td>
+<td style="text-align: right;">56007808</td>
 <td style="text-align: right;">4.0</td>
 <td style="text-align: left;">2.59%</td>
 <td style="text-align: left;">2.67%</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Seagate SSD</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">34967</td>
 <td style="text-align: right;">0.3</td>
 <td style="text-align: left;">0.00%</td>
 <td style="text-align: left;">3.85%</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">TOSHIBA MD04ABA500V</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">66870</td>
 <td style="text-align: right;">5.0</td>
 <td style="text-align: left;">1.09%</td>
 <td style="text-align: left;">3.95%</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">ST12000NM001G</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">137929</td>
 <td style="text-align: right;">12.0</td>
 <td style="text-align: left;">2.12%</td>
 <td style="text-align: left;">4.17%</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">HGST HDS724040ALE640</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">58074</td>
 <td style="text-align: right;">4.0</td>
 <td style="text-align: left;">1.26%</td>
 <td style="text-align: left;">4.54%</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">HGST HDS5C4040ALE630</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">112400</td>
 <td style="text-align: right;">4.0</td>
 <td style="text-align: left;">2.27%</td>
 <td style="text-align: left;">4.69%</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">WDC WD60EFRX</td>
+<td style="text-align: right;">72</td>
+<td style="text-align: right;">685610</td>
 <td style="text-align: right;">6.0</td>
 <td style="text-align: left;">3.84%</td>
 <td style="text-align: left;">4.83%</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">WDC WD5000LPCX</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">77048</td>
 <td style="text-align: right;">0.5</td>
 <td style="text-align: left;">1.90%</td>
 <td style="text-align: left;">4.85%</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">WDC WD40EFRX</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">76828</td>
 <td style="text-align: right;">4.0</td>
 <td style="text-align: left;">1.90%</td>
 <td style="text-align: left;">4.87%</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Seagate BarraCuda SSD ZA250CM10002</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">64636</td>
 <td style="text-align: right;">0.3</td>
 <td style="text-align: left;">1.70%</td>
 <td style="text-align: left;">4.95%</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">DELLBOSS VD</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">25739</td>
 <td style="text-align: right;">0.5</td>
 <td style="text-align: left;">0.00%</td>
 <td style="text-align: left;">5.23%</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">ST500LM012 HN</td>
+<td style="text-align: right;">153</td>
+<td style="text-align: right;">1161496</td>
 <td style="text-align: right;">0.5</td>
 <td style="text-align: left;">4.81%</td>
 <td style="text-align: left;">5.64%</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">WDC WD30EFRX</td>
+<td style="text-align: right;">174</td>
+<td style="text-align: right;">1271769</td>
 <td style="text-align: right;">3.0</td>
 <td style="text-align: left;">5.00%</td>
 <td style="text-align: left;">5.80%</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">WDC WD5000LPVX</td>
+<td style="text-align: right;">75</td>
+<td style="text-align: right;">568740</td>
 <td style="text-align: right;">0.5</td>
 <td style="text-align: left;">4.82%</td>
 <td style="text-align: left;">6.04%</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">TOSHIBA MQ01ABF050M</td>
+<td style="text-align: right;">43</td>
+<td style="text-align: right;">342176</td>
 <td style="text-align: right;">0.5</td>
 <td style="text-align: left;">4.59%</td>
 <td style="text-align: left;">6.18%</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">WDC WD5000BPKT</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">42539</td>
 <td style="text-align: right;">0.5</td>
 <td style="text-align: left;">1.72%</td>
 <td style="text-align: left;">6.20%</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">TOSHIBA DT01ACA300</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">74177</td>
 <td style="text-align: right;">3.0</td>
 <td style="text-align: left;">3.45%</td>
 <td style="text-align: left;">7.10%</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">ST33000651AS</td>
+<td style="text-align: right;">31</td>
+<td style="text-align: right;">222587</td>
 <td style="text-align: right;">3.0</td>
 <td style="text-align: left;">5.09%</td>
 <td style="text-align: left;">7.22%</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">WDC WD10EADS</td>
+<td style="text-align: right;">64</td>
+<td style="text-align: right;">370505</td>
 <td style="text-align: right;">1.0</td>
 <td style="text-align: left;">6.31%</td>
 <td style="text-align: left;">8.06%</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">ST9320325AS</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">36563</td>
 <td style="text-align: right;">0.3</td>
 <td style="text-align: left;">3.00%</td>
 <td style="text-align: left;">8.76%</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">WDC WD1600AAJS</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">126941</td>
 <td style="text-align: right;">0.2</td>
 <td style="text-align: left;">5.75%</td>
 <td style="text-align: left;">8.89%</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">ST4000DM005</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">47800</td>
 <td style="text-align: right;">4.0</td>
 <td style="text-align: left;">3.82%</td>
 <td style="text-align: left;">8.92%</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">ST500LM021</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">14308</td>
 <td style="text-align: right;">0.5</td>
 <td style="text-align: left;">0.00%</td>
 <td style="text-align: left;">9.42%</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">WDC WD10EACS</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">60951</td>
 <td style="text-align: right;">1.0</td>
 <td style="text-align: left;">4.79%</td>
 <td style="text-align: left;">9.45%</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">HGST HUS726040ALE610</td>
-<td style="text-align: right;">4.0</td>
-<td style="text-align: left;">3.71%</td>
-<td style="text-align: left;">10.85%</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">WDC WD30EZRX</td>
-<td style="text-align: right;">3.0</td>
-<td style="text-align: left;">7.39%</td>
-<td style="text-align: left;">10.91%</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">ST31500541AS</td>
-<td style="text-align: right;">1.5</td>
-<td style="text-align: left;">10.03%</td>
-<td style="text-align: left;">11.07%</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">ST6000DM001</td>
-<td style="text-align: right;">6.0</td>
-<td style="text-align: left;">0.00%</td>
-<td style="text-align: left;">11.29%</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">ST9250315AS</td>
-<td style="text-align: right;">0.3</td>
-<td style="text-align: left;">7.29%</td>
-<td style="text-align: left;">11.68%</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">ST3160316AS</td>
-<td style="text-align: right;">0.2</td>
-<td style="text-align: left;">6.76%</td>
-<td style="text-align: left;">11.81%</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">TOSHIBA HDWF180</td>
-<td style="text-align: right;">8.0</td>
-<td style="text-align: left;">2.18%</td>
-<td style="text-align: left;">12.17%</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">HGST HUH721010ALE600</td>
-<td style="text-align: right;">10.0</td>
-<td style="text-align: left;">0.00%</td>
-<td style="text-align: left;">12.38%</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">ST4000DX000</td>
-<td style="text-align: right;">4.0</td>
-<td style="text-align: left;">10.08%</td>
-<td style="text-align: left;">12.53%</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">WDC WD20EFRX</td>
-<td style="text-align: right;">2.0</td>
-<td style="text-align: left;">8.13%</td>
-<td style="text-align: left;">13.40%</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">ST32000542AS</td>
-<td style="text-align: right;">2.0</td>
-<td style="text-align: left;">10.10%</td>
-<td style="text-align: left;">14.19%</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">TOSHIBA MQ01ABF050</td>
-<td style="text-align: right;">0.5</td>
-<td style="text-align: left;">13.12%</td>
-<td style="text-align: left;">15.06%</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Hitachi HDS723030BLE640</td>
-<td style="text-align: right;">3.0</td>
-<td style="text-align: left;">2.76%</td>
-<td style="text-align: left;">15.38%</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">ST250LM004 HN</td>
-<td style="text-align: right;">0.3</td>
-<td style="text-align: left;">9.04%</td>
-<td style="text-align: left;">15.79%</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">ST16000NM001G</td>
-<td style="text-align: right;">16.0</td>
-<td style="text-align: left;">2.97%</td>
-<td style="text-align: left;">16.54%</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">ST500LM030</td>
-<td style="text-align: right;">0.5</td>
-<td style="text-align: left;">12.39%</td>
-<td style="text-align: left;">16.63%</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">WDC WD2500BPVT</td>
-<td style="text-align: right;">0.3</td>
-<td style="text-align: left;">3.16%</td>
-<td style="text-align: left;">17.59%</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">ST4000DM001</td>
-<td style="text-align: right;">4.0</td>
-<td style="text-align: left;">12.92%</td>
-<td style="text-align: left;">18.05%</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">ST8000DM005</td>
-<td style="text-align: right;">8.0</td>
-<td style="text-align: left;">6.28%</td>
-<td style="text-align: left;">18.36%</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">ST3160318AS</td>
-<td style="text-align: right;">0.2</td>
-<td style="text-align: left;">11.88%</td>
-<td style="text-align: left;">19.29%</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Seagate BarraCuda SSD ZA500CM10002</td>
-<td style="text-align: right;">0.5</td>
-<td style="text-align: left;">3.61%</td>
-<td style="text-align: left;">20.09%</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">WDC WD10EADX</td>
-<td style="text-align: right;">1.0</td>
-<td style="text-align: left;">9.37%</td>
-<td style="text-align: left;">23.98%</td>
 </tr>
 </tbody>
 </table>

@@ -71,9 +71,11 @@ Let's say a drive has a 0.5% daily failure rate.  This means it has a 99.5% dail
 Here's the results of our analysis.  The `r best_drive` is the most reliable drive in our sample of data:
 ```{r data}
 knitr::kable(all_data[
-  annual_drive_failure_rate_95 < .25,
+  annual_drive_failure_rate_95 < .10,
   list(
     model, 
+    Failures=Yes,
+    Drive_Years=Yes+No,
     capacity_tb, 
     annual_drive_failure_rate=sprintf("%1.2f%%", 100*annual_drive_failure_rate),
     annual_drive_failure_rate_95=sprintf("%1.2f%%", 100*annual_drive_failure_rate_95))])
