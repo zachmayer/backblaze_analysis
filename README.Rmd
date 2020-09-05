@@ -7,7 +7,19 @@ output: md_document
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-```{r analyze_data, echo=FALSE}
+# Data Sources
+I did this analysis using data from: [BackBlaze](https://www.backblaze.com/b2/hard-drive-test-data.html#downloading-the-raw-hard-drive-test-data).
+
+I used all the data they had available.  Here is a link to an example file: [2020 Data, Q2](https://f001.backblazeb2.com/file/Backblaze-Hard-Drive-Data/data_Q2_2020.zip)
+
+Download the files, unzip them, and put all the raw files in `data/`
+
+Some background on how to look at this data can be found on the [backblaze blog](https://www.backblaze.com/blog/backblaze-hard-drive-stats-q1-2020/). They use the followiong formula to annualize failure rates: `Drive Failures / (Drive Days / 365)`.  This is correct if we assume that failure rates do not change at all over time.  They also calculate a 95% confidence interval, but I wanted to be sure to use a poisson distribution to calculate an upper 95% interval and then sort by ut
+
+# Simple Analysis: assuming a constant failure rate
+## AKA Poisson probability
+
+```{r poisson, echo=FALSE}
 library(data.table)
 library(epitools)
 #source('1_download_data.R')  # Uncomment these lines the first time you run
@@ -42,17 +54,6 @@ setorderv(all_data, c('annual_drive_failure_rate_95', 'annual_drive_failure_rate
 best_drive <- all_data[1, model]
 ```
 
-# Data Sources
-I did this analysis using data from: [BackBlaze](https://www.backblaze.com/b2/hard-drive-test-data.html#downloading-the-raw-hard-drive-test-data).
-
-I used all the data they had available.  Here is a link to an example file: [2020 Data, Q2](https://f001.backblazeb2.com/file/Backblaze-Hard-Drive-Data/data_Q2_2020.zip)
-
-Download the files, unzip them, and put all the raw files in `data/`
-
-Some background on how to look at this data can be found on the [backblaze blog](https://www.backblaze.com/blog/backblaze-hard-drive-stats-q1-2020/). They use the followiong formula to annualize failure rates: `Drive Failures / (Drive Days / 365)`.  This is correct if we assume that failure rates do not change at all over time.  They also calculate a 95% confidence interval, but I wanted to be sure to use a poisson distribution to calculate an upper 95% interval and then sort by ut
-
-# Simple Analysis: assuming a constant failure rate
-## AKA Poisson probability
 We're going to use the poisson distribution to understand this data: each year, a certain number of drives fail.  We can model this as a poisson process, which assumes a constant failure rate for all drives over time.
 
 We then use R's exact poisson test to get a 95% confidence interval on that failure rate.  Specifically, we look at the upper confidence interval, as we want to pick drives that are least likely to have a high failure rate.  (Another way of saying this is that we want drives that were observed for long periods of time with low failure rates).
@@ -63,11 +64,7 @@ In other words, we have 2 goals in this analysis:
 
 Using the binomial confidence interval is a good way to achieve both goals.
 
-For a lot more detail on why a binomial confidence interval is what we want to use here, read Evan Miller's blog post [How Not To Sort By Average Rating](https://www.evanmiller.org/how-not-to-sort-by-average-rating.html).
-
-This statistic is the daily failure rate, but we're not gonna use these drives for 1 day.  We're gonna use them for years, so we "annualize" the failure rate.
-
-Let's say a drive has a 0.5% daily failure rate.  This means it has a 99.5% daily passing rate.  We want to know the odds it will survive 1 year, which are .995^365 = 0.1604813.  So 0.5% daily failure rate is really bad, and is equivalent to an annual failure rate of 100-16 = 84%.  You wouldn't buy a drive with an 84% chance of failing in 1 year!
+For a lot more detail on why a confidence interval is what we want to use here, read Evan Miller's blog post [How Not To Sort By Average Rating](https://www.evanmiller.org/how-not-to-sort-by-average-rating.html).
 
 Here's the results of our analysis.  The `r best_drive` is the most reliable drive in our sample of data:
 ```{r data}
@@ -84,6 +81,35 @@ knitr::kable(all_data[
 
 # Complicated Analysis: allow for a variable failure rate (between serial numbners, and over time)
 ## AKA Survival Analysis
+```{r surv, echo=FALSE}
+library(survival)
+library(survMisc)
+data_surv <- fread('all_data.csv')
+keys <- c('model', 'serial_number')
+setkeyv(data_surv, keys)
+
+data_surv <- data_surv[,list(
+  N = sum(N),
+  failure=sum(failure),
+  capacity_tb=round(max(capacity_bytes)/1e+12, 1)
+), by=keys]
+
+km_fit <- data_surv[model=='HGST HMS5C4040BLE640',survfit(Surv(time=N, event=failure) ~ 1)]
+
+km_results <- data.table(summary(km_fit)$table)
+
+km_results[, model := gsub('model=', '', names(km_fit$strata), fixed=T),]
+km_results <- km_results[,list(
+  model,
+  days_to_fail_median=median,
+  ci_95=`0.95LCL`
+)]
+km_results <- km_results[!is.na(ci_95),]
+km_results <- km_results[order(-ci_95, -days_to_fail_median),]
+km_results
+
+cox <- coxph(Surv(N, failure) ~ model, data = data_surv)
+```
 
 # Erratum
 ![I nerd sniped myself](https://imgs.xkcd.com/comics/nerd_sniping.png)
