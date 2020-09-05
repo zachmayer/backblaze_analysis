@@ -14,7 +14,7 @@ I used all the data they had available.  Here is a link to an example file: [202
 
 Download the files, unzip them, and put all the raw files in `data/`
 
-Some background on how to look at this data can be found on the [backblaze blog](https://www.backblaze.com/blog/backblaze-hard-drive-stats-q1-2020/). They use the followiong formula to annualize failure rates: `Drive Failures / (Drive Days / 365)`.  This is correct if we assume that failure rates do not change at all over time.  They also calculate a 95% confidence interval, but I wanted to be sure to use a poisson distribution to calculate an upper 95% interval and then sort by ut
+Some background on how to look at this data can be found on the [backblaze blog](https://www.backblaze.com/blog/backblaze-hard-drive-stats-q1-2020/). They use the followiong formula to annualize failure rates: `Drive Failures / (Drive Days / 365)`.  This is correct if we assume that failure rates do not change at all over time.  They also calculate a 95% confidence interval, but I wanted to be sure to use a poisson distribution to calculate an upper 95% interval and then sort by it.
 
 # Simple Analysis: assuming a constant failure rate
 ## AKA Poisson probability
@@ -22,11 +22,16 @@ Some background on how to look at this data can be found on the [backblaze blog]
 ```{r poisson, echo=FALSE}
 library(data.table)
 library(epitools)
+days_to_year <- 365.2425
 #source('1_download_data.R')  # Uncomment these lines the first time you run
 #source('2_unzip_data.R')
 #source('3_assemble_data.R')
 
 all_data <- fread('all_data.csv')
+
+# Only keep models where at least 100 drives made it 1 year
+all_data[,count_one_year := sum(N>=days_to_year), by='model']
+all_data <- all_data[count_one_year > 99,]
 
 # Aggregate data
 keys <- c('model', 'failure')
@@ -42,7 +47,6 @@ all_data <- dcast.data.table(all_data, model + capacity_tb ~ failure, value.var 
 all_data[is.na(Yes), Yes := 0]
 
 # Calculate 95% poisson confidence intervals
-days_to_year <- 365.2425
 poisson_results <- all_data[,pois.exact(Yes, (Yes+No)/days_to_year)]
 all_data[,annual_drive_failure_rate := poisson_results$rate]
 all_data[,annual_drive_failure_rate_95 := poisson_results$upper]
@@ -53,6 +57,7 @@ setorderv(all_data, c('annual_drive_failure_rate_95', 'annual_drive_failure_rate
 # Choose best drive
 best_drive <- all_data[1, model]
 ```
+For this analysis, we only look at drive models where at least 100 drives lasted at least 1 year.
 
 We're going to use the poisson distribution to understand this data: each year, a certain number of drives fail.  We can model this as a poisson process, which assumes a constant failure rate for all drives over time.
 
@@ -67,48 +72,85 @@ Using the binomial confidence interval is a good way to achieve both goals.
 For a lot more detail on why a confidence interval is what we want to use here, read Evan Miller's blog post [How Not To Sort By Average Rating](https://www.evanmiller.org/how-not-to-sort-by-average-rating.html).
 
 Here's the results of our analysis.  The `r best_drive` is the most reliable drive in our sample of data:
-```{r data}
-knitr::kable(all_data[
-  annual_drive_failure_rate_95 < .10,
-  list(
-    model, 
-    capacity_tb, 
-    Failures=Yes,
-    Drive_Years=round((Yes+No)/days_to_year, 1),
-    annual_drive_fail_rate=sprintf("%1.2f%%", 100*annual_drive_failure_rate),
-    ci_95=sprintf("%1.2f%%", 100*annual_drive_failure_rate_95))])
+```{r pois_results}
+knitr::kable(
+  all_data[,
+    list(
+      model, 
+      capacity_tb, 
+      Failures=Yes,
+      Drive_Years=round((Yes+No)/days_to_year, 1),
+      annual_drive_fail_rate=sprintf("%1.2f%%", 100*annual_drive_failure_rate),
+      ci_95=sprintf("%1.2f%%", 100*annual_drive_failure_rate_95)
+      )
+  ]
+)
 ```
 
 # Complicated Analysis: allow for a variable failure rate (between serial numbners, and over time)
 ## AKA Survival Analysis
+
 ```{r surv, echo=FALSE}
+# Setup
+library(data.table)
 library(survival)
-library(survMisc)
 data_surv <- fread('all_data.csv')
 keys <- c('model', 'serial_number')
 setkeyv(data_surv, keys)
-
 data_surv <- data_surv[,list(
   N = sum(N),
   failure=sum(failure),
   capacity_tb=round(max(capacity_bytes)/1e+12, 1)
 ), by=keys]
 
-km_fit <- data_surv[model=='HGST HMS5C4040BLE640',survfit(Surv(time=N, event=failure) ~ 1)]
+# Plot survival curves for 1 or 2 models to check results make sense
+# library(survminer)
+# dat <- data_surv[model %in% c('HGST HUH721212ALN604','HGST HMS5C4040BLE640', 'WDC WD40EFRX'),]
+# model <- dat[,survfit(Surv(N, failure) ~ model)]
+# ggsurvplot(model, data=dat, fun='cumhaz', conf.int = T)
+# ggsurvplot(model, data=dat, conf.int = T, ylim=c(.95, 1.0))
 
-km_results <- data.table(summary(km_fit)$table)
+# Only keep models were at leat 100 drives made it to one year
+data_surv[,count_one_year := sum(N>=days_to_year), by='model']
+data_surv <- data_surv[count_one_year > 99,]
 
-km_results[, model := gsub('model=', '', names(km_fit$strata), fixed=T),]
-km_results <- km_results[,list(
-  model,
-  days_to_fail_median=median,
-  ci_95=`0.95LCL`
-)]
-km_results <- km_results[!is.na(ci_95),]
-km_results <- km_results[order(-ci_95, -days_to_fail_median),]
-km_results
+# Do a non-parametric survival curve for every drive model
+survival_curve_at_t <- function(time, failure, at=days_to_year){
+  out <- survfit(Surv(time, failure)~1)
+  out <- summary(out, times=at, conf.int=.99)
+  out <- list(
+    surv = out$surv,
+    lower =  out$lower
+  )
+  return(out)
+}
 
-cox <- coxph(Surv(N, failure) ~ model, data = data_surv)
+data_surv <- data_surv[, c(list(capacity_tb=max(capacity_tb), N=.N), survival_curve_at_t(N, failure)), by='model']
+data_surv <- data_surv[order(-lower),]
+
+# Choose best drive
+best_drive <- data_surv[1, model]
+```
+For this analysis, we only look at drive models where at least 100 drives lasted at least 1 year.
+
+Unlike the poisson model, this analysis does not assume a constant failure rate.  Very frequently, drives fail at a higher rate when they are new, and the rate of failures levels off over time.
+
+This analysis allows different drive models to have different failure "curves."  This analysis looks for drive models where many individual drives lasted >1 year.
+
+It is a little less biased toward drive models with smaller samples of data.  If a small data sample has many drive make it to 1 year, this analysis will give them credit.
+
+Here's the results of our analysis.  The `r best_drive` is the most reliable drive in our sample of data:
+```{r surv_results}
+knitr::kable(
+  data_surv[,
+    list(
+      model, 
+      capacity_tb, 
+      N,
+      annual_drive_fail_rate=sprintf("%1.2f%%", 100*(1-surv)),
+      ci_95=sprintf("%1.2f%%", 100*(1-lower)))
+    ]
+)
 ```
 
 # Erratum
