@@ -29,21 +29,26 @@ all_data[,failure := factor(failure, labels=c('No', 'Yes'))]
 all_data <- dcast.data.table(all_data, model + capacity_tb ~ failure, value.var = 'N')
 all_data[is.na(Yes), Yes := 0]
 
-# Calculate binomial probability
-# TODO: use poisson: 
-# https://datarobot.slack.com/archives/C030MTXJ3/p1599169013087900?thread_ts=1599165034.086300&cid=C030MTXJ3
-all_data[,bi_prob_mean := binom.confint(Yes, Yes+No, level=.95, methods='exact')[,'mean']]
-all_data[,bi_prob_95_upper := binom.confint(Yes, Yes+No, level=.95, methods='exact')[,'upper']]
+# Calculate poisson 95% percentile of coun
+vector_poission <- function(x) sapply(x, function(a) poisson.test(a)$conf.int[2])
+all_data[,yes_95_ci := vector_poission(Yes)]
 
-# Annualize teh daily failure rate
+# Convert poisson counts to yearly counts
 days_to_year <- 365.2425
-all_data[,bi_prob_mean := 1-(1-bi_prob_mean)^days_to_year]
-all_data[,bi_prob_95_upper := 1-(1-bi_prob_95_upper)^days_to_year]
-setorderv(all_data, 'bi_prob_95_upper')
+all_data[,days_observed := Yes + No]
+all_data[,annual_failure_count := Yes * (days_to_year / days_observed)]
+all_data[,annual_failure_count_95 := yes_95_ci * (days_to_year / days_observed)]
+
+# Convert yearly counts to yearly failure rates
+all_data[,annual_failure_rate := 1-exp(-annual_failure_count)]
+all_data[,annual_failure_rate_95 := 1-exp(-annual_failure_count_95)]
+
+# Order data
+setorderv(all_data, c('annual_failure_rate_95', 'annual_failure_rate'))
 
 # Round off for nice formatting
-all_data[,bi_prob_mean := sprintf("%1.2f%%", 100*bi_prob_mean)]
-all_data[,bi_prob_95_upper := sprintf("%1.2f%%", 100*bi_prob_95_upper)]
+all_data[,annual_failure_rate := sprintf("%1.2f%%", 100*annual_failure_rate)]
+all_data[,annual_failure_rate_95 := sprintf("%1.2f%%", 100*annual_failure_rate_95)]
 
 # Choose best drive
 best_drive <- all_data[1, model]
@@ -52,21 +57,17 @@ best_drive <- all_data[1, model]
 # Data Sources
 I did this analysis using data from: [BackBlaze](https://www.backblaze.com/b2/hard-drive-test-data.html#downloading-the-raw-hard-drive-test-data).
 
-I used all the data they had available.  Here are some links to example files:  
-[2020 Data, Q2](https://f001.backblazeb2.com/file/Backblaze-Hard-Drive-Data/data_Q2_2020.zip)    
-[2020 Data, Q1](https://f001.backblazeb2.com/file/Backblaze-Hard-Drive-Data/data_Q1_2020.zip)    
-[2019 Data, Q4](https://f001.backblazeb2.com/file/Backblaze-Hard-Drive-Data/data_Q4_2019.zip)    
-[2019 Data, Q3](https://f001.backblazeb2.com/file/Backblaze-Hard-Drive-Data/data_Q3_2019.zip)    
+I used all the data they had available.  Here is a link to an example file: [2020 Data, Q2](https://f001.backblazeb2.com/file/Backblaze-Hard-Drive-Data/data_Q2_2020.zip)
 
 Download the files, unzip them, and put all the raw files in `data/`
 
-Some background on how to look at this data can be found on the [backblaze blog](https://www.backblaze.com/blog/backblaze-hard-drive-stats-q1-2020/). However, their formula to annualize failure rates is wrong: `Drive Failures / (Drive Days / 365)`.  The correct probability calculation is `1-(1-Drive Failures / Drive Days)^365`.  The difference is tiny, but it bothers me, so here we are.
+Some background on how to look at this data can be found on the [backblaze blog](https://www.backblaze.com/blog/backblaze-hard-drive-stats-q1-2020/). However, their formula to annualize failure rates is wrong: `Drive Failures / (Drive Days / 365)`.  The correct probability calculation is `1-(1-Drive Failures / Drive Days)^365`. The difference is tiny, but it bothers me, so here we are.
 
 # Simple Analysis: assuming a constant failure rate
 ## AKA Poisson probability
-We're going to use the binomial distribution to understand this data: each day, each drive either fails or doesn't fail.  We encode failure as 1, and not failing as 0.
+We're going to use the poisson distribution to understand this data: each year, a certain number of drives fail.  We can model this as a poisson process, which assumes a constant failure rate for all drives over time.
 
-We then use R's exact binomial test to get a 95% confidence interval on that failure rate.  Specifically, we look at the upper confidence interval, as we want to pick drives that are least likely to have a high failure rate.  (Another way of saying this is that we want drives that were observed for long periods of time with low failure rates).
+We then use R's exact poisson test to get a 95% confidence interval on that failure rate.  Specifically, we look at the upper confidence interval, as we want to pick drives that are least likely to have a high failure rate.  (Another way of saying this is that we want drives that were observed for long periods of time with low failure rates).
 
 In other words, we have 2 goals in this analysis:
 1. Holding observation time constant, we want lower failure rates (lower failure rate is better).

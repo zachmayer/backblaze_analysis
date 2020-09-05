@@ -1,5 +1,8 @@
+# Setup
 library(pbapply)
 library(data.table)
+
+# Load the data
 data_dir <- 'data/'
 all_files <- list.files(data_dir)
 all_data <- pblapply(
@@ -10,19 +13,25 @@ all_data <- pblapply(
       select=c('model', 'serial_number', 'failure', 'capacity_bytes'),
       colClasses=c(capacity_bytes='character') # We lose a tiny bit of precision, but who cares
     )
-    #out[,filename = x]  # TODO: check which files have capacities < 0
+    out[,filename := x]  # TODO: check which files have capacities < 0
   }
 )
 all_data <- rbindlist(all_data)
-keys <- c('filename', 'model', 'serial_number', 'failure', 'capacity_bytes')
+
+# Look at bad capacities
+all_data[capacity_bytes == "-1", sort(unique(filename))]
+all_data[capacity_bytes == "-9116022715867848704", sort(unique(filename))]
+
+# Aggregate to counts by row (lots dupes so we can compress the data a lot here)
+keys <- c('model', 'serial_number', 'failure', 'capacity_bytes')
 setkeyv(all_data, keys)
 all_data <- all_data[,list(.N), by=keys]
 
 # Data quality checks
 all_data[,sort(unique(capacity_bytes))]
 
-summary(all_data[capacity_bytes == '-1',])
-all_data[capacity_bytes == '-1',]
+summary(all_data[capacity_bytes == "-1",])
+all_data[capacity_bytes == "-1",]
 all_data[capacity_bytes == "-9116022715867848704",]
 
 # Map models to capacity
