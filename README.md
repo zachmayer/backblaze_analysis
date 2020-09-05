@@ -38,8 +38,9 @@ were observed for long periods of time with low failure rates).
 
 In other words, we have 2 goals in this analysis: 1. Holding observation
 time constant, we want lower failure rates (lower failure rate is
-better). 2. olding failure rate constant we want longer observation time
-(this gives us more confidence in the failure rate).
+better).  
+2. olding failure rate constant we want longer observation time (this
+gives us more confidence in the failure rate).
 
 Using the binomial confidence interval is a good way to achieve both
 goals.
