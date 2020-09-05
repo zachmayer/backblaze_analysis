@@ -37,10 +37,6 @@ all_data[,annual_drive_failure_rate_95 := poisson_results$upper]
 # Order data
 setorderv(all_data, c('annual_drive_failure_rate_95', 'annual_drive_failure_rate'))
 
-# Round off for nice formatting
-all_data[,annual_drive_failure_rate := sprintf("%1.2f%%", 100*annual_drive_failure_rate)]
-all_data[,annual_drive_failure_rate_95 := sprintf("%1.2f%%", 100*annual_drive_failure_rate_95)]
-
 # Choose best drive
 best_drive <- all_data[1, model]
 ```
@@ -74,10 +70,13 @@ Let's say a drive has a 0.5% daily failure rate.  This means it has a 99.5% dail
 
 Here's the results of our analysis.  The `r best_drive` is the most reliable drive in our sample of data:
 ```{r data}
-knitr::kable(all_data[,list(
-  model, capacity_tb, 
-  annual_drive_failure_rate,
-  annual_drive_failure_rate_95)])
+knitr::kable(all_data[
+  annual_drive_failure_rate_95 < .25,
+  list(
+    model, 
+    capacity_tb, 
+    annual_drive_failure_rate=sprintf("%1.2f%%", 100*annual_drive_failure_rate),
+    annual_drive_failure_rate_95=sprintf("%1.2f%%", 100*annual_drive_failure_rate_95))])
 ```
 
 # Complicated Analysis: allow for a variable failure rate (between serial numbners, and over time)
