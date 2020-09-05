@@ -9,7 +9,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ```{r analyze_data, echo=FALSE}
 library(data.table)
-library(binom)
+library(epitools)
 #source('1_download_data.R')  # Uncomment these lines the first time you run
 #source('2_unzip_data.R')
 #source('3_assemble_data.R')
@@ -29,26 +29,17 @@ all_data[,failure := factor(failure, labels=c('No', 'Yes'))]
 all_data <- dcast.data.table(all_data, model + capacity_tb ~ failure, value.var = 'N')
 all_data[is.na(Yes), Yes := 0]
 
-# Calculate poisson 95% percentile of coun
-vector_poission <- function(x) sapply(x, function(a) poisson.test(a)$conf.int[2])
-all_data[,yes_95_ci := vector_poission(Yes)]
-
-# Convert poisson counts to yearly counts
-days_to_year <- 365.2425
-all_data[,days_observed := Yes + No]
-all_data[,annual_failure_count := Yes * (days_to_year / days_observed)]
-all_data[,annual_failure_count_95 := yes_95_ci * (days_to_year / days_observed)]
-
-# Convert yearly counts to yearly failure rates
-all_data[,annual_failure_rate := 1-exp(-annual_failure_count)]
-all_data[,annual_failure_rate_95 := 1-exp(-annual_failure_count_95)]
+# Calculate 95% poisson confidence intervals
+poisson_results <- all_data[,pois.exact(Yes, (Yes+No)/365.2425)]
+all_data[,annual_drive_failure_rate := poisson_results$rate]
+all_data[,annual_drive_failure_rate_95 := poisson_results$upper]
 
 # Order data
-setorderv(all_data, c('annual_failure_rate_95', 'annual_failure_rate'))
+setorderv(all_data, c('annual_drive_failure_rate_95', 'annual_drive_failure_rate'))
 
 # Round off for nice formatting
-all_data[,annual_failure_rate := sprintf("%1.2f%%", 100*annual_failure_rate)]
-all_data[,annual_failure_rate_95 := sprintf("%1.2f%%", 100*annual_failure_rate_95)]
+all_data[,annual_drive_failure_rate := sprintf("%1.2f%%", 100*annual_drive_failure_rate)]
+all_data[,annual_drive_failure_rate_95 := sprintf("%1.2f%%", 100*annual_drive_failure_rate_95)]
 
 # Choose best drive
 best_drive <- all_data[1, model]
@@ -61,7 +52,7 @@ I used all the data they had available.  Here is a link to an example file: [202
 
 Download the files, unzip them, and put all the raw files in `data/`
 
-Some background on how to look at this data can be found on the [backblaze blog](https://www.backblaze.com/blog/backblaze-hard-drive-stats-q1-2020/). However, their formula to annualize failure rates is wrong: `Drive Failures / (Drive Days / 365)`.  The correct probability calculation is `1-(1-Drive Failures / Drive Days)^365`. The difference is tiny, but it bothers me, so here we are.
+Some background on how to look at this data can be found on the [backblaze blog](https://www.backblaze.com/blog/backblaze-hard-drive-stats-q1-2020/). They use the followiong formula to annualize failure rates: `Drive Failures / (Drive Days / 365)`.  This is correct if we assume that failure rates do not change at all over time.  They also calculate a 95% confidence interval, but I wanted to be sure to use a poisson distribution to calculate an upper 95% interval and then sort by ut
 
 # Simple Analysis: assuming a constant failure rate
 ## AKA Poisson probability
@@ -83,7 +74,10 @@ Let's say a drive has a 0.5% daily failure rate.  This means it has a 99.5% dail
 
 Here's the results of our analysis.  The `r best_drive` is the most reliable drive in our sample of data:
 ```{r data}
-knitr::kable(all_data)
+knitr::kable(all_data[,list(
+  model, capacity_tb, 
+  annual_drive_failure_rate,
+  annual_drive_failure_rate_95)])
 ```
 
 # Complicated Analysis: allow for a variable failure rate (between serial numbners, and over time)
