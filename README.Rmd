@@ -75,9 +75,9 @@ knitr::kable(all_data[
   annual_drive_failure_rate_95 < .10,
   list(
     model, 
+    capacity_tb, 
     Failures=Yes,
     Drive_Years=round((Yes+No)/days_to_year, 1),
-    capacity_tb, 
     annual_drive_fail_rate=sprintf("%1.2f%%", 100*annual_drive_failure_rate),
     ci_95=sprintf("%1.2f%%", 100*annual_drive_failure_rate_95))])
 ```
