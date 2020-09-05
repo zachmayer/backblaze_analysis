@@ -21,7 +21,6 @@ Some background on how to look at this data can be found on the [backblaze blog]
 
 ```{r poisson, echo=FALSE}
 library(data.table)
-library(epitools)
 days_to_year <- 365.2425
 #source('1_download_data.R')  # Uncomment these lines the first time you run
 #source('2_unzip_data.R')
@@ -47,7 +46,7 @@ all_data <- dcast.data.table(all_data, model + capacity_tb ~ failure, value.var 
 all_data[is.na(Yes), Yes := 0]
 
 # Calculate 95% poisson confidence intervals
-poisson_results <- all_data[,pois.exact(Yes, (Yes+No)/days_to_year)]
+poisson_results <- all_data[,epitools::pois.exact(Yes, (Yes+No)/days_to_year)]
 all_data[,annual_drive_failure_rate := poisson_results$rate]
 all_data[,annual_drive_failure_rate_95 := poisson_results$upper]
 
@@ -140,7 +139,7 @@ This analysis allows different drive models to have different failure "curves." 
 It is a little less biased toward drive models with smaller samples of data.  If a small data sample has many drive make it to 1 year, this analysis will give them credit.
 
 Here's the results of our analysis.  The `r best_drive` is the most reliable drive in our sample of data:
-```{r surv_results}
+```{r surv_results, echo=FALSE}
 knitr::kable(
   data_surv[,
     list(

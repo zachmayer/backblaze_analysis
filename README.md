@@ -348,13 +348,6 @@ Complicated Analysis: allow for a variable failure rate (between serial numbners
 AKA Survival Analysis
 ---------------------
 
-    ## 
-    ## Attaching package: 'survival'
-
-    ## The following object is masked from 'package:epitools':
-    ## 
-    ##     ratetable
-
 For this analysis, we only look at drive models where at least 100
 drives lasted at least 1 year.
 
