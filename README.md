@@ -24,7 +24,7 @@ Rating](https://www.evanmiller.org/how-not-to-sort-by-average-rating.html).
 
 I wanted to use a failure model that allows for time-varying failure
 rates, and then pick a drive based on a confidence interval, so here we
-are…
+are.
 
 Survival Analysis
 =================

@@ -15,7 +15,7 @@ Backblaze [did their own analysis](https://www.backblaze.com/blog/backblaze-hard
 2. They don't really explain how they derived confidence intervals or used them in their analysis, and pretty much rely on the "annualized failure rate" to make conclusions.  I want to use a confidence interval for my decision making. For a lot more detail on why a confidence interval is a good idea, read Evan Miller's blog post about a different type of problem: [How Not To Sort By Average Rating](https://www.evanmiller.org/how-not-to-sort-by-average-rating.html).    
 
 
-I wanted to use a failure model that allows for time-varying failure rates, and then pick a drive based on a confidence interval, so here we are...
+I wanted to use a failure model that allows for time-varying failure rates, and then pick a drive based on a confidence interval, so here we are.
 
 # Survival Analysis
 
