@@ -13,13 +13,13 @@ of drive failures, but I don’t like their approach for 2 reasons: 1.
 Their “annualized failure rate” (`Drive Failures / (Drive Days / 365)`)
 assumes that failure rates are constant over time. E.g. this assumptions
 means that observing 1 drive for 100 days gives you the exact same
-information as observing 100 drives for 1 day. 2. They don’t really
-explain how the derived confidence intervals or used them in their
-analysis, and pretty much rely on the “annualized failure rate” to make
-conclusions. I want to use a confidence interval for my decision making.
-For a lot more detail on why a confidence interval is a good idea, read
-Evan Miller’s blog post about a different type of problem: [How Not To
-Sort By Average
+information as observing 100 drives for 1 day.  
+2. They don’t really explain how the derived confidence intervals or
+used them in their analysis, and pretty much rely on the “annualized
+failure rate” to make conclusions. I want to use a confidence interval
+for my decision making. For a lot more detail on why a confidence
+interval is a good idea, read Evan Miller’s blog post about a different
+type of problem: [How Not To Sort By Average
 Rating](https://www.evanmiller.org/how-not-to-sort-by-average-rating.html).
 
 I really wanted to use a failure model that allows for time-varying
@@ -65,7 +65,7 @@ reliable drive in our sample of data:
 <th style="text-align: left;">model</th>
 <th style="text-align: right;">capacity_tb</th>
 <th style="text-align: right;">N</th>
-<th style="text-align: left;">annual_drive_fail_rate</th>
+<th style="text-align: left;">one_year_failure_rate</th>
 <th style="text-align: left;">ci_95</th>
 </tr>
 </thead>
