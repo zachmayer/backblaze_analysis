@@ -79,7 +79,6 @@ knitr::kable(
       capacity_tb, 
       drive_days,
       failures,
-      N_drives,
       one_year_failure_rate=sprintf("%1.2f%%", 100*(1-surv)),
       ci_95=sprintf("%1.2f%%", 100*(1-lower)))
     ]
@@ -87,13 +86,12 @@ knitr::kable(
 ```
 
 # 12TB vs 4TB drives
-
 ```{r choose_12_v_4, echo=FALSE}
 best_drive_12 <- data_surv[round(capacity_tb)==12,][1, model]
 best_drive_4 <- data_surv[round(capacity_tb)==4,][1, model]
 ```
 
-Lets drill down into my results a little bit, and compare our best 12TB drive `r best_drive_12` to the best 4TB drive `r best_drive_4`:
+Lets drill down into my results a little bit, and compare our best 12TB drive (`r best_drive_12`) to the best 4TB drive (`r best_drive_4`):
 
 ```{r table_12_v_4, echo=FALSE}
 knitr::kable(
@@ -108,6 +106,35 @@ knitr::kable(
       ci_95=sprintf("%1.2f%%", 100*(1-lower)))
     ]
 )
+```
+
+Let's use Backblaze's "naive" statistic to compare these 2 drives: `Drive Failures / (Drive Days / 365)`
+
+```{r table_12_v_4_drilldown, echo=FALSE}
+result <- data_surv[model %in% c(best_drive_12, best_drive_4),][,
+    list(
+      model, 
+      capacity_tb, 
+      drive_days,
+      one_year_failure_rate=sprintf("%1.2f%%", 100*(1-surv)),
+      naive_rate=sprintf("%1.2f%%", 100*(failures/(drive_days/365)))
+    )
+  ]
+knitr::kable(result)
+rate_12 <- result[round(capacity_tb)==12,][1, naive_rate]
+rate_4 <- result[round(capacity_tb)==4,][1, naive_rate]
+```
+
+The `r best_drive_12` actually has a **higher* naive failure rate at `r rate_12` than the `r best_drive_4` at `r rate_4`.
+
+So why do I reccomend buying `r best_drive_4`?
+
+The answer is that we've observed the `r best_drive_4` for many more years than the `r best_drive_12`.  On the one had, these extra years give us more certainty that these drives are reliable and fail at extremely low rates.  On the other hand, these extra years are **late** in the drive's lifetimes, when failure rates are (expected) to be lower.
+
+Zooming in on the first year of a drive's life demonstates that the `r rate_12` has a lower failure rate during this period.  Obviously the future beyond that is unknown, but I expect this lower failure rate to continue over the lifetime of the two drives:
+
+
+```{r plot_2_drives, echo=FALSE}
 ```
 
 # Replicating my results
