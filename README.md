@@ -336,9 +336,9 @@ drive space. I also suggest opening
 [backblaze\_analysis.Rproj](backblaze_analysis.Rproj) in RStudio.  
 1. Run [1\_download\_data.R](1_download_data.R) to download the data
 (almost 10.5 GB).  
-2. Run [2\_uzip\_data.R](1_download_data.R) to unzip the data (almost 55
+2. Run [2\_uzip\_data.R](2_uzip_data.R) to unzip the data (almost 55
 GB).  
-3. Run [3\_assemble\_data.R](1_download_data.R) to “compress” the data,
+3. Run [3\_assemble\_data.R](3_assemble_data.R) to “compress” the data,
 which generates [all\_data.csv](all_data.csv).
 
 An interesting note about this data: It’s 55GB uncompressed, and
