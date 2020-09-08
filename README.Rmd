@@ -62,7 +62,7 @@ data_surv <- data_surv[, c(list(
   capacity_tb=max(capacity_tb), 
   drive_days=sum(drive_days),
   failures=sum(failure),
-  unique_drives=.N
+  N_drives=.N
   ), survival_curve_at_t(drive_days, failure)), by='model']
 data_surv <- data_surv[order(-lower),]
 
@@ -102,7 +102,7 @@ knitr::kable(
       capacity_tb, 
       drive_days,
       failures,
-      N_drives = unique_drives,
+      N_drives,
       one_year_failure_rate=sprintf("%1.2f%%", 100*(1-surv)),
       ci_95=sprintf("%1.2f%%", 100*(1-lower)))
     ]
