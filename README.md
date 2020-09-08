@@ -2,20 +2,19 @@ Data Sources
 ============
 
 I’m buying a hard drive to backup my data at home, and I want to buy a
-drive that’s not gonna fail. Fortunately, [BackBlaze has shared all of
-their data on hard drives and drive
-failures.](https://www.backblaze.com/b2/hard-drive-test-data.html#downloading-the-raw-hard-drive-test-data).
-has
+drive that’s not going to fail. Fortunately, [BackBlaze has shared all
+of their data on hard drives and drive
+failures.](https://www.backblaze.com/b2/hard-drive-test-data.html#downloading-the-raw-hard-drive-test-data)
 
 Backblaze [did their own
 analysis](https://www.backblaze.com/blog/backblaze-hard-drive-stats-q1-2020/)
 of drive failures, but I don’t like their approach for 2 reasons:  
 1. Their “annualized failure rate”
 (`Drive Failures / (Drive Days / 365)`) assumes that failure rates are
-constant over time. E.g. this assumptions means that observing 1 drive
+constant over time. E.g. this assumption means that observing 1 drive
 for 100 days gives you the exact same information as observing 100
 drives for 1 day.  
-2. They don’t really explain how the derived confidence intervals or
+2. They don’t really explain how they derived confidence intervals or
 used them in their analysis, and pretty much rely on the “annualized
 failure rate” to make conclusions. I want to use a confidence interval
 for my decision making. For a lot more detail on why a confidence
@@ -23,14 +22,14 @@ interval is a good idea, read Evan Miller’s blog post about a different
 type of problem: [How Not To Sort By Average
 Rating](https://www.evanmiller.org/how-not-to-sort-by-average-rating.html).
 
-I really wanted to use a failure model that allows for time-varying
-failure rates, and then pick a drive based on a confidence interval, so
-here we are…
+I wanted to use a failure model that allows for time-varying failure
+rates, and then pick a drive based on a confidence interval, so here we
+are…
 
 Survival Analysis
 =================
 
-I really wanted to pick my drive based on:
+I wanted to pick my drive based on:
 `lower 95% confidence interval for median time to failure`. In other
 words, I want to pick the drive that has the most evidence it will last
 a large number of days.
