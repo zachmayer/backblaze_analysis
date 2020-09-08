@@ -70,6 +70,7 @@ reliable drive model in our sample of data:
 <th style="text-align: right;">capacity_tb</th>
 <th style="text-align: right;">drive_days</th>
 <th style="text-align: right;">failures</th>
+<th style="text-align: right;">N_drives</th>
 <th style="text-align: left;">one_year_failure_rate</th>
 <th style="text-align: left;">ci_95</th>
 </tr>
@@ -80,6 +81,7 @@ reliable drive model in our sample of data:
 <td style="text-align: right;">12.0</td>
 <td style="text-align: right;">4893547</td>
 <td style="text-align: right;">65</td>
+<td style="text-align: right;">10914</td>
 <td style="text-align: left;">0.42%</td>
 <td style="text-align: left;">0.55%</td>
 </tr>
@@ -88,6 +90,7 @@ reliable drive model in our sample of data:
 <td style="text-align: right;">12.0</td>
 <td style="text-align: right;">669202</td>
 <td style="text-align: right;">8</td>
+<td style="text-align: right;">2609</td>
 <td style="text-align: left;">0.40%</td>
 <td style="text-align: left;">0.69%</td>
 </tr>
@@ -96,6 +99,7 @@ reliable drive model in our sample of data:
 <td style="text-align: right;">10.0</td>
 <td style="text-align: right;">1222596</td>
 <td style="text-align: right;">25</td>
+<td style="text-align: right;">1246</td>
 <td style="text-align: left;">0.40%</td>
 <td style="text-align: left;">0.76%</td>
 </tr>
@@ -104,6 +108,7 @@ reliable drive model in our sample of data:
 <td style="text-align: right;">4.0</td>
 <td style="text-align: right;">21867106</td>
 <td style="text-align: right;">274</td>
+<td style="text-align: right;">16346</td>
 <td style="text-align: left;">0.68%</td>
 <td style="text-align: left;">0.81%</td>
 </tr>
@@ -112,6 +117,7 @@ reliable drive model in our sample of data:
 <td style="text-align: right;">3.0</td>
 <td style="text-align: right;">6641559</td>
 <td style="text-align: right;">150</td>
+<td style="text-align: right;">4664</td>
 <td style="text-align: left;">0.77%</td>
 <td style="text-align: left;">1.02%</td>
 </tr>
@@ -120,6 +126,7 @@ reliable drive model in our sample of data:
 <td style="text-align: right;">14.0</td>
 <td style="text-align: right;">1797240</td>
 <td style="text-align: right;">54</td>
+<td style="text-align: right;">8825</td>
 <td style="text-align: left;">0.85%</td>
 <td style="text-align: left;">1.17%</td>
 </tr>
@@ -128,6 +135,7 @@ reliable drive model in our sample of data:
 <td style="text-align: right;">4.0</td>
 <td style="text-align: right;">12187880</td>
 <td style="text-align: right;">179</td>
+<td style="text-align: right;">8723</td>
 <td style="text-align: left;">0.99%</td>
 <td style="text-align: left;">1.19%</td>
 </tr>
@@ -136,6 +144,7 @@ reliable drive model in our sample of data:
 <td style="text-align: right;">8.0</td>
 <td style="text-align: right;">15779767</td>
 <td style="text-align: right;">516</td>
+<td style="text-align: right;">14991</td>
 <td style="text-align: left;">1.07%</td>
 <td style="text-align: left;">1.23%</td>
 </tr>
@@ -144,6 +153,7 @@ reliable drive model in our sample of data:
 <td style="text-align: right;">8.0</td>
 <td style="text-align: right;">977265</td>
 <td style="text-align: right;">17</td>
+<td style="text-align: right;">1085</td>
 <td style="text-align: left;">0.75%</td>
 <td style="text-align: left;">1.27%</td>
 </tr>
@@ -152,6 +162,7 @@ reliable drive model in our sample of data:
 <td style="text-align: right;">8.0</td>
 <td style="text-align: right;">13572615</td>
 <td style="text-align: right;">392</td>
+<td style="text-align: right;">10187</td>
 <td style="text-align: left;">1.09%</td>
 <td style="text-align: left;">1.29%</td>
 </tr>
@@ -160,6 +171,7 @@ reliable drive model in our sample of data:
 <td style="text-align: right;">2.0</td>
 <td style="text-align: right;">5306511</td>
 <td style="text-align: right;">235</td>
+<td style="text-align: right;">4774</td>
 <td style="text-align: left;">1.09%</td>
 <td style="text-align: left;">1.39%</td>
 </tr>
@@ -168,6 +180,7 @@ reliable drive model in our sample of data:
 <td style="text-align: right;">0.5</td>
 <td style="text-align: right;">1161496</td>
 <td style="text-align: right;">148</td>
+<td style="text-align: right;">807</td>
 <td style="text-align: left;">1.00%</td>
 <td style="text-align: left;">1.68%</td>
 </tr>
@@ -176,6 +189,7 @@ reliable drive model in our sample of data:
 <td style="text-align: right;">12.0</td>
 <td style="text-align: right;">27502834</td>
 <td style="text-align: right;">1675</td>
+<td style="text-align: right;">38692</td>
 <td style="text-align: left;">1.57%</td>
 <td style="text-align: left;">1.69%</td>
 </tr>
@@ -184,6 +198,7 @@ reliable drive model in our sample of data:
 <td style="text-align: right;">0.5</td>
 <td style="text-align: right;">568740</td>
 <td style="text-align: right;">69</td>
+<td style="text-align: right;">350</td>
 <td style="text-align: left;">0.86%</td>
 <td style="text-align: left;">1.82%</td>
 </tr>
@@ -192,6 +207,7 @@ reliable drive model in our sample of data:
 <td style="text-align: right;">4.0</td>
 <td style="text-align: right;">4401851</td>
 <td style="text-align: right;">88</td>
+<td style="text-align: right;">2719</td>
 <td style="text-align: left;">1.40%</td>
 <td style="text-align: left;">1.84%</td>
 </tr>
@@ -200,6 +216,7 @@ reliable drive model in our sample of data:
 <td style="text-align: right;">3.0</td>
 <td style="text-align: right;">1429666</td>
 <td style="text-align: right;">73</td>
+<td style="text-align: right;">1048</td>
 <td style="text-align: left;">1.34%</td>
 <td style="text-align: left;">2.03%</td>
 </tr>
@@ -208,6 +225,7 @@ reliable drive model in our sample of data:
 <td style="text-align: right;">6.0</td>
 <td style="text-align: right;">3058616</td>
 <td style="text-align: right;">87</td>
+<td style="text-align: right;">1939</td>
 <td style="text-align: left;">1.50%</td>
 <td style="text-align: left;">2.03%</td>
 </tr>
@@ -216,6 +234,7 @@ reliable drive model in our sample of data:
 <td style="text-align: right;">4.0</td>
 <td style="text-align: right;">293560</td>
 <td style="text-align: right;">81</td>
+<td style="text-align: right;">222</td>
 <td style="text-align: left;">0.90%</td>
 <td style="text-align: left;">2.14%</td>
 </tr>
@@ -224,6 +243,7 @@ reliable drive model in our sample of data:
 <td style="text-align: right;">4.0</td>
 <td style="text-align: right;">56007808</td>
 <td style="text-align: right;">3969</td>
+<td style="text-align: right;">37035</td>
 <td style="text-align: left;">2.37%</td>
 <td style="text-align: left;">2.53%</td>
 </tr>
@@ -232,6 +252,7 @@ reliable drive model in our sample of data:
 <td style="text-align: right;">4.0</td>
 <td style="text-align: right;">252425</td>
 <td style="text-align: right;">5</td>
+<td style="text-align: right;">150</td>
 <td style="text-align: left;">2.00%</td>
 <td style="text-align: left;">4.22%</td>
 </tr>
@@ -240,6 +261,7 @@ reliable drive model in our sample of data:
 <td style="text-align: right;">0.5</td>
 <td style="text-align: right;">342176</td>
 <td style="text-align: right;">43</td>
+<td style="text-align: right;">451</td>
 <td style="text-align: left;">2.79%</td>
 <td style="text-align: left;">4.34%</td>
 </tr>
@@ -248,6 +270,7 @@ reliable drive model in our sample of data:
 <td style="text-align: right;">0.5</td>
 <td style="text-align: right;">559663</td>
 <td style="text-align: right;">195</td>
+<td style="text-align: right;">589</td>
 <td style="text-align: left;">4.62%</td>
 <td style="text-align: left;">6.30%</td>
 </tr>
@@ -256,6 +279,7 @@ reliable drive model in our sample of data:
 <td style="text-align: right;">1.0</td>
 <td style="text-align: right;">370505</td>
 <td style="text-align: right;">64</td>
+<td style="text-align: right;">550</td>
 <td style="text-align: left;">4.57%</td>
 <td style="text-align: left;">6.31%</td>
 </tr>
@@ -264,6 +288,7 @@ reliable drive model in our sample of data:
 <td style="text-align: right;">0.2</td>
 <td style="text-align: right;">126941</td>
 <td style="text-align: right;">20</td>
+<td style="text-align: right;">125</td>
 <td style="text-align: left;">3.25%</td>
 <td style="text-align: left;">6.34%</td>
 </tr>
@@ -272,6 +297,7 @@ reliable drive model in our sample of data:
 <td style="text-align: right;">4.0</td>
 <td style="text-align: right;">112400</td>
 <td style="text-align: right;">6</td>
+<td style="text-align: right;">118</td>
 <td style="text-align: left;">3.44%</td>
 <td style="text-align: left;">6.70%</td>
 </tr>
@@ -280,6 +306,7 @@ reliable drive model in our sample of data:
 <td style="text-align: right;">6.0</td>
 <td style="text-align: right;">685610</td>
 <td style="text-align: right;">72</td>
+<td style="text-align: right;">499</td>
 <td style="text-align: left;">5.41%</td>
 <td style="text-align: left;">7.38%</td>
 </tr>
@@ -288,6 +315,7 @@ reliable drive model in our sample of data:
 <td style="text-align: right;">3.0</td>
 <td style="text-align: right;">1271769</td>
 <td style="text-align: right;">174</td>
+<td style="text-align: right;">1335</td>
 <td style="text-align: left;">7.71%</td>
 <td style="text-align: left;">9.16%</td>
 </tr>
@@ -296,6 +324,7 @@ reliable drive model in our sample of data:
 <td style="text-align: right;">3.0</td>
 <td style="text-align: right;">222587</td>
 <td style="text-align: right;">31</td>
+<td style="text-align: right;">351</td>
 <td style="text-align: left;">6.60%</td>
 <td style="text-align: left;">9.29%</td>
 </tr>
@@ -304,6 +333,7 @@ reliable drive model in our sample of data:
 <td style="text-align: right;">2.0</td>
 <td style="text-align: right;">67422</td>
 <td style="text-align: right;">15</td>
+<td style="text-align: right;">167</td>
 <td style="text-align: left;">5.90%</td>
 <td style="text-align: left;">9.59%</td>
 </tr>
@@ -312,6 +342,7 @@ reliable drive model in our sample of data:
 <td style="text-align: right;">2.0</td>
 <td style="text-align: right;">119309</td>
 <td style="text-align: right;">33</td>
+<td style="text-align: right;">385</td>
 <td style="text-align: left;">7.42%</td>
 <td style="text-align: left;">10.35%</td>
 </tr>
@@ -320,6 +351,7 @@ reliable drive model in our sample of data:
 <td style="text-align: right;">1.5</td>
 <td style="text-align: right;">1445217</td>
 <td style="text-align: right;">397</td>
+<td style="text-align: right;">2188</td>
 <td style="text-align: left;">9.74%</td>
 <td style="text-align: left;">11.00%</td>
 </tr>
@@ -328,6 +360,7 @@ reliable drive model in our sample of data:
 <td style="text-align: right;">0.5</td>
 <td style="text-align: right;">129711</td>
 <td style="text-align: right;">44</td>
+<td style="text-align: right;">282</td>
 <td style="text-align: left;">11.18%</td>
 <td style="text-align: left;">14.88%</td>
 </tr>
@@ -336,6 +369,7 @@ reliable drive model in our sample of data:
 <td style="text-align: right;">3.0</td>
 <td style="text-align: right;">2205148</td>
 <td style="text-align: right;">1708</td>
+<td style="text-align: right;">4707</td>
 <td style="text-align: left;">15.13%</td>
 <td style="text-align: left;">16.17%</td>
 </tr>
@@ -344,6 +378,7 @@ reliable drive model in our sample of data:
 <td style="text-align: right;">1.5</td>
 <td style="text-align: right;">330431</td>
 <td style="text-align: right;">216</td>
+<td style="text-align: right;">787</td>
 <td style="text-align: left;">21.07%</td>
 <td style="text-align: left;">24.19%</td>
 </tr>
