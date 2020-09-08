@@ -102,7 +102,7 @@ knitr::kable(
       capacity_tb, 
       drive_days,
       failures,
-      unique_drives,
+      N_drives = unique_drives,
       one_year_failure_rate=sprintf("%1.2f%%", 100*(1-surv)),
       ci_95=sprintf("%1.2f%%", 100*(1-lower)))
     ]

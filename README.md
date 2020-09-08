@@ -363,7 +363,7 @@ drive HGST HUH721212ALN604 to the best 4TB drive HGST HMS5C4040BLE640:
 <th style="text-align: right;">capacity_tb</th>
 <th style="text-align: right;">drive_days</th>
 <th style="text-align: right;">failures</th>
-<th style="text-align: right;">unique_drives</th>
+<th style="text-align: right;">N_drives</th>
 <th style="text-align: left;">one_year_failure_rate</th>
 <th style="text-align: left;">ci_95</th>
 </tr>
