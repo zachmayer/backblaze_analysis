@@ -35,7 +35,7 @@ I really wanted to pick my drive based on:
 words, I want to pick the drive that has the most evidence it will last
 a large number of days.
 
-In order to analyze median time to failure, you need to observe 50% your
+In order to analyze median time to failure, you need to observe your
 sample long enough for 50% of the drives to fail. However, these drives
 are *so reliable* that almost none of them have yet hit the 50% failure
 mark. Therefore, I will settle for looking at
