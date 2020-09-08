@@ -31,13 +31,13 @@ Survival Analysis
 
 I wanted to pick my drive based on:
 `lower 95% confidence interval for median time to failure`. In other
-words, I want to pick the drive that has the most evidence it will last
-a large number of days.
+words, I want to pick the drive model that has the most evidence it will
+last a large number of days.
 
 In order to analyze median time to failure, you need to observe your
 sample long enough for 50% of the drives to fail. However, these drives
-are *so reliable* that almost none of the models in the sample have yet
-hit the 50% failure mark. Therefore, I will settle for looking at
+are **so reliable** that almost none of the models in the sample have
+yet hit the 50% failure mark. Therefore, I will settle for looking at
 `upper 95% confidence interval for failure rate after 1 year`. In other
 words, I want to pick the drive I am most sure will last at least one
 year.
@@ -48,9 +48,9 @@ lasted a year or longer, to remove drive models without a lot of data.
 (I don’t love this, and wish I knew how to make the survival curve
 confidence intervals reflect uncertainy from the number of individuals
 observed).  
-2. This analysis does not assume a constant failure rate. We often see
-in real life that drives fail at a high rate early on, and then failures
-become less likely over time.  
+2. This analysis does not assume a constant failure rate for each drive
+model. We often see in real life that drives fail at a high rate early
+on, and then failures become less likely over time.  
 3. This analysis allows different drive models to have different failure
 “curves.” I looped over every drive model, ran the `survfit` function in
 R (which fits a very simple, non-parametric [Kaplan-Meier survival
@@ -59,7 +59,7 @@ and then took the 95% confidence interval at 1 year from the fitted
 survival curve.
 
 Here’s the results of our analysis. The HGST HUH721212ALN604 is the most
-reliable drive in our sample of data:
+reliable drive model in our sample of data:
 
 <table>
 <thead>
@@ -325,6 +325,24 @@ this [README.md](README.md) file you are reading right now. Use
 [RStudio](https://rstudio.com/products/rstudio/download/) to `knit` the
 `Rmd` file into a `md` file, which github will then render nicely for
 you. \`knitr::kable produces the nice table of my results.
+
+If you want to get the raw data before it was cleaned up into
+[all\_data.csv](all_data.csv), you’ll need at least 70GB of free hard
+drive space:  
+0. Open up [backblaze\_analysis.Rproj](backblaze_analysis.Rproj) in
+RStudio. 1. Run [1\_download\_data.R](1_download_data.R) to download the
+data (almost 10.5 GB).  
+2. Run [2\_uzip\_data.R](1_download_data.R) to unzip the data (almost 55
+GB).  
+3. Run [3\_assemble\_data.R](1_download_data.R) to “compress” the data,
+which generates [all\_data.csv](all_data.csv).
+
+An interesting note about this data: It’s 55GB uncompressed, and
+contains a whole bunch of irrelevant informtation. It was very
+interesting to me that I could compress a 55GB dataset to 10.5GB, while
+still keeping **all** of the relevant information for modeling. I think
+this is another example of how “good data structures” are essential for
+effective engineering, and data science is, at its core, engineering.
 
 Erratum
 =======
