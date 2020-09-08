@@ -46,14 +46,16 @@ Some technical notes:
 1. I only looked at drive models where at least 100 individual drives
 lasted a year or longer, to remove drive models without a lot of data.
 (I don’t love this, and wish I knew how to make the survival curve
-confidence intervals reflect uncertainy from the number of individuals
+confidence intervals reflect uncertainty from the number of individuals
 observed).  
 2. This analysis does not assume a constant failure rate for each drive
 model. We often see in real life that drives fail at a high rate early
 on, and then failures become less likely over time.  
 3. This analysis allows different drive models to have different failure
-“curves.” I looped over every drive model, ran the `survfit` function in
-R (which fits a very simple, non-parametric [Kaplan-Meier survival
+“curves.” I looped over every drive model, ran the
+[survfit](https://www.rdocumentation.org/packages/survival/versions/2.11-4/topics/survfit)
+function in R (which fits a very simple, non-parametric [Kaplan-Meier
+survival
 curve](https://en.wikipedia.org/wiki/Kaplan%E2%80%93Meier_estimator)),
 and then took the 95% confidence interval at 1 year from the fitted
 survival curve.
