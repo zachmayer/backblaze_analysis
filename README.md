@@ -438,14 +438,6 @@ Zooming in on the first year of a drive’s life demonstates that the
 beyond that is unknown, but I expect this lower failure rate to continue
 over the lifetime of the two drives:
 
-    ## Warning: package 'survminer' was built under R version 3.6.2
-
-    ## Loading required package: ggplot2
-
-    ## Loading required package: ggpubr
-
-    ## Warning: package 'ggpubr' was built under R version 3.6.2
-
 ![](README_files/figure-markdown_strict/plot_2_drives-1.png)
 
 Replicating my results

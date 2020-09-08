@@ -133,13 +133,14 @@ The answer is that we've observed the `r best_drive_4` for many more years than 
 
 Zooming in on the first year of a drive's life demonstates that the `r rate_12` has a lower failure rate during this period.  Obviously the future beyond that is unknown, but I expect this lower failure rate to continue over the lifetime of the two drives:
 
-```{r plot_2_drives, echo=FALSE, plot=TRUE}
+```{r plot_2_drives, echo=FALSE}
 # Plot survival curves for 1 or 2 models to check results make sense
-library(survminer)
+suppressWarnings(suppressMessages(library(survminer)))
 dat <- data_raw[model %in% c(best_drive_12, best_drive_4),]
 model <- dat[,survfit(Surv(drive_days, failure) ~ model)]
 #ggsurvplot(model, data=dat, fun='cumhaz', conf.int = T)
-ggsurvplot(model, data=dat, conf.int = T, ylim=c(.95, 1.0))
+out <- ggsurvplot(model, data=dat, conf.int = T, ylim=c(.95, 1.0))
+print(out)
 ```
 
 # Replicating my results
