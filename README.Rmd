@@ -38,20 +38,13 @@ data_surv <- fread('all_data.csv')
 keys <- c('model', 'serial_number')
 setkeyv(data_surv, keys)
 data_surv <- data_surv[,list(
-  N = sum(N),
+  drive_days = sum(N),
   failure=sum(failure),
   capacity_tb=round(max(capacity_bytes)/1e+12, 1)
 ), by=keys]
 
-# Plot survival curves for 1 or 2 models to check results make sense
-# library(survminer)
-# dat <- data_surv[model %in% c('HGST HUH721212ALN604','HGST HMS5C4040BLE640', 'WDC WD40EFRX'),]
-# model <- dat[,survfit(Surv(N, failure) ~ model)]
-# ggsurvplot(model, data=dat, fun='cumhaz', conf.int = T)
-# ggsurvplot(model, data=dat, conf.int = T, ylim=c(.95, 1.0))
-
 # Only keep models were at leat 100 drives made it to one year
-data_surv[,count_one_year := sum(N>=days_to_year), by='model']
+data_surv[,count_one_year := sum(drive_days>=days_to_year), by='model']
 data_surv <- data_surv[count_one_year > 99,]
 
 # Do a non-parametric survival curve for every drive model
@@ -65,7 +58,12 @@ survival_curve_at_t <- function(time, failure, at=days_to_year){
   return(out)
 }
 
-data_surv <- data_surv[, c(list(capacity_tb=max(capacity_tb), N=.N), survival_curve_at_t(N, failure)), by='model']
+data_surv <- data_surv[, c(list(
+  capacity_tb=max(capacity_tb), 
+  drive_days=sum(drive_days),
+  failures=sum(failure),
+  unique_drives=.N
+  ), survival_curve_at_t(drive_days, failure)), by='model']
 data_surv <- data_surv[order(-lower),]
 
 # Choose best drive
@@ -79,12 +77,47 @@ knitr::kable(
     list(
       model, 
       capacity_tb, 
-      N,
+      drive_days,
+      failures,
+      unique_drives,
       one_year_failure_rate=sprintf("%1.2f%%", 100*(1-surv)),
       ci_95=sprintf("%1.2f%%", 100*(1-lower)))
     ]
 )
 ```
+
+# 12TB vs 4TB drives
+
+```{r choose_12_v_4, echo=FALSE}
+best_drive_12 <- data_surv[round(capacity_tb)==12,][1, model]
+best_drive_4 <- data_surv[round(capacity_tb)==4,][1, model]
+```
+
+Lets drill down into my results a little bit, and compare our best 12TB drive `r best_drive_12` to the best 4TB drive `r best_drive_4`:
+
+```{r table_12_v_4, echo=FALSE}
+knitr::kable(
+  data_surv[model %in% c(best_drive_12, best_drive_4),][,
+    list(
+      model, 
+      capacity_tb, 
+      drive_days,
+      failures,
+      unique_drives,
+      one_year_failure_rate=sprintf("%1.2f%%", 100*(1-surv)),
+      ci_95=sprintf("%1.2f%%", 100*(1-lower)))
+    ]
+)
+```
+
+# Plot survival curves for 1 or 2 models to check results make sense
+# library(survminer)
+# dat <- data_surv[model %in% c('HGST HUH721212ALN604','HGST HMS5C4040BLE640', 'WDC WD40EFRX'),]
+# model <- dat[,survfit(Surv(N, failure) ~ model)]
+# ggsurvplot(model, data=dat, fun='cumhaz', conf.int = T)
+# ggsurvplot(model, data=dat, conf.int = T, ylim=c(.95, 1.0))
+
+
 
 # Replicating my results
 [all_data.csv](all_data.csv) has the cleaned up data from backblaze, at the level of individual drives, days observed, and whether or not the drive failed.   
