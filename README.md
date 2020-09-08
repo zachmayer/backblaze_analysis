@@ -422,8 +422,8 @@ Let’s use Backblaze’s “naive” statistic to compare these 2 drives:
 </tbody>
 </table>
 
-The HGST HUH721212ALN604 actually has a \*\*higher\* naive failure rate
-at 0.48% than the HGST HMS5C4040BLE640 at 0.46%.
+The HGST HUH721212ALN604 actually has a **higher** naive failure rate at
+0.48% than the HGST HMS5C4040BLE640 at 0.46%.
 
 So why do I reccomend buying HGST HMS5C4040BLE640?
 

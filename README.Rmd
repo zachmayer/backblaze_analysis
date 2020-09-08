@@ -125,7 +125,7 @@ rate_12 <- result[round(capacity_tb)==12,][1, naive_rate]
 rate_4 <- result[round(capacity_tb)==4,][1, naive_rate]
 ```
 
-The `r best_drive_12` actually has a **higher* naive failure rate at `r rate_12` than the `r best_drive_4` at `r rate_4`.
+The `r best_drive_12` actually has a **higher** naive failure rate at `r rate_12` than the `r best_drive_4` at `r rate_4`.
 
 So why do I reccomend buying `r best_drive_4`?
 
