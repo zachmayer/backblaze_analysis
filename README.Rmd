@@ -89,10 +89,10 @@ knitr::kable(
 # Replicating my results
 [all_data.csv](all_data.csv) has the cleaned up data from backblaze, at the level of individual drives, days observed, and whether or not the drive failed.   
 
-[README.Rmd](README.Rmd) has the code to run this analysis and generate this [README.md](README.md) file you are reading right now. Use [RStudio](https://rstudio.com/products/rstudio/download/) to `knit` the `Rmd` file into a `md` file, which github will then render nicely for you. [knitr::kable](https://www.rdocumentation.org/packages/knitr/versions/1.29/topics/kable) produces the nice table of my results.
+[README.Rmd](README.Rmd) has the code to run this analysis and generate this [README.md](README.md) file you are reading right now. Use [RStudio](https://rstudio.com/products/rstudio/download/) to `knit` the `Rmd` file into a `md` file, which github will then render nicely for you. [knitr::kable](https://www.rdocumentation.org/packages/knitr/versions/1.29/topics/kable) produces the nice table of results.
 
 If you want to get the raw data before it was cleaned up into [all_data.csv](all_data.csv), you'll need at least 70GB of free hard drive space:    
-0. Open up [backblaze_analysis.Rproj](backblaze_analysis.Rproj) in RStudio.
+0. Open up [backblaze_analysis.Rproj](backblaze_analysis.Rproj) in RStudio.    
 1.  Run [1_download_data.R](1_download_data.R) to download the data (almost 10.5 GB).    
 2.  Run [2_uzip_data.R](1_download_data.R) to unzip the data (almost 55 GB).    
 3.  Run [3_assemble_data.R](1_download_data.R) to "compress" the data, which generates [all_data.csv](all_data.csv).    

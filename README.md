@@ -328,14 +328,15 @@ this [README.md](README.md) file you are reading right now. Use
 `Rmd` file into a `md` file, which github will then render nicely for
 you.
 [knitr::kable](https://www.rdocumentation.org/packages/knitr/versions/1.29/topics/kable)
-produces the nice table of my results.
+produces the nice table of results.
 
 If you want to get the raw data before it was cleaned up into
 [all\_data.csv](all_data.csv), you’ll need at least 70GB of free hard
 drive space:  
 0. Open up [backblaze\_analysis.Rproj](backblaze_analysis.Rproj) in
-RStudio. 1. Run [1\_download\_data.R](1_download_data.R) to download the
-data (almost 10.5 GB).  
+RStudio.  
+1. Run [1\_download\_data.R](1_download_data.R) to download the data
+(almost 10.5 GB).  
 2. Run [2\_uzip\_data.R](1_download_data.R) to unzip the data (almost 55
 GB).  
 3. Run [3\_assemble\_data.R](1_download_data.R) to “compress” the data,
