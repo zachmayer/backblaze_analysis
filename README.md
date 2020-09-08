@@ -343,10 +343,12 @@ which generates [all\_data.csv](all_data.csv).
 
 An interesting note about this data: It’s 55GB uncompressed, and
 contains a whole bunch of irrelevant informtation. It was very
-interesting to me that I could compress a 55GB dataset to 10.5GB, while
-still keeping **all** of the relevant information for modeling. I think
-this is another example of how “good data structures” are essential for
-effective engineering, and data science is, at its core, engineering.
+interesting to me that I could compress a 55GB dataset to 10mb, while
+still keeping **all** of the relevant information for modeling. (In
+other words, this dataset was 5,000x larger than it needed to be). I
+think this is another example of how “good data structures” are
+essential for effective engineering, and data science is, at its core,
+engineering.
 
 Erratum
 =======
