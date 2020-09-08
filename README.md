@@ -354,7 +354,8 @@ reliable drive model in our sample of data:
 ==================
 
 Lets drill down into my results a little bit, and compare our best 12TB
-drive HGST HUH721212ALN604 to the best 4TB drive HGST HMS5C4040BLE640:
+drive (HGST HUH721212ALN604) to the best 4TB drive (HGST
+HMS5C4040BLE640):
 
 <table>
 <thead>
@@ -389,6 +390,63 @@ drive HGST HUH721212ALN604 to the best 4TB drive HGST HMS5C4040BLE640:
 </tr>
 </tbody>
 </table>
+
+Let’s use Backblaze’s “naive” statistic to compare these 2 drives:
+`Drive Failures / (Drive Days / 365)`
+
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">model</th>
+<th style="text-align: right;">capacity_tb</th>
+<th style="text-align: right;">drive_days</th>
+<th style="text-align: left;">one_year_failure_rate</th>
+<th style="text-align: left;">naive_rate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">HGST HUH721212ALN604</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">4893547</td>
+<td style="text-align: left;">0.42%</td>
+<td style="text-align: left;">0.48%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">HGST HMS5C4040BLE640</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">21867106</td>
+<td style="text-align: left;">0.68%</td>
+<td style="text-align: left;">0.46%</td>
+</tr>
+</tbody>
+</table>
+
+The HGST HUH721212ALN604 actually has a \*\*higher\* naive failure rate
+at 0.48% than the HGST HMS5C4040BLE640 at 0.46%.
+
+So why do I reccomend buying HGST HMS5C4040BLE640?
+
+The answer is that we’ve observed the HGST HMS5C4040BLE640 for many more
+years than the HGST HUH721212ALN604. On the one had, these extra years
+give us more certainty that these drives are reliable and fail at
+extremely low rates. On the other hand, these extra years are **late**
+in the drive’s lifetimes, when failure rates are (expected) to be lower.
+
+Zooming in on the first year of a drive’s life demonstates that the
+0.48% has a lower failure rate during this period. Obviously the future
+beyond that is unknown, but I expect this lower failure rate to continue
+over the lifetime of the two drives:
+
+    ## Warning: package 'survminer' was built under R version 3.6.2
+
+    ## Loading required package: ggplot2
+
+    ## Loading required package: ggpubr
+
+    ## Warning: package 'ggpubr' was built under R version 3.6.2
+
+![](README_files/figure-markdown_strict/plot_2_drives-1.png)
 
 Replicating my results
 ======================

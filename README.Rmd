@@ -34,18 +34,18 @@ library(data.table)
 library(survival)
 days_to_year <- 365.2425
 
-data_surv <- fread('all_data.csv')
+data_raw <- fread('all_data.csv')
 keys <- c('model', 'serial_number')
-setkeyv(data_surv, keys)
-data_surv <- data_surv[,list(
+setkeyv(data_raw, keys)
+data_raw <- data_raw[,list(
   drive_days = sum(N),
   failure=sum(failure),
   capacity_tb=round(max(capacity_bytes)/1e+12, 1)
 ), by=keys]
 
 # Only keep models were at leat 100 drives made it to one year
-data_surv[,count_one_year := sum(drive_days>=days_to_year), by='model']
-data_surv <- data_surv[count_one_year > 99,]
+data_raw[,count_one_year := sum(drive_days>=days_to_year), by='model']
+data_raw <- data_raw[count_one_year > 99,]
 
 # Do a non-parametric survival curve for every drive model
 survival_curve_at_t <- function(time, failure, at=days_to_year){
@@ -58,7 +58,7 @@ survival_curve_at_t <- function(time, failure, at=days_to_year){
   return(out)
 }
 
-data_surv <- data_surv[, c(list(
+data_surv <- data_raw[, c(list(
   capacity_tb=max(capacity_tb), 
   drive_days=sum(drive_days),
   failures=sum(failure),
@@ -133,8 +133,13 @@ The answer is that we've observed the `r best_drive_4` for many more years than 
 
 Zooming in on the first year of a drive's life demonstates that the `r rate_12` has a lower failure rate during this period.  Obviously the future beyond that is unknown, but I expect this lower failure rate to continue over the lifetime of the two drives:
 
-
-```{r plot_2_drives, echo=FALSE}
+```{r plot_2_drives, echo=FALSE, plot=TRUE}
+# Plot survival curves for 1 or 2 models to check results make sense
+library(survminer)
+dat <- data_raw[model %in% c(best_drive_12, best_drive_4),]
+model <- dat[,survfit(Surv(drive_days, failure) ~ model)]
+#ggsurvplot(model, data=dat, fun='cumhaz', conf.int = T)
+ggsurvplot(model, data=dat, conf.int = T, ylim=c(.95, 1.0))
 ```
 
 # Replicating my results
