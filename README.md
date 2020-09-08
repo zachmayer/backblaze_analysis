@@ -37,8 +37,8 @@ a large number of days.
 
 In order to analyze median time to failure, you need to observe your
 sample long enough for 50% of the drives to fail. However, these drives
-are *so reliable* that almost none of them have yet hit the 50% failure
-mark. Therefore, I will settle for looking at
+are *so reliable* that almost none of the models in the sample have yet
+hit the 50% failure mark. Therefore, I will settle for looking at
 `upper 95% confidence interval for failure rate after 1 year`. In other
 words, I want to pick the drive I am most sure will last at least one
 year.
