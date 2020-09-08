@@ -9,11 +9,12 @@ has
 
 Backblaze [did their own
 analysis](https://www.backblaze.com/blog/backblaze-hard-drive-stats-q1-2020/)
-of drive failures, but I don’t like their approach for 2 reasons: 1.
-Their “annualized failure rate” (`Drive Failures / (Drive Days / 365)`)
-assumes that failure rates are constant over time. E.g. this assumptions
-means that observing 1 drive for 100 days gives you the exact same
-information as observing 100 drives for 1 day.  
+of drive failures, but I don’t like their approach for 2 reasons:  
+1. Their “annualized failure rate”
+(`Drive Failures / (Drive Days / 365)`) assumes that failure rates are
+constant over time. E.g. this assumptions means that observing 1 drive
+for 100 days gives you the exact same information as observing 100
+drives for 1 day.  
 2. They don’t really explain how the derived confidence intervals or
 used them in their analysis, and pretty much rely on the “annualized
 failure rate” to make conclusions. I want to use a confidence interval
@@ -47,12 +48,13 @@ Some technical notes:
 lasted a year or longer, to remove drive models without a lot of data.
 (I don’t love this, and wish I knew how to make the survival curve
 confidence intervals reflect uncertainy from the number of individuals
-observed). 2. This analysis does not assume a constant failure rate. We
-often see in real life that drives fail at a high rate early on, and
-then failures become less likely over time. 3. This analysis allows
-different drive models to have different failure “curves.” I looped over
-every drive model, ran the `survfit` function in R (which fits a very
-simple, non-parametric [Kaplan-Meier survival
+observed).  
+2. This analysis does not assume a constant failure rate. We often see
+in real life that drives fail at a high rate early on, and then failures
+become less likely over time.  
+3. This analysis allows different drive models to have different failure
+“curves.” I looped over every drive model, ran the `survfit` function in
+R (which fits a very simple, non-parametric [Kaplan-Meier survival
 curve](https://en.wikipedia.org/wiki/Kaplan%E2%80%93Meier_estimator)),
 and then took the 95% confidence interval at 1 year from the fitted
 survival curve.
