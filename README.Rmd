@@ -139,7 +139,7 @@ suppressWarnings(suppressMessages(library(survminer)))
 dat <- data_raw[model %in% c(best_drive_12, best_drive_4),]
 model <- dat[,survfit(Surv(drive_days, failure) ~ model)]
 #ggsurvplot(model, data=dat, fun='cumhaz', conf.int = T)
-out <- ggsurvplot(model, data=dat, conf.int = T, ylim=c(.95, 1.0))
+out <- ggsurvplot(model, data=dat, conf.int = T, ylim=c(.96, 1.0))
 print(out)
 ```
 
