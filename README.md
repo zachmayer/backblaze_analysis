@@ -319,14 +319,16 @@ Replicating my results
 ======================
 
 [all\_data.csv](all_data.csv) has the cleaned up data from backblaze, at
-the level of individual drives, says observed, and whether or not the
+the level of individual drives, days observed, and whether or not the
 drive failed.
 
 [README.Rmd](README.Rmd) has the code to run this analysis and generate
 this [README.md](README.md) file you are reading right now. Use
 [RStudio](https://rstudio.com/products/rstudio/download/) to `knit` the
 `Rmd` file into a `md` file, which github will then render nicely for
-you. \`knitr::kable produces the nice table of my results.
+you.
+[knitr::kable](https://www.rdocumentation.org/packages/knitr/versions/1.29/topics/kable)
+produces the nice table of my results.
 
 If you want to get the raw data before it was cleaned up into
 [all\_data.csv](all_data.csv), you’ll need at least 70GB of free hard
