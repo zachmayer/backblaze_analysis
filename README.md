@@ -332,9 +332,8 @@ produces the nice table of results.
 
 If you want to get the raw data before it was cleaned up into
 [all\_data.csv](all_data.csv), you’ll need at least 70GB of free hard
-drive space:  
-0. Open up [backblaze\_analysis.Rproj](backblaze_analysis.Rproj) in
-RStudio.  
+drive space. I also suggest opening
+[backblaze\_analysis.Rproj](backblaze_analysis.Rproj) in RStudio.  
 1. Run [1\_download\_data.R](1_download_data.R) to download the data
 (almost 10.5 GB).  
 2. Run [2\_uzip\_data.R](1_download_data.R) to unzip the data (almost 55
