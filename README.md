@@ -428,7 +428,7 @@ The HGST HUH721212ALN604 actually has a **higher** naive failure rate at
 So why do I reccomend buying HGST HMS5C4040BLE640?
 
 The answer is that we’ve observed the HGST HMS5C4040BLE640 for many more
-years than the HGST HUH721212ALN604. On the one had, these extra years
+years than the HGST HUH721212ALN604. On the one hand, these extra years
 give us more certainty that these drives are reliable and fail at
 extremely low rates. On the other hand, these extra years are **late**
 in the drive’s lifetimes, when failure rates are (expected) to be lower.
@@ -467,7 +467,7 @@ GB).
 which generates [all\_data.csv](all_data.csv).
 
 An interesting note about this data: It’s 55GB uncompressed, and
-contains a whole bunch of irrelevant informtation. It was very
+contains a whole bunch of irrelevant information. It was very
 interesting to me that I could compress a 55GB dataset to 10mb, while
 still keeping **all** of the relevant information for modeling. (In
 other words, this dataset was 5,000x larger than it needed to be). I
