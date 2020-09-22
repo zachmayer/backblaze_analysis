@@ -539,11 +539,6 @@ that quantile:
 Do a non-parametric survival curve for every drive model
 ========================================================
 
-survival\_curve\_at\_t &lt;- function(time, failure, at=days\_to\_year){
-out &lt;- survfit(Surv(time, failure)~1) out &lt;- summary(out,
-times=at, conf.int=.95) out &lt;- list( surv =
-out*s**u**r**v*, *l**o**w**e**r* = *o**u**t*lower ) return(out) }
-
 <table>
 <thead>
 <tr class="header">

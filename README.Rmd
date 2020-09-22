@@ -186,16 +186,6 @@ So at most, we've seen `r failure_rate_formatted` drives fail, which means we're
 So, here is a survival table for the known quantiles for these 2 drives, along with upper and lower bounds on the estimated time-to-survival for that quantile:
 
 # Do a non-parametric survival curve for every drive model
-survival_curve_at_t <- function(time, failure, at=days_to_year){
-  out <- survfit(Surv(time, failure)~1)
-  out <- summary(out, times=at, conf.int=.95)
-  out <- list(
-    surv = out$surv,
-    lower =  out$lower
-  )
-  return(out)
-}
-
 ```{r quantiles, echo=FALSE}
 survival_quantile <- function(time, failure, quantiles){
   out <- survfit(Surv(time, failure)~1)
