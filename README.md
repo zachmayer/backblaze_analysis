@@ -536,9 +536,6 @@ So, here is a survival table for the known quantiles for these 2 drives,
 along with upper and lower bounds on the estimated time-to-survival for
 that quantile:
 
-Do a non-parametric survival curve for every drive model
-========================================================
-
 <table>
 <thead>
 <tr class="header">
@@ -714,14 +711,7 @@ Do a non-parametric survival curve for every drive model
 </tbody>
 </table>
 
-    ## Warning: Removed 2 rows containing missing values (geom_point).
-
-    ## Warning: Removed 4 rows containing missing values (geom_errorbar).
-
 ![](README_files/figure-markdown_strict/quantiles-1.png)
-
-Choose best drive
-=================
 
 Erratum
 =======

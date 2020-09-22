@@ -184,8 +184,6 @@ knitr::kable(best_drives)
 So at most, we've seen `r failure_rate_formatted` drives fail, which means we're at most seeing the `r failure_rate_formatted` percentile for drive survival time— we cannot make any inferences about percentiles higher than this, becuase **not enough drives have failed yet!**.  Interestingly, we can start to estimate a lower bound on survival time at a given quantile as we get close to it.
 
 So, here is a survival table for the known quantiles for these 2 drives, along with upper and lower bounds on the estimated time-to-survival for that quantile:
-
-# Do a non-parametric survival curve for every drive model
 ```{r quantiles, echo=FALSE}
 survival_quantile <- function(time, failure, quantiles){
   out <- survfit(Surv(time, failure)~1)
@@ -210,14 +208,12 @@ knitr::kable(data_quant)
 
 data_quant[,capacity_tb := factor(capacity_tb)]
 plt <- ggplot(data_quant, aes(x=percentile, y=days, ymin=lower, ymax=upper, col=capacity_tb)) + 
-  geom_point() + 
-  geom_errorbar() + 
+  geom_point(na.rm=T) + 
+  geom_errorbar(na.rm=T) + 
   ggtitle('Estimated survival days at different quantiles for 4TB vs 12TB drives') + 
   theme_tufte()
 print(plt)
 ```
-
-# Choose best drive
 
 # Erratum
 ![I nerd sniped myself](https://imgs.xkcd.com/comics/nerd_sniping.png)
