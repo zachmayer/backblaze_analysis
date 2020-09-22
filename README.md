@@ -428,7 +428,7 @@ The HGST HUH721212ALN604 actually has a **higher** naive failure rate at
 So why do I reccomend buying HGST HMS5C4040BLE640?
 
 The answer is that we’ve observed the HGST HMS5C4040BLE640 for many more
-years than the HGST HUH721212ALN604. On the one hand, these extra years
+years than the HGST HUH721212ALN604. On the one had, these extra years
 give us more certainty that these drives are reliable and fail at
 extremely low rates. On the other hand, these extra years are **late**
 in the drive’s lifetimes, when failure rates are (expected) to be lower.
@@ -467,13 +467,69 @@ GB).
 which generates [all\_data.csv](all_data.csv).
 
 An interesting note about this data: It’s 55GB uncompressed, and
-contains a whole bunch of irrelevant information. It was very
+contains a whole bunch of irrelevant informtation. It was very
 interesting to me that I could compress a 55GB dataset to 10mb, while
 still keeping **all** of the relevant information for modeling. (In
 other words, this dataset was 5,000x larger than it needed to be). I
 think this is another example of how “good data structures” are
 essential for effective engineering, and data science is, at its core,
 engineering.
+
+Some notes on survival analysis
+===============================
+
+Survival analysis is a little weird, becuase you don’t observe teh full
+distribution of your data. This makes some traditional statistics
+impossible to calculate.
+
+For example, until you observe every hard drive in the sample fail, you
+can’t know the mean failure rate. (For example if you have one unit left
+that hasn’t failed yet, and becomes an outlier in survival time, that
+might have a big impact on mean survivial time.)
+
+Therefore, for most survival problems, we use quantiles. For example,
+once you’ve observed 50% of the hard drives fail, you can compute median
+time to failure. Or perhaps once you’ve observed 10% of the drives fail,
+you can calculate the 10th percentile of time to failure.
+
+Here’s the thing: these drivew are **so reliable** even after 5 years of
+data, we’ve barely observed the distribution of failures. (This is a
+good thing, but it makes it hard to chose between drives!).
+
+Here’s our best 12TB and 4TB drives:
+
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">model</th>
+<th style="text-align: right;">capacity_tb</th>
+<th style="text-align: right;">failures</th>
+<th style="text-align: right;">N_drives</th>
+<th style="text-align: left;">pct_failed</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">HGST HUH721212ALN604</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">65</td>
+<td style="text-align: right;">10914</td>
+<td style="text-align: left;">0.60%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">HGST HMS5C4040BLE640</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">274</td>
+<td style="text-align: right;">16346</td>
+<td style="text-align: left;">1.68%</td>
+</tr>
+</tbody>
+</table>
+
+So at most, we’ve seen 1.68% drives fail, which means we’re at most
+seeing the 1.68% percentile for drive survival time— we cannot make any
+inferences about percentiles higher than this, becuase **not enough
+drives have failed yet!**.
 
 Erratum
 =======

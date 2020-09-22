@@ -162,5 +162,25 @@ For example, until you observe every hard drive in the sample fail, you can't kn
 
 Therefore, for most survival problems, we use quantiles.  For example, once you've observed 50% of the hard drives fail, you can compute median time to failure.  Or perhaps once you've observed 10% of the drives fail, you can calculate the 10th percentile of time to failure.
 
+Here's the thing: these drivew are **so reliable** even after 5 years of data, we've barely observed the distribution of failures.  (This is a good thing, but it makes it hard to chose between drives!).
+
+Here's our best 12TB and 4TB drives:
+```{r percentiles_for_best_drive, echo=FALSE}
+best_drives <- data_surv[model %in% c(best_drive_12, best_drive_4),][,
+    list(
+      model, 
+      capacity_tb, 
+      failures,
+      N_drives,
+      pct_failed = sprintf("%1.2f%%", 100*(failures/N_drives))
+    )
+  ]
+failure_rate <- data_surv[model %in% c(best_drive_12, best_drive_4), max(100*(failures/N_drives))]
+failure_rate <- sprintf("%1.2f%%", failure_rate)
+knitr::kable(best_drives)
+```
+
+So at most, we've seen `r failure_rate` drives fail, which means we're at most seeing the `r failure_rate` percentile for drive survival time— we cannot make any inferences about percentiles higher than this, becuase **not enough drives have failed yet!**.
+
 # Erratum
 ![I nerd sniped myself](https://imgs.xkcd.com/comics/nerd_sniping.png)
