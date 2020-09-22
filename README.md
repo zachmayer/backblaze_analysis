@@ -478,7 +478,7 @@ engineering.
 Some notes on survival analysis
 ===============================
 
-Survival analysis is a little weird, becuase you don’t observe teh full
+Survival analysis is a little weird, becuase you don’t observe the full
 distribution of your data. This makes some traditional statistics
 impossible to calculate.
 
@@ -529,7 +529,204 @@ Here’s our best 12TB and 4TB drives:
 So at most, we’ve seen 1.68% drives fail, which means we’re at most
 seeing the 1.68% percentile for drive survival time— we cannot make any
 inferences about percentiles higher than this, becuase **not enough
-drives have failed yet!**.
+drives have failed yet!**. Interestingly, we can start to estimate a
+lower bound on survival time at a given quantile as we get close to it.
+
+So, here is a survival table for the known quantiles for these 2 drives,
+along with upper and lower bounds on the estimated time-to-survival for
+that quantile:
+
+Do a non-parametric survival curve for every drive model
+========================================================
+
+survival\_curve\_at\_t &lt;- function(time, failure, at=days\_to\_year){
+out &lt;- survfit(Surv(time, failure)~1) out &lt;- summary(out,
+times=at, conf.int=.95) out &lt;- list( surv =
+out*s**u**r**v*, *l**o**w**e**r* = *o**u**t*lower ) return(out) }
+
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">model</th>
+<th style="text-align: right;">capacity_tb</th>
+<th style="text-align: right;">percentile</th>
+<th style="text-align: right;">lower</th>
+<th style="text-align: right;">days</th>
+<th style="text-align: right;">upper</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">HGST HMS5C4040BLE640</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0.1</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">30</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">HGST HMS5C4040BLE640</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0.2</td>
+<td style="text-align: right;">28</td>
+<td style="text-align: right;">34</td>
+<td style="text-align: right;">70</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">HGST HMS5C4040BLE640</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0.3</td>
+<td style="text-align: right;">47</td>
+<td style="text-align: right;">71</td>
+<td style="text-align: right;">129</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">HGST HMS5C4040BLE640</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0.4</td>
+<td style="text-align: right;">72</td>
+<td style="text-align: right;">130</td>
+<td style="text-align: right;">198</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">HGST HMS5C4040BLE640</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0.5</td>
+<td style="text-align: right;">130</td>
+<td style="text-align: right;">176</td>
+<td style="text-align: right;">322</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">HGST HMS5C4040BLE640</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0.6</td>
+<td style="text-align: right;">176</td>
+<td style="text-align: right;">307</td>
+<td style="text-align: right;">449</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">HGST HMS5C4040BLE640</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0.7</td>
+<td style="text-align: right;">294</td>
+<td style="text-align: right;">371</td>
+<td style="text-align: right;">524</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">HGST HMS5C4040BLE640</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0.8</td>
+<td style="text-align: right;">358</td>
+<td style="text-align: right;">500</td>
+<td style="text-align: right;">607</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">HGST HMS5C4040BLE640</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0.9</td>
+<td style="text-align: right;">487</td>
+<td style="text-align: right;">569</td>
+<td style="text-align: right;">697</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">HGST HMS5C4040BLE640</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">1.0</td>
+<td style="text-align: right;">541</td>
+<td style="text-align: right;">643</td>
+<td style="text-align: right;">808</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">HGST HUH721212ALN604</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">0.1</td>
+<td style="text-align: right;">26</td>
+<td style="text-align: right;">62</td>
+<td style="text-align: right;">111</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">HGST HUH721212ALN604</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">0.2</td>
+<td style="text-align: right;">82</td>
+<td style="text-align: right;">115</td>
+<td style="text-align: right;">239</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">HGST HUH721212ALN604</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">0.3</td>
+<td style="text-align: right;">124</td>
+<td style="text-align: right;">236</td>
+<td style="text-align: right;">364</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">HGST HUH721212ALN604</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">0.4</td>
+<td style="text-align: right;">236</td>
+<td style="text-align: right;">319</td>
+<td style="text-align: right;">432</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">HGST HUH721212ALN604</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">0.5</td>
+<td style="text-align: right;">313</td>
+<td style="text-align: right;">425</td>
+<td style="text-align: right;">488</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">HGST HUH721212ALN604</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">0.6</td>
+<td style="text-align: right;">393</td>
+<td style="text-align: right;">473</td>
+<td style="text-align: right;">526</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">HGST HUH721212ALN604</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">0.7</td>
+<td style="text-align: right;">432</td>
+<td style="text-align: right;">488</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">HGST HUH721212ALN604</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">0.8</td>
+<td style="text-align: right;">477</td>
+<td style="text-align: right;">511</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">HGST HUH721212ALN604</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">0.9</td>
+<td style="text-align: right;">488</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">HGST HUH721212ALN604</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">1.0</td>
+<td style="text-align: right;">501</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+</tbody>
+</table>
+
+    ## Warning: Removed 2 rows containing missing values (geom_point).
+
+    ## Warning: Removed 4 rows containing missing values (geom_errorbar).
+
+![](README_files/figure-markdown_strict/quantiles-1.png)
+
+Choose best drive
+=================
 
 Erratum
 =======

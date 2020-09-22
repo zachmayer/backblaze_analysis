@@ -32,6 +32,7 @@ Some technical notes:
 # Setup
 library(data.table)
 library(survival)
+library(ggthemes)
 days_to_year <- 365.2425
 
 data_raw <- fread('all_data.csv')
@@ -156,7 +157,7 @@ If you want to get the raw data before it was cleaned up into [all_data.csv](all
 An interesting note about this data: It's 55GB uncompressed, and contains a whole bunch of irrelevant informtation.  It was very interesting to me that I could compress a 55GB dataset to 10mb, while still keeping **all** of the relevant information for modeling.  (In other words, this dataset was 5,000x larger than it needed to be). I think this is another example of how "good data structures" are essential for effective engineering, and data science is, at its core, engineering.
 
 # Some notes on survival analysis
-Survival analysis is a little weird, becuase you don't observe teh full distribution of your data.  This makes some traditional statistics impossible to calculate.
+Survival analysis is a little weird, becuase you don't observe the full distribution of your data.  This makes some traditional statistics impossible to calculate.
 
 For example, until you observe every hard drive in the sample fail, you can't know the mean failure rate.  (For example if you have one unit left that hasn't failed yet, and becomes an outlier in survival time, that might have a big impact on mean survivial time.)
 
@@ -176,11 +177,57 @@ best_drives <- data_surv[model %in% c(best_drive_12, best_drive_4),][,
     )
   ]
 failure_rate <- data_surv[model %in% c(best_drive_12, best_drive_4), max(100*(failures/N_drives))]
-failure_rate <- sprintf("%1.2f%%", failure_rate)
+failure_rate_formatted <- sprintf("%1.2f%%", failure_rate)
 knitr::kable(best_drives)
 ```
 
-So at most, we've seen `r failure_rate` drives fail, which means we're at most seeing the `r failure_rate` percentile for drive survival time— we cannot make any inferences about percentiles higher than this, becuase **not enough drives have failed yet!**.
+So at most, we've seen `r failure_rate_formatted` drives fail, which means we're at most seeing the `r failure_rate_formatted` percentile for drive survival time— we cannot make any inferences about percentiles higher than this, becuase **not enough drives have failed yet!**.  Interestingly, we can start to estimate a lower bound on survival time at a given quantile as we get close to it.
+
+So, here is a survival table for the known quantiles for these 2 drives, along with upper and lower bounds on the estimated time-to-survival for that quantile:
+
+# Do a non-parametric survival curve for every drive model
+survival_curve_at_t <- function(time, failure, at=days_to_year){
+  out <- survfit(Surv(time, failure)~1)
+  out <- summary(out, times=at, conf.int=.95)
+  out <- list(
+    surv = out$surv,
+    lower =  out$lower
+  )
+  return(out)
+}
+
+```{r quantiles, echo=FALSE}
+survival_quantile <- function(time, failure, quantiles){
+  out <- survfit(Surv(time, failure)~1)
+  out <- quantile(out, quantiles/100)
+  out <- list(
+    percentile = quantiles,
+    lower = out$lower,
+    days =  out$quantile,
+    upper =  out$upper
+  )
+  return(out)
+}
+
+#quantiles = seq(0, failure_rate, length=11)[-1]
+quantiles = seq(0, 1, length=11)[-1]
+data_quant <- data_raw[model %in% c(best_drive_12, best_drive_4), ]
+data_quant <- data_quant[, c(
+    list(capacity_tb=max(capacity_tb)),
+    survival_quantile(drive_days, failure,  quantiles=quantiles)
+  ),by='model']
+knitr::kable(data_quant)
+
+data_quant[,capacity_tb := factor(capacity_tb)]
+plt <- ggplot(data_quant, aes(x=percentile, y=days, ymin=lower, ymax=upper, col=capacity_tb)) + 
+  geom_point() + 
+  geom_errorbar() + 
+  ggtitle('Estimated survival days at different quantiles for 4TB vs 12TB drives') + 
+  theme_tufte()
+print(plt)
+```
+
+# Choose best drive
 
 # Erratum
 ![I nerd sniped myself](https://imgs.xkcd.com/comics/nerd_sniping.png)
