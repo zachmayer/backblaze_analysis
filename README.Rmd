@@ -139,7 +139,7 @@ suppressWarnings(suppressMessages(library(survminer)))
 dat <- data_raw[model %in% c(best_drive_12, best_drive_4),]
 model <- dat[,survfit(Surv(drive_days, failure) ~ model)]
 #ggsurvplot(model, data=dat, fun='cumhaz', conf.int = T)
-out <- ggsurvplot(model, data=dat, conf.int = T, ylim=c(.96, 1.0))
+out <- ggsurvplot(model, data=dat, conf.int = T, ylim=c(.96, 1.0), conf.int.style='step')
 print(out)
 ```
 
@@ -154,6 +154,13 @@ If you want to get the raw data before it was cleaned up into [all_data.csv](all
 3.  Run [3_assemble_data.R](3_assemble_data.R) to "compress" the data, which generates [all_data.csv](all_data.csv).    
 
 An interesting note about this data: It's 55GB uncompressed, and contains a whole bunch of irrelevant informtation.  It was very interesting to me that I could compress a 55GB dataset to 10mb, while still keeping **all** of the relevant information for modeling.  (In other words, this dataset was 5,000x larger than it needed to be). I think this is another example of how "good data structures" are essential for effective engineering, and data science is, at its core, engineering.
+
+# Some notes on survival analysis
+Survival analysis is a little weird, becuase you don't observe teh full distribution of your data.  This makes some traditional statistics impossible to calculate.
+
+For example, until you observe every hard drive in the sample fail, you can't know the mean failure rate.  (For example if you have one unit left that hasn't failed yet, and becomes an outlier in survival time, that might have a big impact on mean survivial time.)
+
+Therefore, for most survival problems, we use quantiles.  For example, once you've observed 50% of the hard drives fail, you can compute median time to failure.  Or perhaps once you've observed 10% of the drives fail, you can calculate the 10th percentile of time to failure.
 
 # Erratum
 ![I nerd sniped myself](https://imgs.xkcd.com/comics/nerd_sniping.png)
