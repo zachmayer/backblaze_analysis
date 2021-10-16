@@ -44,9 +44,9 @@ data_raw <- data_raw[,list(
   capacity_tb=round(max(capacity_bytes)/1e+12, 1)
 ), by=keys]
 
-# Only keep models were at leat 100 drives made it to one year
+# Only keep models were at least 500 drives made it to one year
 data_raw[,count_one_year := sum(drive_days>=days_to_year), by='model']
-data_raw <- data_raw[count_one_year > 99,]
+data_raw <- data_raw[count_one_year > 499,]
 
 # Do a non-parametric survival curve for every drive model
 survival_curve_at_t <- function(time, failure, at=days_to_year){

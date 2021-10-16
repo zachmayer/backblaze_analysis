@@ -58,8 +58,8 @@ curve](https://en.wikipedia.org/wiki/Kaplan%E2%80%93Meier_estimator)),
 and then took the 95% confidence interval at 1 year from the fitted
 survival curve.
 
-Here’s the results of our analysis. The DELLBOSS VD is the most reliable
-drive model in our sample of data:
+Here’s the results of our analysis. The HGST HUH721212ALN604 is the most
+reliable drive model in our sample of data:
 
 <table>
 <thead>
@@ -73,22 +73,6 @@ drive model in our sample of data:
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td style="text-align: left;">DELLBOSS VD</td>
-<td style="text-align: right;">0.5</td>
-<td style="text-align: right;">68564</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: left;">0.00%</td>
-<td style="text-align: left;">0.00%</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Seagate SSD</td>
-<td style="text-align: right;">0.3</td>
-<td style="text-align: right;">74234</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: left;">0.00%</td>
-<td style="text-align: left;">0.00%</td>
-</tr>
 <tr class="odd">
 <td style="text-align: left;">HGST HUH721212ALN604</td>
 <td style="text-align: right;">12.0</td>
@@ -138,14 +122,6 @@ drive model in our sample of data:
 <td style="text-align: left;">0.83%</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Seagate BarraCuda SSD ZA250CM10002</td>
-<td style="text-align: right;">0.3</td>
-<td style="text-align: right;">262381</td>
-<td style="text-align: right;">5</td>
-<td style="text-align: left;">0.36%</td>
-<td style="text-align: left;">0.85%</td>
-</tr>
-<tr class="even">
 <td style="text-align: left;">ST12000NM0008</td>
 <td style="text-align: right;">12.0</td>
 <td style="text-align: right;">9261834</td>
@@ -153,21 +129,13 @@ drive model in our sample of data:
 <td style="text-align: left;">0.82%</td>
 <td style="text-align: left;">0.94%</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Hitachi HDS5C3030ALA630</td>
 <td style="text-align: right;">3.0</td>
 <td style="text-align: right;">6641559</td>
 <td style="text-align: right;">150</td>
 <td style="text-align: left;">0.77%</td>
 <td style="text-align: left;">1.02%</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Seagate BarraCuda 120 SSD ZA250CM10003</td>
-<td style="text-align: right;">0.3</td>
-<td style="text-align: right;">151410</td>
-<td style="text-align: right;">4</td>
-<td style="text-align: left;">0.58%</td>
-<td style="text-align: left;">1.15%</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">HGST HMS5C4040ALE640</td>
@@ -226,14 +194,6 @@ drive model in our sample of data:
 <td style="text-align: left;">1.71%</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">WDC WD5000LPVX</td>
-<td style="text-align: right;">0.5</td>
-<td style="text-align: right;">640884</td>
-<td style="text-align: right;">71</td>
-<td style="text-align: left;">0.86%</td>
-<td style="text-align: left;">1.82%</td>
-</tr>
-<tr class="odd">
 <td style="text-align: left;">Hitachi HDS5C4040ALE630</td>
 <td style="text-align: right;">4.0</td>
 <td style="text-align: right;">4403138</td>
@@ -241,7 +201,7 @@ drive model in our sample of data:
 <td style="text-align: left;">1.40%</td>
 <td style="text-align: left;">1.84%</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Hitachi HDS723030ALA640</td>
 <td style="text-align: right;">3.0</td>
 <td style="text-align: right;">1429666</td>
@@ -249,21 +209,13 @@ drive model in our sample of data:
 <td style="text-align: left;">1.34%</td>
 <td style="text-align: left;">2.03%</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">ST6000DX000</td>
 <td style="text-align: right;">6.0</td>
 <td style="text-align: right;">3382006</td>
 <td style="text-align: right;">88</td>
 <td style="text-align: left;">1.50%</td>
 <td style="text-align: left;">2.03%</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">ST4000DX000</td>
-<td style="text-align: right;">4.0</td>
-<td style="text-align: right;">293560</td>
-<td style="text-align: right;">81</td>
-<td style="text-align: left;">0.90%</td>
-<td style="text-align: left;">2.14%</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">ST4000DM000</td>
@@ -274,60 +226,12 @@ drive model in our sample of data:
 <td style="text-align: left;">2.53%</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">TOSHIBA MQ01ABF050M</td>
-<td style="text-align: right;">0.5</td>
-<td style="text-align: right;">480102</td>
-<td style="text-align: right;">94</td>
-<td style="text-align: left;">2.68%</td>
-<td style="text-align: left;">4.16%</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">TOSHIBA MD04ABA400V</td>
-<td style="text-align: right;">4.0</td>
-<td style="text-align: right;">288525</td>
-<td style="text-align: right;">6</td>
-<td style="text-align: left;">2.00%</td>
-<td style="text-align: left;">4.22%</td>
-</tr>
-<tr class="even">
 <td style="text-align: left;">TOSHIBA MQ01ABF050</td>
 <td style="text-align: right;">0.5</td>
 <td style="text-align: right;">687057</td>
 <td style="text-align: right;">272</td>
 <td style="text-align: left;">4.62%</td>
 <td style="text-align: left;">6.30%</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">WDC WD10EADS</td>
-<td style="text-align: right;">1.0</td>
-<td style="text-align: right;">370505</td>
-<td style="text-align: right;">64</td>
-<td style="text-align: left;">4.57%</td>
-<td style="text-align: left;">6.31%</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">WDC WD1600AAJS</td>
-<td style="text-align: right;">0.2</td>
-<td style="text-align: right;">126941</td>
-<td style="text-align: right;">20</td>
-<td style="text-align: left;">3.25%</td>
-<td style="text-align: left;">6.34%</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">HGST HDS5C4040ALE630</td>
-<td style="text-align: right;">4.0</td>
-<td style="text-align: right;">121680</td>
-<td style="text-align: right;">6</td>
-<td style="text-align: left;">3.44%</td>
-<td style="text-align: left;">6.69%</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">WDC WD60EFRX</td>
-<td style="text-align: right;">6.0</td>
-<td style="text-align: right;">686705</td>
-<td style="text-align: right;">72</td>
-<td style="text-align: left;">5.41%</td>
-<td style="text-align: left;">7.38%</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">WDC WD30EFRX</td>
@@ -338,44 +242,12 @@ drive model in our sample of data:
 <td style="text-align: left;">9.16%</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">ST33000651AS</td>
-<td style="text-align: right;">3.0</td>
-<td style="text-align: right;">222587</td>
-<td style="text-align: right;">31</td>
-<td style="text-align: left;">6.60%</td>
-<td style="text-align: left;">9.29%</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">WDC WD20EFRX</td>
-<td style="text-align: right;">2.0</td>
-<td style="text-align: right;">67422</td>
-<td style="text-align: right;">15</td>
-<td style="text-align: left;">5.90%</td>
-<td style="text-align: left;">9.59%</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">ST32000542AS</td>
-<td style="text-align: right;">2.0</td>
-<td style="text-align: right;">119309</td>
-<td style="text-align: right;">33</td>
-<td style="text-align: left;">7.42%</td>
-<td style="text-align: left;">10.35%</td>
-</tr>
-<tr class="odd">
 <td style="text-align: left;">ST31500541AS</td>
 <td style="text-align: right;">1.5</td>
 <td style="text-align: right;">1445217</td>
 <td style="text-align: right;">397</td>
 <td style="text-align: left;">9.74%</td>
 <td style="text-align: left;">11.00%</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">ST500LM030</td>
-<td style="text-align: right;">0.5</td>
-<td style="text-align: right;">216516</td>
-<td style="text-align: right;">53</td>
-<td style="text-align: left;">10.68%</td>
-<td style="text-align: left;">14.21%</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">ST3000DM001</td>
@@ -384,14 +256,6 @@ drive model in our sample of data:
 <td style="text-align: right;">1708</td>
 <td style="text-align: left;">15.13%</td>
 <td style="text-align: left;">16.17%</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">ST31500341AS</td>
-<td style="text-align: right;">1.5</td>
-<td style="text-align: right;">330431</td>
-<td style="text-align: right;">216</td>
-<td style="text-align: left;">21.07%</td>
-<td style="text-align: left;">24.19%</td>
 </tr>
 </tbody>
 </table>
