@@ -44,9 +44,9 @@ data_raw <- data_raw[,list(
   capacity_tb=round(max(capacity_bytes)/1e+12, 1)
 ), by=keys]
 
-# Only keep models were at least 500 drives made it to one year
+# Only keep models were at least 250 drives made it to one year
 data_raw[,count_one_year := sum(drive_days>=days_to_year), by='model']
-data_raw <- data_raw[count_one_year > 499,]
+data_raw <- data_raw[count_one_year > 249,]
 
 # Do a non-parametric survival curve for every drive model
 survival_curve_at_t <- function(time, failure, at=days_to_year){
@@ -88,8 +88,13 @@ knitr::kable(
 
 # 12TB vs 4TB drives
 ```{r choose_12_v_4, echo=FALSE}
-best_drive_12 <- data_surv[round(capacity_tb)==12,][1, model]
-best_drive_4 <- data_surv[round(capacity_tb)==4,][1, model]
+data_surv[,capacity_tb_round := round(capacity_tb)]
+best_drives <- data_surv[,list(
+  model = model[which.max(lower)],
+  lower = max(lower)
+), by=capacity_tb_round][order(-lower),]
+best_drive_12 <- best_drives[capacity_tb_round==12,][1, model]
+best_drive_4 <- best_drives[capacity_tb_round==4,][1, model]
 ```
 
 Lets drill down into my results a little bit, and compare our best 12TB drive (`r best_drive_12`) to the best 4TB drive (`r best_drive_4`):
@@ -128,20 +133,40 @@ rate_4 <- result[round(capacity_tb)==4,][1, naive_rate]
 
 The `r best_drive_12` actually has a **higher** naive failure rate at `r rate_12` than the `r best_drive_4` at `r rate_4`.
 
-So why do I reccomend buying `r best_drive_4`?
+So why do I recommend buying `r best_drive_12`?
 
 The answer is that we've observed the `r best_drive_4` for many more years than the `r best_drive_12`.  On the one had, these extra years give us more certainty that these drives are reliable and fail at extremely low rates.  On the other hand, these extra years are **late** in the drive's lifetimes, when failure rates are (expected) to be lower.
 
-Zooming in on the first year of a drive's life demonstates that the `r rate_12` has a lower failure rate during this period.  Obviously the future beyond that is unknown, but I expect this lower failure rate to continue over the lifetime of the two drives:
+Zooming in on the first year of a drive's life demonstrates that the `r rate_12` has a lower failure rate during this period.  Obviously the future beyond that is unknown, but I expect this lower failure rate to continue over the lifetime of the two drives:
 
 ```{r plot_2_drives, echo=FALSE}
 # Plot survival curves for 1 or 2 models to check results make sense
 suppressWarnings(suppressMessages(library(survminer)))
 dat <- data_raw[model %in% c(best_drive_12, best_drive_4),]
 model <- dat[,survfit(Surv(drive_days, failure) ~ model)]
-#ggsurvplot(model, data=dat, fun='cumhaz', conf.int = T)
-out <- ggsurvplot(model, data=dat, conf.int = T, ylim=c(.96, 1.0), conf.int.style='step')
+out <- ggsurvplot(model, data=dat, conf.int = T, ylim=c(.96, 1.0))
 print(out)
+```
+
+# Survival curves by drive capacity
+```{r plot_best_drives, echo=FALSE}
+colors <- c(
+  "#1f78b4", "#ff7f00", "#6a3d9a", "#33a02c", "#e31a1c", "#b15928",
+  "#a6cee3", "#fdbf6f", "#cab2d6", "#b2df8a", "#fb9a99", "black",
+  "grey1", "grey10"
+)
+
+dat <- data_raw[model %in% best_drives[,model],]
+dat[,capacity_tb := factor(round(capacity_tb))]
+model <- dat[,survfit(Surv(drive_days, failure) ~ capacity_tb)]
+
+out <- ggsurvplot(
+  model, data=dat, conf.int = T, ylim=c(.96, 1.0),
+  palette = colors
+  )
+print(out)
+
+ggsurvplot(model, data=dat, fun='cumhaz', palette = colors, conf.int = T)
 ```
 
 # Replicating my results

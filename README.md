@@ -122,6 +122,14 @@ reliable drive model in our sample of data:
 <td style="text-align: left;">0.83%</td>
 </tr>
 <tr class="odd">
+<td style="text-align: left;">Seagate BarraCuda SSD ZA250CM10002</td>
+<td style="text-align: right;">0.3</td>
+<td style="text-align: right;">262381</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">0.36%</td>
+<td style="text-align: left;">0.85%</td>
+</tr>
+<tr class="even">
 <td style="text-align: left;">ST12000NM0008</td>
 <td style="text-align: right;">12.0</td>
 <td style="text-align: right;">9261834</td>
@@ -129,7 +137,7 @@ reliable drive model in our sample of data:
 <td style="text-align: left;">0.82%</td>
 <td style="text-align: left;">0.94%</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Hitachi HDS5C3030ALA630</td>
 <td style="text-align: right;">3.0</td>
 <td style="text-align: right;">6641559</td>
@@ -137,7 +145,7 @@ reliable drive model in our sample of data:
 <td style="text-align: left;">0.77%</td>
 <td style="text-align: left;">1.02%</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">HGST HMS5C4040ALE640</td>
 <td style="text-align: right;">4.0</td>
 <td style="text-align: right;">13317995</td>
@@ -145,7 +153,7 @@ reliable drive model in our sample of data:
 <td style="text-align: left;">0.99%</td>
 <td style="text-align: left;">1.19%</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">ST8000NM0055</td>
 <td style="text-align: right;">8.0</td>
 <td style="text-align: right;">21043105</td>
@@ -153,7 +161,7 @@ reliable drive model in our sample of data:
 <td style="text-align: left;">1.06%</td>
 <td style="text-align: left;">1.23%</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">ST8000DM002</td>
 <td style="text-align: right;">8.0</td>
 <td style="text-align: right;">17138860</td>
@@ -161,7 +169,7 @@ reliable drive model in our sample of data:
 <td style="text-align: left;">1.11%</td>
 <td style="text-align: left;">1.31%</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Hitachi HDS722020ALA330</td>
 <td style="text-align: right;">2.0</td>
 <td style="text-align: right;">5306511</td>
@@ -169,7 +177,7 @@ reliable drive model in our sample of data:
 <td style="text-align: left;">1.09%</td>
 <td style="text-align: left;">1.39%</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">HGST HUH728080ALE600</td>
 <td style="text-align: right;">8.0</td>
 <td style="text-align: right;">1362296</td>
@@ -177,7 +185,7 @@ reliable drive model in our sample of data:
 <td style="text-align: left;">0.88%</td>
 <td style="text-align: left;">1.42%</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">ST500LM012 HN</td>
 <td style="text-align: right;">0.5</td>
 <td style="text-align: right;">1326191</td>
@@ -185,13 +193,21 @@ reliable drive model in our sample of data:
 <td style="text-align: left;">1.00%</td>
 <td style="text-align: left;">1.68%</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">ST12000NM0007</td>
 <td style="text-align: right;">12.0</td>
 <td style="text-align: right;">35220447</td>
 <td style="text-align: right;">1911</td>
 <td style="text-align: left;">1.58%</td>
 <td style="text-align: left;">1.71%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">WDC WD5000LPVX</td>
+<td style="text-align: right;">0.5</td>
+<td style="text-align: right;">640884</td>
+<td style="text-align: right;">71</td>
+<td style="text-align: left;">0.86%</td>
+<td style="text-align: left;">1.82%</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Hitachi HDS5C4040ALE630</td>
@@ -226,6 +242,14 @@ reliable drive model in our sample of data:
 <td style="text-align: left;">2.53%</td>
 </tr>
 <tr class="even">
+<td style="text-align: left;">TOSHIBA MQ01ABF050M</td>
+<td style="text-align: right;">0.5</td>
+<td style="text-align: right;">480102</td>
+<td style="text-align: right;">94</td>
+<td style="text-align: left;">2.68%</td>
+<td style="text-align: left;">4.16%</td>
+</tr>
+<tr class="odd">
 <td style="text-align: left;">TOSHIBA MQ01ABF050</td>
 <td style="text-align: right;">0.5</td>
 <td style="text-align: right;">687057</td>
@@ -233,13 +257,37 @@ reliable drive model in our sample of data:
 <td style="text-align: left;">4.62%</td>
 <td style="text-align: left;">6.30%</td>
 </tr>
+<tr class="even">
+<td style="text-align: left;">WDC WD10EADS</td>
+<td style="text-align: right;">1.0</td>
+<td style="text-align: right;">370505</td>
+<td style="text-align: right;">64</td>
+<td style="text-align: left;">4.57%</td>
+<td style="text-align: left;">6.31%</td>
+</tr>
 <tr class="odd">
+<td style="text-align: left;">WDC WD60EFRX</td>
+<td style="text-align: right;">6.0</td>
+<td style="text-align: right;">686705</td>
+<td style="text-align: right;">72</td>
+<td style="text-align: left;">5.41%</td>
+<td style="text-align: left;">7.38%</td>
+</tr>
+<tr class="even">
 <td style="text-align: left;">WDC WD30EFRX</td>
 <td style="text-align: right;">3.0</td>
 <td style="text-align: right;">1271769</td>
 <td style="text-align: right;">174</td>
 <td style="text-align: left;">7.71%</td>
 <td style="text-align: left;">9.16%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ST33000651AS</td>
+<td style="text-align: right;">3.0</td>
+<td style="text-align: right;">222587</td>
+<td style="text-align: right;">31</td>
+<td style="text-align: left;">6.60%</td>
+<td style="text-align: left;">9.29%</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">ST31500541AS</td>
@@ -250,12 +298,28 @@ reliable drive model in our sample of data:
 <td style="text-align: left;">11.00%</td>
 </tr>
 <tr class="odd">
+<td style="text-align: left;">ST500LM030</td>
+<td style="text-align: right;">0.5</td>
+<td style="text-align: right;">216516</td>
+<td style="text-align: right;">53</td>
+<td style="text-align: left;">10.68%</td>
+<td style="text-align: left;">14.21%</td>
+</tr>
+<tr class="even">
 <td style="text-align: left;">ST3000DM001</td>
 <td style="text-align: right;">3.0</td>
 <td style="text-align: right;">2205148</td>
 <td style="text-align: right;">1708</td>
 <td style="text-align: left;">15.13%</td>
 <td style="text-align: left;">16.17%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ST31500341AS</td>
+<td style="text-align: right;">1.5</td>
+<td style="text-align: right;">330431</td>
+<td style="text-align: right;">216</td>
+<td style="text-align: left;">21.07%</td>
+<td style="text-align: left;">24.19%</td>
 </tr>
 </tbody>
 </table>
@@ -334,7 +398,7 @@ Let’s use Backblaze’s “naive” statistic to compare these 2 drives:
 The HGST HUH721212ALN604 actually has a **higher** naive failure rate at
 0.43% than the HGST HMS5C4040BLE640 at 0.43%.
 
-So why do I reccomend buying HGST HMS5C4040BLE640?
+So why do I recommend buying HGST HUH721212ALN604?
 
 The answer is that we’ve observed the HGST HMS5C4040BLE640 for many more
 years than the HGST HUH721212ALN604. On the one had, these extra years
@@ -342,12 +406,24 @@ give us more certainty that these drives are reliable and fail at
 extremely low rates. On the other hand, these extra years are **late**
 in the drive’s lifetimes, when failure rates are (expected) to be lower.
 
-Zooming in on the first year of a drive’s life demonstates that the
+Zooming in on the first year of a drive’s life demonstrates that the
 0.43% has a lower failure rate during this period. Obviously the future
 beyond that is unknown, but I expect this lower failure rate to continue
 over the lifetime of the two drives:
 
 ![](README_files/figure-markdown_strict/plot_2_drives-1.png)
+
+# Survival curves by drive capacity
+
+    ## Warning: Removed 613 row(s) containing missing values (geom_path).
+
+    ## Warning: Removed 496 rows containing missing values (geom_point).
+
+    ## Warning: Removed 613 row(s) containing missing values (geom_path).
+
+    ## Warning: Removed 496 rows containing missing values (geom_point).
+
+![](README_files/figure-markdown_strict/plot_best_drives-1.png)![](README_files/figure-markdown_strict/plot_best_drives-2.png)
 
 # Replicating my results
 
