@@ -15,7 +15,8 @@ for(year in 2013:2015){
 }
 
 # Quarterly data
-for(year in 2016:2020){
+THIS_YEAR <- year(Sys.Date())
+for(year in 2016:THIS_YEAR){
   for(quarter in paste0('Q', 1:4)){
     quarter_year <- paste0(quarter, '_', year)
     filename <- paste0('zip_data/data_', quarter_year, '.zip')
