@@ -1,5 +1,4 @@
-Data Sources
-============
+# Data Sources
 
 I’m buying a hard drive to backup my data at home, and I want to buy a
 drive that’s not going to fail. Fortunately, [BackBlaze has shared all
@@ -26,8 +25,7 @@ I wanted to use a failure model that allows for time-varying failure
 rates, and then pick a drive based on a confidence interval, so here we
 are.
 
-Survival Analysis
-=================
+# Survival Analysis
 
 I wanted to pick my drive based on:
 `lower 95% confidence interval for median time to failure`. In other
@@ -60,8 +58,8 @@ curve](https://en.wikipedia.org/wiki/Kaplan%E2%80%93Meier_estimator)),
 and then took the 95% confidence interval at 1 year from the fitted
 survival curve.
 
-Here’s the results of our analysis. The HGST HUH721212ALN604 is the most
-reliable drive model in our sample of data:
+Here’s the results of our analysis. The DELLBOSS VD is the most reliable
+drive model in our sample of data:
 
 <table>
 <thead>
@@ -76,36 +74,84 @@ reliable drive model in our sample of data:
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">HGST HUH721212ALN604</td>
-<td style="text-align: right;">12.0</td>
-<td style="text-align: right;">4893547</td>
-<td style="text-align: right;">65</td>
-<td style="text-align: left;">0.42%</td>
-<td style="text-align: left;">0.55%</td>
+<td style="text-align: left;">DELLBOSS VD</td>
+<td style="text-align: right;">0.5</td>
+<td style="text-align: right;">68564</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">0.00%</td>
+<td style="text-align: left;">0.00%</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">HGST HUH721212ALE600</td>
-<td style="text-align: right;">12.0</td>
-<td style="text-align: right;">669202</td>
-<td style="text-align: right;">8</td>
-<td style="text-align: left;">0.40%</td>
-<td style="text-align: left;">0.69%</td>
+<td style="text-align: left;">Seagate SSD</td>
+<td style="text-align: right;">0.3</td>
+<td style="text-align: right;">74234</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">0.00%</td>
+<td style="text-align: left;">0.00%</td>
 </tr>
 <tr class="odd">
+<td style="text-align: left;">HGST HUH721212ALN604</td>
+<td style="text-align: right;">12.0</td>
+<td style="text-align: right;">8847475</td>
+<td style="text-align: right;">105</td>
+<td style="text-align: left;">0.45%</td>
+<td style="text-align: left;">0.57%</td>
+</tr>
+<tr class="even">
 <td style="text-align: left;">ST10000NM0086</td>
 <td style="text-align: right;">10.0</td>
-<td style="text-align: right;">1222596</td>
-<td style="text-align: right;">25</td>
+<td style="text-align: right;">1660634</td>
+<td style="text-align: right;">44</td>
 <td style="text-align: left;">0.40%</td>
-<td style="text-align: left;">0.76%</td>
+<td style="text-align: left;">0.75%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">HGST HUH721212ALE600</td>
+<td style="text-align: right;">12.0</td>
+<td style="text-align: right;">1615716</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: left;">0.50%</td>
+<td style="text-align: left;">0.77%</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">HGST HMS5C4040BLE640</td>
 <td style="text-align: right;">4.0</td>
-<td style="text-align: right;">21867106</td>
-<td style="text-align: right;">274</td>
-<td style="text-align: left;">0.68%</td>
-<td style="text-align: left;">0.81%</td>
+<td style="text-align: right;">26516326</td>
+<td style="text-align: right;">314</td>
+<td style="text-align: left;">0.67%</td>
+<td style="text-align: left;">0.80%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ST12000NM001G</td>
+<td style="text-align: right;">12.0</td>
+<td style="text-align: right;">2895470</td>
+<td style="text-align: right;">52</td>
+<td style="text-align: left;">0.63%</td>
+<td style="text-align: left;">0.80%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">TOSHIBA MG07ACA14TA</td>
+<td style="text-align: right;">14.0</td>
+<td style="text-align: right;">9682950</td>
+<td style="text-align: right;">209</td>
+<td style="text-align: left;">0.71%</td>
+<td style="text-align: left;">0.83%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Seagate BarraCuda SSD ZA250CM10002</td>
+<td style="text-align: right;">0.3</td>
+<td style="text-align: right;">262381</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">0.36%</td>
+<td style="text-align: left;">0.85%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ST12000NM0008</td>
+<td style="text-align: right;">12.0</td>
+<td style="text-align: right;">9261834</td>
+<td style="text-align: right;">244</td>
+<td style="text-align: left;">0.82%</td>
+<td style="text-align: left;">0.94%</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Hitachi HDS5C3030ALA630</td>
@@ -116,46 +162,38 @@ reliable drive model in our sample of data:
 <td style="text-align: left;">1.02%</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">TOSHIBA MG07ACA14TA</td>
-<td style="text-align: right;">14.0</td>
-<td style="text-align: right;">1797240</td>
-<td style="text-align: right;">54</td>
-<td style="text-align: left;">0.85%</td>
-<td style="text-align: left;">1.17%</td>
+<td style="text-align: left;">Seagate BarraCuda 120 SSD ZA250CM10003</td>
+<td style="text-align: right;">0.3</td>
+<td style="text-align: right;">151410</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">0.58%</td>
+<td style="text-align: left;">1.15%</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">HGST HMS5C4040ALE640</td>
 <td style="text-align: right;">4.0</td>
-<td style="text-align: right;">12187880</td>
-<td style="text-align: right;">179</td>
+<td style="text-align: right;">13317995</td>
+<td style="text-align: right;">192</td>
 <td style="text-align: left;">0.99%</td>
 <td style="text-align: left;">1.19%</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">ST8000NM0055</td>
 <td style="text-align: right;">8.0</td>
-<td style="text-align: right;">15779767</td>
-<td style="text-align: right;">516</td>
-<td style="text-align: left;">1.07%</td>
+<td style="text-align: right;">21043105</td>
+<td style="text-align: right;">690</td>
+<td style="text-align: left;">1.06%</td>
 <td style="text-align: left;">1.23%</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">HGST HUH728080ALE600</td>
-<td style="text-align: right;">8.0</td>
-<td style="text-align: right;">977265</td>
-<td style="text-align: right;">17</td>
-<td style="text-align: left;">0.75%</td>
-<td style="text-align: left;">1.27%</td>
-</tr>
-<tr class="even">
 <td style="text-align: left;">ST8000DM002</td>
 <td style="text-align: right;">8.0</td>
-<td style="text-align: right;">13572615</td>
-<td style="text-align: right;">392</td>
-<td style="text-align: left;">1.09%</td>
-<td style="text-align: left;">1.29%</td>
+<td style="text-align: right;">17138860</td>
+<td style="text-align: right;">507</td>
+<td style="text-align: left;">1.11%</td>
+<td style="text-align: left;">1.31%</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Hitachi HDS722020ALA330</td>
 <td style="text-align: right;">2.0</td>
 <td style="text-align: right;">5306511</td>
@@ -163,34 +201,42 @@ reliable drive model in our sample of data:
 <td style="text-align: left;">1.09%</td>
 <td style="text-align: left;">1.39%</td>
 </tr>
+<tr class="odd">
+<td style="text-align: left;">HGST HUH728080ALE600</td>
+<td style="text-align: right;">8.0</td>
+<td style="text-align: right;">1362296</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: left;">0.88%</td>
+<td style="text-align: left;">1.42%</td>
+</tr>
 <tr class="even">
 <td style="text-align: left;">ST500LM012 HN</td>
 <td style="text-align: right;">0.5</td>
-<td style="text-align: right;">1161496</td>
-<td style="text-align: right;">148</td>
+<td style="text-align: right;">1326191</td>
+<td style="text-align: right;">180</td>
 <td style="text-align: left;">1.00%</td>
 <td style="text-align: left;">1.68%</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">ST12000NM0007</td>
 <td style="text-align: right;">12.0</td>
-<td style="text-align: right;">27502834</td>
-<td style="text-align: right;">1675</td>
-<td style="text-align: left;">1.57%</td>
-<td style="text-align: left;">1.69%</td>
+<td style="text-align: right;">35220447</td>
+<td style="text-align: right;">1911</td>
+<td style="text-align: left;">1.58%</td>
+<td style="text-align: left;">1.71%</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">WDC WD5000LPVX</td>
 <td style="text-align: right;">0.5</td>
-<td style="text-align: right;">568740</td>
-<td style="text-align: right;">69</td>
+<td style="text-align: right;">640884</td>
+<td style="text-align: right;">71</td>
 <td style="text-align: left;">0.86%</td>
 <td style="text-align: left;">1.82%</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Hitachi HDS5C4040ALE630</td>
 <td style="text-align: right;">4.0</td>
-<td style="text-align: right;">4401851</td>
+<td style="text-align: right;">4403138</td>
 <td style="text-align: right;">88</td>
 <td style="text-align: left;">1.40%</td>
 <td style="text-align: left;">1.84%</td>
@@ -206,8 +252,8 @@ reliable drive model in our sample of data:
 <tr class="odd">
 <td style="text-align: left;">ST6000DX000</td>
 <td style="text-align: right;">6.0</td>
-<td style="text-align: right;">3058616</td>
-<td style="text-align: right;">87</td>
+<td style="text-align: right;">3382006</td>
+<td style="text-align: right;">88</td>
 <td style="text-align: left;">1.50%</td>
 <td style="text-align: left;">2.03%</td>
 </tr>
@@ -222,32 +268,32 @@ reliable drive model in our sample of data:
 <tr class="odd">
 <td style="text-align: left;">ST4000DM000</td>
 <td style="text-align: right;">4.0</td>
-<td style="text-align: right;">56007808</td>
-<td style="text-align: right;">3969</td>
+<td style="text-align: right;">62923311</td>
+<td style="text-align: right;">4271</td>
 <td style="text-align: left;">2.37%</td>
 <td style="text-align: left;">2.53%</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">TOSHIBA MD04ABA400V</td>
-<td style="text-align: right;">4.0</td>
-<td style="text-align: right;">252425</td>
-<td style="text-align: right;">5</td>
-<td style="text-align: left;">2.00%</td>
-<td style="text-align: left;">4.22%</td>
-</tr>
-<tr class="odd">
 <td style="text-align: left;">TOSHIBA MQ01ABF050M</td>
 <td style="text-align: right;">0.5</td>
-<td style="text-align: right;">342176</td>
-<td style="text-align: right;">43</td>
-<td style="text-align: left;">2.79%</td>
-<td style="text-align: left;">4.34%</td>
+<td style="text-align: right;">480102</td>
+<td style="text-align: right;">94</td>
+<td style="text-align: left;">2.68%</td>
+<td style="text-align: left;">4.16%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">TOSHIBA MD04ABA400V</td>
+<td style="text-align: right;">4.0</td>
+<td style="text-align: right;">288525</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">2.00%</td>
+<td style="text-align: left;">4.22%</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">TOSHIBA MQ01ABF050</td>
 <td style="text-align: right;">0.5</td>
-<td style="text-align: right;">559663</td>
-<td style="text-align: right;">195</td>
+<td style="text-align: right;">687057</td>
+<td style="text-align: right;">272</td>
 <td style="text-align: left;">4.62%</td>
 <td style="text-align: left;">6.30%</td>
 </tr>
@@ -270,15 +316,15 @@ reliable drive model in our sample of data:
 <tr class="odd">
 <td style="text-align: left;">HGST HDS5C4040ALE630</td>
 <td style="text-align: right;">4.0</td>
-<td style="text-align: right;">112400</td>
+<td style="text-align: right;">121680</td>
 <td style="text-align: right;">6</td>
 <td style="text-align: left;">3.44%</td>
-<td style="text-align: left;">6.70%</td>
+<td style="text-align: left;">6.69%</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">WDC WD60EFRX</td>
 <td style="text-align: right;">6.0</td>
-<td style="text-align: right;">685610</td>
+<td style="text-align: right;">686705</td>
 <td style="text-align: right;">72</td>
 <td style="text-align: left;">5.41%</td>
 <td style="text-align: left;">7.38%</td>
@@ -326,10 +372,10 @@ reliable drive model in our sample of data:
 <tr class="even">
 <td style="text-align: left;">ST500LM030</td>
 <td style="text-align: right;">0.5</td>
-<td style="text-align: right;">129711</td>
-<td style="text-align: right;">44</td>
-<td style="text-align: left;">11.18%</td>
-<td style="text-align: left;">14.88%</td>
+<td style="text-align: right;">216516</td>
+<td style="text-align: right;">53</td>
+<td style="text-align: left;">10.68%</td>
+<td style="text-align: left;">14.21%</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">ST3000DM001</td>
@@ -350,8 +396,7 @@ reliable drive model in our sample of data:
 </tbody>
 </table>
 
-12TB vs 4TB drives
-==================
+# 12TB vs 4TB drives
 
 Lets drill down into my results a little bit, and compare our best 12TB
 drive (HGST HUH721212ALN604) to the best 4TB drive (HGST
@@ -373,20 +418,20 @@ HMS5C4040BLE640):
 <tr class="odd">
 <td style="text-align: left;">HGST HUH721212ALN604</td>
 <td style="text-align: right;">12</td>
-<td style="text-align: right;">4893547</td>
-<td style="text-align: right;">65</td>
-<td style="text-align: right;">10914</td>
-<td style="text-align: left;">0.42%</td>
-<td style="text-align: left;">0.55%</td>
+<td style="text-align: right;">8847475</td>
+<td style="text-align: right;">105</td>
+<td style="text-align: right;">10944</td>
+<td style="text-align: left;">0.45%</td>
+<td style="text-align: left;">0.57%</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">HGST HMS5C4040BLE640</td>
 <td style="text-align: right;">4</td>
-<td style="text-align: right;">21867106</td>
-<td style="text-align: right;">274</td>
-<td style="text-align: right;">16346</td>
-<td style="text-align: left;">0.68%</td>
-<td style="text-align: left;">0.81%</td>
+<td style="text-align: right;">26516326</td>
+<td style="text-align: right;">314</td>
+<td style="text-align: right;">16349</td>
+<td style="text-align: left;">0.67%</td>
+<td style="text-align: left;">0.80%</td>
 </tr>
 </tbody>
 </table>
@@ -408,22 +453,22 @@ Let’s use Backblaze’s “naive” statistic to compare these 2 drives:
 <tr class="odd">
 <td style="text-align: left;">HGST HUH721212ALN604</td>
 <td style="text-align: right;">12</td>
-<td style="text-align: right;">4893547</td>
-<td style="text-align: left;">0.42%</td>
-<td style="text-align: left;">0.48%</td>
+<td style="text-align: right;">8847475</td>
+<td style="text-align: left;">0.45%</td>
+<td style="text-align: left;">0.43%</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">HGST HMS5C4040BLE640</td>
 <td style="text-align: right;">4</td>
-<td style="text-align: right;">21867106</td>
-<td style="text-align: left;">0.68%</td>
-<td style="text-align: left;">0.46%</td>
+<td style="text-align: right;">26516326</td>
+<td style="text-align: left;">0.67%</td>
+<td style="text-align: left;">0.43%</td>
 </tr>
 </tbody>
 </table>
 
 The HGST HUH721212ALN604 actually has a **higher** naive failure rate at
-0.48% than the HGST HMS5C4040BLE640 at 0.46%.
+0.43% than the HGST HMS5C4040BLE640 at 0.43%.
 
 So why do I reccomend buying HGST HMS5C4040BLE640?
 
@@ -434,14 +479,13 @@ extremely low rates. On the other hand, these extra years are **late**
 in the drive’s lifetimes, when failure rates are (expected) to be lower.
 
 Zooming in on the first year of a drive’s life demonstates that the
-0.48% has a lower failure rate during this period. Obviously the future
+0.43% has a lower failure rate during this period. Obviously the future
 beyond that is unknown, but I expect this lower failure rate to continue
 over the lifetime of the two drives:
 
 ![](README_files/figure-markdown_strict/plot_2_drives-1.png)
 
-Replicating my results
-======================
+# Replicating my results
 
 [all\_data.csv](all_data.csv) has the cleaned up data from backblaze, at
 the level of individual drives, days observed, and whether or not the
@@ -475,8 +519,7 @@ think this is another example of how “good data structures” are
 essential for effective engineering, and data science is, at its core,
 engineering.
 
-Some notes on survival analysis
-===============================
+# Some notes on survival analysis
 
 Survival analysis is a little weird, becuase you don’t observe the full
 distribution of your data. This makes some traditional statistics
@@ -512,22 +555,22 @@ Here’s our best 12TB and 4TB drives:
 <tr class="odd">
 <td style="text-align: left;">HGST HUH721212ALN604</td>
 <td style="text-align: right;">12</td>
-<td style="text-align: right;">65</td>
-<td style="text-align: right;">10914</td>
-<td style="text-align: left;">0.60%</td>
+<td style="text-align: right;">105</td>
+<td style="text-align: right;">10944</td>
+<td style="text-align: left;">0.96%</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">HGST HMS5C4040BLE640</td>
 <td style="text-align: right;">4</td>
-<td style="text-align: right;">274</td>
-<td style="text-align: right;">16346</td>
-<td style="text-align: left;">1.68%</td>
+<td style="text-align: right;">314</td>
+<td style="text-align: right;">16349</td>
+<td style="text-align: left;">1.92%</td>
 </tr>
 </tbody>
 </table>
 
-So at most, we’ve seen 1.68% drives fail, which means we’re at most
-seeing the 1.68% percentile for drive survival time— we cannot make any
+So at most, we’ve seen 1.92% drives fail, which means we’re at most
+seeing the 1.92% percentile for drive survival time— we cannot make any
 inferences about percentiles higher than this, becuase **not enough
 drives have failed yet!**. Interestingly, we can start to estimate a
 lower bound on survival time at a given quantile as we get close to it.
@@ -552,41 +595,41 @@ that quantile:
 <td style="text-align: left;">HGST HMS5C4040BLE640</td>
 <td style="text-align: right;">4</td>
 <td style="text-align: right;">0.1</td>
-<td style="text-align: right;">4</td>
-<td style="text-align: right;">11</td>
-<td style="text-align: right;">30</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">31</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">HGST HMS5C4040BLE640</td>
 <td style="text-align: right;">4</td>
 <td style="text-align: right;">0.2</td>
 <td style="text-align: right;">28</td>
-<td style="text-align: right;">34</td>
+<td style="text-align: right;">37</td>
 <td style="text-align: right;">70</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">HGST HMS5C4040BLE640</td>
 <td style="text-align: right;">4</td>
 <td style="text-align: right;">0.3</td>
-<td style="text-align: right;">47</td>
+<td style="text-align: right;">51</td>
 <td style="text-align: right;">71</td>
-<td style="text-align: right;">129</td>
+<td style="text-align: right;">130</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">HGST HMS5C4040BLE640</td>
 <td style="text-align: right;">4</td>
 <td style="text-align: right;">0.4</td>
-<td style="text-align: right;">72</td>
-<td style="text-align: right;">130</td>
-<td style="text-align: right;">198</td>
+<td style="text-align: right;">79</td>
+<td style="text-align: right;">132</td>
+<td style="text-align: right;">206</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">HGST HMS5C4040BLE640</td>
 <td style="text-align: right;">4</td>
 <td style="text-align: right;">0.5</td>
-<td style="text-align: right;">130</td>
-<td style="text-align: right;">176</td>
-<td style="text-align: right;">322</td>
+<td style="text-align: right;">132</td>
+<td style="text-align: right;">191</td>
+<td style="text-align: right;">327</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">HGST HMS5C4040BLE640</td>
@@ -594,118 +637,118 @@ that quantile:
 <td style="text-align: right;">0.6</td>
 <td style="text-align: right;">176</td>
 <td style="text-align: right;">307</td>
-<td style="text-align: right;">449</td>
+<td style="text-align: right;">466</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">HGST HMS5C4040BLE640</td>
 <td style="text-align: right;">4</td>
 <td style="text-align: right;">0.7</td>
 <td style="text-align: right;">294</td>
-<td style="text-align: right;">371</td>
-<td style="text-align: right;">524</td>
+<td style="text-align: right;">397</td>
+<td style="text-align: right;">550</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">HGST HMS5C4040BLE640</td>
 <td style="text-align: right;">4</td>
 <td style="text-align: right;">0.8</td>
-<td style="text-align: right;">358</td>
-<td style="text-align: right;">500</td>
-<td style="text-align: right;">607</td>
+<td style="text-align: right;">366</td>
+<td style="text-align: right;">510</td>
+<td style="text-align: right;">642</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">HGST HMS5C4040BLE640</td>
 <td style="text-align: right;">4</td>
 <td style="text-align: right;">0.9</td>
-<td style="text-align: right;">487</td>
-<td style="text-align: right;">569</td>
-<td style="text-align: right;">697</td>
+<td style="text-align: right;">494</td>
+<td style="text-align: right;">599</td>
+<td style="text-align: right;">735</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">HGST HMS5C4040BLE640</td>
 <td style="text-align: right;">4</td>
 <td style="text-align: right;">1.0</td>
-<td style="text-align: right;">541</td>
-<td style="text-align: right;">643</td>
-<td style="text-align: right;">808</td>
+<td style="text-align: right;">566</td>
+<td style="text-align: right;">671</td>
+<td style="text-align: right;">841</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">HGST HUH721212ALN604</td>
 <td style="text-align: right;">12</td>
 <td style="text-align: right;">0.1</td>
-<td style="text-align: right;">26</td>
-<td style="text-align: right;">62</td>
-<td style="text-align: right;">111</td>
+<td style="text-align: right;">21</td>
+<td style="text-align: right;">56</td>
+<td style="text-align: right;">108</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">HGST HUH721212ALN604</td>
 <td style="text-align: right;">12</td>
 <td style="text-align: right;">0.2</td>
-<td style="text-align: right;">82</td>
-<td style="text-align: right;">115</td>
-<td style="text-align: right;">239</td>
+<td style="text-align: right;">80</td>
+<td style="text-align: right;">114</td>
+<td style="text-align: right;">194</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">HGST HUH721212ALN604</td>
 <td style="text-align: right;">12</td>
 <td style="text-align: right;">0.3</td>
-<td style="text-align: right;">124</td>
-<td style="text-align: right;">236</td>
-<td style="text-align: right;">364</td>
+<td style="text-align: right;">119</td>
+<td style="text-align: right;">194</td>
+<td style="text-align: right;">319</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">HGST HUH721212ALN604</td>
 <td style="text-align: right;">12</td>
 <td style="text-align: right;">0.4</td>
-<td style="text-align: right;">236</td>
-<td style="text-align: right;">319</td>
-<td style="text-align: right;">432</td>
+<td style="text-align: right;">194</td>
+<td style="text-align: right;">312</td>
+<td style="text-align: right;">431</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">HGST HUH721212ALN604</td>
 <td style="text-align: right;">12</td>
 <td style="text-align: right;">0.5</td>
-<td style="text-align: right;">313</td>
-<td style="text-align: right;">425</td>
-<td style="text-align: right;">488</td>
+<td style="text-align: right;">306</td>
+<td style="text-align: right;">395</td>
+<td style="text-align: right;">511</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">HGST HUH721212ALN604</td>
 <td style="text-align: right;">12</td>
 <td style="text-align: right;">0.6</td>
-<td style="text-align: right;">393</td>
-<td style="text-align: right;">473</td>
-<td style="text-align: right;">526</td>
+<td style="text-align: right;">388</td>
+<td style="text-align: right;">477</td>
+<td style="text-align: right;">649</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">HGST HUH721212ALN604</td>
 <td style="text-align: right;">12</td>
 <td style="text-align: right;">0.7</td>
-<td style="text-align: right;">432</td>
-<td style="text-align: right;">488</td>
-<td style="text-align: right;">NA</td>
+<td style="text-align: right;">435</td>
+<td style="text-align: right;">526</td>
+<td style="text-align: right;">733</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">HGST HUH721212ALN604</td>
 <td style="text-align: right;">12</td>
 <td style="text-align: right;">0.8</td>
-<td style="text-align: right;">477</td>
-<td style="text-align: right;">511</td>
-<td style="text-align: right;">NA</td>
+<td style="text-align: right;">500</td>
+<td style="text-align: right;">687</td>
+<td style="text-align: right;">836</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">HGST HUH721212ALN604</td>
 <td style="text-align: right;">12</td>
 <td style="text-align: right;">0.9</td>
-<td style="text-align: right;">488</td>
-<td style="text-align: right;">NA</td>
+<td style="text-align: right;">564</td>
+<td style="text-align: right;">773</td>
 <td style="text-align: right;">NA</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">HGST HUH721212ALN604</td>
 <td style="text-align: right;">12</td>
 <td style="text-align: right;">1.0</td>
-<td style="text-align: right;">501</td>
-<td style="text-align: right;">NA</td>
+<td style="text-align: right;">696</td>
+<td style="text-align: right;">836</td>
 <td style="text-align: right;">NA</td>
 </tr>
 </tbody>
@@ -713,7 +756,6 @@ that quantile:
 
 ![](README_files/figure-markdown_strict/quantiles-1.png)
 
-Erratum
-=======
+# Erratum
 
 ![I nerd sniped myself](https://imgs.xkcd.com/comics/nerd_sniping.png)
