@@ -166,7 +166,8 @@ out <- ggsurvplot(
   )
 print(out)
 
-ggsurvplot(model, data=dat, fun='cumhaz', palette = colors, conf.int = T)
+out <- ggsurvplot(model, data=dat, fun='cumhaz', palette = colors, conf.int = T)
+print(out)
 ```
 
 # Replicating my results
