@@ -1,4 +1,5 @@
 library(data.table)
+options(timeout=600)  # These files take a while to download
 
 # Single year data
 for(year in 2013:2015){
