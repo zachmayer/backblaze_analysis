@@ -5,6 +5,12 @@ output: md_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
+
+custom_palette <- c(
+  "#1f78b4", "#ff7f00", "#6a3d9a", "#33a02c", "#e31a1c", "#b15928",
+  "#a6cee3", "#fdbf6f", "#cab2d6", "#b2df8a", "#fb9a99", "black",
+  "grey1", "grey10"
+)
 ```
 
 # Data Sources
@@ -29,45 +35,6 @@ Some technical notes:
 3. This analysis allows different drive models to have different failure "curves."  I looped over every drive model, ran the [survfit](https://www.rdocumentation.org/packages/survival/versions/2.11-4/topics/survfit) function in R (which fits a very simple, non-parametric [Kaplan-Meier survival curve](https://en.wikipedia.org/wiki/Kaplan%E2%80%93Meier_estimator)), and then took the 95% confidence interval at 1 year from the fitted survival curve.    
 
 ```{r surv, echo=FALSE}
-# Setup
-library(data.table)
-library(survival)
-library(ggthemes)
-days_to_year <- 365.2425
-
-data_raw <- fread('all_data.csv')
-keys <- c('model', 'serial_number')
-setkeyv(data_raw, keys)
-data_raw <- data_raw[,list(
-  drive_days = sum(N),
-  failure=sum(failure),
-  capacity_tb=round(max(capacity_bytes)/1e+12, 1)
-), by=keys]
-
-# Only keep models were at least 250 drives made it to one year
-data_raw[,count_one_year := sum(drive_days>=days_to_year), by='model']
-data_raw <- data_raw[count_one_year > 249,]
-
-# Do a non-parametric survival curve for every drive model
-survival_curve_at_t <- function(time, failure, at=days_to_year){
-  out <- survfit(Surv(time, failure)~1)
-  out <- summary(out, times=at, conf.int=.95)
-  out <- list(
-    surv = out$surv,
-    lower =  out$lower
-  )
-  return(out)
-}
-
-data_surv <- data_raw[, c(list(
-  capacity_tb=max(capacity_tb), 
-  drive_days=sum(drive_days),
-  failures=sum(failure),
-  N_drives=.N
-  ), survival_curve_at_t(drive_days, failure)), by='model']
-data_surv <- data_surv[order(-lower),]
-
-# Choose best drive
 best_drive <- data_surv[1, model]
 ```
 
@@ -150,11 +117,7 @@ print(out)
 
 # Survival curves by drive capacity
 ```{r plot_best_drives, echo=FALSE}
-colors <- c(
-  "#1f78b4", "#ff7f00", "#6a3d9a", "#33a02c", "#e31a1c", "#b15928",
-  "#a6cee3", "#fdbf6f", "#cab2d6", "#b2df8a", "#fb9a99", "black",
-  "grey1", "grey10"
-)
+
 
 dat <- data_raw[model %in% best_drives[,model],]
 dat[,capacity_tb := factor(round(capacity_tb))]
@@ -162,11 +125,11 @@ model <- dat[,survfit(Surv(drive_days, failure) ~ capacity_tb)]
 
 out <- ggsurvplot(
   model, data=dat, conf.int = T, ylim=c(.96, 1.0),
-  palette = colors
+  palette = custom_palette
   )
 print(out)
 
-out <- ggsurvplot(model, data=dat, fun='cumhaz', palette = colors, conf.int = T)
+out <- ggsurvplot(model, data=dat, fun='cumhaz', palette = custom_palette, conf.int = T)
 print(out)
 ```
 
