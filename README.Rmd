@@ -118,7 +118,6 @@ print(out)
 # Survival curves by drive capacity
 ```{r plot_best_drives, echo=FALSE}
 
-
 dat <- data_raw[model %in% best_drives[,model],]
 dat[,capacity_tb := factor(round(capacity_tb))]
 model <- dat[,survfit(Surv(drive_days, failure) ~ capacity_tb)]
@@ -174,25 +173,7 @@ So at most, we've seen `r failure_rate_formatted` drives fail, which means we're
 
 So, here is a survival table for the known quantiles for these 2 drives, along with upper and lower bounds on the estimated time-to-survival for that quantile:
 ```{r quantiles, echo=FALSE}
-survival_quantile <- function(time, failure, quantiles){
-  out <- survfit(Surv(time, failure)~1)
-  out <- quantile(out, quantiles/100)
-  out <- list(
-    percentile = quantiles,
-    lower = out$lower,
-    days =  out$quantile,
-    upper =  out$upper
-  )
-  return(out)
-}
 
-#quantiles = seq(0, failure_rate, length=11)[-1]
-quantiles = seq(0, 1, length=11)[-1]
-data_quant <- data_raw[model %in% c(best_drive_12, best_drive_4), ]
-data_quant <- data_quant[, c(
-    list(capacity_tb=max(capacity_tb)),
-    survival_quantile(drive_days, failure,  quantiles=quantiles)
-  ),by='model']
 knitr::kable(data_quant)
 
 data_quant[,capacity_tb := factor(capacity_tb)]

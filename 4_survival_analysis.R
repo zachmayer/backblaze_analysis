@@ -1,4 +1,7 @@
 # Setup
+stop()
+rm(list = ls(all=T))
+gc(reset = T)
 library(data.table)
 library(survival)
 library(ggthemes)
@@ -11,13 +14,30 @@ setkeyv(data_raw, keys)
 
 # Sum drive days by model and failure state
 data_raw <- data_raw[,list(
-  drive_days = sum(N),
-  failure=sum(failure),
-  capacity_tb=round(max(capacity_bytes)/1e+12, 1)
+  drive_days = as.integer(sum(N)),
+  failure = as.integer(sum(failure)),
+  tb = as.numeric(round(max(capacity_bytes)/1e+12, 1))
 ), by=keys]
 
-# Count number of drives that survived to one year by model
-data_raw[,count_one_year := sum(drive_days>=days_to_year), by='model']
+# Calculate 99% confidence interval of 99% survival
+survival_quantile <- function(time, failure, quantiles){
+  out <- survfit(Surv(time, failure)~1)
+  out <- quantile(out, quantiles/100)
+  out <- list(
+    percentile = quantiles,
+    lower = as.numeric(out$lower),
+    days =  as.numeric(out$quantile),
+    upper =  as.numeric(out$upper)
+  )
+  return(out)
+}
+
+data_quant <- data_raw[, c(
+  list(tb=max(tb)),
+  survival_quantile(drive_days, failure,  quantiles=seq(0, 1, length=11)[-1])
+), by='model']
+
+data_quant
 
 # Do a non-parametric survival curve for every drive model
 survival_curve_at_t <- function(time, failure, at=days_to_year){
