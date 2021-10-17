@@ -19,7 +19,7 @@ data_raw <- data_raw[,list(
   tb = as.numeric(round(max(capacity_bytes)/1e+12, 1))
 ), by=keys]
 
-# Calculate 99% confidence interval of 99% survival
+# Calculate 95% confidence interval of 99% survival
 survival_quantile <- function(time, failure, quantiles){
   out <- survfit(Surv(time, failure)~1)
   out <- quantile(out, quantiles/100)
@@ -31,13 +31,13 @@ survival_quantile <- function(time, failure, quantiles){
   )
   return(out)
 }
-
 data_quant <- data_raw[, c(
   list(tb=max(tb)),
+  N=length(unique(serial_number)),
   survival_quantile(drive_days, failure,  quantiles=seq(0, 1, length=11)[-1])
 ), by='model']
-
-data_quant
+data_quant <- data_quant[is.finite(lower),]
+print(data_quant[percentile==1 & N > 100,][order(-lower),])
 
 # Do a non-parametric survival curve for every drive model
 survival_curve_at_t <- function(time, failure, at=days_to_year){
@@ -51,7 +51,7 @@ survival_curve_at_t <- function(time, failure, at=days_to_year){
 }
 
 data_surv <- data_raw[, c(list(
-  capacity_tb=max(capacity_tb), 
+  tb=max(tb), 
   drive_days=sum(drive_days),
   failures=sum(failure),
   N_drives=.N
