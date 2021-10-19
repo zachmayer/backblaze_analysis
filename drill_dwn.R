@@ -1,17 +1,23 @@
+rm(list=ls(all=T))
+gc(reset=T)
 library(data.table)
 library(survival)
 library(BayesSurvival)
 library(rstanarm)
+library(quantreg)
+library(ctqr)
 
 dat <- data.table(
-  days = rep(c(762, 766), 100),
-  failed = rep(c(1, 0), 100)
+  days = c(762, 766),
+  failed = c(1, 0)
 )
 
-model <- dat[,survfit(Surv(days, failed) ~ 1)]
-summary(model, times=2 * 365.25)
+model <- dat[,survfit(Surv(days, failed) ~ 1, robust=T, type = "fleming-harrington", conf.type = "log-log")]
 summary(model, times=761)
-summary(model, times=3 * 365.25, extend=T)
+summary(model, times=762)
+quantile(model, 0.01)
+
+dat[,ctqr(Surv(days, failed) ~ 1, p=seq(0.01, .99, length=100))]
 
 quantile(model, .01)$lower
 model_bayes <- BayesSurv(
@@ -22,9 +28,10 @@ model_bayes <- BayesSurv(
   
 )
 
-PlotBayesSurv(bayes.surv.object = res,
+PlotBayesSurv(bayes.surv.object = model_bayes,
               object = "survival")
 
+mod1 <- stan_surv(formula = Surv(days, failed) ~ 1, data=data.frame(dat), algorithm = 'fullrank')
 
 
 dat <- data.frame(
