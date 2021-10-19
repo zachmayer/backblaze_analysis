@@ -1,4 +1,6 @@
 # Setup
+# TODO: TRY A PROPORTIAL HAZARD MODEL — the 14 TB DRIVES LOOK GREAT BUT AREN'T YET 1 YEAR OLD
+# TODO: Plot best drive by size
 stop()
 rm(list = ls(all=T))
 gc(reset = T)
@@ -6,7 +8,14 @@ library(data.table)
 library(kit)
 library(survival)
 library(ggthemes)
+library(prodlim)
+
 days_to_year <- 365.2425
+custom_palette <- c(
+  "#1f78b4", "#ff7f00", "#6a3d9a", "#33a02c", "#e31a1c", "#b15928",
+  "#a6cee3", "#fdbf6f", "#cab2d6", "#b2df8a", "#fb9a99", "black",
+  "grey1", "grey10"
+)
 
 # Todo:
 # From a practical perspective, put a death in at time 1, and multiply the resulting survival estimates and CIs by (N+1)/N.
@@ -33,46 +42,53 @@ drive_dates[is.finite(first_fail), max_date := first_fail]
 drive_dates[,days := as.integer(max_date - min_date)]
 drive_dates[,model := factor(model)]
 
-# Join data
-# dat <- merge(drive_dates, capacity_map, by='model', all=F)
-# dat <- dat[,list(model, size, serial_number, days, failed)]
-# dat[,sort(table(size))]
+# Fit a cox model
+ref_level <- drive_dates[,list(days=sum(days), .N), by='model'][which.max(days), as.character(model)]
+drive_dates[,model := factor(model)]
+drive_dates[,model := relevel(model, ref=ref_level)]
+cox_model <- drive_dates[,coxph(Surv(time=days, failed) ~ 1 + model)]
+cox_model_hazard <- basehaz(cox_model)
 
-# Fit a survival model
-surv_model_param <- drive_dates[days>0,survreg(Surv(time=days, failed) ~ model, dist = "weibull")]
-cf <- summary(surv_model_param)
-data.table(
-  model=names(cf$coefficients),
-  cf=cf$coefficients
-)[order(cf),]
+# Extract cox model coefficients
+cf <- coef(summary(cox_model))
+cf <- data.table(model=row.names(cf), cf)
+cf[,upper_ci := coef + `se(coef)`]
+cf[, model := gsub('model', '', model,fixed=T)]
+cf <- cf[order(upper_ci),]
+head(cf, 25)
 
-
-dat[,ctqr(Surv(days, failed) ~ 1, p=seq(0.01, .99, length=100))]
-ctqr_model <- drive_dates[,ctqr(Surv(time=days, failed) ~ 0 + model, p=.01)]
-
-
-surv_model <- drive_dates[,survfit(Surv(time=days, failed) ~ 0 + model, type = "fleming-harrington", conf.type = "log-log")]
-
-surv_model <- drive_dates[,survfit(Surv(time=days, failed) ~ 0 + model)]
+# Fit a cox model
+cf <- summary(cox_model)
+cf <- data.table(model=row.names(cf$conf.int), cf$conf.int)
+cf <- cf[order(`upper .95`),]
+head(cf[is.finite(`upper .95`),], 50)
 
 # Calculate survival days for the 99th percentile for each drive
-surv_days_99 <- quantile(surv_model, 0.01)
+surv_days_99 <- quantile(surv_model, .01)
 surv_days_99 <- data.table(
-  model = row.names(surv_days_99$quantile),
-  survial_days_99_percent = surv_days_99$quantile[,1],
-  survial_days_99_percent_lower = surv_days_99$lower[,1],
-  survial_days_99_percent_upper = surv_days_99$upper[,1]
+  model = names(surv_days_99),
+  rbindlist(lapply(surv_days_99, function(x) data.table(x)), use.names = T, fill=T)
 )
-
-# Calculate survival rate at 2 years
-surv_pct_at_years <- summary(
-  surv_model, times=10 * days_to_year, conf.int=.95, extend=TRUE
+setnames(
+  surv_days_99, 
+  c('quantile', 'lower', 'upper'),
+  c('survial_days_99_percent', 'survial_days_99_percent_lower', 'survial_days_99_percent_upper')
   )
+
+# Calculate survival rate at 5 years
+surv_pct_at_years <- summary(
+  surv_model, times=1 * days_to_year, conf.int=.9999, extend=TRUE, max.tables=999999,
+  intervals=T
+  )$table
 surv_pct_at_years <- data.table(
-  model = surv_pct_at_years$strata,
-  survival_pct_10_year = surv_pct_at_years$surv,
-  survival_pct_10_year_lower = surv_pct_at_years$lower,
-  survival_pct_10_year_upper = surv_pct_at_years$upper
+  model = names(surv_pct_at_years),
+  rbindlist(lapply(surv_pct_at_years, function(x) data.table(x)), use.names = T, fill=T)
+)
+surv_pct_at_years <- data.table(
+  model = surv_pct_at_years$model,
+  survival_pct_1_year = surv_pct_at_years$surv,
+  survival_pct_1_year_lower = surv_pct_at_years$lower,
+  survival_pct_1_year_upper = surv_pct_at_years$upper
 )
 
 # Combine survival statistics
@@ -83,11 +99,38 @@ dat[,model := gsub('model=', '', model, fixed=T)]
 drive_summary <- drive_dates[,list(
   n_unique=length(funique(serial_number)),
   drive_days = sum(days),
+  naive_age_med = as.numeric(median(days)),
+  naive_age_mean = as.numeric(mean(days)),
   failed = sum(failed)
 ), by='model']
+drive_summary[model %in% model_list,]
 dat <- merge(drive_summary, dat, by='model', all=T)
 
 # Add drive TB
 dat <- merge(dat, capacity_map, by='model', all=F)
-dat <- dat[order(-survival_pct_10_year_lower), list(model, size, n_unique, drive_days, failed, survial_days_99_percent_lower, survival_pct_10_year_lower)]
-dat[!is.na(survival_pct_10_year_lower) & !is.na(survial_days_99_percent_lower),]
+
+# Show data
+dat <- dat[, list(
+  model, size, n_unique, drive_days, failed, survial_days_99_percent, 
+  survival_pct_1_year_lower, pois_ci, naive_age_med, naive_age_mean)]
+
+# Best by 1-year rate
+dat[!is.na(survival_pct_1_year_lower),][order(-survival_pct_1_year_lower),]
+
+# Best by percentile
+dat[!is.na(survial_days_99_percent),][order(-survial_days_99_percent),]
+
+# Best by pois
+dat[!is.na(pois_ci),][order(-pois_ci),]
+
+
+
+# Plot survival curves for the best drives by size
+plot_dat <- drive_dates[model %in% model_list,]
+plot_dat <- merge(plot_dat, capacity_map, by='model')
+plot_dat[,table(factor(model), factor(size))]
+out <- ggsurvplot(
+  plot_dat[, survfit(Surv(time=days / 365.25, failed) ~ 1 + size)], 
+  data=plot_dat, 
+  palette = custom_palette, conf.int = T, ylim=c(.93, 1.0), xlab = "Time (years)", breaks = 1:5)
+print(out)
