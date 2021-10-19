@@ -48,18 +48,10 @@ drive_dates[,model := relevel(model, ref=ref_level)]
 cox_model <- drive_dates[,coxph(Surv(time=days, failed) ~ 1 + model, x=T)]
 
 # Extract baseline hazard
-cox_model_curve <- survfit(cox_model)
-cox_model_hazard <- data.table(
-  time = cox_model_curve[['time']],
-  n.risk = cox_model_curve[['n.risk']],
-  n.event = cox_model_curve[['n.event']],
-  n.censor = cox_model_curve[['n.censor']],
-  surv = cox_model_curve[['surv']],
-  cumhaz = cox_model_curve[['cumhaz']],
-  std.err = cox_model_curve[['std.err']],
-  n.risk = cox_model_curve[['n.risk']]
-)
-setorderv(cox_model_hazard, 'time')
+models <- drive_dates[,list(days=10 * days_to_year, failed=0), by='model']
+surv_10_year_log <- predict(cox_model, newdata=models, type='expected', se.fit=T)
+surv_10_year <- exp(-(surv_10_year_log$fit + surv_10_year_log$se.fit))
+models[,surv_10_year := surv_10_year]
 
 # Extract cox model coefficients
 cf <- summary(cox_model)
