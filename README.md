@@ -3,9 +3,7 @@
 I’m buying a hard drive for backups, and I want to buy a drive that’s
 not going to fail. I’m going to use data from
 [BackBlaze](https://www.backblaze.com/b2/hard-drive-test-data.html#downloading-the-raw-hard-drive-test-data)
-to assess drive reliability.
-
-Backblaze [did their own
+to assess drive reliability. Backblaze [did their own
 analysis](https://www.backblaze.com/blog/backblaze-hard-drive-stats-q1-2020/)
 of drive failures, but I don’t like their approach for 2 reasons:  
 1. Their “annualized failure rate” `Drive Failures / (Drive Days / 365)`
@@ -27,11 +25,9 @@ things.
 
 I chose to order the drives by their expected 5 year survival rate. I
 calculated a 95% confidence interval on the 5-year survival rate, and I
-used that interval to sort the drives.
-
-Based on this analysis, the WDC WUH721414ALE6L4 is the most reliable
-drive model in our data, with an estimated 5-year survival rate that is
-at least 99.65%.
+used that interval to sort the drives. Based on this analysis, the WDC
+WUH721414ALE6L4 is the most reliable drive model in our data, with an
+estimated 5-year survival rate that is at least 99.65%.
 
 The top 25 drives from this analysis are:
 
