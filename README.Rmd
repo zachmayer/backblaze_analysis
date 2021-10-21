@@ -159,13 +159,13 @@ If you want to get the raw data before it was cleaned up into [all_data.csv](all
 3.  Run [3_assemble_data.R](3_assemble_data.R) to "compress" the data, which generates [all_data.csv](all_data.csv).    
 4.  Run [4_survival_analysis.R](4_survival_analysis.R) to calculate 5 year survival.
 
-An interesting note about this data: It's 55GB uncompressed, and contains a whole bunch of irrelevant information.  It was very interesting to me that I could compress a 55GB dataset to `r file_size`, while still keeping **all** of the relevant information for modeling.  (In other words, this dataset was 4,000x larger than it needed to be). I think this is another example of how good data structures are essential for effective engineering, and data science is, at its core, engineering.
+An interesting note about this data: It's 55GB uncompressed, and contains a whole bunch of irrelevant information.  It was very interesting to me that I could compress a 55GB dataset to `r file_size`, while still keeping **all** of the relevant information for modeling.  (In other words, this dataset was 4,000x larger than it needed to be). I think this is another example of how good data structures are essential for data science is.
 
 # Erratum
 ```{r bad_drives, echo=FALSE}
 bad_drive <- dat[n_unique>999,][which.min(surv_5yr_upper),]
 ```
-I'm probably way over-thinking this, but it was fun to analyze the data.  Any of the top `r top_n` drives are likely safe to buy, and are very unlikely to fail as I use them for a backup drive.
+I'm probably way over-thinking this, but it was fun to analyze the data.  Any of the top `r top_n` drives are likely safe to buy, and are very unlikely to fail.
 
 There are some drives in this data I plan to avoid.  For example, the `r bad_drive$model` has a 5 year survival of `r sprintf("%1.1f%%", 100*bad_drive$surv_5yr)`.  This is honestly probably fine for my purposes, but maybe I'd be a little nervous to buy a drive with a 1-in-`r round(1 / (1 - bad_drive$surv_5yr))` chance of dying within 5 years.
 

@@ -503,8 +503,7 @@ interesting to me that I could compress a 55GB dataset to 14 Mb, while
 still keeping **all** of the relevant information for modeling. (In
 other words, this dataset was 4,000x larger than it needed to be). I
 think this is another example of how good data structures are essential
-for effective engineering, and data science is, at its core,
-engineering.
+for data science is.
 
 # Erratum
 
