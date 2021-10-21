@@ -18,10 +18,10 @@ actually fail at a higher rate early in their lives.
 a drive that both has a low failure rate, but also enough observations
 to make me confident in this failure rate. For example, if I have a
 drive that’s been observed for 1 day with 0 failures, I probably don’t
-want to buy it, despite it’s zero percent failure rate. This blog post
+want to buy it, despite it’s zero percent failure rate. [This blog
+post](https://www.evanmiller.org/how-not-to-sort-by-average-rating.html)
 has some good details on why confidence intervals are useful for sorting
-things you want to buy [How Not To Sort By Average
-Rating](https://www.evanmiller.org/how-not-to-sort-by-average-rating.html).
+things.
 
 # Results
 
@@ -30,7 +30,7 @@ calculated a 95% confidence interval on the 5-year survival rate, and I
 used that interval to sort the drives.
 
 Based on this analysis, the WDC WUH721414ALE6L4 is the most reliable
-drive model in our sample of data, with a 5-year survival rate that is
+drive model in our data, with an estimated 5-year survival rate that is
 at least 99.65%.
 
 The top 25 drives from this analysis are:
@@ -308,14 +308,14 @@ The top 25 drives from this analysis are:
 -   **drive\_days** is the total number of days that we’ve observed for
     drives of this model in the sample
 -   **failures** is the number of failures observed so far
--   **surv\_5yr\_lower** is the lower bound of the 95% confidence
-    interval of the 5-year survival rate
+-   **surv\_5yr\_lo** is the lower bound of the 95% confidence interval
+    of the 5-year survival rate
 -   **surv\_5yr** is the 5-year survival rate
--   **surv\_5yr\_upper** is the upper bound of the 95% confidence
-    interval of the 5-year survival rate
+-   **surv\_5yr\_hi** is the upper bound of the 95% confidence interval
+    of the 5-year survival rate
 
-To narrow down the data, we can just look at the best drive by size,
-excluding models that have fewer than 1000 in the dataset:
+To narrow down the data, we can just look at the best drive by size
+(excluding models that have fewer than \`r min\_unique\_drives):
 
 <table>
 <thead>
@@ -425,7 +425,7 @@ excluding models that have fewer than 1000 in the dataset:
 </table>
 
 All of these drives have a very high 5-year survival rate, and I’d feel
-pretty confident buying any of them for home backups.
+pretty confident buying any of them.
 
 # Technical Details
 
@@ -436,9 +436,10 @@ in the sample fail, you can’t know the mean time to failure. (If you
 have one drive left that hasn’t failed yet, and becomes an outlier in
 survival time, that might have a big impact on mean survival time.)
 
-Here’s the thing: these drives are **so reliable** even after 5 years of
-data, we’ve barely observed the distribution of failures. (This is a
-good thing, but it makes it hard to chose between drives!).
+Here’s the thing: these drives are **so reliable**, that even after 5+
+years of observation, we’ve barely observed the distribution of
+failures! (This is a good thing, but it makes it hard to chose between
+drives!).
 
 I fit a [Cox Proportional Hazard
 model](https://en.wikipedia.org/wiki/Proportional_hazards_model) to this

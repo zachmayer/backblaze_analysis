@@ -60,12 +60,12 @@ I'm buying a hard drive for backups, and I want to buy a drive that's not going 
 
 Backblaze [did their own analysis](https://www.backblaze.com/blog/backblaze-hard-drive-stats-q1-2020/) of drive failures, but I don't like their approach for 2 reasons:    
 1. Their "annualized failure rate" `Drive Failures / (Drive Days / 365)` assumes that failure rates are constant over time.  E.g. this assumption means that observing 1 drive for 100 days gives you the exact same information as observing 100 drives for 1 day. If drives fail at a constant rate over time, this is fine, but I suspect that drives actually fail at a higher rate early in their lives.    
-2. I want to compute a confidence interval of some kind, so I can select a drive that both has a low failure rate, but also enough observations to make me confident in this failure rate.  For example, if I have a drive that's been observed for 1 day with 0 failures, I probably don't want to buy it, despite it's zero percent failure rate.  This blog post has some good details on why confidence intervals are useful for sorting things you want to buy [How Not To Sort By Average Rating](https://www.evanmiller.org/how-not-to-sort-by-average-rating.html).   
+2. I want to compute a confidence interval of some kind, so I can select a drive that both has a low failure rate, but also enough observations to make me confident in this failure rate.  For example, if I have a drive that's been observed for 1 day with 0 failures, I probably don't want to buy it, despite it's zero percent failure rate.  [This blog post](https://www.evanmiller.org/how-not-to-sort-by-average-rating.html) has some good details on why confidence intervals are useful for sorting things.   
 
 # Results
 I chose to order the drives by their expected 5 year survival rate. I calculated a 95% confidence interval on the 5-year survival rate, and I used that interval to sort the drives.
 
-Based on this analysis, the `r best_drive` is the most reliable drive model in our sample of data, with a 5-year survival rate that is at least `r best_drive_surv`.
+Based on this analysis, the `r best_drive` is the most reliable drive model in our data, with an estimated 5-year survival rate that is at least `r best_drive_surv`.
 
 The top `r top_n` drives from this analysis are:
 ```{r top_50, echo=FALSE}
@@ -88,12 +88,11 @@ knitr::kable(
 * **N** is the number of unique drives in the analysis
 * **drive_days** is the total number of days that we've observed for drives of this model in the sample
 * **failures** is the number of failures observed so far
-* **surv_5yr_lower** is the lower bound of the 95% confidence interval of the 5-year survival rate
+* **surv_5yr_lo** is the lower bound of the 95% confidence interval of the 5-year survival rate
 * **surv_5yr** is the 5-year survival rate
-* **surv_5yr_upper** is the upper bound of the 95% confidence interval of the 5-year survival rate
+* **surv_5yr_hi** is the upper bound of the 95% confidence interval of the 5-year survival rate
 
-To narrow down the data, we can just look at the best drive by size, excluding models that have fewer than `r min_unique_drives` in the dataset:
-
+To narrow down the data, we can just look at the best drive by size (excluding models that have fewer than `r min_unique_drives):
 ```{r best_by_size, echo=FALSE}
 knitr::kable(
   best_drive_by_size[,
@@ -110,12 +109,12 @@ knitr::kable(
 )
 ```
 
-All of these drives have a very high 5-year survival rate, and I'd feel pretty confident buying any of them for home backups.
+All of these drives have a very high 5-year survival rate, and I'd feel pretty confident buying any of them.
 
 # Technical Details
 Survival analysis is a little weird, because you don't observe the full distribution of your data.  This makes some traditional statistics impossible to calculate. For example, until you observe every hard drive in the sample fail, you can't know the mean time to failure.  (If you have one drive left that hasn't failed yet, and becomes an outlier in survival time, that might have a big impact on mean survival time.)
 
-Here's the thing: these drives are **so reliable** even after 5 years of data, we've barely observed the distribution of failures.  (This is a good thing, but it makes it hard to chose between drives!).
+Here's the thing: these drives are **so reliable**, that even after 5+ years of observation, we've barely observed the distribution of failures! (This is a good thing, but it makes it hard to chose between drives!).
 
 I fit a [Cox Proportional Hazard model](https://en.wikipedia.org/wiki/Proportional_hazards_model) to this data, which enabled me to estimate 5 years survival rates for all of the drives, as well as a confidence interval on that rate.  The confidence interval narrows as you observe more drives and as you observe those drives for a longer time.
 
