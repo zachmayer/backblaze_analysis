@@ -133,6 +133,7 @@ print(out)
 Note that we haven't even observed 1 year's worth of data yet for the 14 and 16TB drives, but they seem to have a very low failure rate relative to the other drives during their first year of life.
 
 The "proportional hazards" assumption from the Cox model allows us to extend these curves and estimate survival times at 5 years for all of the drives:
+
 ```{r cox_curves, echo=FALSE, warning=FALSE}
 sizes <- best_drive_by_size[,sort(size)]
 newdata <- data.table(model=as.character(model_list[best_drive_by_size[,order(size)]]))

@@ -466,7 +466,9 @@ to the other drives during their first year of life.
 
 The “proportional hazards” assumption from the Cox model allows us to
 extend these curves and estimate survival times at 5 years for all of
-the drives: ![](README_files/figure-markdown_strict/cox_curves-1.png)
+the drives:
+
+![](README_files/figure-markdown_strict/cox_curves-1.png)
 
 This plot doesn’t have the confidence intervals, which are wider for the
 drives with less data.
