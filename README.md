@@ -509,7 +509,7 @@ for data science is.
 
 I’m probably way over-thinking this, but it was fun to analyze the data.
 Any of the top 25 drives are likely safe to buy, and are very unlikely
-to fail as I use them for a backup drive.
+to fail.
 
 There are some drives in this data I plan to avoid. For example, the
 ST3000DM001 has a 5 year survival of 80.9%. This is honestly probably
