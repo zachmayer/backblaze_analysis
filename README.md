@@ -1,21 +1,19 @@
 # Data Sources
 
 I’m buying a hard drive to backup my data at home, and I want to buy a
-drive that’s not going to fail. [BackBlaze has shared all of their data
-on hard drives and drive
-failures.](https://www.backblaze.com/b2/hard-drive-test-data.html#downloading-the-raw-hard-drive-test-data),
-and I’m going to use their data to try to assess drive reliability.
+drive that’s not going to fail. I’m going to use data from
+[BackBlaze](https://www.backblaze.com/b2/hard-drive-test-data.html#downloading-the-raw-hard-drive-test-data)
+to assess drive reliability.
 
 Backblaze [did their own
 analysis](https://www.backblaze.com/blog/backblaze-hard-drive-stats-q1-2020/)
 of drive failures, but I don’t like their approach for 2 reasons:  
-1. Their “annualized failure rate”
-(`Drive Failures / (Drive Days / 365)`) assumes that failure rates are
-constant over time. E.g. this assumption means that observing 1 drive
-for 100 days gives you the exact same information as observing 100
-drives for 1 day. If drives fail at a constant rate over time, this is
-fine, but I suspect that drives actually fail at a higher rate early in
-their lives.  
+1. Their “annualized failure rate” `Drive Failures / (Drive Days / 365)`
+assumes that failure rates are constant over time. E.g. this assumption
+means that observing 1 drive for 100 days gives you the exact same
+information as observing 100 drives for 1 day. If drives fail at a
+constant rate over time, this is fine, but I suspect that drives
+actually fail at a higher rate early in their lives.  
 2. I want to compute a confidence interval of some kind, so I can select
 a drive that both has a low failure rate, but also enough observations
 to make me confident in this failure rate. For example, if I have a
