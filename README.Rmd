@@ -16,7 +16,7 @@ library(survival)
 library(survminer)
 
 # Globals
-top_n <- 50
+top_n <- 25
 min_unique_drives <- 1000
 file_size <- utils:::format.object_size(file.size('drive_dates.csv'), 'Mb', digits=0)
 days_to_year <- 365.2425
@@ -77,9 +77,9 @@ knitr::kable(
       N=n_unique,
       drive_days,
       failures=failed,
-      surv_5yr_lower=sprintf("%1.2f%%", 100*surv_5yr_lower),
+      surv_5yr_lo=sprintf("%1.2f%%", 100*surv_5yr_lower),
       surv_5yr=sprintf("%1.2f%%", 100*surv_5yr),
-      surv_5yr_upper=sprintf("%1.2f%%", 100*surv_5yr_upper)
+      surv_5yr_hi=sprintf("%1.2f%%", 100*surv_5yr_upper)
     )]
 )
 ```
