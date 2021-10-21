@@ -1,7 +1,7 @@
 # Data Sources
 
-I’m buying a hard drive to backup my data at home, and I want to buy a
-drive that’s not going to fail. I’m going to use data from
+I’m buying a hard drive for backups, and I want to buy a drive that’s
+not going to fail. I’m going to use data from
 [BackBlaze](https://www.backblaze.com/b2/hard-drive-test-data.html#downloading-the-raw-hard-drive-test-data)
 to assess drive reliability.
 
@@ -302,17 +302,17 @@ The top 25 drives from this analysis are:
 </tbody>
 </table>
 
--   model is the drive model
--   size is the size of the drive
--   N is the number of unique drives in the analysis
--   drive\_days is the total number of days that we’ve observed for
+-   **model** is the drive model
+-   **size** is the size of the drive
+-   **N** is the number of unique drives in the analysis
+-   **drive\_days** is the total number of days that we’ve observed for
     drives of this model in the sample
--   failures is the number of failures observed so far
--   surv\_5yr\_lower is the lower bound of the 95% confidence interval
-    of the 5-year survival rate
--   surv\_5yr is the 5-year survival rate
--   surv\_5yr\_upper is the upper bound of the 95% confidence interval
-    of the 5-year survival rate
+-   **failures** is the number of failures observed so far
+-   **surv\_5yr\_lower** is the lower bound of the 95% confidence
+    interval of the 5-year survival rate
+-   **surv\_5yr** is the 5-year survival rate
+-   **surv\_5yr\_upper** is the upper bound of the 95% confidence
+    interval of the 5-year survival rate
 
 To narrow down the data, we can just look at the best drive by size,
 excluding models that have fewer than 1000 in the dataset:
@@ -325,9 +325,9 @@ excluding models that have fewer than 1000 in the dataset:
 <th style="text-align: right;">N</th>
 <th style="text-align: right;">drive_days</th>
 <th style="text-align: right;">failures</th>
-<th style="text-align: left;">surv_5yr_lower</th>
+<th style="text-align: left;">surv_5yr_lo</th>
 <th style="text-align: left;">surv_5yr</th>
-<th style="text-align: left;">surv_5yr_upper</th>
+<th style="text-align: left;">surv_5yr_hi</th>
 </tr>
 </thead>
 <tbody>
@@ -461,24 +461,18 @@ curve ends with the oldest drive we’ve observed (these are called
 [Kaplan–Meier](https://en.wikipedia.org/wiki/Kaplan%E2%80%93Meier_estimator)
 curves):
 
-    ## Warning: Removed 4 row(s) containing missing values (geom_path).
+![](README_files/figure-markdown_strict/km_curves-1.png)
 
-    ## Warning: Removed 4 row(s) containing missing values (geom_path).
-
-![](README_files/figure-markdown_strict/km_curves-1.png) Note that we
-haven’t even observed 1 year’s worth of data yet for the 14 and 16TB
-drives, but they seem to have a very low failure rate relative to the
-other drives during their first year of life.
+Note that we haven’t even observed 1 year’s worth of data yet for the 14
+and 16TB drives, but they seem to have a very low failure rate relative
+to the other drives during their first year of life.
 
 The “proportional hazards” assumption from the Cox model allows us to
 extend these curves and estimate survival times at 5 years for all of
-the drives:
+the drives: ![](README_files/figure-markdown_strict/cox_curves-1.png)
 
-    ## Warning: Removed 426 row(s) containing missing values (geom_path).
-
-    ## Warning: Removed 426 row(s) containing missing values (geom_path).
-
-![](README_files/figure-markdown_strict/cox_curves-1.png)
+This plot doesn’t have the confidence intervals, which are wider for the
+drives with less data.
 
 # Replicating my results
 
@@ -502,23 +496,23 @@ drive space. I also suggest opening
 2. Run [2\_unzip\_data.R](2_unzip_data.R) to unzip the data (almost 55
 GB).  
 3. Run [3\_assemble\_data.R](3_assemble_data.R) to “compress” the data,
-which generates [all\_data.csv](all_data.csv). 4. Run
-[4\_survival\_analysis.R](4_survival_analysis.R) to calculate 5 year
-survival.
+which generates [all\_data.csv](all_data.csv).  
+4. Run [4\_survival\_analysis.R](4_survival_analysis.R) to calculate 5
+year survival.
 
 An interesting note about this data: It’s 55GB uncompressed, and
 contains a whole bunch of irrelevant information. It was very
 interesting to me that I could compress a 55GB dataset to 14 Mb, while
 still keeping **all** of the relevant information for modeling. (In
 other words, this dataset was 4,000x larger than it needed to be). I
-think this is another example of how “good data structures” are
-essential for effective engineering, and data science is, at its core,
+think this is another example of how good data structures are essential
+for effective engineering, and data science is, at its core,
 engineering.
 
 # Erratum
 
 I’m probably way over-thinking this, but it was fun to analyze the data.
-Any of the top 50 drives are likely safe to buy, and are very unlikely
+Any of the top 25 drives are likely safe to buy, and are very unlikely
 to fail as I use them for a backup drive.
 
 There are some drives in this data I plan to avoid. For example, the
