@@ -311,7 +311,7 @@ The top 25 drives from this analysis are:
     of the 5-year survival rate
 
 To narrow down the data, we can just look at the best drive by size
-(excluding models that have fewer than \`r min\_unique\_drives):
+(excluding models that have fewer than 1000):
 
 <table>
 <thead>

@@ -88,7 +88,7 @@ knitr::kable(
 * **surv_5yr** is the 5-year survival rate
 * **surv_5yr_hi** is the upper bound of the 95% confidence interval of the 5-year survival rate
 
-To narrow down the data, we can just look at the best drive by size (excluding models that have fewer than `r min_unique_drives):
+To narrow down the data, we can just look at the best drive by size (excluding models that have fewer than `r min_unique_drives`):
 ```{r best_by_size, echo=FALSE}
 knitr::kable(
   best_drive_by_size[,
