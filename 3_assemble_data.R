@@ -4,15 +4,13 @@ rm(list = ls(all=T))
 gc(reset = T)
 library(pbapply)
 library(data.table)
-library(compiler)
-library(fastmatch)
-library(kit)
+source('helpers.r')
 
 # Load the data
 # NOTE: 54+ drives have more than one "failure" day
 # I *think* this means that the drive failure was fixed, and the drive was re-deployed
 # HOWEVER; I don't want to fix my own drives, so I am going to consider any "failure"
-# to be game ove
+# to be game over
 data_dir <- 'data/'
 all_files <- list.files(data_dir)
 all_data <- pblapply(  # Takes ~18 minutes
@@ -27,16 +25,26 @@ all_data <- pblapply(  # Takes ~18 minutes
   }
 )
 all_data <- rbindlist(all_data, use.names=TRUE, fill=TRUE)
-all_data[,capacity_bytes := as.integer(capacity_bytes)]
+# all_data[serial_number=='9JG4657T',]
+
+# Cleanup model names
+all_data[,model := string_normalize(model)]
+
+# More model name cleanup
+# DON'T DO THIS!  LOOKS LIKE SOME DRIVE MANUFACTURERS RE-USE SERAILS FOR DIFFERENT MODELS
+# keys <- c('model', 'serial_number')
+# model_map <- all_data[,list(.N, max_date=max(date)), by=keys]
+# model_map[serial_number == 'PL1331LAGRZ3DH',]
+# model_map <- model_map[,list(
+#   model_N = model[which.max(N)],
+#   model_date = model[which.max(max_date)]
+#   ), by='serial_number']
+# model_map[serial_number == 'PL1331LAGRZ3DH',]
+# model_map[model_N != model_date,]
 
 # Filename to date
-file_to_date <- cmpfun(function(x){
-  x_unique <- sort(funique(x))
-  x_map <- fmatch(x, x_unique)
-  x_date <- as.Date(gsub('.csv', '', x_unique, fixed=T))
-  return(x_date[x_map])
-})
 all_data[,date := file_to_date(filename)]
+# all_data[serial_number=='9JG4657T',]
 
 # Data quality checks=: bad capacity
 all_data[,sort(funique(capacity_bytes))]
@@ -57,9 +65,18 @@ fwrite(capacity_map, 'capacity_map.csv')
 gc(reset=T)
 
 # Calculate dates by serial number
-setkeyv(all_data, c('model', 'serial_number'))
+keys <- c('model', 'serial_number')
+setkeyv(all_data, keys)
 drive_dates <- all_data[, list(
   min_date = min(date),
   max_date = max(date),
-  first_fail = min(date[failure==1])), by=c('model', 'serial_number')]
+  first_fail = min(date[failure==1])), by=keys]
 fwrite(drive_dates, 'drive_dates.csv')
+# drive_dates[serial_number=='9JG4657T',]
+
+# Check that each unique serial has one unique model
+# Some manufacturers do re-use serials, so there will be some dupes
+# But it should be a very small number
+duplicate_serials <- drive_dates[,list(N=length(funique(model))), by='serial_number'][N>1,]
+stopifnot(nrow(duplicate_serials) < 10)
+duplicate_serials
