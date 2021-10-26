@@ -30,18 +30,6 @@ all_data <- rbindlist(all_data, use.names=TRUE, fill=TRUE)
 # Cleanup model names
 all_data[,model := string_normalize(model)]
 
-# More model name cleanup
-# DON'T DO THIS!  LOOKS LIKE SOME DRIVE MANUFACTURERS RE-USE SERAILS FOR DIFFERENT MODELS
-# keys <- c('model', 'serial_number')
-# model_map <- all_data[,list(.N, max_date=max(date)), by=keys]
-# model_map[serial_number == 'PL1331LAGRZ3DH',]
-# model_map <- model_map[,list(
-#   model_N = model[which.max(N)],
-#   model_date = model[which.max(max_date)]
-#   ), by='serial_number']
-# model_map[serial_number == 'PL1331LAGRZ3DH',]
-# model_map[model_N != model_date,]
-
 # Filename to date
 all_data[,date := file_to_date(filename)]
 # all_data[serial_number=='9JG4657T',]
