@@ -45,12 +45,7 @@ dat_list <- pblapply(  # Takes ~30 minutes
     gc(reset=T)
     
     # Load data
-    dat <- fread(
-      paste0(data_dir, x), 
-      select=c('model', 'serial_number', 'date', 'failure', smart_stats),
-      colClasses=smart_classes,
-      showProgress=F
-    )
+    dat <- fread(paste0(data_dir, x), showProgress=F)
     
     # Subset
     dat <- dat[serial_number==lookit_me,]
