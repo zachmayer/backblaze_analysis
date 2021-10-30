@@ -25,6 +25,7 @@ string_normalize <- cmpfun(function(x){
   x_unique <- stri_replace_all_regex(x_unique, '[[\\p{C}]|[\\p{M}]|[\\p{S}]|[\\p{Z}]]+', ' ')
   x <- stri_replace_all_regex(x, ' +', ' ')
   x_unique <- stri_trim_both(x_unique)
+  x_unique <- stri_trans_tolower(x_unique)
   
   # Remap and return
   return(x_unique[x_map])

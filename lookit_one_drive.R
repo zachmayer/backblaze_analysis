@@ -4,6 +4,7 @@ rm(list = ls(all=T))
 gc(reset = T)
 library(pbapply)
 library(data.table)
+library(stringi)
 library(ggplot2)
 library(ggthemes)
 source('helpers.r')
@@ -31,7 +32,9 @@ print(length(all_files) / length(list.files(data_dir)))
 # Load the drive dates data
 drive_dates <- fread('drive_dates.csv')
 drive_dates[,days_to_fail := as.integer(first_fail - min_date)]
-lookit_me <- drive_dates[!is.na(first_fail),][order(-days_to_fail),][1, serial_number]
+lookit_me <- drive_dates[!is.na(first_fail),][order(-days_to_fail),]
+lookit_serial <- lookit_me[1, string_normalize(serial_number)]
+lookit_model <- lookit_me[1, string_normalize(model)]
 
 # Load the data
 # https://www.backblaze.com/b2/hard-drive-test-data.html#overview-of-the-hard-drive-data
@@ -41,16 +44,20 @@ set.seed(110001)
 dat_list <- pblapply(  # Takes ~30 minutes
   sample(all_files),
   function(x){
-    
+
     # Bookkeeping
     gc(reset=T)
-    
+
     # Load data
     dat <- fread(paste0(data_dir, x), showProgress=F)
-    
+
+    # Normalize
+    dat[,serial_number := string_normalize(serial_number)]
+    dat[,model := string_normalize(model)]
+
     # Subset
-    dat <- dat[serial_number==lookit_me,]
-    
+    dat <- dat[serial_number==lookit_serial & model==lookit_model,]
+
     #Return
     return(dat)
   }
@@ -97,14 +104,14 @@ setkeyv(dat, c('model', 'serial_number', 'date'))
 smart_stats <- names(dat)[grepl('smart_', names(dat), fixed=T)]
 plot_dat <- melt.data.table(dat[,c('date', smart_stats), with=F], id.vars = c('date'))
 plot_dat[,value := (value - min(value)) / diff(range(value)), by='variable']
-ggplot(plot_dat, aes(x=date, y=value, color=variable)) + 
-  geom_point()+ theme(legend.position="top") + theme_tufte() + 
+ggplot(plot_dat, aes(x=date, y=value, color=variable)) +
+  geom_point()+ theme(legend.position="top") + theme_tufte() +
   scale_color_manual(values=custom_palette)
 
 for(var in sort(unique(plot_dat[['variable']]))){
   print({
-    ggplot(plot_dat[variable == var,], aes(x=date, y=value, color=variable)) + 
-      geom_point()+ theme(legend.position="top") + theme_tufte() + 
+    ggplot(plot_dat[variable == var,], aes(x=date, y=value, color=variable)) +
+      geom_point()+ theme(legend.position="top") + theme_tufte() +
       scale_color_manual(values=custom_palette) + ggtitle(var)
   })
 }
