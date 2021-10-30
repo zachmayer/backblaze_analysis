@@ -5,6 +5,7 @@ gc(reset = T)
 library(pbapply)
 library(data.table)
 library(ggplot2)
+library(ggthemes)
 source('helpers.r')
 set.seed(110001)
 SAMPLE_SIZE <- 2008
@@ -96,3 +97,8 @@ setkeyv(dat, c('model', 'serial_number', 'date'))
 # Plots
 smart_stats <- names(dat)[grepl('smart_', names(dat), fixed=T)]
 plot_dat <- melt.data.table(dat[,c('date', smart_stats), with=F], id.vars = c('date'))
+plot_dat[,value := (value - min(value)) / diff(range(value)), by='variable']
+ggplot(plot_dat, aes(x=date, y=value, color=variable)) + 
+  geom_point()+ theme(legend.position="top") + theme_tufte() + 
+  scale_color_manual(values=custom_palette)
+
