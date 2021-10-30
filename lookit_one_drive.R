@@ -102,3 +102,5 @@ ggplot(plot_dat, aes(x=date, y=value, color=variable)) +
   geom_point()+ theme(legend.position="top") + theme_tufte() + 
   scale_color_manual(values=custom_palette)
 
+# fail cor
+sort(abs(cor(dat[,smart_stats, with=F], dat[['failure']])[,1]))
