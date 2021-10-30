@@ -8,7 +8,6 @@ library(ggplot2)
 library(ggthemes)
 source('helpers.r')
 set.seed(110001)
-SAMPLE_SIZE <- 2008
 
 # TODO:
 # Consider stratified sampling: once we've ID'd important smart stats, sample where those >0
@@ -40,7 +39,7 @@ lookit_me <- drive_dates[!is.na(first_fail),][order(-days_to_fail),][1, serial_n
 t1 <- Sys.time()
 set.seed(110001)
 dat_list <- pblapply(  # Takes ~30 minutes
-  sample(all_files, SAMPLE_SIZE),
+  sample(all_files),
   function(x){
     
     # Bookkeeping
@@ -101,6 +100,14 @@ plot_dat[,value := (value - min(value)) / diff(range(value)), by='variable']
 ggplot(plot_dat, aes(x=date, y=value, color=variable)) + 
   geom_point()+ theme(legend.position="top") + theme_tufte() + 
   scale_color_manual(values=custom_palette)
+
+for(var in sort(unique(plot_dat[['variable']]))){
+  print({
+    ggplot(plot_dat[variable == var,], aes(x=date, y=value, color=variable)) + 
+      geom_point()+ theme(legend.position="top") + theme_tufte() + 
+      scale_color_manual(values=custom_palette) + ggtitle(var)
+  })
+}
 
 # fail cor
 sort(abs(cor(dat[,smart_stats, with=F], dat[['failure']])[,1]))
