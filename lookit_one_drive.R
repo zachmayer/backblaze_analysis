@@ -4,6 +4,7 @@ rm(list = ls(all=T))
 gc(reset = T)
 library(pbapply)
 library(data.table)
+library(ggplot2)
 source('helpers.r')
 set.seed(110001)
 SAMPLE_SIZE <- 2008
@@ -56,7 +57,42 @@ dat_list <- pblapply(  # Takes ~30 minutes
 )
 warnings()  # 222 / 224 / 226 not found
 time_diff <- as.numeric(Sys.time() - t1)
+print(time_diff)
 
 # Rbind
-dat <- rbindlist(dat_list, use.names=T, fill=T)
-summary(dat)
+dat <- dat_list
+dat <- lapply(dat, function(x){
+  if(nrow(x)>0){
+    return(x)
+  }
+})
+dat <- rbindlist(dat, use.names=T, fill=T)
+
+# Clean model name string
+dat[,model := string_normalize(model)]
+gc(reset=T)
+
+# Replace NA with zero
+smart_stats <- names(dat)[grepl('smart_', names(dat), fixed=T)]
+for(var in smart_stats){
+  set(dat, j=var, value = as.numeric(dat[[var]]))
+  set(dat, i=which(is.na(dat[[var]])), j=var, value=0)
+}
+gc(reset=T)
+
+# Drop constant numeric columns
+nums <- sapply(dat, is.numeric)
+singles <- sapply(dat, function(x) length(unique(x)) < 2)
+num_singles <- nums & singles
+remove_vars <- names(num_singles)[num_singles]
+#print(remove_vars)
+for(var in remove_vars){
+  set(dat, j=var, value=NULL)
+}
+
+# Order
+setkeyv(dat, c('model', 'serial_number', 'date'))
+
+# Plots
+smart_stats <- names(dat)[grepl('smart_', names(dat), fixed=T)]
+plot_dat <- melt.data.table(dat[,c('date', smart_stats), with=F], id.vars = c('date'))
