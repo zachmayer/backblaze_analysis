@@ -33,8 +33,29 @@ print(length(all_files) / length(list.files(data_dir)))
 drive_dates <- fread('drive_dates.csv')
 drive_dates[,days_to_fail := as.integer(first_fail - min_date)]
 lookit_me <- drive_dates[!is.na(first_fail),][order(-days_to_fail),]
-lookit_serial <- lookit_me[1, string_normalize(serial_number)]
-lookit_model <- lookit_me[1, string_normalize(model)]
+lookit_serial <- lookit_me[2, string_normalize(serial_number)]
+lookit_model <- lookit_me[2, string_normalize(model)]
+
+# Calculate "data gaps" by drive
+t1 <- Sys.time()
+set.seed(110001)
+dat_list <- pblapply(  # Takes ~30 minutes
+  sample(all_files),
+  function(x){
+
+    # Bookkeeping
+    gc(reset=T)
+
+    # Load data
+    x <- paste0(data_dir, x)
+    dat <- fread(x, showProgress=F, select=c('date', 'serial_number', 'model'))
+
+    #Return
+    dat
+  }
+)
+time_diff <- as.numeric(Sys.time() - t1)
+print(time_diff)
 
 # Load the data
 # https://www.backblaze.com/b2/hard-drive-test-data.html#overview-of-the-hard-drive-data
