@@ -129,12 +129,28 @@ st <- SetTarget(
   seed=35569,
   maxWait=600)
 
-# Run repo models
-bps <- ListBlueprints(projectObject)
-new <- pblapply(bps, function(bp){
+# Function to run repo models
+try_model <- function(pid, bp, scoringType='crossValidation', samplePct=NULL){
   tryCatch({
-    out <- RequestNewModel(projectObject$projectId, bp, scoringType='crossValidation')
+    suppressMessages({
+      RequestNewModel(pid, list(
+        projectId=pid$projectId,
+        created=pid$created,
+        projectName=pid$projectName,
+        fileName=pid$fileName,
+        blueprintId=bp
+      ), scoringType=scoringType, samplePct=samplePct)
+    })
   }, error=function(e) warning(e))
+}
+
+# Run repo models
+models <- c(ListBlueprints(projectObject), ListModels(projectObject))
+bps <- sort(unique(sapply(models, '[[', 'blueprintId')))
+new <- pblapply(bps, function(bp){
+  try_model(projectObject, bp, 'crossValidation')
+  try_model(projectObject, bp, 'validation')
+  Sys.sleep(0.1)
 })
 
 # Wait a few hours and run feature impact
