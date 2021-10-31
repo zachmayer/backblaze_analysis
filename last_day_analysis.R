@@ -17,7 +17,7 @@ set.seed(110001)
 # Choose files
 data_dir <- 'data/'
 all_files <- list.files(data_dir)
-all_files <- sample(all_files, 10)
+all_files <- sample(all_files)
 x <- all_files[1]
 
 # Load the drive dates data
@@ -95,6 +95,7 @@ setkeyv(dat, c('model', 'serial_number'))
 # Start project
 library(datarobot)
 projectObject = SetupProject(dat)
+readr::write_lines(projectObject$projectId, 'pid.txt')
 sink <- UpdateProject(projectObject, workerCount=25, holdoutUnlocked=TRUE)
 st <- SetTarget(
   project=projectObject,
