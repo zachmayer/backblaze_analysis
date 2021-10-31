@@ -27,20 +27,17 @@ all_files <- sample(list.files(data_dir))
 gc(reset=T)
 
 # Write the header for the last file we have (which will have the most columns)
-last_file <- tail(sort(all_files), 1)
-system(paste('head -1', paste0(data_dir, last_file), '>', output_name))
-system(paste('cat', output_name))
-
-# Now write the contents of the file
-system(paste0('tail -n +2 -q ', data_dir, '*.csv >> ', output_name))
-
-
 t1 <- Sys.time()
-dat_list <- pblapply(all_files, function(x){ # Takes ~30 minutes
-    x <- paste0(data_dir, x)
-
-  }
+dat_list <- pblapply(all_files, function(x){  # Takes ~30 minutes
+  dat <- fread(paste0(data_dir, x), showProgress=F)
+  dat[,capacity_bytes := NULL]
+  ids <- c('date', 'serial_number', 'model', 'failure')
+  dat <- melt.data.table(dat, id.vars = ids, na.rm = TRUE)
+  dat <- dat[is.finite(value),]
+  dat <- dat[value != 0,]
+  dat <- dat[!grepl('_normalized', variable, fixed=T),]
+  fwrite(dat, file=output_name, append = T)
+}
 )
 time_diff <- as.numeric(Sys.time() - t1)
 print(time_diff)
-gc(reset=T)
