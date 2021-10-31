@@ -92,16 +92,28 @@ setkeyv(dat, c('model', 'serial_number'))
 # Run DR
 ################################################################
 
+# Start project
 library(datarobot)
 projectObject = SetupProject(dat)
-sink <- UpdateProject(projectObject, workerCount = 20, holdoutUnlocked = TRUE)
+sink <- UpdateProject(projectObject, workerCount=25, holdoutUnlocked=TRUE)
 st <- SetTarget(
-  project = projectObject,
-  target = "failure",
-  metric='RMSE',
-  targetType='binary',
+  project=projectObject,
+  target="failure",
+  targetType='Binary',
+  metric='FVE Binomial',
+  partition=CreateStratifiedPartition(validationType='CV', holdoutPct=0, reps=10),
   smartDownsampled=FALSE,
   mode='comprehensive',
   seed=35569,
   maxWait=600)
-ViewWebProject(projectObject)
+
+# Run repo models
+bps <- ListBlueprints(projectObject)
+new <- pblapply(bps, function(bp){
+  tryCatch({
+    out <- RequestNewModel(projectObject$projectId, bp, scoringType='cross-validation')
+  }, error=function(e) warning(e))
+})
+
+# Lookit
+ViewWebProject(projectObject$projectId)
