@@ -7,10 +7,17 @@ library(data.table)
 library(stringi)
 library(ggplot2)
 library(ggthemes)
+library(datarobot)
 source('helpers.r')
 
+# TODO: organize files into folders:
+# code in one folder
+# data in another
+# re-write code files to use the folders
+# TODO: run string_normalize on model/serial in all raw data read
+
 ################################################################
-# Setup data
+# Load raw data
 ################################################################
 set.seed(110001)
 
@@ -36,13 +43,18 @@ setkeyv(drive_dates_subset, keys)
 
 # Load the data
 t1 <- Sys.time()
-dat_list <- pblapply(all_files, function(x) {  # Takes ~30 minutes
+dat_list <- pblapply(all_files, function(x) {  # Takes ~60 minutes
+
+  # print(x)
 
   # Bookkeeping
   gc(reset=T)
 
   # Load data
   dat <- fread(paste0(data_dir, x), showProgress=F)
+  if(nrow(dat) < 1){  # TODO: find which file is blank!
+    return(NULL)
+  }
 
   # Normalize
   dat[,serial_number := string_normalize(serial_number)]
@@ -63,8 +75,11 @@ dat_list <- pblapply(all_files, function(x) {  # Takes ~30 minutes
 time_diff <- as.numeric(Sys.time() - t1)
 print(time_diff)
 
+################################################################
+# Make one big data table
+################################################################
+
 # Join data
-# TODO: CACHE THIS FILE
 dat <- rbindlist(dat_list, fill=T, use.names=T)
 
 # Replace NA with zero
@@ -85,17 +100,22 @@ for(var in remove_vars){
   set(dat, j=var, value=NULL)
 }
 
-# Order
-dat[,date := NULL]
+# Order and drop vars
 setkeyv(dat, c('model', 'serial_number'))
+dat[,date := NULL]
+dat[,serial_number := NULL]
+setkeyv(dat, c('model', 'age_days', 'failure', 'smart_9_raw'))
+
+# Save data
+last_day_file <- 'last_day_data.csv'
+fwrite(dat, last_day_file)
 
 ################################################################
 # Run DR
 ################################################################
 
 # Start project
-library(datarobot)
-projectObject = SetupProject(dat)
+projectObject = SetupProject(last_day_file)
 readr::write_lines(projectObject$projectId, 'pid.txt')
 sink <- UpdateProject(projectObject, workerCount=25, holdoutUnlocked=TRUE)
 st <- SetTarget(
@@ -117,5 +137,14 @@ new <- pblapply(bps, function(bp){
   }, error=function(e) warning(e))
 })
 
-# Lookit
+# Wait a few hours and run feature impact
+Sys.sleep(3600*5)
+best_model <- ListModels(project)[[1]]
+featureImpactJobId <- RequestFeatureImpact(best_model)
+
+# Wait a few minutes and run feature fit
+# TODO
+Sys.sleep(60*5)
+
+# Lookit the project
 ViewWebProject(projectObject$projectId)
