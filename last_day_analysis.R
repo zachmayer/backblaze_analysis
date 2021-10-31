@@ -15,6 +15,12 @@ source('helpers.r')
 # data in another
 # re-write code files to use the folders
 # TODO: run string_normalize on model/serial in all raw data read
+# TODO: keep missing data as missing
+# TODO: rowwise count of zeros
+# TODO: rowwise count of NAs (after dropping constant columns)
+# TODO: try a survival xgboost, crib tuning from best DR model (which looks like XGB)
+# TODO: use 30 days prior to censoring as target for 0
+# TODO: Predict in sample, and look at prediciton over time for failed drives: does it start to go up as we get to the failure date?  Plot this for all failed drives to see how far out we may be able to predict failures
 
 ################################################################
 # Load raw data
@@ -145,6 +151,7 @@ try_model <- function(pid, bp, scoringType='crossValidation', samplePct=NULL){
 }
 
 # Run repo models
+Sys.sleep(3600*5)
 models <- c(ListBlueprints(projectObject), ListModels(projectObject))
 bps <- sort(unique(sapply(models, '[[', 'blueprintId')))
 new <- pblapply(bps, function(bp){
@@ -153,9 +160,9 @@ new <- pblapply(bps, function(bp){
   Sys.sleep(0.1)
 })
 
-# Wait a few hours and run feature impact
+# Run feature impact
 Sys.sleep(3600*5)
-best_model <- ListModels(project)[[1]]
+best_model <- ListModels(projectObject)[[1]]
 featureImpactJobId <- RequestFeatureImpact(best_model)
 
 # Wait a few minutes and run feature fit
