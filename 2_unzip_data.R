@@ -15,6 +15,7 @@ sink <- pblapply(all_files, function(filename){
 # Concat all files
 ########################################################
 # https://unix.stackexchange.com/a/170692/203993
+library(data.table)
 
 # Delete the combined file
 output_name <- 'all_data.csv'

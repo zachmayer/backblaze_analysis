@@ -1,6 +1,7 @@
 # Data files
 data/*
 zip_data/*
+all_data.csv
 
 # History files
 .Rhistory
