@@ -111,7 +111,7 @@ st <- SetTarget(
 bps <- ListBlueprints(projectObject)
 new <- pblapply(bps, function(bp){
   tryCatch({
-    out <- RequestNewModel(projectObject$projectId, bp, scoringType='cross-validation')
+    out <- RequestNewModel(projectObject$projectId, bp, scoringType='crossValidation')
   }, error=function(e) warning(e))
 })
 
