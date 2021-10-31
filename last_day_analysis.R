@@ -64,6 +64,7 @@ time_diff <- as.numeric(Sys.time() - t1)
 print(time_diff)
 
 # Join data
+# TODO: CACHE THIS FILE
 dat <- rbindlist(dat_list, fill=T, use.names=T)
 
 # Replace NA with zero
