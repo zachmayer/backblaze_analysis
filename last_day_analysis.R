@@ -120,6 +120,12 @@ fwrite(dat, last_day_file)
 # Run DR
 ################################################################
 
+# Load the cached data and project object
+# Note that projectObject will be overwitten by a NEW project below when you run SetupProject
+# You can manually skip the `start project` block if you wish to just load an old project
+dat <- fread('last_day_data.csv')
+projectObject <- GetProject(readr::read_lines('pid.txt'))
+
 # Start project
 projectObject = SetupProject(last_day_file)
 readr::write_lines(projectObject$projectId, 'pid.txt')
