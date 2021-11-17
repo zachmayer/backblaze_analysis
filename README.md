@@ -25,9 +25,9 @@ things.
 
 I chose to order the drives by their expected 5 year survival rate. I
 calculated a 95% confidence interval on the 5-year survival rate, and I
-used that interval to sort the drives. Based on this analysis, the WDC
-WUH721414ALE6L4 is the most reliable drive model in our data, with an
-estimated 5-year survival rate that is at least 99.65%.
+used that interval to sort the drives. Based on this analysis, the HGST
+HUH721212ALN604 is the most reliable drive model in our data, with an
+estimated 5-year survival rate that is at least 99.60%.
 
 The top 25 drives from this analysis are:
 
@@ -46,16 +46,6 @@ The top 25 drives from this analysis are:
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">WDC WUH721414ALE6L4</td>
-<td style="text-align: left;">14 TB</td>
-<td style="text-align: right;">7694</td>
-<td style="text-align: right;">650370</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: left;">99.65%</td>
-<td style="text-align: left;">99.95%</td>
-<td style="text-align: left;">99.99%</td>
-</tr>
-<tr class="even">
 <td style="text-align: left;">HGST HUH721212ALN604</td>
 <td style="text-align: left;">12 TB</td>
 <td style="text-align: right;">10944</td>
@@ -65,7 +55,7 @@ The top 25 drives from this analysis are:
 <td style="text-align: left;">99.67%</td>
 <td style="text-align: left;">99.72%</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">HGST HMS5C4040ALE640</td>
 <td style="text-align: left;">4 TB</td>
 <td style="text-align: right;">8723</td>
@@ -75,7 +65,7 @@ The top 25 drives from this analysis are:
 <td style="text-align: left;">99.60%</td>
 <td style="text-align: left;">99.65%</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">HGST HUH721212ALE600</td>
 <td style="text-align: left;">12 TB</td>
 <td style="text-align: right;">2619</td>
@@ -85,7 +75,7 @@ The top 25 drives from this analysis are:
 <td style="text-align: left;">99.69%</td>
 <td style="text-align: left;">99.81%</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">HGST HUH721212ALE604</td>
 <td style="text-align: left;">12 TB</td>
 <td style="text-align: right;">10792</td>
@@ -95,7 +85,7 @@ The top 25 drives from this analysis are:
 <td style="text-align: left;">99.57%</td>
 <td style="text-align: left;">99.73%</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Hitachi HDS5C4040ALE630</td>
 <td style="text-align: left;">4 TB</td>
 <td style="text-align: right;">2719</td>
@@ -105,17 +95,17 @@ The top 25 drives from this analysis are:
 <td style="text-align: left;">99.44%</td>
 <td style="text-align: left;">99.55%</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">WDC WUH721414ALE6L4</td>
 <td style="text-align: left;">14 TB</td>
 <td style="text-align: right;">8421</td>
-<td style="text-align: right;">1630664</td>
-<td style="text-align: right;">20</td>
-<td style="text-align: left;">99.31%</td>
-<td style="text-align: left;">99.56%</td>
-<td style="text-align: left;">99.71%</td>
+<td style="text-align: right;">1630929</td>
+<td style="text-align: right;">21</td>
+<td style="text-align: left;">99.28%</td>
+<td style="text-align: left;">99.53%</td>
+<td style="text-align: left;">99.70%</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Hitachi HDS5C3030ALA630</td>
 <td style="text-align: left;">3 TB</td>
 <td style="text-align: right;">4664</td>
@@ -125,7 +115,7 @@ The top 25 drives from this analysis are:
 <td style="text-align: left;">99.38%</td>
 <td style="text-align: left;">99.48%</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">HGST HUH728080ALE600</td>
 <td style="text-align: left;">8 TB</td>
 <td style="text-align: right;">1163</td>
@@ -135,7 +125,7 @@ The top 25 drives from this analysis are:
 <td style="text-align: left;">99.50%</td>
 <td style="text-align: left;">99.66%</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">TOSHIBA MG07ACA14TA</td>
 <td style="text-align: left;">14 TB</td>
 <td style="text-align: right;">32199</td>
@@ -145,7 +135,7 @@ The top 25 drives from this analysis are:
 <td style="text-align: left;">99.29%</td>
 <td style="text-align: left;">99.38%</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">ST12000NM001G</td>
 <td style="text-align: left;">12 TB</td>
 <td style="text-align: right;">10620</td>
@@ -155,7 +145,7 @@ The top 25 drives from this analysis are:
 <td style="text-align: left;">99.36%</td>
 <td style="text-align: left;">99.51%</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">ST8000DM002</td>
 <td style="text-align: left;">8 TB</td>
 <td style="text-align: right;">10241</td>
@@ -165,7 +155,7 @@ The top 25 drives from this analysis are:
 <td style="text-align: left;">99.14%</td>
 <td style="text-align: left;">99.21%</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">ST12000NM0008</td>
 <td style="text-align: left;">12 TB</td>
 <td style="text-align: right;">20601</td>
@@ -175,7 +165,7 @@ The top 25 drives from this analysis are:
 <td style="text-align: left;">99.16%</td>
 <td style="text-align: left;">99.26%</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">ST6000DX000</td>
 <td style="text-align: left;">6 TB</td>
 <td style="text-align: right;">1939</td>
@@ -185,7 +175,7 @@ The top 25 drives from this analysis are:
 <td style="text-align: left;">99.21%</td>
 <td style="text-align: left;">99.36%</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">ST8000NM0055</td>
 <td style="text-align: left;">8 TB</td>
 <td style="text-align: right;">15112</td>
@@ -195,7 +185,7 @@ The top 25 drives from this analysis are:
 <td style="text-align: left;">99.07%</td>
 <td style="text-align: left;">99.14%</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">ST10000NM0086</td>
 <td style="text-align: left;">10 TB</td>
 <td style="text-align: right;">1263</td>
@@ -205,7 +195,7 @@ The top 25 drives from this analysis are:
 <td style="text-align: left;">99.25%</td>
 <td style="text-align: left;">99.44%</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">TOSHIBA MG08ACA16TEY</td>
 <td style="text-align: left;">16 TB</td>
 <td style="text-align: right;">1431</td>
@@ -215,7 +205,7 @@ The top 25 drives from this analysis are:
 <td style="text-align: left;">99.84%</td>
 <td style="text-align: left;">99.98%</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Hitachi HDS722020ALA330</td>
 <td style="text-align: left;">2 TB</td>
 <td style="text-align: right;">4774</td>
@@ -225,7 +215,7 @@ The top 25 drives from this analysis are:
 <td style="text-align: left;">98.81%</td>
 <td style="text-align: left;">98.96%</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">TOSHIBA MD04ABA400V</td>
 <td style="text-align: left;">4 TB</td>
 <td style="text-align: right;">150</td>
@@ -235,7 +225,7 @@ The top 25 drives from this analysis are:
 <td style="text-align: left;">99.36%</td>
 <td style="text-align: left;">99.71%</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Seagate BarraCuda SSD ZA250CM10002</td>
 <td style="text-align: left;">250 GB</td>
 <td style="text-align: right;">563</td>
@@ -245,7 +235,7 @@ The top 25 drives from this analysis are:
 <td style="text-align: left;">99.39%</td>
 <td style="text-align: left;">99.75%</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">ST14000NM001G</td>
 <td style="text-align: left;">14 TB</td>
 <td style="text-align: right;">8412</td>
@@ -255,7 +245,7 @@ The top 25 drives from this analysis are:
 <td style="text-align: left;">98.83%</td>
 <td style="text-align: left;">99.10%</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">ST12000NM0007</td>
 <td style="text-align: left;">12 TB</td>
 <td style="text-align: right;">38748</td>
@@ -265,7 +255,7 @@ The top 25 drives from this analysis are:
 <td style="text-align: left;">98.47%</td>
 <td style="text-align: left;">98.55%</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Hitachi HDS723030ALA640</td>
 <td style="text-align: left;">3 TB</td>
 <td style="text-align: right;">1048</td>
@@ -275,7 +265,7 @@ The top 25 drives from this analysis are:
 <td style="text-align: left;">98.62%</td>
 <td style="text-align: left;">98.90%</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">ST16000NM001G</td>
 <td style="text-align: left;">16 TB</td>
 <td style="text-align: right;">4876</td>
@@ -285,7 +275,7 @@ The top 25 drives from this analysis are:
 <td style="text-align: left;">98.80%</td>
 <td style="text-align: left;">99.25%</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">ST4000DM000</td>
 <td style="text-align: left;">4 TB</td>
 <td style="text-align: right;">37037</td>
@@ -294,6 +284,16 @@ The top 25 drives from this analysis are:
 <td style="text-align: left;">97.90%</td>
 <td style="text-align: left;">97.99%</td>
 <td style="text-align: left;">98.08%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Seagate BarraCuda 120 SSD ZA250CM10003</td>
+<td style="text-align: left;">250 GB</td>
+<td style="text-align: right;">754</td>
+<td style="text-align: right;">151571</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">97.55%</td>
+<td style="text-align: left;">99.07%</td>
+<td style="text-align: left;">99.65%</td>
 </tr>
 </tbody>
 </table>
@@ -328,16 +328,6 @@ To narrow down the data, we can just look at the best drive by size
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">WDC WUH721414ALE6L4</td>
-<td style="text-align: left;">14 TB</td>
-<td style="text-align: right;">7694</td>
-<td style="text-align: right;">650370</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: left;">99.65%</td>
-<td style="text-align: left;">99.95%</td>
-<td style="text-align: left;">99.99%</td>
-</tr>
-<tr class="even">
 <td style="text-align: left;">HGST HUH721212ALN604</td>
 <td style="text-align: left;">12 TB</td>
 <td style="text-align: right;">10944</td>
@@ -347,7 +337,7 @@ To narrow down the data, we can just look at the best drive by size
 <td style="text-align: left;">99.67%</td>
 <td style="text-align: left;">99.72%</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">HGST HMS5C4040ALE640</td>
 <td style="text-align: left;">4 TB</td>
 <td style="text-align: right;">8723</td>
@@ -356,6 +346,16 @@ To narrow down the data, we can just look at the best drive by size
 <td style="text-align: left;">99.54%</td>
 <td style="text-align: left;">99.60%</td>
 <td style="text-align: left;">99.65%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">WDC WUH721414ALE6L4</td>
+<td style="text-align: left;">14 TB</td>
+<td style="text-align: right;">8421</td>
+<td style="text-align: right;">1630929</td>
+<td style="text-align: right;">21</td>
+<td style="text-align: left;">99.28%</td>
+<td style="text-align: left;">99.53%</td>
+<td style="text-align: left;">99.70%</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Hitachi HDS5C3030ALA630</td>
@@ -501,7 +501,7 @@ year survival.
 
 An interesting note about this data: It’s 55GB uncompressed, and
 contains a whole bunch of irrelevant information. It was very
-interesting to me that I could compress a 55GB dataset to 14 Mb, while
+interesting to me that I could compress a 55GB dataset to 13 Mb, while
 still keeping **all** of the relevant information for modeling. (In
 other words, this dataset was 4,000x larger than it needed to be). I
 think this is another example of how good data structures are essential

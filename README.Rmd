@@ -14,17 +14,12 @@ library(ggplot2)
 library(ggthemes)
 library(survival)
 library(survminer)
+source('helpers.r')
 
 # Globals
 top_n <- 25
 min_unique_drives <- 1000
 file_size <- utils:::format.object_size(file.size('drive_dates.csv'), 'Mb', digits=0)
-days_to_year <- 365.2425
-custom_palette <- c(
-  "#1f78b4", "#ff7f00", "#6a3d9a", "#33a02c", "#e31a1c", "#b15928",
-  "#a6cee3", "#fdbf6f", "#cab2d6", "#b2df8a", "#fb9a99", "black",
-  "grey1", "grey10"
-)
 
 # Load data
 dat = fread('survival_results.csv')
