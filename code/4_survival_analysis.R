@@ -34,9 +34,9 @@ drive_dates[is.finite(first_fail), max_date := first_fail]
 drive_dates[,days := as.integer(max_date - min_date)]
 drive_dates[,model := factor(model)]
 
-# Choose the "reference" class based on the drive with the most days
-ref_level <- drive_dates[,list(days=max(days), .N, sum_days=sum(days)), by='model'][which.max(days), as.character(model)]
+# Choose the "reference" class based
 ref_level <- 'HGST HMS5C4040BLE640'  # Reliable 4TB drive with lots of drives and drive days
+ref_level <- string_normalize(ref_level)
 drive_dates[,model := factor(model)]
 drive_dates[,model := relevel(model, ref=ref_level)]
 fwrite(drive_dates, 'results/drive_dates_clean.csv')

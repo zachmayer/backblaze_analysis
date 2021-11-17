@@ -25,9 +25,9 @@ things.
 
 I chose to order the drives by their expected 5 year survival rate. I
 calculated a 95% confidence interval on the 5-year survival rate, and I
-used that interval to sort the drives. Based on this analysis, the HGST
-HUH721212ALN604 is the most reliable drive model in our data, with an
-estimated 5-year survival rate that is at least 99.60%.
+used that interval to sort the drives. Based on this analysis, the hgst
+huh721212aln604 is the most reliable drive model in our data, with an
+estimated 5-year survival rate that is at least 99.59%.
 
 The top 25 drives from this analysis are:
 
@@ -46,167 +46,187 @@ The top 25 drives from this analysis are:
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">HGST HUH721212ALN604</td>
+<td style="text-align: left;">hgst huh721212aln604</td>
 <td style="text-align: left;">12 TB</td>
-<td style="text-align: right;">10944</td>
-<td style="text-align: right;">8840451</td>
-<td style="text-align: right;">105</td>
-<td style="text-align: left;">99.60%</td>
-<td style="text-align: left;">99.67%</td>
+<td style="text-align: right;">10952</td>
+<td style="text-align: right;">9837839</td>
+<td style="text-align: right;">119</td>
+<td style="text-align: left;">99.59%</td>
+<td style="text-align: left;">99.66%</td>
 <td style="text-align: left;">99.72%</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">HGST HMS5C4040ALE640</td>
-<td style="text-align: left;">4 TB</td>
-<td style="text-align: right;">8723</td>
-<td style="text-align: right;">14215303</td>
-<td style="text-align: right;">192</td>
-<td style="text-align: left;">99.54%</td>
-<td style="text-align: left;">99.60%</td>
-<td style="text-align: left;">99.65%</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">HGST HUH721212ALE600</td>
+<td style="text-align: left;">hgst huh721212ale600</td>
 <td style="text-align: left;">12 TB</td>
 <td style="text-align: right;">2619</td>
-<td style="text-align: right;">1629567</td>
+<td style="text-align: right;">1868767</td>
 <td style="text-align: right;">17</td>
-<td style="text-align: left;">99.50%</td>
-<td style="text-align: left;">99.69%</td>
-<td style="text-align: left;">99.81%</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">HGST HUH721212ALE604</td>
-<td style="text-align: left;">12 TB</td>
-<td style="text-align: right;">10792</td>
-<td style="text-align: right;">1376575</td>
-<td style="text-align: right;">18</td>
-<td style="text-align: left;">99.31%</td>
-<td style="text-align: left;">99.57%</td>
-<td style="text-align: left;">99.73%</td>
+<td style="text-align: left;">99.58%</td>
+<td style="text-align: left;">99.74%</td>
+<td style="text-align: left;">99.84%</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Hitachi HDS5C4040ALE630</td>
+<td style="text-align: left;">hgst hms5c4040ale640</td>
+<td style="text-align: left;">4 TB</td>
+<td style="text-align: right;">8723</td>
+<td style="text-align: right;">14626442</td>
+<td style="text-align: right;">196</td>
+<td style="text-align: left;">99.54%</td>
+<td style="text-align: left;">99.60%</td>
+<td style="text-align: left;">99.66%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">hgst huh721212ale604</td>
+<td style="text-align: left;">12 TB</td>
+<td style="text-align: right;">11992</td>
+<td style="text-align: right;">2410028</td>
+<td style="text-align: right;">26</td>
+<td style="text-align: left;">99.44%</td>
+<td style="text-align: left;">99.62%</td>
+<td style="text-align: left;">99.74%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">wdc wuh721414ale6l4</td>
+<td style="text-align: left;">14 TB</td>
+<td style="text-align: right;">8431</td>
+<td style="text-align: right;">2403557</td>
+<td style="text-align: right;">29</td>
+<td style="text-align: left;">99.36%</td>
+<td style="text-align: left;">99.56%</td>
+<td style="text-align: left;">99.69%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">hitachi hds5c4040ale630</td>
 <td style="text-align: left;">4 TB</td>
 <td style="text-align: right;">2719</td>
-<td style="text-align: right;">4636586</td>
+<td style="text-align: right;">4637138</td>
 <td style="text-align: right;">88</td>
-<td style="text-align: left;">99.31%</td>
-<td style="text-align: left;">99.44%</td>
-<td style="text-align: left;">99.55%</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">WDC WUH721414ALE6L4</td>
-<td style="text-align: left;">14 TB</td>
-<td style="text-align: right;">8421</td>
-<td style="text-align: right;">1630929</td>
-<td style="text-align: right;">21</td>
-<td style="text-align: left;">99.28%</td>
-<td style="text-align: left;">99.53%</td>
-<td style="text-align: left;">99.70%</td>
+<td style="text-align: left;">99.32%</td>
+<td style="text-align: left;">99.45%</td>
+<td style="text-align: left;">99.56%</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Hitachi HDS5C3030ALA630</td>
+<td style="text-align: left;">hgst huh728080ale600</td>
+<td style="text-align: left;">8 TB</td>
+<td style="text-align: right;">1180</td>
+<td style="text-align: right;">1491122</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: left;">99.29%</td>
+<td style="text-align: left;">99.52%</td>
+<td style="text-align: left;">99.68%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">hitachi hds5c3030ala630</td>
 <td style="text-align: left;">3 TB</td>
 <td style="text-align: right;">4664</td>
 <td style="text-align: right;">6934573</td>
 <td style="text-align: right;">150</td>
-<td style="text-align: left;">99.27%</td>
-<td style="text-align: left;">99.38%</td>
+<td style="text-align: left;">99.28%</td>
+<td style="text-align: left;">99.39%</td>
 <td style="text-align: left;">99.48%</td>
 </tr>
-<tr class="even">
-<td style="text-align: left;">HGST HUH728080ALE600</td>
-<td style="text-align: left;">8 TB</td>
-<td style="text-align: right;">1163</td>
-<td style="text-align: right;">1368895</td>
-<td style="text-align: right;">24</td>
-<td style="text-align: left;">99.25%</td>
-<td style="text-align: left;">99.50%</td>
-<td style="text-align: left;">99.66%</td>
-</tr>
 <tr class="odd">
-<td style="text-align: left;">TOSHIBA MG07ACA14TA</td>
-<td style="text-align: left;">14 TB</td>
-<td style="text-align: right;">32199</td>
-<td style="text-align: right;">9653721</td>
-<td style="text-align: right;">209</td>
-<td style="text-align: left;">99.19%</td>
-<td style="text-align: left;">99.29%</td>
-<td style="text-align: left;">99.38%</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">ST12000NM001G</td>
+<td style="text-align: left;">st12000nm001g</td>
 <td style="text-align: left;">12 TB</td>
-<td style="text-align: right;">10620</td>
-<td style="text-align: right;">2885329</td>
-<td style="text-align: right;">52</td>
-<td style="text-align: left;">99.16%</td>
-<td style="text-align: left;">99.36%</td>
+<td style="text-align: right;">12072</td>
+<td style="text-align: right;">3940104</td>
+<td style="text-align: right;">73</td>
+<td style="text-align: left;">99.22%</td>
+<td style="text-align: left;">99.38%</td>
 <td style="text-align: left;">99.51%</td>
 </tr>
-<tr class="odd">
-<td style="text-align: left;">ST8000DM002</td>
-<td style="text-align: left;">8 TB</td>
-<td style="text-align: right;">10241</td>
-<td style="text-align: right;">17182411</td>
-<td style="text-align: right;">507</td>
-<td style="text-align: left;">99.05%</td>
-<td style="text-align: left;">99.14%</td>
-<td style="text-align: left;">99.21%</td>
-</tr>
 <tr class="even">
-<td style="text-align: left;">ST12000NM0008</td>
+<td style="text-align: left;">toshiba mg07aca14ta</td>
+<td style="text-align: left;">14 TB</td>
+<td style="text-align: right;">38317</td>
+<td style="text-align: right;">12849814</td>
+<td style="text-align: right;">277</td>
+<td style="text-align: left;">99.21%</td>
+<td style="text-align: left;">99.30%</td>
+<td style="text-align: left;">99.38%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">st12000nm0008</td>
 <td style="text-align: left;">12 TB</td>
 <td style="text-align: right;">20601</td>
-<td style="text-align: right;">9290813</td>
-<td style="text-align: right;">244</td>
-<td style="text-align: left;">99.05%</td>
+<td style="text-align: right;">11160142</td>
+<td style="text-align: right;">311</td>
+<td style="text-align: left;">99.06%</td>
 <td style="text-align: left;">99.16%</td>
-<td style="text-align: left;">99.26%</td>
+<td style="text-align: left;">99.25%</td>
 </tr>
-<tr class="odd">
-<td style="text-align: left;">ST6000DX000</td>
+<tr class="even">
+<td style="text-align: left;">st6000dx000</td>
 <td style="text-align: left;">6 TB</td>
 <td style="text-align: right;">1939</td>
-<td style="text-align: right;">3410511</td>
-<td style="text-align: right;">88</td>
+<td style="text-align: right;">3492732</td>
+<td style="text-align: right;">89</td>
+<td style="text-align: left;">99.05%</td>
+<td style="text-align: left;">99.23%</td>
+<td style="text-align: left;">99.38%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">st8000dm002</td>
+<td style="text-align: left;">8 TB</td>
+<td style="text-align: right;">10282</td>
+<td style="text-align: right;">18077025</td>
+<td style="text-align: right;">548</td>
 <td style="text-align: left;">99.03%</td>
-<td style="text-align: left;">99.21%</td>
+<td style="text-align: left;">99.12%</td>
+<td style="text-align: left;">99.19%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">st8000nm0055</td>
+<td style="text-align: left;">8 TB</td>
+<td style="text-align: right;">15160</td>
+<td style="text-align: right;">22395906</td>
+<td style="text-align: right;">766</td>
+<td style="text-align: left;">98.96%</td>
+<td style="text-align: left;">99.03%</td>
+<td style="text-align: left;">99.11%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">st10000nm0086</td>
+<td style="text-align: left;">10 TB</td>
+<td style="text-align: right;">1267</td>
+<td style="text-align: right;">1773611</td>
+<td style="text-align: right;">53</td>
+<td style="text-align: left;">98.89%</td>
+<td style="text-align: left;">99.16%</td>
 <td style="text-align: left;">99.36%</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">ST8000NM0055</td>
-<td style="text-align: left;">8 TB</td>
-<td style="text-align: right;">15112</td>
-<td style="text-align: right;">21072469</td>
-<td style="text-align: right;">690</td>
-<td style="text-align: left;">98.99%</td>
-<td style="text-align: left;">99.07%</td>
-<td style="text-align: left;">99.14%</td>
+<td style="text-align: left;">toshiba mg08aca16tey</td>
+<td style="text-align: left;">16 TB</td>
+<td style="text-align: right;">2061</td>
+<td style="text-align: right;">400038</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">98.84%</td>
+<td style="text-align: left;">99.47%</td>
+<td style="text-align: left;">99.76%</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">ST10000NM0086</td>
-<td style="text-align: left;">10 TB</td>
-<td style="text-align: right;">1263</td>
-<td style="text-align: right;">1663652</td>
-<td style="text-align: right;">44</td>
+<td style="text-align: left;">st14000nm001g</td>
+<td style="text-align: left;">14 TB</td>
+<td style="text-align: right;">10824</td>
+<td style="text-align: right;">2514556</td>
+<td style="text-align: right;">72</td>
+<td style="text-align: left;">98.73%</td>
 <td style="text-align: left;">98.99%</td>
-<td style="text-align: left;">99.25%</td>
-<td style="text-align: left;">99.44%</td>
+<td style="text-align: left;">99.20%</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">TOSHIBA MG08ACA16TEY</td>
-<td style="text-align: left;">16 TB</td>
-<td style="text-align: right;">1431</td>
-<td style="text-align: right;">227941</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: left;">98.90%</td>
-<td style="text-align: left;">99.84%</td>
-<td style="text-align: left;">99.98%</td>
+<td style="text-align: left;">seagate barracuda ssd za250cm10002</td>
+<td style="text-align: left;">250 GB</td>
+<td style="text-align: right;">563</td>
+<td style="text-align: right;">312965</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">98.72%</td>
+<td style="text-align: left;">99.42%</td>
+<td style="text-align: left;">99.74%</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Hitachi HDS722020ALA330</td>
+<td style="text-align: left;">hitachi hds722020ala330</td>
 <td style="text-align: left;">2 TB</td>
 <td style="text-align: right;">4774</td>
 <td style="text-align: right;">5675646</td>
@@ -216,84 +236,64 @@ The top 25 drives from this analysis are:
 <td style="text-align: left;">98.96%</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">TOSHIBA MD04ABA400V</td>
+<td style="text-align: left;">toshiba md04aba400v</td>
 <td style="text-align: left;">4 TB</td>
 <td style="text-align: right;">150</td>
-<td style="text-align: right;">289927</td>
-<td style="text-align: right;">6</td>
-<td style="text-align: left;">98.59%</td>
-<td style="text-align: left;">99.36%</td>
-<td style="text-align: left;">99.71%</td>
+<td style="text-align: right;">298900</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: left;">98.50%</td>
+<td style="text-align: left;">99.28%</td>
+<td style="text-align: left;">99.66%</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Seagate BarraCuda SSD ZA250CM10002</td>
-<td style="text-align: left;">250 GB</td>
-<td style="text-align: right;">563</td>
-<td style="text-align: right;">261645</td>
-<td style="text-align: right;">5</td>
-<td style="text-align: left;">98.54%</td>
-<td style="text-align: left;">99.39%</td>
-<td style="text-align: left;">99.75%</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">ST14000NM001G</td>
-<td style="text-align: left;">14 TB</td>
-<td style="text-align: right;">8412</td>
-<td style="text-align: right;">1590919</td>
-<td style="text-align: right;">52</td>
-<td style="text-align: left;">98.46%</td>
-<td style="text-align: left;">98.83%</td>
-<td style="text-align: left;">99.10%</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">ST12000NM0007</td>
+<td style="text-align: left;">st12000nm0007</td>
 <td style="text-align: left;">12 TB</td>
-<td style="text-align: right;">38748</td>
-<td style="text-align: right;">35477372</td>
-<td style="text-align: right;">1911</td>
-<td style="text-align: left;">98.38%</td>
-<td style="text-align: left;">98.47%</td>
-<td style="text-align: left;">98.55%</td>
+<td style="text-align: right;">38796</td>
+<td style="text-align: right;">35693445</td>
+<td style="text-align: right;">1941</td>
+<td style="text-align: left;">98.37%</td>
+<td style="text-align: left;">98.45%</td>
+<td style="text-align: left;">98.53%</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Hitachi HDS723030ALA640</td>
+<td style="text-align: left;">st16000nm001g</td>
+<td style="text-align: left;">16 TB</td>
+<td style="text-align: right;">6092</td>
+<td style="text-align: right;">956133</td>
+<td style="text-align: right;">34</td>
+<td style="text-align: left;">98.31%</td>
+<td style="text-align: left;">98.79%</td>
+<td style="text-align: left;">99.14%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">hitachi hds723030ala640</td>
 <td style="text-align: left;">3 TB</td>
 <td style="text-align: right;">1048</td>
 <td style="text-align: right;">1495337</td>
 <td style="text-align: right;">73</td>
-<td style="text-align: left;">98.26%</td>
-<td style="text-align: left;">98.62%</td>
-<td style="text-align: left;">98.90%</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">ST16000NM001G</td>
-<td style="text-align: left;">16 TB</td>
-<td style="text-align: right;">4876</td>
-<td style="text-align: right;">422804</td>
-<td style="text-align: right;">17</td>
-<td style="text-align: left;">98.07%</td>
-<td style="text-align: left;">98.80%</td>
-<td style="text-align: left;">99.25%</td>
+<td style="text-align: left;">98.27%</td>
+<td style="text-align: left;">98.63%</td>
+<td style="text-align: left;">98.91%</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">ST4000DM000</td>
-<td style="text-align: left;">4 TB</td>
-<td style="text-align: right;">37037</td>
-<td style="text-align: right;">63454747</td>
-<td style="text-align: right;">4271</td>
-<td style="text-align: left;">97.90%</td>
-<td style="text-align: left;">97.99%</td>
-<td style="text-align: left;">98.08%</td>
+<td style="text-align: left;">seagate barracuda 120 ssd za250cm10003</td>
+<td style="text-align: left;">250 GB</td>
+<td style="text-align: right;">964</td>
+<td style="text-align: right;">231104</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">98.03%</td>
+<td style="text-align: left;">99.11%</td>
+<td style="text-align: left;">99.60%</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Seagate BarraCuda 120 SSD ZA250CM10003</td>
-<td style="text-align: left;">250 GB</td>
-<td style="text-align: right;">754</td>
-<td style="text-align: right;">151571</td>
-<td style="text-align: right;">4</td>
-<td style="text-align: left;">97.55%</td>
-<td style="text-align: left;">99.07%</td>
-<td style="text-align: left;">99.65%</td>
+<td style="text-align: left;">st4000dm000</td>
+<td style="text-align: left;">4 TB</td>
+<td style="text-align: right;">37037</td>
+<td style="text-align: right;">65178266</td>
+<td style="text-align: right;">4358</td>
+<td style="text-align: left;">97.93%</td>
+<td style="text-align: left;">98.02%</td>
+<td style="text-align: left;">98.11%</td>
 </tr>
 </tbody>
 </table>
@@ -328,87 +328,87 @@ To narrow down the data, we can just look at the best drive by size
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">HGST HUH721212ALN604</td>
+<td style="text-align: left;">hgst huh721212aln604</td>
 <td style="text-align: left;">12 TB</td>
-<td style="text-align: right;">10944</td>
-<td style="text-align: right;">8840451</td>
-<td style="text-align: right;">105</td>
-<td style="text-align: left;">99.60%</td>
-<td style="text-align: left;">99.67%</td>
+<td style="text-align: right;">10952</td>
+<td style="text-align: right;">9837839</td>
+<td style="text-align: right;">119</td>
+<td style="text-align: left;">99.59%</td>
+<td style="text-align: left;">99.66%</td>
 <td style="text-align: left;">99.72%</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">HGST HMS5C4040ALE640</td>
+<td style="text-align: left;">hgst hms5c4040ale640</td>
 <td style="text-align: left;">4 TB</td>
 <td style="text-align: right;">8723</td>
-<td style="text-align: right;">14215303</td>
-<td style="text-align: right;">192</td>
+<td style="text-align: right;">14626442</td>
+<td style="text-align: right;">196</td>
 <td style="text-align: left;">99.54%</td>
 <td style="text-align: left;">99.60%</td>
-<td style="text-align: left;">99.65%</td>
+<td style="text-align: left;">99.66%</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">WDC WUH721414ALE6L4</td>
+<td style="text-align: left;">wdc wuh721414ale6l4</td>
 <td style="text-align: left;">14 TB</td>
-<td style="text-align: right;">8421</td>
-<td style="text-align: right;">1630929</td>
-<td style="text-align: right;">21</td>
-<td style="text-align: left;">99.28%</td>
-<td style="text-align: left;">99.53%</td>
-<td style="text-align: left;">99.70%</td>
+<td style="text-align: right;">8431</td>
+<td style="text-align: right;">2403557</td>
+<td style="text-align: right;">29</td>
+<td style="text-align: left;">99.36%</td>
+<td style="text-align: left;">99.56%</td>
+<td style="text-align: left;">99.69%</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Hitachi HDS5C3030ALA630</td>
+<td style="text-align: left;">hgst huh728080ale600</td>
+<td style="text-align: left;">8 TB</td>
+<td style="text-align: right;">1180</td>
+<td style="text-align: right;">1491122</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: left;">99.29%</td>
+<td style="text-align: left;">99.52%</td>
+<td style="text-align: left;">99.68%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">hitachi hds5c3030ala630</td>
 <td style="text-align: left;">3 TB</td>
 <td style="text-align: right;">4664</td>
 <td style="text-align: right;">6934573</td>
 <td style="text-align: right;">150</td>
-<td style="text-align: left;">99.27%</td>
-<td style="text-align: left;">99.38%</td>
+<td style="text-align: left;">99.28%</td>
+<td style="text-align: left;">99.39%</td>
 <td style="text-align: left;">99.48%</td>
 </tr>
-<tr class="odd">
-<td style="text-align: left;">HGST HUH728080ALE600</td>
-<td style="text-align: left;">8 TB</td>
-<td style="text-align: right;">1163</td>
-<td style="text-align: right;">1368895</td>
-<td style="text-align: right;">24</td>
-<td style="text-align: left;">99.25%</td>
-<td style="text-align: left;">99.50%</td>
-<td style="text-align: left;">99.66%</td>
-</tr>
 <tr class="even">
-<td style="text-align: left;">ST6000DX000</td>
+<td style="text-align: left;">st6000dx000</td>
 <td style="text-align: left;">6 TB</td>
 <td style="text-align: right;">1939</td>
-<td style="text-align: right;">3410511</td>
-<td style="text-align: right;">88</td>
-<td style="text-align: left;">99.03%</td>
-<td style="text-align: left;">99.21%</td>
+<td style="text-align: right;">3492732</td>
+<td style="text-align: right;">89</td>
+<td style="text-align: left;">99.05%</td>
+<td style="text-align: left;">99.23%</td>
+<td style="text-align: left;">99.38%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">st10000nm0086</td>
+<td style="text-align: left;">10 TB</td>
+<td style="text-align: right;">1267</td>
+<td style="text-align: right;">1773611</td>
+<td style="text-align: right;">53</td>
+<td style="text-align: left;">98.89%</td>
+<td style="text-align: left;">99.16%</td>
 <td style="text-align: left;">99.36%</td>
 </tr>
-<tr class="odd">
-<td style="text-align: left;">ST10000NM0086</td>
-<td style="text-align: left;">10 TB</td>
-<td style="text-align: right;">1263</td>
-<td style="text-align: right;">1663652</td>
-<td style="text-align: right;">44</td>
-<td style="text-align: left;">98.99%</td>
-<td style="text-align: left;">99.25%</td>
-<td style="text-align: left;">99.44%</td>
-</tr>
 <tr class="even">
-<td style="text-align: left;">TOSHIBA MG08ACA16TEY</td>
+<td style="text-align: left;">toshiba mg08aca16tey</td>
 <td style="text-align: left;">16 TB</td>
-<td style="text-align: right;">1431</td>
-<td style="text-align: right;">227941</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: left;">98.90%</td>
-<td style="text-align: left;">99.84%</td>
-<td style="text-align: left;">99.98%</td>
+<td style="text-align: right;">2061</td>
+<td style="text-align: right;">400038</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">98.84%</td>
+<td style="text-align: left;">99.47%</td>
+<td style="text-align: left;">99.76%</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Hitachi HDS722020ALA330</td>
+<td style="text-align: left;">hitachi hds722020ala330</td>
 <td style="text-align: left;">2 TB</td>
 <td style="text-align: right;">4774</td>
 <td style="text-align: right;">5675646</td>
@@ -501,7 +501,7 @@ year survival.
 
 An interesting note about this data: It’s 55GB uncompressed, and
 contains a whole bunch of irrelevant information. It was very
-interesting to me that I could compress a 55GB dataset to 13 Mb, while
+interesting to me that I could compress a 55GB dataset to NA Mb, while
 still keeping **all** of the relevant information for modeling. (In
 other words, this dataset was 4,000x larger than it needed to be). I
 think this is another example of how good data structures are essential
@@ -514,7 +514,7 @@ Any of the top 25 drives are likely safe to buy, and are very unlikely
 to fail.
 
 There are some drives in this data I plan to avoid. For example, the
-ST3000DM001 has a 5 year survival of 80.9%. This is honestly probably
+st3000dm001 has a 5 year survival of 80.9%. This is honestly probably
 fine for my purposes, but maybe I’d be a little nervous to buy a drive
 with a 1-in-5 chance of dying within 5 years.
 

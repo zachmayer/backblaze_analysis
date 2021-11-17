@@ -49,7 +49,7 @@ capacity_map <- capacity_map[which(capacity_bytes > 0),]  # HDs can't have negat
 capacity_map <- capacity_map[which(capacity_bytes < 1e+15),]  # 1 PetaByte drives don't exist yet
 setkeyv(capacity_map, 'model')
 capacity_map <- capacity_map[,list(capacity_bytes=max(capacity_bytes)), by='model']
-fwrite(capacity_map, 'capacity_map.csv')
+fwrite(capacity_map, 'results/capacity_map.csv')
 gc(reset=T)
 
 # Calculate dates by serial number
