@@ -4,7 +4,7 @@ rm(list = ls(all=T))
 gc(reset = T)
 library(pbapply)
 library(data.table)
-source('helpers.r')
+source('code/helpers.r')
 
 # Load the data
 # NOTE: 54+ drives have more than one "failure" day
@@ -17,7 +17,7 @@ all_data <- pblapply(  # Takes ~18 minutes
   all_files,
   function(x){
     out <- fread(
-      paste0(data_dir, x), 
+      paste0(data_dir, x),
       select=c('model', 'serial_number', 'failure', 'capacity_bytes'),
       colClasses=c(capacity_bytes='numeric') # We lose a tiny bit of precision, but who cares
     )
@@ -59,7 +59,7 @@ drive_dates <- all_data[, list(
   min_date = min(date),
   max_date = max(date),
   first_fail = min(date[failure==1])), by=keys]
-fwrite(drive_dates, 'drive_dates.csv')
+fwrite(drive_dates, 'results/drive_dates.csv')
 # drive_dates[serial_number=='9JG4657T',]
 
 # Check that each unique serial has one unique model

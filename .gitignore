@@ -1,8 +1,8 @@
 # Data files
 data/*
 zip_data/*
-all_data.csv
-last_day_data.csv
+results/all_data.csv
+results/last_day_data.csv
 
 # History files
 .Rhistory
