@@ -13,8 +13,9 @@ set.seed(110001)
 # 2 drives with high failure scores from the last_day_analysis
 keep_drives <- rbindlist(
   list(
-    data.table(model='hgst hms5c4040ble640', serial_number='pl2331lah4zldj'),  # didn't fail
-    data.table(model='hgst hms5c4040ble640', serial_number='pl1331lahd3t1h')  # did fail
+    data.table(model='hgst hms5c4040ble640', serial_number='pl1331lahbzzph'),  # didn't fail
+    data.table(model='hgst hms5c4040ble640', serial_number='pl1331lahg5mhh'),  # didn't fail
+    data.table(model='hgst hms5c4040ble640', serial_number='pl1331lahgdg9hs')  # did fail
   )
 )
 keep_drives[,model := string_normalize(model)]

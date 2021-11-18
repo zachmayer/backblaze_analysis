@@ -135,17 +135,26 @@ dat[,summary(as.integer64(smart_241_raw))]
 dat[,smart_9_raw_per_day := smart_9_raw / age_days]
 dat[!is.finite(smart_9_raw_per_day), smart_9_raw_per_day := 0]
 
-dat[,gb_per_day := ((smart_241_raw * 512) / 8e+9) / age_days]  # this is a guess
-dat[!is.finite(gb_per_day), gb_per_day := 0]
-dat[,summary(gb_per_day)]
+dat[,gb_write_per_day := ((smart_241_raw * 512) / 8e+9) / age_days]  # this is a guess
+dat[!is.finite(gb_write_per_day), gb_write_per_day := 0]
+dat[,summary(gb_write_per_day)]
+
+dat[,gb_read_per_day := ((smart_242_raw * 512) / 8e+9) / age_days]  # this is a guess
+dat[!is.finite(gb_read_per_day), gb_read_per_day := 0]
+dat[,summary(gb_read_per_day)]
+
+dat[,start_stop_per_day := smart_4_raw / age_days]
+dat[!is.finite(start_stop_per_day), start_stop_per_day := 0]
+dat[,summary(start_stop_per_day)]
 
 subset_smart <- c(
-  'gb_per_day',
-  #'smart_241_raw',  # Total LBAs Written
+  'gb_write_per_day',
+  'gb_read_per_day',
+  # 'smart_241_raw',  # Total LBAs Written
+  # 'smart_242_raw',  # Total LBAs Read
   'smart_193_raw',  # Load Cycle Count
   'smart_197_raw',  # Current Pending Sector Count
   'smart_192_raw',  # Power-off Retract Count
-  'smart_242_raw',  # Total LBAs Read
   'smart_9_raw_per_day',
   # 'smart_9_raw',  # Power-On Hours
   'smart_1_normalized', # Read Error Rate
@@ -154,7 +163,8 @@ subset_smart <- c(
   'smart_189_raw',  # High Fly Writes
   'smart_187_normalized',  # Reported Uncorrectable Errors
   'smart_7_normalized', # Seek Error Rate
-  'smart_4_raw', # 	Start/Stop Count
+  'start_stop_per_day',
+  # 'smart_4_raw', # 	Start/Stop Count
   'smart_190_normalized', # Temperature Difference or Airflow Temperature
   'smart_2_normalized', # Throughput Performance
   'smart_194_raw', # Temperature or Temperature Celsius
@@ -238,10 +248,10 @@ plot(wf)
 # Note that projectObject will be overwitten by a NEW project below when you run SetupProject
 # You can manually skip the `start project` block if you wish to just load an old project
 # dat <- fread('last_day_data.csv')
-projectObject <- GetProject(readr::read_lines('results/pid.txt'))
+# projectObject <- GetProject(readr::read_lines('results/pid.txt'))
 
 # Start project
-projectObject = SetupProject(dat[,list(model, failed, age_days, subset_smart)])
+projectObject = SetupProject(dat[,c('model', 'failure', 'age_days', subset_smart), with=F])
 readr::write_lines(projectObject$projectId, 'pid.txt')
 sink <- UpdateProject(projectObject, workerCount=25, holdoutUnlocked=TRUE)
 st <- SetTarget(
