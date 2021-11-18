@@ -142,7 +142,8 @@ sort(abs(crs[1,]), decreasing = T)
 
 # Setup XGboost data
 # https://xgboost.readthedocs.io/en/latest/tutorials/aft_survival_analysis.html
-X <- data.matrix(dat[,c('model', smart_vars), with=F])
+all_smart <- names(dat)[grepl('smart', names(dat))]
+X <- data.matrix(dat[,c('model', all_smart), with=F])
 y_upper <- dat[,age_days]
 y_upper <- dat[,ifelse(failure==1, age_days, Inf)]
 y <- dat[,ifelse(failure==1, age_days, -age_days)]
@@ -160,8 +161,8 @@ params <- list(
   eval_metric='rmse',
   tree_method='hist',
   learning_rate=0.01,
-  max_depth=2)
-xgb_model_cv <- xgb.cv(params, dtrain, nrounds=500, nfold=10)
+  max_depth=8)
+xgb_model_cv <- xgb.cv(params, dtrain, nrounds=100, nfold=10)
 
 # Plot model training
 plot_data <- data.table(xgb_model_cv$evaluation_log)
@@ -172,6 +173,7 @@ ggplot(plot_data, aes(x=iter)) +
   scale_color_manual(values=custom_palette) +
   theme_tufte()
 best_iter <- plot_data[which.min(test_rmse_mean), iter]
+print(plot_data[best_iter,])
 
 # Fit final model
 xgb_model <- xgb.train(params, dtrain, nrounds=best_iter)
@@ -189,6 +191,20 @@ dat[failure==1 & age_days > 365,][which.max(pred),][,lookit_vars,with=F]
 # Lookit results - good drives
 dat[failure==0 & age_days > 365][which.min(pred),][,lookit_vars,with=F]
 dat[failure==1 & age_days > 365,][which.min(pred),][,lookit_vars,with=F]
+
+# Find interactions
+# https://cran.r-project.org/web/packages/EIX/vignettes/EIX.html
+library(EIX)
+pairs <- interactions(xgb_model, X, option = "interactions")
+pairs <- data.table(pairs)[order(-sumGain),]
+head(pairs, 10)
+
+# Looking worst drive
+row <- dat[,which.max(pred)]
+dat[row,]
+wf <- waterfall(xgb_model, X[row,], dat[row,], option = "interactions")
+wf
+plot(wf)
 
 ################################################################
 # Run DR
