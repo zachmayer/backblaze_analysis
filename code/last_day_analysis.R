@@ -8,6 +8,8 @@ library(stringi)
 library(ggplot2)
 library(ggthemes)
 library(datarobot)
+library(future)
+library(compiler)
 source('code/helpers.r')
 
 # TODO: rowwise count of zeros
@@ -45,14 +47,8 @@ all_files <- sample(all_files)
 # TODO: add gaps
 # TODO: drop drives with large gaps?
 
-# Load the data
-t1 <- Sys.time()
-dat_list <- pblapply(all_files, function(x) {  # Takes ~60 minutes
-
-  # print(x)
-
-  # Bookkeeping
-  gc(reset=T)
+# Data processing  function
+load_last_day_only <- cmpfun(function(x){
 
   # Load data
   dat <- fread(paste0(data_dir, x), showProgress=F)
@@ -72,10 +68,18 @@ dat_list <- pblapply(all_files, function(x) {  # Takes ~60 minutes
   dat[,capacity_bytes := NULL]
 
   #Return
-  if(nrow(dat) > 0){
-    return(dat)
-  }
+  return(dat)
 })
+
+# Load the data
+t1 <- Sys.time()
+availableCores()
+plan(multicore)
+dat_list_futures <- list()
+for(x in all_files){
+  dat_list_futures[[x]] <- future({load_last_day_only(x)})
+}
+dat_list <- pblapply(dat_list_futures, value)
 time_diff <- as.numeric(Sys.time() - t1)
 print(time_diff)
 
