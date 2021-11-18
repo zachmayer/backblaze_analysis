@@ -42,46 +42,47 @@ setkeyv(drive_dates_subset, keys)
 # TODO: only keep dates where a drive failed
 last_days_only <- drive_dates_subset[,stri_paste(sort(funique(date)), '.csv')]
 all_files <- sort(intersect(all_files, last_days_only))
-all_files <- sample(all_files)
 
 # TODO: add gaps
 # TODO: drop drives with large gaps?
 
 # Data processing  function
 load_last_day_only <- cmpfun(function(x){
+  future({
+    # Load data
+    dat <- fread(paste0(data_dir, x), showProgress=F)
+    if(nrow(dat) < 1){  # TODO: find which file is blank!
+      return(NULL)
+    }
 
-  # Load data
-  dat <- fread(paste0(data_dir, x), showProgress=F)
-  if(nrow(dat) < 1){  # TODO: find which file is blank!
-    return(NULL)
-  }
+    # Normalize
+    dat[,serial_number := string_normalize(serial_number)]
+    dat[,model := string_normalize(model)]
 
-  # Normalize
-  dat[,serial_number := string_normalize(serial_number)]
-  dat[,model := string_normalize(model)]
+    # Merges
+    setkeyv(dat, keys)
+    dat <- merge(drive_dates_subset, dat, sby=keys)
 
-  # Merges
-  setkeyv(dat, keys)
-  dat <- merge(drive_dates_subset, dat, sby=keys)
+    # Drops
+    dat[,capacity_bytes := NULL]
 
-  # Drops
-  dat[,capacity_bytes := NULL]
-
-  #Return
-  return(dat)
+    #Return
+    return(dat)
+  })
 })
 
 # Load the data
+set.seed(42)
+all_files <- sample(all_files, 1000)
+print(paste('~', round((0.4769096 * length(all_files))  / 60),  'minutes'))
+plan(multisession)
 t1 <- Sys.time()
-availableCores()
-plan(multicore)
-dat_list_futures <- list()
-for(x in all_files){
-  dat_list_futures[[x]] <- future({load_last_day_only(x)})
-}
-dat_list <- pblapply(dat_list_futures, value)
+# availableCores()
+dat_list_futures <- pblapply(all_files, load_last_day_only)  # Start the jobs
+dat_list <- pblapply(sample(dat_list_futures), value)  # Wait for them to finish
 time_diff <- as.numeric(Sys.time() - t1)
 print(time_diff)
+print(time_diff / length(all_files))
 
 ################################################################
 # Make one big data table
