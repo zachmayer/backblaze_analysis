@@ -179,6 +179,9 @@ ref_level <- string_normalize('HGST HMS5C4040BLE640')
 dat[failure==0 & model == ref_level,][which.max(pred),][,c('pred', 'model', 'age_days', smart_vars),with=F]
 dat[failure==1 & model == ref_level,][which.max(pred),][,c('pred', 'model', 'age_days', smart_vars),with=F]
 
+dat[failure==0,][which.max(pred),][,c('pred', 'model', 'age_days', smart_vars),with=F]
+dat[failure==1,][which.max(pred),][,c('pred', 'model', 'age_days', smart_vars),with=F]
+
 ################################################################
 # Run DR
 ################################################################
