@@ -7,9 +7,10 @@ library(data.table)
 library(stringi)
 library(ggplot2)
 library(ggthemes)
-library(datarobot)
 library(future)
 library(compiler)
+library(xgboost)
+library(datarobot)
 source('code/helpers.r')
 
 # TODO: rowwise count of zeros
@@ -74,8 +75,8 @@ load_last_day_only <- cmpfun(function(x){
 # Load the data
 set.seed(42)
 all_files <- sample(all_files)
-print(paste('~', round((0.00639483 * length(all_files))),  'minutes'))
-plan(multisession)
+print(paste('~', round((0.006656703 * length(all_files))),  'minutes'))
+plan(multisession, workers=24)
 t1 <- Sys.time()
 # availableCores()
 dat_list_futures <- pblapply(all_files, load_last_day_only)  # Start the jobs
@@ -91,11 +92,11 @@ print(time_diff / length(all_files))
 # Join data
 dat <- rbindlist(dat_list, fill=T, use.names=T)
 
-# Replace NA with zero
+# Convert to numneric and optionally replace NA with 0
 smart_stats <- names(dat)[grepl('smart_', names(dat), fixed=T)]
 for(var in smart_stats){
   set(dat, j=var, value = as.numeric(dat[[var]]))
-  # set(dat, i=which(is.na(dat[[var]])), j=var, value=0)
+  set(dat, i=which(is.na(dat[[var]])), j=var, value=0)
 }
 gc(reset=T)
 
@@ -116,8 +117,47 @@ dat[,serial_number := NULL]
 setkeyv(dat, c('model', 'age_days', 'failure', 'smart_9_raw'))
 
 # Save data
-last_day_file <- 'last_day_data.csv'
+last_day_file <- 'results/last_day_data.csv'
 fwrite(dat, last_day_file)
+
+################################################################
+# Survival XGboost
+################################################################
+
+smart_vars <- c(
+  'smart_241_raw',  # Total LBAs Written
+  'smart_193_raw',  # Load Cycle Count
+  'smart_197_raw',  # Current Pending Sector Count
+  'smart_192_raw',  # Power-off Retract Count
+  'smart_242_raw',  # Total LBAs Read
+  'smart_9_raw',  # Power-On Hours
+  'smart_1_normalized', # Read Error Rate
+  'smart_5_raw'  # Reallocated Sectors Count
+  )
+
+crs <- cor(dat[,'age_days',with=F], dat[,smart_vars,with=F], use = "pairwise.complete.obs")
+sort(abs(crs[1,]), decreasing = T)
+
+# Setup XGboost data
+# https://xgboost.readthedocs.io/en/latest/tutorials/aft_survival_analysis.html
+X <- data.matrix(dat[,c('model', smart_vars), with=F])
+y_lower_bound <- dat[,age_days]
+y_upper_bound <- dat[,ifelse(failure==1, age_days, Inf)]
+dtrain <- xgb.DMatrix(X)
+setinfo(dtrain, 'label_lower_bound', y_lower_bound)
+setinfo(dtrain, 'label_upper_bound', y_upper_bound)
+
+# Fit the XGboost model
+params <- list(
+  objective='survival:aft',
+  eval_metric='aft-nloglik',
+  aft_loss_distribution='normal',
+  aft_loss_distribution_scale=1.20,
+  tree_method='hist',
+  learning_rate=0.05,
+  max_depth=2)
+watchlist <- list(train = dtrain)
+model <- xgb.train(params, dtrain, nrounds=5, watchlist)
 
 ################################################################
 # Run DR
@@ -127,7 +167,7 @@ fwrite(dat, last_day_file)
 # Note that projectObject will be overwitten by a NEW project below when you run SetupProject
 # You can manually skip the `start project` block if you wish to just load an old project
 dat <- fread('last_day_data.csv')
-projectObject <- GetProject(readr::read_lines('pid.txt'))
+projectObject <- GetProject(readr::read_lines('results/pid.txt'))
 
 # Start project
 projectObject = SetupProject(last_day_file)
@@ -138,7 +178,7 @@ st <- SetTarget(
   target="failure",
   targetType='Binary',
   metric='FVE Binomial',
-  partition=CreateStratifiedPartition(validationType='CV', holdoutPct=0, reps=10),
+  partition=CreateStratifiedPartition(validationType='CV', holdoutPct=0, reps=5),
   smartDownsampled=FALSE,
   mode='comprehensive',
   seed=35569,
