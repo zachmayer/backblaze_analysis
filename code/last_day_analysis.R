@@ -92,7 +92,7 @@ print(time_diff / length(all_files))
 # Join data
 dat <- rbindlist(dat_list, fill=T, use.names=T)
 
-# Convert to numneric and optionally replace NA with 0
+# Convert to numeric and optionally replace NA with 0
 smart_stats <- names(dat)[grepl('smart_', names(dat), fixed=T)]
 for(var in smart_stats){
   set(dat, j=var, value = as.numeric(dat[[var]]))

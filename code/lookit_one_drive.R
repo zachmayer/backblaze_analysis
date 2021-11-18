@@ -50,6 +50,7 @@ keep <- c(
   'date',
   'serial_number',
   'model',
+  'failure',
   'smart_241_raw',  # Total LBAs Written
   'smart_193_raw',  # Load Cycle Count
   'smart_197_raw',  # Current Pending Sector Count
@@ -85,7 +86,7 @@ load_last_day_only <- cmpfun(function(x){
 # Load the data
 set.seed(42)
 all_files <- sample(all_files)
-print(paste('~', round((0.004318525 * length(all_files))),  'minutes'))
+print(paste('~', round((0.004243062 * length(all_files))),  'minutes'))
 plan(multisession, workers=24)
 t1 <- Sys.time()
 dat_list_futures <- pblapply(all_files, load_last_day_only)  # Start the jobs
@@ -98,20 +99,36 @@ print(time_diff / length(all_files))
 # Plot
 ################################################################
 
-smart_stats <- names(dat)[grepl('smart_', names(dat), fixed=T)]
-plot_dat <- melt.data.table(dat[,c('date', smart_stats), with=F], id.vars = c('date'))
-plot_dat[,value := (value - min(value)) / diff(range(value)), by='variable']
-ggplot(plot_dat, aes(x=date, y=value, color=variable)) +
-  geom_point()+ theme(legend.position="top") + theme_tufte() +
-  scale_color_manual(values=custom_palette)
+# Join days
+dat <- rbindlist(dat_list, fill=T, use.names=T)
 
-for(var in sort(unique(plot_dat[['variable']]))){
-  print({
-    ggplot(plot_dat[variable == var,], aes(x=date, y=value, color=variable)) +
-      geom_point()+ theme(legend.position="top") + theme_tufte() +
-      scale_color_manual(values=custom_palette) + ggtitle(var)
-  })
+# Convert to numeric and optionally replace NA with 0
+smart_stats <- names(dat)[grepl('smart_', names(dat), fixed=T)]
+for(var in smart_stats){
+  set(dat, j=var, value = as.numeric(dat[[var]]))
+  set(dat, i=which(is.na(dat[[var]])), j=var, value=0)
+}
+gc(reset=T)
+
+# Drop constant numeric columns
+nums <- sapply(dat, is.numeric)
+singles <- sapply(dat, function(x) length(unique(x)) < 2)
+num_singles <- nums & singles
+remove_vars <- names(num_singles)[num_singles]
+print(remove_vars)
+for(var in remove_vars){
+  set(dat, j=var, value=NULL)
 }
 
-# fail cor
-sort(abs(cor(dat[,smart_stats, with=F], dat[['failure']])[,1]))
+# Summarize:
+summary(dat)
+
+# Make plots
+plot_dat <- melt.data.table(dat, id.vars = c('model', 'serial_number', 'date'))
+plot_dat[,value := (value - min(value)) / diff(range(value)), by='variable']
+
+ggplot(plot_dat, aes(x=date, y=value, color=variable)) +
+  geom_point() +
+  scale_color_manual(values=custom_palette) +
+  facet_wrap(~serial_number,  scales='free') +
+  theme_tufte() + theme(legend.position="top")
