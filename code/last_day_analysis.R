@@ -172,11 +172,12 @@ best_iter <- plot_data[which.min(test_cox_nloglik_mean), iter]
 
 # Fit final model
 xgb_model <- xgb.train(params, dtrain, nrounds=best_iter)
+dat[,pred := predict(xgb_model, dtrain)]
 
 # Lookit results
-dat[,pred := predict(xgb_model, dtrain)]
-dat[failure==0,][which.max(pred),][,c('pred', 'model', 'age_days', smart_vars),with=F]
-dat[failure==1,][which.max(pred),][,c('pred', 'model', 'age_days', smart_vars),with=F]
+ref_level <- string_normalize('HGST HMS5C4040BLE640')
+dat[failure==0 & model == ref_level,][which.max(pred),][,c('pred', 'model', 'age_days', smart_vars),with=F]
+dat[failure==1 & model == ref_level,][which.max(pred),][,c('pred', 'model', 'age_days', smart_vars),with=F]
 
 ################################################################
 # Run DR
