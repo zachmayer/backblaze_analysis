@@ -124,6 +124,8 @@ fwrite(dat, last_day_file)
 # Survival XGboost
 ################################################################
 
+# dat <- fread(last_day_file)
+
 smart_vars <- c(
   'smart_241_raw',  # Total LBAs Written
   'smart_193_raw',  # Load Cycle Count
@@ -175,7 +177,7 @@ best_iter <- plot_data[which.min(test_rmse_mean), iter]
 xgb_model <- xgb.train(params, dtrain, nrounds=best_iter)
 dat[,pred := predict(xgb_model, dtrain)]
 
-# Lookit results
+# Lookit results - bad drives
 ref_level <- string_normalize('HGST HMS5C4040BLE640')
 lookit_vars <- c('pred', 'model', 'serial_number', 'age_days', smart_vars)
 dat[failure==0 & model == ref_level & age_days > 365,][which.max(pred),][,lookit_vars,with=F]
@@ -183,6 +185,10 @@ dat[failure==1 & model == ref_level & age_days > 365,][which.max(pred),][,lookit
 
 dat[failure==0 & age_days > 365][which.max(pred),][,lookit_vars,with=F]
 dat[failure==1 & age_days > 365,][which.max(pred),][,lookit_vars,with=F]
+
+# Lookit results - good drives
+dat[failure==0 & age_days > 365][which.min(pred),][,lookit_vars,with=F]
+dat[failure==1 & age_days > 365,][which.min(pred),][,lookit_vars,with=F]
 
 ################################################################
 # Run DR
