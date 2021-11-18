@@ -126,15 +126,30 @@ fwrite(dat, last_day_file)
 
 # dat <- fread(last_day_file)
 
-smart_vars <- c(
+# Set factor order
+#dat[,list(.N), by='model'][order(N, model), model]
+
+dat[,smart_9_raw_per_day := smart_9_raw / age_days]
+dat[!is.finite(smart_9_raw_per_day), smart_9_raw_per_day := 0]
+
+subset_smart <- c(
   'smart_241_raw',  # Total LBAs Written
   'smart_193_raw',  # Load Cycle Count
   'smart_197_raw',  # Current Pending Sector Count
   'smart_192_raw',  # Power-off Retract Count
   'smart_242_raw',  # Total LBAs Read
-  'smart_9_raw',  # Power-On Hours
+  'smart_9_raw_per_day',  # Power-On Hours
   'smart_1_normalized', # Read Error Rate
-  'smart_5_raw'  # Reallocated Sectors Count
+  'smart_5_raw',  # Reallocated Sectors Count
+  'smart_195_normalized',  # Hardware ECC Recovered
+  'smart_189_normalized',  # High Fly Writes
+  'smart_187_normalized',  # Reported Uncorrectable Errors
+  'smart_7_normalized', # Seek Error Rate
+  'smart_4_raw', # 	Start/Stop Count
+  'smart_190_normalized', # Temperature Difference or Airflow Temperature
+  'smart_2_normalized', # Throughput Performance
+  'smart_194_raw', # Temperature or Temperature Celsius
+  'smart_8_raw' # Seek Time Performance
   )
 
 crs <- cor(dat[,age_days], dat[,smart_vars,with=F], use = "pairwise.complete.obs")
@@ -143,37 +158,37 @@ sort(abs(crs[1,]), decreasing = T)
 # Setup XGboost data
 # https://xgboost.readthedocs.io/en/latest/tutorials/aft_survival_analysis.html
 all_smart <- names(dat)[grepl('smart', names(dat))]
-X <- data.matrix(dat[,c('model', all_smart), with=F])
+X <- data.matrix(dat[,c('model', subset_smart), with=F])
 y_upper <- dat[,age_days]
 y_upper <- dat[,ifelse(failure==1, age_days, Inf)]
 y <- dat[,ifelse(failure==1, age_days, -age_days)]
 
-# dtrain <- xgb.DMatrix(X)
-# setinfo(dtrain, 'label_lower_bound', y_lower_bound)
-# setinfo(dtrain, 'label_upper_bound', y_upper_bound)
-
-# dtrain = xgb.DMatrix(X, label_lower_bound=y_upper, label_upper_bound=y_upper)  # AFT
-dtrain = xgb.DMatrix(X, label=y)
+dtrain = xgb.DMatrix(X, label=y, label_lower_bound=y_upper, label_upper_bound=y_upper)  # AFT
+# dtrain = xgb.DMatrix(X, label=y)
 
 # CV XGboost model
 params <- list(
   objective='survival:cox',
-  eval_metric='rmse',
+  #aft_loss_distribution='extreme',
+  #eval_metric='rmse',
   tree_method='hist',
-  learning_rate=0.01,
-  max_depth=8)
+  learning_rate=0.1,
+  max_depth=4,
+  base_score=1
+)
 xgb_model_cv <- xgb.cv(params, dtrain, nrounds=100, nfold=10)
 
 # Plot model training
 plot_data <- data.table(xgb_model_cv$evaluation_log)
+best_iter <- plot_data[which.min(test_cox_nloglik_mean), iter]
+print(plot_data[best_iter,])
+
 ggplot(plot_data, aes(x=iter)) +
-  geom_line(aes(y=train_rmse_mean, col='train')) +
-  geom_line(aes(y=test_rmse_mean, col='valid')) +
+  geom_line(aes(y=train_cox_nloglik_mean, col='train')) +
+  geom_line(aes(y=test_cox_nloglik_mean, col='valid')) +
   ylab('cox_nloglik') +
   scale_color_manual(values=custom_palette) +
   theme_tufte()
-best_iter <- plot_data[which.min(test_rmse_mean), iter]
-print(plot_data[best_iter,])
 
 # Fit final model
 xgb_model <- xgb.train(params, dtrain, nrounds=best_iter)
