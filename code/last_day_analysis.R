@@ -152,22 +152,26 @@ y <- dat[,ifelse(failure==1, age_days, -age_days)]
 # dtrain = xgb.DMatrix(X, label_lower_bound=y_upper, label_upper_bound=y_upper)  # AFT
 dtrain = xgb.DMatrix(X, label=y)
 
-# Fit the XGboost model
+# CV XGboost model
 params <- list(
   objective='survival:cox',
   tree_method='hist',
-  learning_rate=0.01,
+  learning_rate=0.05,
   max_depth=2)
-xgb_model <- xgb.cv(params, dtrain, nrounds=1000, nfold=10)
+xgb_model_cv <- xgb.cv(params, dtrain, nrounds=1000, nfold=10)
 
 # Plot model training
-plot_data <- data.table(xgb_model$evaluation_log)
+plot_data <- data.table(xgb_model_cv$evaluation_log)
 ggplot(plot_data, aes(x=iter)) +
   geom_line(aes(y=train_cox_nloglik_mean, col='train')) +
   geom_line(aes(y=test_cox_nloglik_mean, col='valid')) +
   ylab('cox_nloglik') +
   scale_color_manual(values=custom_palette) +
   theme_tufte()
+best_iter <- plot_data[which.min(test_cox_nloglik_mean), iter]
+
+# Fit final model
+xgb_model <- xgb.train(params, dtrain, nrounds=best_iter)
 
 # Lookit results
 dat[,pred := predict(xgb_model, dtrain)]
