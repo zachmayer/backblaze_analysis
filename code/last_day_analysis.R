@@ -24,7 +24,6 @@ set.seed(110001)
 # Choose files
 data_dir <- 'data/'
 all_files <- list.files(data_dir)
-all_files <- sample(all_files)
 x <- all_files[1]
 
 # Load the drive dates data
@@ -37,6 +36,11 @@ drive_dates_subset <- drive_dates[,list(model, serial_number, date, age_days)]
 drive_dates_subset[, model := string_normalize(model)]
 drive_dates_subset[, serial_number := string_normalize(serial_number)]
 setkeyv(drive_dates_subset, keys)
+
+# TODO: only keep dates where a drive failed
+last_days_only <- drive_dates_subset[,stri_paste(sort(funique(date)), '.csv')]
+all_files <- sort(intersect(all_files, last_days_only))
+all_files <- sample(all_files)
 
 # TODO: add gaps
 # TODO: drop drives with large gaps?
