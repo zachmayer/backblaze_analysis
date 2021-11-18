@@ -73,8 +73,8 @@ load_last_day_only <- cmpfun(function(x){
 
 # Load the data
 set.seed(42)
-all_files <- sample(all_files, 1000)
-print(paste('~', round((0.4769096 * length(all_files))  / 60),  'minutes'))
+all_files <- sample(all_files)
+print(paste('~', round((0.00639483 * length(all_files))),  'minutes'))
 plan(multisession)
 t1 <- Sys.time()
 # availableCores()
