@@ -8,14 +8,8 @@ library(stringi)
 library(ggplot2)
 library(ggthemes)
 library(datarobot)
-source('helpers.r')
+source('code/helpers.r')
 
-# TODO: organize files into folders:
-# code in one folder
-# data in another
-# re-write code files to use the folders
-# TODO: run string_normalize on model/serial in all raw data read
-# TODO: keep missing data as missing
 # TODO: rowwise count of zeros
 # TODO: rowwise count of NAs (after dropping constant columns)
 # TODO: try a survival xgboost, crib tuning from best DR model (which looks like XGB)
@@ -35,7 +29,7 @@ x <- all_files[1]
 
 # Load the drive dates data
 keys <- c('model', 'serial_number', 'date')
-drive_dates <- fread('drive_dates.csv')
+drive_dates <- fread('results/drive_dates.csv')
 drive_dates[,date := max_date]
 drive_dates[is.finite(first_fail), date := first_fail]
 drive_dates[,age_days := as.integer(date - min_date)]
@@ -92,7 +86,7 @@ dat <- rbindlist(dat_list, fill=T, use.names=T)
 smart_stats <- names(dat)[grepl('smart_', names(dat), fixed=T)]
 for(var in smart_stats){
   set(dat, j=var, value = as.numeric(dat[[var]]))
-  set(dat, i=which(is.na(dat[[var]])), j=var, value=0)
+  # set(dat, i=which(is.na(dat[[var]])), j=var, value=0)
 }
 gc(reset=T)
 
