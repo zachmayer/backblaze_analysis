@@ -40,14 +40,14 @@ drive_dates_subset[, model := string_normalize(model)]
 drive_dates_subset[, serial_number := string_normalize(serial_number)]
 setkeyv(drive_dates_subset, keys)
 
-# TODO: only keep dates where a drive failed
+# Only keep dates where a drive failed
 last_days_only <- drive_dates_subset[,stri_paste(sort(funique(date)), '.csv')]
 all_files <- sort(intersect(all_files, last_days_only))
 
 # TODO: add gaps
 # TODO: drop drives with large gaps?
 
-# Data processing  function
+# Data processing function
 load_last_day_only <- cmpfun(function(x){
   future({
     # Load data
@@ -113,10 +113,10 @@ for(var in remove_vars){
 # Order and drop vars
 setkeyv(dat, c('model', 'serial_number'))
 dat[,date := NULL]
-dat[,serial_number := NULL]
 setkeyv(dat, c('model', 'age_days', 'failure', 'smart_9_raw'))
 
 # Save data
+# dat[,serial_number := NULL]
 last_day_file <- 'results/last_day_data.csv'
 fwrite(dat, last_day_file)
 
@@ -155,20 +155,21 @@ dtrain = xgb.DMatrix(X, label=y)
 # CV XGboost model
 params <- list(
   objective='survival:cox',
+  eval_metric='rmse',
   tree_method='hist',
-  learning_rate=0.05,
+  learning_rate=0.01,
   max_depth=2)
-xgb_model_cv <- xgb.cv(params, dtrain, nrounds=1000, nfold=10)
+xgb_model_cv <- xgb.cv(params, dtrain, nrounds=500, nfold=10)
 
 # Plot model training
 plot_data <- data.table(xgb_model_cv$evaluation_log)
 ggplot(plot_data, aes(x=iter)) +
-  geom_line(aes(y=train_cox_nloglik_mean, col='train')) +
-  geom_line(aes(y=test_cox_nloglik_mean, col='valid')) +
+  geom_line(aes(y=train_rmse_mean, col='train')) +
+  geom_line(aes(y=test_rmse_mean, col='valid')) +
   ylab('cox_nloglik') +
   scale_color_manual(values=custom_palette) +
   theme_tufte()
-best_iter <- plot_data[which.min(test_cox_nloglik_mean), iter]
+best_iter <- plot_data[which.min(test_rmse_mean), iter]
 
 # Fit final model
 xgb_model <- xgb.train(params, dtrain, nrounds=best_iter)
@@ -176,11 +177,12 @@ dat[,pred := predict(xgb_model, dtrain)]
 
 # Lookit results
 ref_level <- string_normalize('HGST HMS5C4040BLE640')
-dat[failure==0 & model == ref_level,][which.max(pred),][,c('pred', 'model', 'age_days', smart_vars),with=F]
-dat[failure==1 & model == ref_level,][which.max(pred),][,c('pred', 'model', 'age_days', smart_vars),with=F]
+lookit_vars <- c('pred', 'model', 'serial_number', 'age_days', smart_vars)
+dat[failure==0 & model == ref_level & age_days > 365,][which.max(pred),][,lookit_vars,with=F]
+dat[failure==1 & model == ref_level & age_days > 365,][which.max(pred),][,lookit_vars,with=F]
 
-dat[failure==0,][which.max(pred),][,c('pred', 'model', 'age_days', smart_vars),with=F]
-dat[failure==1,][which.max(pred),][,c('pred', 'model', 'age_days', smart_vars),with=F]
+dat[failure==0 & age_days > 365][which.max(pred),][,lookit_vars,with=F]
+dat[failure==1 & age_days > 365,][which.max(pred),][,lookit_vars,with=F]
 
 ################################################################
 # Run DR
