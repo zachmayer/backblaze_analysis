@@ -135,29 +135,44 @@ smart_vars <- c(
   'smart_5_raw'  # Reallocated Sectors Count
   )
 
-crs <- cor(dat[,'age_days',with=F], dat[,smart_vars,with=F], use = "pairwise.complete.obs")
+crs <- cor(dat[,age_days], dat[,smart_vars,with=F], use = "pairwise.complete.obs")
 sort(abs(crs[1,]), decreasing = T)
 
 # Setup XGboost data
 # https://xgboost.readthedocs.io/en/latest/tutorials/aft_survival_analysis.html
 X <- data.matrix(dat[,c('model', smart_vars), with=F])
-y_lower_bound <- dat[,age_days]
-y_upper_bound <- dat[,ifelse(failure==1, age_days, Inf)]
-dtrain <- xgb.DMatrix(X)
-setinfo(dtrain, 'label_lower_bound', y_lower_bound)
-setinfo(dtrain, 'label_upper_bound', y_upper_bound)
+y_upper <- dat[,age_days]
+y_upper <- dat[,ifelse(failure==1, age_days, Inf)]
+y <- dat[,ifelse(failure==1, age_days, -age_days)]
+
+# dtrain <- xgb.DMatrix(X)
+# setinfo(dtrain, 'label_lower_bound', y_lower_bound)
+# setinfo(dtrain, 'label_upper_bound', y_upper_bound)
+
+# dtrain = xgb.DMatrix(X, label_lower_bound=y_upper, label_upper_bound=y_upper)  # AFT
+dtrain = xgb.DMatrix(X, label=y)
 
 # Fit the XGboost model
 params <- list(
-  objective='survival:aft',
-  eval_metric='aft-nloglik',
-  aft_loss_distribution='normal',
-  aft_loss_distribution_scale=1.20,
+  objective='survival:cox',
   tree_method='hist',
-  learning_rate=0.05,
+  learning_rate=0.01,
   max_depth=2)
-watchlist <- list(train = dtrain)
-model <- xgb.train(params, dtrain, nrounds=5, watchlist)
+xgb_model <- xgb.cv(params, dtrain, nrounds=1000, nfold=10)
+
+# Plot model training
+plot_data <- data.table(xgb_model$evaluation_log)
+ggplot(plot_data, aes(x=iter)) +
+  geom_line(aes(y=train_cox_nloglik_mean, col='train')) +
+  geom_line(aes(y=test_cox_nloglik_mean, col='valid')) +
+  ylab('cox_nloglik') +
+  scale_color_manual(values=custom_palette) +
+  theme_tufte()
+
+# Lookit results
+dat[,pred := predict(xgb_model, dtrain)]
+dat[failure==0,][which.max(pred),][,c('pred', 'model', 'age_days', smart_vars),with=F]
+dat[failure==1,][which.max(pred),][,c('pred', 'model', 'age_days', smart_vars),with=F]
 
 ################################################################
 # Run DR
