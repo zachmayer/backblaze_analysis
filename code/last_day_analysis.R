@@ -4,6 +4,7 @@ rm(list = ls(all=T))
 gc(reset = T)
 library(pbapply)
 library(data.table)
+library(bit64)
 library(stringi)
 library(ggplot2)
 library(ggthemes)
@@ -120,11 +121,13 @@ setkeyv(dat, c('model', 'age_days', 'failure', 'smart_9_raw'))
 last_day_file <- 'results/last_day_data.csv'
 fwrite(dat, last_day_file)
 
+dat[,summary(as.integer64(smart_241_raw))]
+
 ################################################################
 # Survival XGboost
 ################################################################
 
-# dat <- fread(last_day_file)
+# dat <- fread(last_day_file, colClasses=c(smart_241_raw='int64'))
 
 # Set factor order
 #dat[,list(.N), by='model'][order(N, model), model]
@@ -132,17 +135,23 @@ fwrite(dat, last_day_file)
 dat[,smart_9_raw_per_day := smart_9_raw / age_days]
 dat[!is.finite(smart_9_raw_per_day), smart_9_raw_per_day := 0]
 
+dat[,gb_per_day := ((smart_241_raw * 512) / 8e+9) / age_days]  # this is a guess
+dat[!is.finite(gb_per_day), gb_per_day := 0]
+dat[,summary(gb_per_day)]
+
 subset_smart <- c(
-  'smart_241_raw',  # Total LBAs Written
+  'gb_per_day',
+  #'smart_241_raw',  # Total LBAs Written
   'smart_193_raw',  # Load Cycle Count
   'smart_197_raw',  # Current Pending Sector Count
   'smart_192_raw',  # Power-off Retract Count
   'smart_242_raw',  # Total LBAs Read
-  'smart_9_raw_per_day',  # Power-On Hours
+  'smart_9_raw_per_day',
+  # 'smart_9_raw',  # Power-On Hours
   'smart_1_normalized', # Read Error Rate
   'smart_5_raw',  # Reallocated Sectors Count
   'smart_195_normalized',  # Hardware ECC Recovered
-  'smart_189_normalized',  # High Fly Writes
+  'smart_189_raw',  # High Fly Writes
   'smart_187_normalized',  # Reported Uncorrectable Errors
   'smart_7_normalized', # Seek Error Rate
   'smart_4_raw', # 	Start/Stop Count
@@ -152,7 +161,7 @@ subset_smart <- c(
   'smart_8_raw' # Seek Time Performance
   )
 
-crs <- cor(dat[,age_days], dat[,smart_vars,with=F], use = "pairwise.complete.obs")
+crs <- cor(dat[,age_days], dat[,subset_smart,with=F], use = "pairwise.complete.obs")
 sort(abs(crs[1,]), decreasing = T)
 
 # Setup XGboost data
@@ -163,8 +172,8 @@ y_upper <- dat[,age_days]
 y_upper <- dat[,ifelse(failure==1, age_days, Inf)]
 y <- dat[,ifelse(failure==1, age_days, -age_days)]
 
-dtrain = xgb.DMatrix(X, label=y, label_lower_bound=y_upper, label_upper_bound=y_upper)  # AFT
-# dtrain = xgb.DMatrix(X, label=y)
+# dtrain = xgb.DMatrix(X, label=y, label_lower_bound=y_upper, label_upper_bound=y_upper)  # AFT
+dtrain = xgb.DMatrix(X, label=y)  # COX
 
 # CV XGboost model
 params <- list(
@@ -176,7 +185,7 @@ params <- list(
   max_depth=4,
   base_score=1
 )
-xgb_model_cv <- xgb.cv(params, dtrain, nrounds=100, nfold=10)
+xgb_model_cv <- xgb.cv(params, dtrain, nrounds=500, nfold=10)
 
 # Plot model training
 plot_data <- data.table(xgb_model_cv$evaluation_log)
@@ -196,7 +205,7 @@ dat[,pred := predict(xgb_model, dtrain)]
 
 # Lookit results - bad drives
 ref_level <- string_normalize('HGST HMS5C4040BLE640')
-lookit_vars <- c('pred', 'model', 'serial_number', 'age_days', smart_vars)
+lookit_vars <- c('pred', 'model', 'serial_number', 'age_days', subset_smart)
 dat[failure==0 & model == ref_level & age_days > 365,][which.max(pred),][,lookit_vars,with=F]
 dat[failure==1 & model == ref_level & age_days > 365,][which.max(pred),][,lookit_vars,with=F]
 
@@ -216,8 +225,8 @@ head(pairs, 10)
 
 # Looking worst drive
 row <- dat[,which.max(pred)]
-dat[row,]
-wf <- waterfall(xgb_model, X[row,], dat[row,], option = "interactions")
+#dat[row,]
+wf <- waterfall(xgb_model, X[row,], X[row,], type='regression', option='interactions', baseline=0)
 wf
 plot(wf)
 
@@ -228,11 +237,11 @@ plot(wf)
 # Load the cached data and project object
 # Note that projectObject will be overwitten by a NEW project below when you run SetupProject
 # You can manually skip the `start project` block if you wish to just load an old project
-dat <- fread('last_day_data.csv')
+# dat <- fread('last_day_data.csv')
 projectObject <- GetProject(readr::read_lines('results/pid.txt'))
 
 # Start project
-projectObject = SetupProject(last_day_file)
+projectObject = SetupProject(dat[,list(model, failed, age_days, subset_smart)])
 readr::write_lines(projectObject$projectId, 'pid.txt')
 sink <- UpdateProject(projectObject, workerCount=25, holdoutUnlocked=TRUE)
 st <- SetTarget(
