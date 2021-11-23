@@ -475,7 +475,7 @@ drives with less data.
 
 # Replicating my results
 
-[drive\_dates.csv](drive_dates.csv) has the cleaned up data from
+[drive\_dates.csv](results/drive_dates.csv) has the cleaned up data from
 backblaze, with each drive, its model, when it was installed, when it
 failed (NA for drives that have not failed) and when it was last
 observed.
@@ -487,17 +487,17 @@ this [README.md](README.md) file you are reading right now. Use
 you.
 
 If you want to get the raw data before it was cleaned up into
-[all\_data.csv](all_data.csv), you’ll need at least 70GB of free hard
-drive space. I also suggest opening
+[all\_data.csv](results/all_data.csv), you’ll need at least 70GB of free
+hard drive space. I also suggest opening
 [backblaze\_analysis.Rproj](backblaze_analysis.Rproj) in RStudio.  
-1. Run [1\_download\_data.R](1_download_data.R) to download the data
-(almost 10.5 GB).  
-2. Run [2\_unzip\_data.R](2_unzip_data.R) to unzip the data (almost 55
-GB).  
-3. Run [3\_assemble\_data.R](3_assemble_data.R) to “compress” the data,
-which generates [all\_data.csv](all_data.csv).  
-4. Run [4\_survival\_analysis.R](4_survival_analysis.R) to calculate 5
-year survival.
+1. Run [code/1\_download\_data.R](1_download_data.R) to download the
+data (almost 10.5 GB).  
+2. Run [code/2\_unzip\_data.R](2_unzip_data.R) to unzip the data (almost
+55 GB).  
+3. Run [code/3\_assemble\_data.R](3_assemble_data.R) to “compress” the
+data, which generates [all\_data.csv](all_data.csv).  
+4. Run [code/4\_survival\_analysis.R](4_survival_analysis.R) to
+calculate 5 year survival.
 
 An interesting note about this data: It’s 55GB uncompressed, and
 contains a whole bunch of irrelevant information. It was very
