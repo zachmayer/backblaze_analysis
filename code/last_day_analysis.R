@@ -300,4 +300,4 @@ featureImpactJobId <- RequestFeatureImpact(best_model)
 Sys.sleep(60*5)
 
 # Lookit the project
-ViewWebProject(projectObject$projectId)
+ViewWebProject(projectObject)
