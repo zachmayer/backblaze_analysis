@@ -14,7 +14,7 @@ library(ggplot2)
 library(ggthemes)
 library(survival)
 library(survminer)
-source('helpers.r')
+source('code/helpers.r')
 
 # Globals
 top_n <- 25
@@ -22,14 +22,14 @@ min_unique_drives <- 1000
 file_size <- utils:::format.object_size(file.size('drive_dates.csv'), 'Mb', digits=0)
 
 # Load data
-dat = fread('survival_results.csv')
-drive_dates = fread('drive_dates_clean.csv')
+dat = fread('results/survival_results.csv')
+drive_dates = fread('results/drive_dates_clean.csv')
 
-capacity_order = fread('capacity_order.csv')
-capacity_map = fread('capacity_map_clean.csv')
+capacity_order = fread('results/capacity_order.csv')
+capacity_map = fread('results/capacity_map_clean.csv')
 capacity_map[,size := factor(size, levels=capacity_order[,size], ordered=T)]
 
-cox_model = readRDS('cox_model.rds')
+cox_model = readRDS('results/cox_model.rds')
 
 # Subset data
 dat[,surv_days_99pct := NULL]
