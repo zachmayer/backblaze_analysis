@@ -66,16 +66,6 @@ The top 25 drives from this analysis are:
 <td style="text-align: left;">99.82%</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">00md00</td>
-<td style="text-align: left;">4 TB</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">12</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: left;">99.64%</td>
-<td style="text-align: left;">99.67%</td>
-<td style="text-align: left;">99.71%</td>
-</tr>
-<tr class="odd">
 <td style="text-align: left;">hgst huh721212ale600</td>
 <td style="text-align: left;">12 TB</td>
 <td style="text-align: right;">2629</td>
@@ -85,7 +75,7 @@ The top 25 drives from this analysis are:
 <td style="text-align: left;">99.76%</td>
 <td style="text-align: left;">99.84%</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">hgst huh721212aln604</td>
 <td style="text-align: left;">12 TB</td>
 <td style="text-align: right;">10973</td>
@@ -95,7 +85,7 @@ The top 25 drives from this analysis are:
 <td style="text-align: left;">99.64%</td>
 <td style="text-align: left;">99.69%</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">hgst hms5c4040ale640</td>
 <td style="text-align: left;">4 TB</td>
 <td style="text-align: right;">8723</td>
@@ -105,7 +95,7 @@ The top 25 drives from this analysis are:
 <td style="text-align: left;">99.61%</td>
 <td style="text-align: left;">99.66%</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">wdc wuh721816ale6l0</td>
 <td style="text-align: left;">16 TB</td>
 <td style="text-align: right;">2705</td>
@@ -115,7 +105,7 @@ The top 25 drives from this analysis are:
 <td style="text-align: left;">99.85%</td>
 <td style="text-align: left;">99.95%</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">hgst huh721212ale604</td>
 <td style="text-align: left;">12 TB</td>
 <td style="text-align: right;">13226</td>
@@ -125,7 +115,7 @@ The top 25 drives from this analysis are:
 <td style="text-align: left;">99.59%</td>
 <td style="text-align: left;">99.67%</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">hitachi hds5c4040ale630</td>
 <td style="text-align: left;">4 TB</td>
 <td style="text-align: right;">2719</td>
@@ -135,7 +125,7 @@ The top 25 drives from this analysis are:
 <td style="text-align: left;">99.47%</td>
 <td style="text-align: left;">99.57%</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">st12000nm001g</td>
 <td style="text-align: left;">12 TB</td>
 <td style="text-align: right;">12531</td>
@@ -145,7 +135,7 @@ The top 25 drives from this analysis are:
 <td style="text-align: left;">99.43%</td>
 <td style="text-align: left;">99.51%</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">hgst huh728080ale600</td>
 <td style="text-align: left;">8 TB</td>
 <td style="text-align: right;">1203</td>
@@ -155,7 +145,7 @@ The top 25 drives from this analysis are:
 <td style="text-align: left;">99.52%</td>
 <td style="text-align: left;">99.66%</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">hitachi hds5c3030ala630</td>
 <td style="text-align: left;">3 TB</td>
 <td style="text-align: right;">4664</td>
@@ -165,7 +155,7 @@ The top 25 drives from this analysis are:
 <td style="text-align: left;">99.40%</td>
 <td style="text-align: left;">99.49%</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">toshiba mg07aca14ta</td>
 <td style="text-align: left;">14 TB</td>
 <td style="text-align: right;">38831</td>
@@ -175,7 +165,7 @@ The top 25 drives from this analysis are:
 <td style="text-align: left;">99.29%</td>
 <td style="text-align: left;">99.35%</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">toshiba mg08aca16tey</td>
 <td style="text-align: left;">16 TB</td>
 <td style="text-align: right;">4051</td>
@@ -185,7 +175,7 @@ The top 25 drives from this analysis are:
 <td style="text-align: left;">99.52%</td>
 <td style="text-align: left;">99.70%</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">st6000dx000</td>
 <td style="text-align: left;">6 TB</td>
 <td style="text-align: right;">1939</td>
@@ -195,7 +185,7 @@ The top 25 drives from this analysis are:
 <td style="text-align: left;">99.31%</td>
 <td style="text-align: left;">99.44%</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">st8000dm002</td>
 <td style="text-align: left;">8 TB</td>
 <td style="text-align: right;">10300</td>
@@ -205,7 +195,7 @@ The top 25 drives from this analysis are:
 <td style="text-align: left;">99.08%</td>
 <td style="text-align: left;">99.15%</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">st14000nm001g</td>
 <td style="text-align: left;">14 TB</td>
 <td style="text-align: right;">10880</td>
@@ -215,7 +205,7 @@ The top 25 drives from this analysis are:
 <td style="text-align: left;">99.12%</td>
 <td style="text-align: left;">99.25%</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">st12000nm0008</td>
 <td style="text-align: left;">12 TB</td>
 <td style="text-align: right;">20607</td>
@@ -225,7 +215,7 @@ The top 25 drives from this analysis are:
 <td style="text-align: left;">99.06%</td>
 <td style="text-align: left;">99.13%</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">st8000nm0055</td>
 <td style="text-align: left;">8 TB</td>
 <td style="text-align: right;">15385</td>
@@ -235,7 +225,7 @@ The top 25 drives from this analysis are:
 <td style="text-align: left;">98.94%</td>
 <td style="text-align: left;">99.02%</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">st16000nm001g</td>
 <td style="text-align: left;">16 TB</td>
 <td style="text-align: right;">18181</td>
@@ -244,16 +234,6 @@ The top 25 drives from this analysis are:
 <td style="text-align: left;">98.84%</td>
 <td style="text-align: left;">99.03%</td>
 <td style="text-align: left;">99.19%</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">toshiba md04aba400v</td>
-<td style="text-align: left;">4 TB</td>
-<td style="text-align: right;">150</td>
-<td style="text-align: right;">325381</td>
-<td style="text-align: right;">7</td>
-<td style="text-align: left;">98.72%</td>
-<td style="text-align: left;">99.39%</td>
-<td style="text-align: left;">99.71%</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">st10000nm0086</td>
@@ -287,16 +267,6 @@ za250cm10003</td>
 <td style="text-align: left;">99.54%</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">seagate barracuda ssd za250cm10002</td>
-<td style="text-align: left;">250 GB</td>
-<td style="text-align: right;">569</td>
-<td style="text-align: right;">465117</td>
-<td style="text-align: right;">13</td>
-<td style="text-align: left;">98.65%</td>
-<td style="text-align: left;">99.21%</td>
-<td style="text-align: left;">99.54%</td>
-</tr>
-<tr class="odd">
 <td style="text-align: left;">wdc wuh721816ale6l4</td>
 <td style="text-align: left;">16 TB</td>
 <td style="text-align: right;">1200</td>
@@ -305,6 +275,36 @@ za250cm10003</td>
 <td style="text-align: left;">98.51%</td>
 <td style="text-align: left;">99.79%</td>
 <td style="text-align: left;">99.97%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">st12000nm0007</td>
+<td style="text-align: left;">12 TB</td>
+<td style="text-align: right;">38838</td>
+<td style="text-align: right;">36053662</td>
+<td style="text-align: right;">1993</td>
+<td style="text-align: left;">98.36%</td>
+<td style="text-align: left;">98.44%</td>
+<td style="text-align: left;">98.52%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">hitachi hds723030ala640</td>
+<td style="text-align: left;">3 TB</td>
+<td style="text-align: right;">1048</td>
+<td style="text-align: right;">1495337</td>
+<td style="text-align: right;">73</td>
+<td style="text-align: left;">98.30%</td>
+<td style="text-align: left;">98.65%</td>
+<td style="text-align: left;">98.93%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">st4000dm000</td>
+<td style="text-align: left;">4 TB</td>
+<td style="text-align: right;">37037</td>
+<td style="text-align: right;">70274727</td>
+<td style="text-align: right;">4731</td>
+<td style="text-align: left;">98.01%</td>
+<td style="text-align: left;">98.10%</td>
+<td style="text-align: left;">98.18%</td>
 </tr>
 </tbody>
 </table>
