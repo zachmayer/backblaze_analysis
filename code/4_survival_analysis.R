@@ -1,5 +1,4 @@
 # Setup
-# TODO: Plot best drive by size
 rm(list = ls(all=T))
 gc(reset = T)
 library(data.table)
