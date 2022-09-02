@@ -1,7 +1,5 @@
 # Setup
-# TODO: TRY A PROPORTIAL HAZARD MODEL — the 14 TB DRIVES LOOK GREAT BUT AREN'T YET 1 YEAR OLD
 # TODO: Plot best drive by size
-stop()
 rm(list = ls(all=T))
 gc(reset = T)
 library(data.table)
