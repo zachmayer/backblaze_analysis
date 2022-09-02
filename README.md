@@ -33,14 +33,14 @@ The top 25 drives from this analysis are:
 
 <table>
 <colgroup>
-<col style="width: 37%" />
+<col style="width: 26%" />
 <col style="width: 6%" />
-<col style="width: 5%" />
+<col style="width: 6%" />
+<col style="width: 12%" />
 <col style="width: 10%" />
-<col style="width: 8%" />
-<col style="width: 11%" />
-<col style="width: 8%" />
-<col style="width: 11%" />
+<col style="width: 13%" />
+<col style="width: 10%" />
+<col style="width: 13%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -256,17 +256,6 @@ The top 25 drives from this analysis are:
 <td style="text-align: left;">98.97%</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">seagate barracuda 120 ssd
-za250cm10003</td>
-<td style="text-align: left;">250 GB</td>
-<td style="text-align: right;">1116</td>
-<td style="text-align: right;">520511</td>
-<td style="text-align: right;">13</td>
-<td style="text-align: left;">98.65%</td>
-<td style="text-align: left;">99.21%</td>
-<td style="text-align: left;">99.54%</td>
-</tr>
-<tr class="even">
 <td style="text-align: left;">wdc wuh721816ale6l4</td>
 <td style="text-align: left;">16 TB</td>
 <td style="text-align: right;">1200</td>
@@ -276,7 +265,7 @@ za250cm10003</td>
 <td style="text-align: left;">99.79%</td>
 <td style="text-align: left;">99.97%</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">st12000nm0007</td>
 <td style="text-align: left;">12 TB</td>
 <td style="text-align: right;">38838</td>
@@ -285,16 +274,6 @@ za250cm10003</td>
 <td style="text-align: left;">98.36%</td>
 <td style="text-align: left;">98.44%</td>
 <td style="text-align: left;">98.52%</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">hitachi hds723030ala640</td>
-<td style="text-align: left;">3 TB</td>
-<td style="text-align: right;">1048</td>
-<td style="text-align: right;">1495337</td>
-<td style="text-align: right;">73</td>
-<td style="text-align: left;">98.30%</td>
-<td style="text-align: left;">98.65%</td>
-<td style="text-align: left;">98.93%</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">st4000dm000</td>
@@ -305,6 +284,26 @@ za250cm10003</td>
 <td style="text-align: left;">98.01%</td>
 <td style="text-align: left;">98.10%</td>
 <td style="text-align: left;">98.18%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">toshiba mg08aca16te</td>
+<td style="text-align: left;">16 TB</td>
+<td style="text-align: right;">6012</td>
+<td style="text-align: right;">1395055</td>
+<td style="text-align: right;">66</td>
+<td style="text-align: left;">97.82%</td>
+<td style="text-align: left;">98.28%</td>
+<td style="text-align: left;">98.65%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">wdc wd30efrx</td>
+<td style="text-align: left;">3 TB</td>
+<td style="text-align: right;">1335</td>
+<td style="text-align: right;">1365902</td>
+<td style="text-align: right;">174</td>
+<td style="text-align: left;">95.88%</td>
+<td style="text-align: left;">96.45%</td>
+<td style="text-align: left;">96.94%</td>
 </tr>
 </tbody>
 </table>
@@ -322,18 +321,18 @@ za250cm10003</td>
     of the 5-year survival rate
 
 To narrow down the data, we can just look at the best drive by size
-(excluding models that have fewer than 1000):
+(excluding models that have fewer than 1200):
 
 <table>
 <colgroup>
-<col style="width: 37%" />
+<col style="width: 27%" />
 <col style="width: 6%" />
-<col style="width: 4%" />
+<col style="width: 5%" />
+<col style="width: 12%" />
 <col style="width: 10%" />
-<col style="width: 8%" />
-<col style="width: 11%" />
-<col style="width: 8%" />
-<col style="width: 11%" />
+<col style="width: 13%" />
+<col style="width: 10%" />
+<col style="width: 13%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -437,17 +436,6 @@ To narrow down the data, we can just look at the best drive by size
 <td style="text-align: left;">98.67%</td>
 <td style="text-align: left;">98.83%</td>
 <td style="text-align: left;">98.97%</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">seagate barracuda 120 ssd
-za250cm10003</td>
-<td style="text-align: left;">250 GB</td>
-<td style="text-align: right;">1116</td>
-<td style="text-align: right;">520511</td>
-<td style="text-align: right;">13</td>
-<td style="text-align: left;">98.65%</td>
-<td style="text-align: left;">99.21%</td>
-<td style="text-align: left;">99.54%</td>
 </tr>
 </tbody>
 </table>

@@ -18,7 +18,7 @@ source('code/helpers.r')
 
 # Globals
 top_n <- 25
-min_unique_drives <- 1000
+min_unique_drives <- 1200
 file_size <- utils:::format.object_size(file.size('drive_dates.csv'), 'Mb', digits=0)
 
 # Load data
