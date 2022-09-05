@@ -1,5 +1,4 @@
 # Setup
-stop()
 rm(list = ls(all=T))
 gc(reset = T)
 library(pbapply)

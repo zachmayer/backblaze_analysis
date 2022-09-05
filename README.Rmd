@@ -18,7 +18,7 @@ source('code/helpers.r')
 
 # Globals
 top_n <- 25
-min_unique_drives <- 1000
+min_unique_drives <- 1200
 file_size <- utils:::format.object_size(file.size('drive_dates.csv'), 'Mb', digits=0)
 
 # Load data
@@ -34,13 +34,14 @@ cox_model = readRDS('results/cox_model.rds')
 # Subset data
 dat[,surv_days_99pct := NULL]
 dat = dat[surv_5yr_lower>0,]
+dat = dat[n_unique >= min_unique_drives,]
 
 # Order factors
 dat[,model := factor(model, levels=model[order(-surv_5yr_lower, -surv_5yr, surv_5yr_upper)], ordered=T)]
 dat[,size := factor(size, levels=capacity_order[['size']], ordered=T)]
 
 # Choose best drive
-best_drive_by_size <- dat[n_unique >= min_unique_drives,][!duplicated(size),]
+best_drive_by_size <- dat[!duplicated(size),]
 best_drive = dat[1, model]
 best_drive_surv = dat[1, sprintf("%1.2f%%", 100*surv_5yr_lower)]
 
