@@ -1,3 +1,13 @@
+Readme
+================
+
+- [Data Sources](#data-sources)
+- [Results](#results)
+- [Technical Details](#technical-details)
+- [Plots](#plots)
+- [Replicating my results](#replicating-my-results)
+- [Erratum](#erratum)
+
 # Data Sources
 
 I’m buying a hard drive for backups, and I want to buy a drive that’s
@@ -31,414 +41,60 @@ estimated 5-year survival rate that is at least 99.69%.
 
 The top 25 drives from this analysis are:
 
-<table>
-<colgroup>
-<col style="width: 26%" />
-<col style="width: 6%" />
-<col style="width: 6%" />
-<col style="width: 12%" />
-<col style="width: 10%" />
-<col style="width: 13%" />
-<col style="width: 10%" />
-<col style="width: 13%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: left;">model</th>
-<th style="text-align: left;">size</th>
-<th style="text-align: right;">N</th>
-<th style="text-align: right;">drive_days</th>
-<th style="text-align: right;">failures</th>
-<th style="text-align: left;">surv_5yr_lo</th>
-<th style="text-align: left;">surv_5yr</th>
-<th style="text-align: left;">surv_5yr_hi</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">wdc wuh721414ale6l4</td>
-<td style="text-align: left;">14 TB</td>
-<td style="text-align: right;">8452</td>
-<td style="text-align: right;">5471924</td>
-<td style="text-align: right;">43</td>
-<td style="text-align: left;">99.69%</td>
-<td style="text-align: left;">99.77%</td>
-<td style="text-align: left;">99.83%</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">wdc wuh721816ale6l0</td>
-<td style="text-align: left;">16 TB</td>
-<td style="text-align: right;">2705</td>
-<td style="text-align: right;">956996</td>
-<td style="text-align: right;">3</td>
-<td style="text-align: left;">99.67%</td>
-<td style="text-align: left;">99.89%</td>
-<td style="text-align: left;">99.97%</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">hgst huh721212ale600</td>
-<td style="text-align: left;">12 TB</td>
-<td style="text-align: right;">2632</td>
-<td style="text-align: right;">2818625</td>
-<td style="text-align: right;">25</td>
-<td style="text-align: left;">99.63%</td>
-<td style="text-align: left;">99.75%</td>
-<td style="text-align: left;">99.83%</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">hgst hms5c4040ale640</td>
-<td style="text-align: left;">4 TB</td>
-<td style="text-align: right;">8723</td>
-<td style="text-align: right;">16461571</td>
-<td style="text-align: right;">238</td>
-<td style="text-align: left;">99.56%</td>
-<td style="text-align: left;">99.62%</td>
-<td style="text-align: left;">99.66%</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">hgst huh721212aln604</td>
-<td style="text-align: left;">12 TB</td>
-<td style="text-align: right;">10982</td>
-<td style="text-align: right;">13782875</td>
-<td style="text-align: right;">191</td>
-<td style="text-align: left;">99.55%</td>
-<td style="text-align: left;">99.61%</td>
-<td style="text-align: left;">99.67%</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">hgst huh721212ale604</td>
-<td style="text-align: left;">12 TB</td>
-<td style="text-align: right;">13255</td>
-<td style="text-align: right;">7187671</td>
-<td style="text-align: right;">94</td>
-<td style="text-align: left;">99.50%</td>
-<td style="text-align: left;">99.59%</td>
-<td style="text-align: left;">99.67%</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">hitachi hds5c4040ale630</td>
-<td style="text-align: left;">4 TB</td>
-<td style="text-align: right;">2719</td>
-<td style="text-align: right;">4641113</td>
-<td style="text-align: right;">89</td>
-<td style="text-align: left;">99.36%</td>
-<td style="text-align: left;">99.48%</td>
-<td style="text-align: left;">99.58%</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">hitachi hds5c3030ala630</td>
-<td style="text-align: left;">3 TB</td>
-<td style="text-align: right;">4664</td>
-<td style="text-align: right;">6934573</td>
-<td style="text-align: right;">150</td>
-<td style="text-align: left;">99.31%</td>
-<td style="text-align: left;">99.41%</td>
-<td style="text-align: left;">99.50%</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">st12000nm001g</td>
-<td style="text-align: left;">12 TB</td>
-<td style="text-align: right;">12708</td>
-<td style="text-align: right;">8422348</td>
-<td style="text-align: right;">174</td>
-<td style="text-align: left;">99.30%</td>
-<td style="text-align: left;">99.39%</td>
-<td style="text-align: left;">99.48%</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">hgst huh728080ale600</td>
-<td style="text-align: left;">8 TB</td>
-<td style="text-align: right;">1204</td>
-<td style="text-align: right;">1899725</td>
-<td style="text-align: right;">39</td>
-<td style="text-align: left;">99.23%</td>
-<td style="text-align: left;">99.44%</td>
-<td style="text-align: left;">99.59%</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">toshiba mg07aca14ta</td>
-<td style="text-align: left;">14 TB</td>
-<td style="text-align: right;">38945</td>
-<td style="text-align: right;">26789054</td>
-<td style="text-align: right;">666</td>
-<td style="text-align: left;">99.21%</td>
-<td style="text-align: left;">99.27%</td>
-<td style="text-align: left;">99.33%</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">st6000dx000</td>
-<td style="text-align: left;">6 TB</td>
-<td style="text-align: right;">1939</td>
-<td style="text-align: right;">3822551</td>
-<td style="text-align: right;">94</td>
-<td style="text-align: left;">99.19%</td>
-<td style="text-align: left;">99.34%</td>
-<td style="text-align: left;">99.46%</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">toshiba mg08aca16tey</td>
-<td style="text-align: left;">16 TB</td>
-<td style="text-align: right;">4275</td>
-<td style="text-align: right;">1515204</td>
-<td style="text-align: right;">29</td>
-<td style="text-align: left;">99.12%</td>
-<td style="text-align: left;">99.39%</td>
-<td style="text-align: left;">99.58%</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">wdc wuh721816ale6l4</td>
-<td style="text-align: left;">16 TB</td>
-<td style="text-align: right;">7205</td>
-<td style="text-align: right;">484470</td>
-<td style="text-align: right;">7</td>
-<td style="text-align: left;">99.09%</td>
-<td style="text-align: left;">99.57%</td>
-<td style="text-align: left;">99.79%</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">st16000nm001g</td>
-<td style="text-align: left;">16 TB</td>
-<td style="text-align: right;">20612</td>
-<td style="text-align: right;">5912833</td>
-<td style="text-align: right;">147</td>
-<td style="text-align: left;">99.03%</td>
-<td style="text-align: left;">99.17%</td>
-<td style="text-align: left;">99.30%</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">st8000dm002</td>
-<td style="text-align: left;">8 TB</td>
-<td style="text-align: right;">10300</td>
-<td style="text-align: right;">21603295</td>
-<td style="text-align: right;">731</td>
-<td style="text-align: left;">98.99%</td>
-<td style="text-align: left;">99.07%</td>
-<td style="text-align: left;">99.14%</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">st14000nm001g</td>
-<td style="text-align: left;">14 TB</td>
-<td style="text-align: right;">10929</td>
-<td style="text-align: right;">6432853</td>
-<td style="text-align: right;">191</td>
-<td style="text-align: left;">98.96%</td>
-<td style="text-align: left;">99.10%</td>
-<td style="text-align: left;">99.22%</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">st12000nm0008</td>
-<td style="text-align: left;">12 TB</td>
-<td style="text-align: right;">20607</td>
-<td style="text-align: right;">18507805</td>
-<td style="text-align: right;">679</td>
-<td style="text-align: left;">98.89%</td>
-<td style="text-align: left;">98.97%</td>
-<td style="text-align: left;">99.05%</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">st8000nm0055</td>
-<td style="text-align: left;">8 TB</td>
-<td style="text-align: right;">15495</td>
-<td style="text-align: right;">27632708</td>
-<td style="text-align: right;">1100</td>
-<td style="text-align: left;">98.84%</td>
-<td style="text-align: left;">98.91%</td>
-<td style="text-align: left;">98.98%</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">hitachi hds722020ala330</td>
-<td style="text-align: left;">2 TB</td>
-<td style="text-align: right;">4774</td>
-<td style="text-align: right;">5675646</td>
-<td style="text-align: right;">235</td>
-<td style="text-align: left;">98.69%</td>
-<td style="text-align: left;">98.85%</td>
-<td style="text-align: left;">98.99%</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">st10000nm0086</td>
-<td style="text-align: left;">10 TB</td>
-<td style="text-align: right;">1283</td>
-<td style="text-align: right;">2206241</td>
-<td style="text-align: right;">88</td>
-<td style="text-align: left;">98.65%</td>
-<td style="text-align: left;">98.91%</td>
-<td style="text-align: left;">99.12%</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">st12000nm0007</td>
-<td style="text-align: left;">12 TB</td>
-<td style="text-align: right;">38838</td>
-<td style="text-align: right;">36171181</td>
-<td style="text-align: right;">2008</td>
-<td style="text-align: left;">98.36%</td>
-<td style="text-align: left;">98.44%</td>
-<td style="text-align: left;">98.52%</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">st4000dm000</td>
-<td style="text-align: left;">4 TB</td>
-<td style="text-align: right;">37037</td>
-<td style="text-align: right;">72190670</td>
-<td style="text-align: right;">4932</td>
-<td style="text-align: left;">98.08%</td>
-<td style="text-align: left;">98.16%</td>
-<td style="text-align: left;">98.24%</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">toshiba mg08aca16ta</td>
-<td style="text-align: left;">16 TB</td>
-<td style="text-align: right;">3761</td>
-<td style="text-align: right;">300862</td>
-<td style="text-align: right;">11</td>
-<td style="text-align: left;">98.07%</td>
-<td style="text-align: left;">98.93%</td>
-<td style="text-align: left;">99.41%</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">toshiba mg08aca16te</td>
-<td style="text-align: left;">16 TB</td>
-<td style="text-align: right;">6030</td>
-<td style="text-align: right;">1941750</td>
-<td style="text-align: right;">88</td>
-<td style="text-align: left;">97.98%</td>
-<td style="text-align: left;">98.36%</td>
-<td style="text-align: left;">98.67%</td>
-</tr>
-</tbody>
-</table>
+| model                   | size  |     N | drive_days | failures | surv_5yr_lo | surv_5yr | surv_5yr_hi |
+|:------------------------|:------|------:|-----------:|---------:|:------------|:---------|:------------|
+| wdc wuh721414ale6l4     | 14 TB |  8452 |    5471924 |       43 | 99.69%      | 99.77%   | 99.83%      |
+| wdc wuh721816ale6l0     | 16 TB |  2705 |     956996 |        3 | 99.67%      | 99.89%   | 99.97%      |
+| hgst huh721212ale600    | 12 TB |  2632 |    2818625 |       25 | 99.63%      | 99.75%   | 99.83%      |
+| hgst hms5c4040ale640    | 4 TB  |  8723 |   16461571 |      238 | 99.56%      | 99.62%   | 99.66%      |
+| hgst huh721212aln604    | 12 TB | 10982 |   13782875 |      191 | 99.55%      | 99.61%   | 99.67%      |
+| hgst huh721212ale604    | 12 TB | 13255 |    7187671 |       94 | 99.50%      | 99.59%   | 99.67%      |
+| hitachi hds5c4040ale630 | 4 TB  |  2719 |    4641113 |       89 | 99.36%      | 99.48%   | 99.58%      |
+| hitachi hds5c3030ala630 | 3 TB  |  4664 |    6934573 |      150 | 99.31%      | 99.41%   | 99.50%      |
+| st12000nm001g           | 12 TB | 12708 |    8422348 |      174 | 99.30%      | 99.39%   | 99.48%      |
+| hgst huh728080ale600    | 8 TB  |  1204 |    1899725 |       39 | 99.23%      | 99.44%   | 99.59%      |
+| toshiba mg07aca14ta     | 14 TB | 38945 |   26789054 |      666 | 99.21%      | 99.27%   | 99.33%      |
+| st6000dx000             | 6 TB  |  1939 |    3822551 |       94 | 99.19%      | 99.34%   | 99.46%      |
+| toshiba mg08aca16tey    | 16 TB |  4275 |    1515204 |       29 | 99.12%      | 99.39%   | 99.58%      |
+| wdc wuh721816ale6l4     | 16 TB |  7205 |     484470 |        7 | 99.09%      | 99.57%   | 99.79%      |
+| st16000nm001g           | 16 TB | 20612 |    5912833 |      147 | 99.03%      | 99.17%   | 99.30%      |
+| st8000dm002             | 8 TB  | 10300 |   21603295 |      731 | 98.99%      | 99.07%   | 99.14%      |
+| st14000nm001g           | 14 TB | 10929 |    6432853 |      191 | 98.96%      | 99.10%   | 99.22%      |
+| st12000nm0008           | 12 TB | 20607 |   18507805 |      679 | 98.89%      | 98.97%   | 99.05%      |
+| st8000nm0055            | 8 TB  | 15495 |   27632708 |     1100 | 98.84%      | 98.91%   | 98.98%      |
+| hitachi hds722020ala330 | 2 TB  |  4774 |    5675646 |      235 | 98.69%      | 98.85%   | 98.99%      |
+| st10000nm0086           | 10 TB |  1283 |    2206241 |       88 | 98.65%      | 98.91%   | 99.12%      |
+| st12000nm0007           | 12 TB | 38838 |   36171181 |     2008 | 98.36%      | 98.44%   | 98.52%      |
+| st4000dm000             | 4 TB  | 37037 |   72190670 |     4932 | 98.08%      | 98.16%   | 98.24%      |
+| toshiba mg08aca16ta     | 16 TB |  3761 |     300862 |       11 | 98.07%      | 98.93%   | 99.41%      |
+| toshiba mg08aca16te     | 16 TB |  6030 |    1941750 |       88 | 97.98%      | 98.36%   | 98.67%      |
 
--   **model** is the drive model
--   **size** is the size of the drive
--   **N** is the number of unique drives in the analysis
--   **drive\_days** is the total number of days that we’ve observed for
-    drives of this model in the sample
--   **failures** is the number of failures observed so far
--   **surv\_5yr\_lo** is the lower bound of the 95% confidence interval
-    of the 5-year survival rate
--   **surv\_5yr** is the 5-year survival rate
--   **surv\_5yr\_hi** is the upper bound of the 95% confidence interval
-    of the 5-year survival rate
+- **model** is the drive model
+- **size** is the size of the drive
+- **N** is the number of unique drives in the analysis
+- **drive_days** is the total number of days that we’ve observed for
+  drives of this model in the sample
+- **failures** is the number of failures observed so far
+- **surv_5yr_lo** is the lower bound of the 95% confidence interval of
+  the 5-year survival rate
+- **surv_5yr** is the 5-year survival rate
+- **surv_5yr_hi** is the upper bound of the 95% confidence interval of
+  the 5-year survival rate
 
 To narrow down the data, we can just look at the best drive by size
 (excluding models that have fewer than 1200):
 
-<table>
-<colgroup>
-<col style="width: 27%" />
-<col style="width: 6%" />
-<col style="width: 5%" />
-<col style="width: 12%" />
-<col style="width: 10%" />
-<col style="width: 13%" />
-<col style="width: 10%" />
-<col style="width: 13%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: left;">model</th>
-<th style="text-align: left;">size</th>
-<th style="text-align: right;">N</th>
-<th style="text-align: right;">drive_days</th>
-<th style="text-align: right;">failures</th>
-<th style="text-align: left;">surv_5yr_lo</th>
-<th style="text-align: left;">surv_5yr</th>
-<th style="text-align: left;">surv_5yr_hi</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">wdc wuh721414ale6l4</td>
-<td style="text-align: left;">14 TB</td>
-<td style="text-align: right;">8452</td>
-<td style="text-align: right;">5471924</td>
-<td style="text-align: right;">43</td>
-<td style="text-align: left;">99.69%</td>
-<td style="text-align: left;">99.77%</td>
-<td style="text-align: left;">99.83%</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">wdc wuh721816ale6l0</td>
-<td style="text-align: left;">16 TB</td>
-<td style="text-align: right;">2705</td>
-<td style="text-align: right;">956996</td>
-<td style="text-align: right;">3</td>
-<td style="text-align: left;">99.67%</td>
-<td style="text-align: left;">99.89%</td>
-<td style="text-align: left;">99.97%</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">hgst huh721212ale600</td>
-<td style="text-align: left;">12 TB</td>
-<td style="text-align: right;">2632</td>
-<td style="text-align: right;">2818625</td>
-<td style="text-align: right;">25</td>
-<td style="text-align: left;">99.63%</td>
-<td style="text-align: left;">99.75%</td>
-<td style="text-align: left;">99.83%</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">hgst hms5c4040ale640</td>
-<td style="text-align: left;">4 TB</td>
-<td style="text-align: right;">8723</td>
-<td style="text-align: right;">16461571</td>
-<td style="text-align: right;">238</td>
-<td style="text-align: left;">99.56%</td>
-<td style="text-align: left;">99.62%</td>
-<td style="text-align: left;">99.66%</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">hitachi hds5c3030ala630</td>
-<td style="text-align: left;">3 TB</td>
-<td style="text-align: right;">4664</td>
-<td style="text-align: right;">6934573</td>
-<td style="text-align: right;">150</td>
-<td style="text-align: left;">99.31%</td>
-<td style="text-align: left;">99.41%</td>
-<td style="text-align: left;">99.50%</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">hgst huh728080ale600</td>
-<td style="text-align: left;">8 TB</td>
-<td style="text-align: right;">1204</td>
-<td style="text-align: right;">1899725</td>
-<td style="text-align: right;">39</td>
-<td style="text-align: left;">99.23%</td>
-<td style="text-align: left;">99.44%</td>
-<td style="text-align: left;">99.59%</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">st6000dx000</td>
-<td style="text-align: left;">6 TB</td>
-<td style="text-align: right;">1939</td>
-<td style="text-align: right;">3822551</td>
-<td style="text-align: right;">94</td>
-<td style="text-align: left;">99.19%</td>
-<td style="text-align: left;">99.34%</td>
-<td style="text-align: left;">99.46%</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">hitachi hds722020ala330</td>
-<td style="text-align: left;">2 TB</td>
-<td style="text-align: right;">4774</td>
-<td style="text-align: right;">5675646</td>
-<td style="text-align: right;">235</td>
-<td style="text-align: left;">98.69%</td>
-<td style="text-align: left;">98.85%</td>
-<td style="text-align: left;">98.99%</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">st10000nm0086</td>
-<td style="text-align: left;">10 TB</td>
-<td style="text-align: right;">1283</td>
-<td style="text-align: right;">2206241</td>
-<td style="text-align: right;">88</td>
-<td style="text-align: left;">98.65%</td>
-<td style="text-align: left;">98.91%</td>
-<td style="text-align: left;">99.12%</td>
-</tr>
-</tbody>
-</table>
+| model                   | size  |    N | drive_days | failures | surv_5yr_lo | surv_5yr | surv_5yr_hi |
+|:------------------------|:------|-----:|-----------:|---------:|:------------|:---------|:------------|
+| wdc wuh721414ale6l4     | 14 TB | 8452 |    5471924 |       43 | 99.69%      | 99.77%   | 99.83%      |
+| wdc wuh721816ale6l0     | 16 TB | 2705 |     956996 |        3 | 99.67%      | 99.89%   | 99.97%      |
+| hgst huh721212ale600    | 12 TB | 2632 |    2818625 |       25 | 99.63%      | 99.75%   | 99.83%      |
+| hgst hms5c4040ale640    | 4 TB  | 8723 |   16461571 |      238 | 99.56%      | 99.62%   | 99.66%      |
+| hitachi hds5c3030ala630 | 3 TB  | 4664 |    6934573 |      150 | 99.31%      | 99.41%   | 99.50%      |
+| hgst huh728080ale600    | 8 TB  | 1204 |    1899725 |       39 | 99.23%      | 99.44%   | 99.59%      |
+| st6000dx000             | 6 TB  | 1939 |    3822551 |       94 | 99.19%      | 99.34%   | 99.46%      |
+| hitachi hds722020ala330 | 2 TB  | 4774 |    5675646 |      235 | 98.69%      | 98.85%   | 98.99%      |
+| st10000nm0086           | 10 TB | 1283 |    2206241 |       88 | 98.65%      | 98.91%   | 99.12%      |
 
 All of these drives have a very high 5-year survival rate, and I’d feel
 pretty confident buying any of them.
@@ -478,7 +134,7 @@ curve ends with the oldest drive we’ve observed (these are called
 [Kaplan–Meier](https://en.wikipedia.org/wiki/Kaplan%E2%80%93Meier_estimator)
 curves):
 
-![](README_files/figure-markdown_strict/km_curves-1.png)
+![](README_files/figure-gfm/km_curves-1.png)<!-- -->
 
 Note that we haven’t even observed 1 year’s worth of data yet for the 14
 and 16TB drives, but they seem to have a very low failure rate relative
@@ -488,14 +144,14 @@ The “proportional hazards” assumption from the Cox model allows us to
 extend these curves and estimate survival times at 5 years for all of
 the drives:
 
-![](README_files/figure-markdown_strict/cox_curves-1.png)
+![](README_files/figure-gfm/cox_curves-1.png)<!-- -->
 
 This plot doesn’t have the confidence intervals, which are wider for the
 drives with less data.
 
 # Replicating my results
 
-[drive\_dates.csv](results/drive_dates.csv) has the cleaned up data from
+[drive_dates.csv](results/drive_dates.csv) has the cleaned up data from
 backblaze, with each drive, its model, when it was installed, when it
 failed (NA for drives that have not failed) and when it was last
 observed.
@@ -507,17 +163,17 @@ this [README.md](README.md) file you are reading right now. Use
 you.
 
 If you want to get the raw data before it was cleaned up into
-[all\_data.csv](results/all_data.csv), you’ll need at least 70GB of free
+[all_data.csv](results/all_data.csv), you’ll need at least 70GB of free
 hard drive space. I also suggest opening
-[backblaze\_analysis.Rproj](backblaze_analysis.Rproj) in RStudio.  
-1. Run [1\_download\_data.R](code/1_download_data.R) to download the
-data (almost 10.5 GB).  
-2. Run [2\_unzip\_data.R](code/2_unzip_data.R) to unzip the data (almost
+[backblaze_analysis.Rproj](backblaze_analysis.Rproj) in RStudio.  
+1. Run [1_download_data.R](code/1_download_data.R) to download the data
+(almost 10.5 GB).  
+2. Run [2_unzip_data.R](code/2_unzip_data.R) to unzip the data (almost
 55 GB).  
-3. Run [3\_assemble\_data.R](code/3_assemble_data.R) to “compress” the
-data, which generates [all\_data.csv](all_data.csv).  
-4. Run [4\_survival\_analysis.R](code/4_survival_analysis.R) to
-calculate 5 year survival.
+3. Run [3_assemble_data.R](code/3_assemble_data.R) to “compress” the
+data, which generates [all_data.csv](all_data.csv).  
+4. Run [4_survival_analysis.R](code/4_survival_analysis.R) to calculate
+5 year survival.
 
 An interesting note about this data: It’s 55GB uncompressed, and
 contains a whole bunch of irrelevant information. It was very
@@ -538,4 +194,8 @@ st3000dm001 has a 5 year survival of 80.6%. This is honestly probably
 fine for my purposes, but maybe I’d be a little nervous to buy a drive
 with a 1-in-5 chance of dying within 5 years.
 
-![I nerd sniped myself](https://imgs.xkcd.com/comics/nerd_sniping.png)
+<figure>
+<img src="https://imgs.xkcd.com/comics/nerd_sniping.png"
+alt="I nerd sniped myself" />
+<figcaption aria-hidden="true">I nerd sniped myself</figcaption>
+</figure>

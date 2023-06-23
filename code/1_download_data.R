@@ -28,7 +28,11 @@ for(year in 2016:THIS_YEAR){
         '.zip'
       )
       print(paste('Downloading', filename))
-      download.file(url, filename)
+      tryCatch({
+        download.file(url, filename)
+      }, error = function(e) {
+        print(paste('Failed to download', filename, 'with error', e))
+      })
     }
   }
 }
