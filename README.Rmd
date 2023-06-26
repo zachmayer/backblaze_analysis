@@ -1,6 +1,9 @@
 ---
 title: "Readme"
-output: md_document
+output:
+  github_document:
+    toc: true
+    html_preview: false
 ---
 
 ```{r setup, include=FALSE}
