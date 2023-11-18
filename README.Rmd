@@ -29,8 +29,11 @@ dat = fread('results/survival_results.csv')
 drive_dates = fread('results/drive_dates_clean.csv')
 
 capacity_order = fread('results/capacity_order.csv')
-capacity_map = fread('results/capacity_map_clean.csv')
-capacity_map[,size := factor(size, levels=capacity_order[,size], ordered=T)]
+setorder(capacity_order, -capacity)
+capacity_order[,size :=  factor(size, levels=size, ordered=T)]
+
+capacity_map = fread('results/capacity_map.csv')
+capacity_map = merge(capacity_map, capacity_order, by='capacity')
 
 cox_model = readRDS('results/cox_model.rds')
 

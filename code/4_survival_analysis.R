@@ -13,16 +13,9 @@ capacity_map <- fread('results/capacity_map.csv')
 drive_dates <- fread('results/drive_dates.csv')
 
 # Format HD sizes nicely
-format_hd_size <- function(x, ...){
-  utils:::format.object_size(x, ..., standard='SI', digits=0)
-}
-capacity_map[capacity_bytes <  1e+12, size := format_hd_size(capacity_bytes, 'GB')]
-capacity_map[capacity_bytes >= 1e+12, size := format_hd_size(capacity_bytes, 'TB')]
-
-capacity_order <- capacity_map[,list(capacity_bytes=max(capacity_bytes)), by='size']
-capacity_order <- capacity_order[order(capacity_bytes),]
+capacity_map[, size := paste(capacity, 'TB')]
+capacity_order <- capacity_map[,list(capacity=max(capacity)), by='size']
 capacity_map[,size := factor(size, levels=capacity_order[,size], ordered=T)]
-fwrite(capacity_map, 'results/capacity_map_clean.csv')
 fwrite(capacity_order, 'results/capacity_order.csv')
 
 # Computer drive failure, and time to failure or time to censoring
