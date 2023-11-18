@@ -21,7 +21,8 @@ assumes that failure rates are constant over time. E.g. this assumption
 means that observing 1 drive for 100 days gives you the exact same
 information as observing 100 drives for 1 day. If drives fail at a
 constant rate over time, this is fine, but I suspect that drives
-actually fail at a higher rate early in their lives.  
+actually fail at a higher rate early in their lives. So their analysis
+is biased against newer drives.  
 2. I want to compute a confidence interval of some kind, so I can select
 a drive that both has a low failure rate, but also enough observations
 to make me confident in this failure rate. For example, if I have a
@@ -135,10 +136,6 @@ curve ends with the oldest drive we’ve observed (these are called
 curves):
 
 ![](README_files/figure-gfm/km_curves-1.png)<!-- -->
-
-Note that we haven’t even observed 1 year’s worth of data yet for the 14
-and 16TB drives, but they seem to have a very low failure rate relative
-to the other drives during their first year of life.
 
 The “proportional hazards” assumption from the Cox model allows us to
 extend these curves and estimate survival times at 5 years for all of
