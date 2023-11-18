@@ -74,7 +74,7 @@ knitr::kable(
       N=n_unique,
       drive_days,
       failures=failed,
-      years_97pct==sprintf("%1.1f%%", years_97pct),
+      years_97pct=sprintf("%1.1f%%", years_97pct),
       surv_5yr_lo=sprintf("%1.2f%%", 100*surv_5yr_lower),
       surv_5yr_lo=sprintf("%1.2f%%", 100*surv_5yr_lower),
       surv_5yr=sprintf("%1.2f%%", 100*surv_5yr),
@@ -102,7 +102,7 @@ knitr::kable(
       N=n_unique,
       drive_days,
       failures=failed,
-      years_97pct==sprintf("%1.1f%%", years_97pct),
+      years_97pct=sprintf("%1.1f%%", years_97pct),
       surv_5yr_lo=sprintf("%1.2f%%", 100*surv_5yr_lower),
       surv_5yr=sprintf("%1.2f%%", 100*surv_5yr),
       surv_5yr_hi=sprintf("%1.2f%%", 100*surv_5yr_upper)
