@@ -25,6 +25,7 @@ all_data <- pblapply(  # Takes ~18 minutes
 )
 all_data <- rbindlist(all_data, use.names=TRUE, fill=TRUE)
 # all_data[serial_number=='9JG4657T',]
+gc(reset = T)
 
 # Cleanup model names
 all_data[,model := string_normalize(model)]
@@ -40,18 +41,21 @@ all_data[capacity_bytes == "-9116022715867848704", summary(date)]
 gc(reset=T)
 
 # Capacity map
-capacity_map <- all_data[,list(model, capacity_bytes)]
-capacity_map[,capacity_bytes := as.numeric(capacity_bytes)]
-setkeyv(capacity_map, 'capacity_bytes')
+capacity_map <- all_data[,list(model, capacity=capacity_bytes)]
+capacity_map[,capacity := as.integer(round(as.numeric(capacity)/1e+12))]
+setkeyv(capacity_map, c('capacity', 'model'))
+capacity_map = unique(capacity_map)
 gc(reset=T)
-capacity_map <- capacity_map[which(capacity_bytes > 0),]  # HDs can't have negative capacity
-capacity_map <- capacity_map[which(capacity_bytes < 1e+15),]  # 1 PetaByte drives don't exist yet
+capacity_map <- capacity_map[capacity > 0L,]  # HDs can't have negative capacity.  Also drop all <500GB drives
+capacity_map <- capacity_map[capacity < 1000L,]  # 1 PetaByte drives don't exist yet
 setkeyv(capacity_map, 'model')
 capacity_map <- unique(capacity_map)
 gc(reset=T)
-capacity_map <- capacity_map[,list(capacity_bytes=max(capacity_bytes)), by='model']
+capacity_map <- capacity_map[,list(capacity=max(capacity)), by='model']
+setorder(capacity_map, -capacity, model)
 fwrite(capacity_map, 'results/capacity_map.csv')
 gc(reset=T)
+head(capacity_map, 25)
 
 # Calculate dates by serial number
 keys <- c('model', 'serial_number')
