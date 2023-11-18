@@ -38,7 +38,6 @@ capacity_map = merge(capacity_map, capacity_order, by='capacity')
 cox_model = readRDS('results/cox_model.rds')
 
 # Subset data
-dat[,surv_days_99pct := NULL]
 dat = dat[surv_5yr_lower>0,]
 dat = dat[n_unique >= min_unique_drives,]
 
@@ -75,6 +74,8 @@ knitr::kable(
       N=n_unique,
       drive_days,
       failures=failed,
+      years_97pct==sprintf("%1.1f%%", years_97pct),
+      surv_5yr_lo=sprintf("%1.2f%%", 100*surv_5yr_lower),
       surv_5yr_lo=sprintf("%1.2f%%", 100*surv_5yr_lower),
       surv_5yr=sprintf("%1.2f%%", 100*surv_5yr),
       surv_5yr_hi=sprintf("%1.2f%%", 100*surv_5yr_upper)
@@ -86,6 +87,7 @@ knitr::kable(
 * **N** is the number of unique drives in the analysis
 * **drive_days** is the total number of days that we've observed for drives of this model in the sample
 * **failures** is the number of failures observed so far
+* **years_97pct** is the expected number of years 97% of these drives will last
 * **surv_5yr_lo** is the lower bound of the 95% confidence interval of the 5-year survival rate
 * **surv_5yr** is the 5-year survival rate
 * **surv_5yr_hi** is the upper bound of the 95% confidence interval of the 5-year survival rate
@@ -100,6 +102,7 @@ knitr::kable(
       N=n_unique,
       drive_days,
       failures=failed,
+      years_97pct==sprintf("%1.1f%%", years_97pct),
       surv_5yr_lo=sprintf("%1.2f%%", 100*surv_5yr_lower),
       surv_5yr=sprintf("%1.2f%%", 100*surv_5yr),
       surv_5yr_hi=sprintf("%1.2f%%", 100*surv_5yr_upper)

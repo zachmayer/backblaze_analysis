@@ -52,10 +52,10 @@ i <- 0
 pb = txtProgressBar(min = 0, max = length(cf[['model']]), initial = 0, style=3)
 for(m in cf[['model']]){
   cox_surv_curve <- survfit(cox_model, conf.int=CONF_LEVEL, newdata=data.table(model=m), conf.type="logit")
-  quantile_surv <- quantile(cox_surv_curve, .01)
+  quantile_surv <- quantile(cox_surv_curve, .03)
   surv_5_year <- summary(cox_surv_curve, conf.int=CONF_LEVEL, 1 * days_to_year)
 
-  cf[model == m, surv_days_99pct := quantile_surv[["lower"]]]
+  cf[model == m, years_97pct := quantile_surv[["lower"]] / 365.25]
   cf[model == m, surv_5yr_lower := surv_5_year$lower]
   cf[model == m, surv_5yr := surv_5_year$surv]
   cf[model == m, surv_5yr_upper := surv_5_year$upper]
@@ -80,11 +80,11 @@ dat <- merge(dat, capacity_map, by='model', all=F)
 # Order data and select columns
 dat <- dat[order(
   -surv_5yr_lower, -surv_5yr, surv_5yr_upper,
-  -surv_days_99pct,
+  -years_97pct,
   -drive_days, -n_unique, failed, -size),]
 dat <- dat[, list(
   model, size, n_unique,
-  drive_days, failed, surv_days_99pct,
+  drive_days, failed, years_97pct,
   surv_5yr_lower, surv_5yr, surv_5yr_upper)]
 
 # Save data for the write up
