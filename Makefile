@@ -1,12 +1,24 @@
+# Default target
+.PHONY: help
+help:
+	@echo "Usage: make [target]"
+	@echo
+	@echo "Available targets:"
+	@echo "  help             Display this help message."
+	@echo "  all              Download all data and process it."
+	@echo "  yearly_data      Download yearly data files (2013-2015)."
+	@echo "  quarterly_data   Download quarterly data files (2016-2024)."
+	@echo "  process_data     Process downloaded zip files into combined CSV files."
+	@echo "  clean_data       Remove all processed CSV files."
+	@echo "  print_files      Print the list of files for debugging."
+
 # Configuration
 BASE_URL := https://f001.backblazeb2.com/file/Backblaze-Hard-Drive-Data/
 END_YEAR := 2024
 END_QUARTER := Q2
 
-# Directory for downloaded files
+# Directories
 DOWNLOAD_DIR := zip_data
-
-# Directory for processed CSV files
 DATA_DIR := data
 
 # Generate list of yearly data files (2013-2015)
@@ -18,7 +30,6 @@ $(if $(filter $(1),$(END_YEAR)),\
     $(addprefix $(DOWNLOAD_DIR)/data_,$(addsuffix _$(1).zip,$(shell seq -f "Q%g" 1 $(subst Q,,$(END_QUARTER))))),\
     $(addprefix $(DOWNLOAD_DIR)/data_,$(addsuffix _$(1).zip,Q1 Q2 Q3 Q4)))
 endef
-
 QUARTERLY_FILES := $(foreach year,$(shell seq 2016 $(END_YEAR)),$(call QUARTER_FILES,$(year)))
 
 # All files to be downloaded
@@ -27,7 +38,7 @@ ALL_FILES := $(YEARLY_FILES) $(QUARTERLY_FILES)
 # List of output CSV files
 CSV_FILES := $(patsubst $(DOWNLOAD_DIR)/data_%.zip,$(DATA_DIR)/%.csv,$(ALL_FILES))
 
-# Phony targets
+# Targets
 .PHONY: all yearly_data quarterly_data process_data clean_data print_files
 
 all: yearly_data quarterly_data process_data
