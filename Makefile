@@ -11,6 +11,9 @@ help:
 	@echo "  process_data     Process downloaded zip files into combined CSV files."
 	@echo "  clean_data       Remove all processed CSV files."
 	@echo "  print_files      Print the list of files for debugging."
+	@echo
+	@echo "Run make -j8 all to download/process the data in parallel."
+
 
 # Configuration
 BASE_URL := https://f001.backblazeb2.com/file/Backblaze-Hard-Drive-Data/
@@ -52,7 +55,6 @@ process_data: $(CSV_FILES)
 # Static pattern rule for downloading files
 $(ALL_FILES): $(DOWNLOAD_DIR)/%.zip:
 	@mkdir -p $(dir $@)
-	@trap 'rm -f $@' EXIT; \
 	curl -o $@ $(BASE_URL)$(@F)
 
 # Pattern rule for processing zip files to CSV
@@ -62,9 +64,11 @@ $(ALL_FILES): $(DOWNLOAD_DIR)/%.zip:
 # For this script we just want to analyze failure rates, so we drop the smart stats
 $(DATA_DIR)/%.csv: $(DOWNLOAD_DIR)/data_%.zip code/aggregate_by_serial.R | $(DATA_DIR)
 	@echo "Processing $< ... $(shell date '+%Y-%m-%d %H:%M:%S')"
-	@trap 'rm -f $@.tmp' EXIT; \
-	unzip -p $< | awk -F, '{print $1","$2","$3","$4","$5}' | awk 'NR == 1 || FNR > 1' > $@.tmp && \
-	Rscript code/aggregate_by_serial.R $@.tmp && \
+	@trap 'rm -f $@.tmp $@.tmp2' EXIT; \
+	unzip -p $< | \
+	awk 'BEGIN {FS=OFS=","} NR == 1 {print "date", "model", "serial_number", "capacity_bytes", "failure"} \
+	     NR > 1 {print $$1, $$2, $$3, $$4, $$5}' > $@.tmp && \
+	Rscript code/aggregate_by_serial.R $@.tmp $@.tmp && \
 	mv $@.tmp $@
 
 # Ensure data directory exists
