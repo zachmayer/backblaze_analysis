@@ -52,10 +52,11 @@ process_data: $(CSV_FILES)
 # Static pattern rule for downloading files
 $(ALL_FILES): $(DOWNLOAD_DIR)/%.zip:
 	@mkdir -p $(dir $@)
+	@trap 'rm -f $@' EXIT; \
 	curl -o $@ $(BASE_URL)$(@F)
 
 # Pattern rule for processing zip files to CSV
-$(DATA_DIR)/%.csv: $(DOWNLOAD_DIR)/data_%.zip | $(DATA_DIR)
+$(DATA_DIR)/%.csv: $(DOWNLOAD_DIR)/data_%.zip code/aggregate_by_serial.R | $(DATA_DIR)
 	@echo "Processing $< ... $(shell date '+%Y-%m-%d %H:%M:%S')"
 	@trap 'rm -f $@.tmp' EXIT; \
 	unzip -p $< | awk 'NR == 1 || FNR > 1' > $@.tmp && \

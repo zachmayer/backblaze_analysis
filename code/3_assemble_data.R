@@ -17,8 +17,7 @@ all_data <- pblapply(  # Takes ~18 minutes
   function(x){
     out <- fread(
       paste0(data_dir, x),
-      select=c('model', 'serial_number', 'failure', 'capacity_bytes'),
-      colClasses=c(capacity_bytes='numeric') # We lose a tiny bit of precision, but who cares
+      select=c('model', 'serial_number', 'failure', 'capacity_bytes', fill=TRUE, comment.char=.),
     )
     out[,filename := x]
   }

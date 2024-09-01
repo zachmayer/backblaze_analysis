@@ -1,30 +1,28 @@
 #!/usr/bin/env Rscript
 
-# Load required library
-library(data.table)
-
-# Read input arguments
 args <- commandArgs(trailingOnly = TRUE)
 input_file <- args[1]
+output_file <- args[2]
 
 # Read the temporary CSV file
-data <- data.table::fread(input_file, select = c("date", "serial_number", "model", "capacity_bytes", "failure"))
+dt <- data.table::fread(
+  input_file, 
+  select = c('date', 'model', 'serial_number', 'failure', 'capacity_bytes'),
+  colClasses=c(capacity_bytes='numeric') # We lose a tiny bit of precision, but who cares
+  )
 
 # Set keys
-data.table::setkeyv(data, c("serial_number", "model", "capacity_bytes"))
+data.table::setkey(dt, serial_number, model, capacity_bytes)
 
-# Perform aggregation
-result <- data[, .(
+# Calculate summary statistics
+summary_dt <- dt[, .(
   min_date = min(date),
   max_date = max(date),
   first_fail = min(date[failure == 1], na.rm = TRUE)
 ), by = .(serial_number, model, capacity_bytes)]
 
-# Sort the result
-data.table::setorder(result, serial_number, model, capacity_bytes)
+# Sort the final output
+data.table::setorder(summary_dt, serial_number, model, capacity_bytes)
 
-# Overwrite the temporary file with the processed data
-data.table::fwrite(result, input_file)
-
-# Inform the user
-cat("Processed data written to:", input_file, "\n")
+# Write the final output
+data.table::fwrite(summary_dt, output_file)
