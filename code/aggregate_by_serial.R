@@ -5,11 +5,7 @@ input_file <- args[1]
 output_file <- args[2]
 
 # Read the temporary CSV file
-dt <- data.table::fread(
-  input_file, 
-  select = c('date', 'model', 'serial_number', 'failure', 'capacity_bytes'),
-  colClasses=c(capacity_bytes='numeric') # We lose a tiny bit of precision, but who cares
-  )
+dt <- data.table::fread(input_file)
 
 # Set keys
 data.table::setkey(dt, serial_number, model, capacity_bytes)

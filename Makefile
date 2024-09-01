@@ -56,10 +56,14 @@ $(ALL_FILES): $(DOWNLOAD_DIR)/%.zip:
 	curl -o $@ $(BASE_URL)$(@F)
 
 # Pattern rule for processing zip files to CSV
+# Only keeps the first 5 columns: date,serial_number,model,capacity_bytes,failure
+# Note that for the smart stats stats, different files have different columns
+# So if we want to process smart stats, we need much more complicated logic.
+# For this script we just want to analyze failure rates, so we drop the smart stats
 $(DATA_DIR)/%.csv: $(DOWNLOAD_DIR)/data_%.zip code/aggregate_by_serial.R | $(DATA_DIR)
 	@echo "Processing $< ... $(shell date '+%Y-%m-%d %H:%M:%S')"
 	@trap 'rm -f $@.tmp' EXIT; \
-	unzip -p $< | awk 'NR == 1 || FNR > 1' > $@.tmp && \
+	unzip -p $< | awk -F, '{print $1","$2","$3","$4","$5}' | awk 'NR == 1 || FNR > 1' > $@.tmp && \
 	Rscript code/aggregate_by_serial.R $@.tmp && \
 	mv $@.tmp $@
 
