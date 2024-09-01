@@ -58,7 +58,9 @@ $(ALL_FILES): $(DOWNLOAD_DIR)/%.zip:
 $(DATA_DIR)/%.csv: $(DOWNLOAD_DIR)/data_%.zip | $(DATA_DIR)
 	@echo "Processing $< ... $(shell date '+%Y-%m-%d %H:%M:%S')"
 	@trap 'rm -f $@.tmp' EXIT; \
-	unzip -p $< | awk 'NR == 1 || FNR > 1' > $@.tmp && mv $@.tmp $@
+	unzip -p $< | awk 'NR == 1 || FNR > 1' > $@.tmp && \
+	Rscript code/aggregate_by_serial.R $@.tmp && \
+	mv $@.tmp $@
 
 # Ensure data directory exists
 $(DATA_DIR):
