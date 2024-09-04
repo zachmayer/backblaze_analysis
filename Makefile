@@ -22,6 +22,7 @@ END_QUARTER := Q2
 # Directories
 DOWNLOAD_DIR := zip_data
 DATA_DIR := data
+RESULTS_DIR := results
 
 # Generate list of yearly data files (2013-2015)
 YEARLY_FILES := $(addprefix $(DOWNLOAD_DIR)/data_,$(addsuffix .zip,$(shell seq 2013 2015)))
@@ -62,11 +63,11 @@ $(ALL_FILES): $(DOWNLOAD_DIR)/%.zip:
 # So if we want to process smart stats, we need much more complicated logic.
 # For this script we just want to analyze failure rates, so we drop the smart stats
 # trap 'rm -rf "$$TEMP_DIR"' EXIT;
-$(DATA_DIR)/%.csv: $(DOWNLOAD_DIR)/data_%.zip code/process_csv_files.R | $(DATA_DIR)
+$(RESULTS_DIR)/%.csv: $(DOWNLOAD_DIR)/data_%.zip code/process_csv_files.R | $(DATA_DIR)
 	@echo "Processing $< ... $(shell date '+%Y-%m-%d %H:%M:%S')"
-	@TEMP_DIR="$(DATA_DIR)/$*_temp_$$(date +%s)"; \
+	@TEMP_DIR="$(DATA_DIR)/$*"; \
 	mkdir -p "$$TEMP_DIR"; \
-	unzip -q -j $< -d "$$TEMP_DIR" -x "__MACOSX/*" "*.DS_Store" && \
+	unzip -n -q -j $< -d "$$TEMP_DIR" -x "__MACOSX/*" "*.DS_Store" && \
 	Rscript code/process_csv_files.R \
 		--input "$$TEMP_DIR" \
 		--output $@ \
@@ -77,8 +78,9 @@ $(DATA_DIR):
 	mkdir -p $@
 
 # Clean processed data
-clean_data:
-	rm -rf $(DATA_DIR)
+clean:
+	find $(DATA_DIR) -mindepth 1 -delete
+	find $(RESULTS_DIR) -mindepth 1 -delete
 
 # Print the list of files (for debugging)
 print_files:

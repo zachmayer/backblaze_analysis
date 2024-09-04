@@ -15,7 +15,7 @@ parser <- argparser::add_argument(parser, "--verbose",
                                   flag=TRUE)
 
 args <- argparser::parse_args(parser)
-if (args$verbose) print(dput(args))
+if (args$verbose) dput(args)
 
 # Validate required arguments
 if (is.na(args$input) || is.na(args$output)) {
