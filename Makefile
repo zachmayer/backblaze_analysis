@@ -68,10 +68,9 @@ $(DATA_DIR)/%.csv: $(DOWNLOAD_DIR)/data_%.zip code/process_csv_files.R | $(DATA_
 	unzip -q $< -d "$$TEMP_DIR" && \
 	Rscript code/process_csv_files.R \
 		--input "$$TEMP_DIR" \
-		--output $@.tmp \
+		--output $@ \
 		--select "failure" \
 		--verbose && \
-	mv $@.tmp $@ || { rm -f $@.tmp; exit 1; }
 
 # Ensure data directory exists
 $(DATA_DIR):
