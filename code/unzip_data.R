@@ -7,7 +7,7 @@
 #!/usr/bin/env Rscript
 
 # Parse command line arguments
-parser <- argparser::arg_parser("Process CSV files and combine them")
+parser <- argparser::arg_parser("Unzip csv files and combine them")
 parser <- argparser::add_argument(parser, "--input", help="Input directory containing CSV files", type="character")
 parser <- argparser::add_argument(parser, "--output", help="Output CSV file", type="character")
 parser <- argparser::add_argument(parser, "--verbose", help="Print extra output", flag=TRUE)
@@ -32,7 +32,7 @@ csv_files <- list.files(path = args$input, pattern = "*.csv", full.names = TRUE)
 if (args$verbose) cat("...Found", length(csv_files), "csv files.\n")
 
 # Read CSV files to list
-apply_fun = lapply
+apply_fun <- lapply
 if (args$verbose) apply_fun = pbapply::pblapply
 keys <- c("serial_number", "model", "capacity_bytes")
 dt_list <- apply_fun(

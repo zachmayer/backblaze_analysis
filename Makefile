@@ -62,10 +62,8 @@ $(DATA_DIR)/%.csv: $(DOWNLOAD_DIR)/data_%.zip code/unzip_data.R
 		--input "$$TEMP_DIR" \
 		--output $@
 
-results/drive_dates.csv: $(CSV_FILES) code/combine_data.R | $(RESULTS_DIR)
-	Rscript code/combine_data.R \
-		--input $(DATA_DIR) \
-		--output $@
+results/drive_dates.csv: $(CSV_FILES) code/combine_data.R
+	Rscript code/combine_data.R --input $(CSV_FILES)
 
 # Define make targets
 .PHONY: all
