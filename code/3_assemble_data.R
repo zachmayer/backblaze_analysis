@@ -1,8 +1,6 @@
 # Setup
 rm(list = ls(all=T))
 gc(reset = T)
-library(pbapply)
-library(data.table)
 source('code/helpers.r')
 
 # Load the data
@@ -12,18 +10,11 @@ source('code/helpers.r')
 # to be game over
 data_dir <- 'data/'
 all_files <- list.files(data_dir)
-all_data <- pblapply(  # Takes ~18 minutes
-  all_files,
-  function(x){
-    out <- fread(
-      paste0(data_dir, x),
-      select=c('model', 'serial_number', 'failure', 'capacity_bytes', fill=TRUE, comment.char=.),
-    )
-    out[,filename := x]
-  }
-)
-all_data <- rbindlist(all_data, use.names=TRUE, fill=TRUE)
-# all_data[serial_number=='9JG4657T',]
+all_data <- pbapply::pblapply(all_files, function(x){
+  data.table::fread(paste0(data_dir, x))
+})
+all_data <- data.table::rbindlist(all_data, use.names=TRUE, fill=TRUE)
+all_data[serial_number=='9JG4657T',]
 gc(reset = T)
 
 # Cleanup model names
