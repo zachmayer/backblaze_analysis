@@ -65,7 +65,6 @@ $(DATA_DIR)/%.csv: $(DOWNLOAD_DIR)/data_%.zip code/process_csv_files.R | $(DATA_
 	@echo "Processing $< ... $(shell date '+%Y-%m-%d %H:%M:%S')"
 	@TEMP_DIR="$(DATA_DIR)/$*_temp_$$(date +%s)"; \
 	mkdir -p "$$TEMP_DIR"; \
-	trap 'rm -rf "$$TEMP_DIR"' EXIT; \
 	unzip -q $< -d "$$TEMP_DIR" && \
 	Rscript code/process_csv_files.R \
 		--input "$$TEMP_DIR" \
