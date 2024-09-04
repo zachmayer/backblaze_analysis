@@ -53,13 +53,18 @@ $(ALL_FILES): $(DOWNLOAD_DIR)/%.zip:
 # ...Bad input files: data/2014/2014-11-02.csv — DST ends lol
 # ...Bad input files: data/2015/2015-11-01.csv — DST ends lol
 CSV_FILES := $(patsubst $(DOWNLOAD_DIR)/data_%.zip,$(DATA_DIR)/%.csv,$(ALL_FILES))
-$(DATA_DIR)/%.csv: $(DOWNLOAD_DIR)/data_%.zip code/process_csv_files.R | $(DATA_DIR)
+$(DATA_DIR)/%.csv: $(DOWNLOAD_DIR)/data_%.zip code/unzip_data.R
 	@echo "Processing $< ... $(shell date '+%Y-%m-%d %H:%M:%S')"
 	@TEMP_DIR="$(DATA_DIR)/$*"; \
 	mkdir -p "$$TEMP_DIR"; \
 	unzip -n -qq -j $< -d "$$TEMP_DIR" -x "__MACOSX/*" "*.DS_Store" 2>/dev/null && \
-	Rscript code/process_csv_files.R \
+	Rscript code/unzip_data.R \
 		--input "$$TEMP_DIR" \
+		--output $@
+
+results/drive_dates.csv: $(CSV_FILES) code/combine_data.R | $(RESULTS_DIR)
+	Rscript code/combine_data.R \
+		--input $(DATA_DIR) \
 		--output $@
 
 # Define make targets
