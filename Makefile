@@ -12,7 +12,7 @@ help:
 	@echo "  clean_data       Remove all processed CSV files."
 	@echo "  print_files      Print the list of files for debugging."
 	@echo
-	@echo "Run make -j8 all to download/process the data in parallel."
+	@echo "Run make clean && make -j8 all to download/process the data in parallel."
 
 # Configuration
 BASE_URL := https://f001.backblazeb2.com/file/Backblaze-Hard-Drive-Data/
@@ -35,24 +35,8 @@ $(if $(filter $(1),$(END_YEAR)),\
 endef
 QUARTERLY_FILES := $(foreach year,$(shell seq 2016 $(END_YEAR)),$(call QUARTER_FILES,$(year)))
 
-# All files to be downloaded
-ALL_FILES := $(YEARLY_FILES) $(QUARTERLY_FILES)
-
-# List of output CSV files
-CSV_FILES := $(patsubst $(DOWNLOAD_DIR)/data_%.zip,$(DATA_DIR)/%.csv,$(ALL_FILES))
-
-# Targets
-.PHONY: all yearly_data quarterly_data process_data clean_data print_files
-
-all: yearly_data quarterly_data process_data
-
-yearly_data: $(YEARLY_FILES)
-
-quarterly_data: $(QUARTERLY_FILES)
-
-process_data: $(CSV_FILES)
-
 # Static pattern rule for downloading files
+ALL_FILES := $(YEARLY_FILES) $(QUARTERLY_FILES)
 $(ALL_FILES): $(DOWNLOAD_DIR)/%.zip:
 	@mkdir -p $(dir $@)
 	curl -o $@ $(BASE_URL)$(@F)
@@ -63,27 +47,34 @@ $(ALL_FILES): $(DOWNLOAD_DIR)/%.zip:
 # So if we want to process smart stats, we need much more complicated logic.
 # For this script we just want to analyze failure rates, so we drop the smart stats
 # trap 'rm -rf "$$TEMP_DIR"' EXIT;
-$(RESULTS_DIR)/%.csv: $(DOWNLOAD_DIR)/data_%.zip code/process_csv_files.R | $(DATA_DIR)
+CSV_FILES := $(patsubst $(DOWNLOAD_DIR)/data_%.zip,$(DATA_DIR)/%.csv,$(ALL_FILES))
+$(DATA_DIR)/%.csv: $(DOWNLOAD_DIR)/data_%.zip code/process_csv_files.R | $(DATA_DIR)
 	@echo "Processing $< ... $(shell date '+%Y-%m-%d %H:%M:%S')"
 	@TEMP_DIR="$(DATA_DIR)/$*"; \
 	mkdir -p "$$TEMP_DIR"; \
-	unzip -n -q -j $< -d "$$TEMP_DIR" -x "__MACOSX/*" "*.DS_Store" && \
+	unzip -n -qq -j $< -d "$$TEMP_DIR" -x "__MACOSX/*" "*.DS_Store" 2>/dev/null && \
 	Rscript code/process_csv_files.R \
 		--input "$$TEMP_DIR" \
-		--output $@ \
-		--verbose
-
-# Ensure data directory exists
-$(DATA_DIR):
-	mkdir -p $@
+		--output $@
 
 # Clean processed data
+.PHONY: clean
 clean:
 	find $(DATA_DIR) -mindepth 1 -delete
 	find $(RESULTS_DIR) -mindepth 1 -delete
 
 # Print the list of files (for debugging)
+.PHONY: print_files
 print_files:
 	@echo "Yearly files:" $(YEARLY_FILES) "\n"
 	@echo "Quarterly files:" $(QUARTERLY_FILES) "\n"
 	@echo "CSV files:" $(CSV_FILES) "\n"
+
+.PHONY: download_data
+download_data: $(ALL_FILES)
+
+.PHONY: process_data
+process_data: $(CSV_FILES)
+
+.PHONY: all
+all: download_data process_data
