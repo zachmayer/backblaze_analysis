@@ -87,7 +87,7 @@ download_data: $(ALL_FILES)
 unzip_data: $(CSV_FILES)
 
 .PHONY: combine_data
-combine_data: 
+combine_data: results/drive_dates.csv
 
 .PHONY: analyze_data
 analyze_data: 
