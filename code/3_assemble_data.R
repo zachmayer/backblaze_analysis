@@ -1,6 +1,3 @@
-# Setup
-rm(list = ls(all=T))
-gc(reset = T)
 source('code/helpers.r')
 
 # Load the data

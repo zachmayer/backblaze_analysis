@@ -5,12 +5,13 @@ help:
 	@echo
 	@echo "Available targets:"
 	@echo "  help             Display this help message."
-	@echo "  all              Download all data and process it."
-	@echo "  yearly_data      Download yearly data files (2013-2015)."
-	@echo "  quarterly_data   Download quarterly data files (2016-2024)."
-	@echo "  process_data     Process downloaded zip files into combined CSV files."
-	@echo "  clean_data       Remove all processed CSV files."
-	@echo "  print_files      Print the list of files for debugging."
+	@echo "  all              Download all data, process it, run the analysis, and knit the report."
+	@echo "  clean            Remove processed files, but keep downloaded zip files."
+	@echo "  print_files      Print a list of the files that will be processed, for debugging."
+	@echo "  download_data    Download the zip files from Backblaze."
+	@echo "  unzip_data       Unzip each downloaded zip file and combine it into a single csv file."
+	@echo "  combine_data     Combine all csv files into a single csv file."
+	@echo "  analyze_data     Run the survival analysis and knit the Readme.md file"
 	@echo
 	@echo "Run make clean && make -j16 all to download/process the data in parallel."
 
@@ -61,13 +62,15 @@ $(DATA_DIR)/%.csv: $(DOWNLOAD_DIR)/data_%.zip code/process_csv_files.R | $(DATA_
 		--input "$$TEMP_DIR" \
 		--output $@
 
-# Clean processed data
+# Define make targets
+.PHONY: all
+all: download_data unzip_data combine_data analyze_data
+
 .PHONY: clean
 clean:
 	find $(DATA_DIR) -mindepth 1 -delete
 	find $(RESULTS_DIR) -mindepth 1 -delete
 
-# Print the list of files (for debugging)
 .PHONY: print_files
 print_files:
 	@echo "Yearly files:" $(YEARLY_FILES) "\n"
@@ -80,5 +83,8 @@ download_data: $(ALL_FILES)
 .PHONY: unzip_data
 unzip_data: $(CSV_FILES)
 
-.PHONY: all
-all: download_data unzip_data
+.PHONY: combine_data
+combine_data: 
+
+.PHONY: analyze_data
+analyze_data: 
