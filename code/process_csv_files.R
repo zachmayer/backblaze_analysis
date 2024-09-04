@@ -18,6 +18,7 @@ parser <- argparser::add_argument(parser, "--verbose",
                                   flag=TRUE)
 
 args <- argparser::parse_args(parser)
+print(args)
 
 # Validate required arguments
 if (is.na(args$input) || is.na(args$output)) {
@@ -32,7 +33,7 @@ select_cols <- unique(select_cols)
 
 # Process CSV files
 apply_fun = lapply
-if (verbose) apply_fun = pbapply::pblapply
+if (args$verbose) apply_fun = pbapply::pblapply
 dt <- data.table::rbindlist(
   apply_fun(
     list.files(path = args$input, pattern = "*.csv", full.names = TRUE),
@@ -41,11 +42,12 @@ dt <- data.table::rbindlist(
     integer64 = "numeric",  # Loose a little tiny precision off drive capacity
     encoding = "UTF-8",
     blank.lines.skip = TRUE,
-    showProgress = verbose
+    showProgress = args$verbose
   )
 )
-setkeyv(df, KEYS)
-if (verbose) cat("Processing", args$input, "successful.\n")
+print(dt)
+data.table::setkeyv(dt, KEYS)
+if (args$verbose) cat("Processing", args$input, "successful.\n")
 
 # Calculate summary statistics
 summary_dt <- dt[, .(
@@ -59,3 +61,4 @@ data.table::setorderv(summary_dt, KEYS)
 
 # Write the final output
 data.table::fwrite(summary_dt, args$output, sep = ",", quote = TRUE, encoding = "UTF-8")
+if (args$verbose) cat("Processing", args$output, "successful.\n")

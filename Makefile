@@ -63,14 +63,15 @@ $(ALL_FILES): $(DOWNLOAD_DIR)/%.zip:
 # For this script we just want to analyze failure rates, so we drop the smart stats
 $(DATA_DIR)/%.csv: $(DOWNLOAD_DIR)/data_%.zip code/process_csv_files.R | $(DATA_DIR)
 	@echo "Processing $< ... $(shell date '+%Y-%m-%d %H:%M:%S')"
-	@TEMP_DIR=$$(mktemp -d); \
+	@TEMP_DIR="$(DATA_DIR)/$*_temp_$$(date +%s)"; \
+	mkdir -p "$$TEMP_DIR"; \
 	trap 'rm -rf "$$TEMP_DIR"' EXIT; \
 	unzip -q $< -d "$$TEMP_DIR" && \
 	Rscript code/process_csv_files.R \
 		--input "$$TEMP_DIR" \
-		--output $@ \
+		--output $@.tmp \
 		--select "failure" \
-		--verbose && \
+		--verbose
 
 # Ensure data directory exists
 $(DATA_DIR):
