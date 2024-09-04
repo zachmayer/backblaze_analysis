@@ -77,11 +77,18 @@ if(nrow(ambiguous_model_data) > 100L){
 
 # Aggregate
 dt <- dt[, list(
-  capacity_bytes = max(capacity_tb, na.rm=TRUE),  # For differing capacities, take the median excluding NAs
+  capacity_tb = max(capacity_tb, na.rm=TRUE),  # For differing capacities, take the median excluding NAs
   model = model[which.max(max_date)],  # For differing models, take the latest
   min_date = min(min_date),
   max_date = max(max_date),
   first_fail = suppressWarnings(min(first_fail, na.rm=TRUE))
 ), by=keys]
 
+# Recode failures
+dt[,failed := as.integer(is.finite(first_fail))]
+dt[is.finite(first_fail), max_date := first_fail]
+dt[,first_fail := NULL]
+stopifnot(dt[,all(max_date >= min_date)])
+
+# Save
 data.table::fwrite(dt, 'results/drive_dates.csv')

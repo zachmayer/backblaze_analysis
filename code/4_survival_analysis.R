@@ -1,43 +1,47 @@
-# Setup
-rm(list = ls(all=T))
-gc(reset = T)
-library(data.table)
-library(kit)
-library(survival)
 library(ggthemes)
 library(survminer)
 source('code/helpers.r')
 
 # Load data
-capacity_map <- fread('results/capacity_map.csv')
-drive_dates <- fread('results/drive_dates.csv')
+drive_dates <- data.table::fread('results/drive_dates.csv')[capacity_tb >= 1,]  # Exclude small drives
 
-# Format HD sizes nicely
-capacity_map[, size := paste(capacity, 'TB')]
-capacity_order <- capacity_map[,list(capacity=max(capacity)), by='size']
-capacity_map[,size := factor(size, levels=capacity_order[,size], ordered=T)]
-fwrite(capacity_order, 'results/capacity_order.csv')
+# Calculate time to failure or time to censoring
+drive_dates[,days := as.numeric(max_date - min_date)]
 
-# Computer drive failure, and time to failure or time to censoring
-drive_dates[,failed := as.integer(is.finite(first_fail))]
-drive_dates[is.finite(first_fail), max_date := first_fail]
-drive_dates[,days := as.integer(max_date - min_date)]
-drive_dates[,model := factor(model)]
+# Combine some low-data drives
+drive_dates[,list(.N, days=sum(days), failed=sum(failed)) , by='model'][failed==0,]
 
 # Choose the "reference" class based
-ref_level <- 'HGST HMS5C4040BLE640'  # Reliable 4TB drive with lots of drives and drive days
-ref_level <- string_normalize(ref_level)
+ref_level <- 'hgst hms5c4040ble640'  # Reliable 4TB drive with lots of drives and drive days
 drive_dates[,model := factor(model)]
 drive_dates[,model := relevel(model, ref=ref_level)]
-fwrite(drive_dates, 'results/drive_dates_clean.csv')
+
+# Try glmnet
+set.seed(42)
+drive_dates[days == 0, days := 1/24.0]
+x <- drive_dates[, Matrix::sparse.model.matrix(~ model)]
+y <- drive_dates[, as.matrix(data.table::data.table(time=days, status=failed))]
+t1 <- Sys.time()
+fit <- glmnet::cv.glmnet(x, y, family = "cox", standardize=F, trace.it=1L, alpha=0.1, nlambda=25L, intercept=F, nfolds=5L, grouped=T)
+t2 <- Sys.time()
+print(t2 - t1)
+plot(fit)
+print(fit)  # 19.29
+plot(survival::survfit(fit, s = 0.05, x = x, y = y))
 
 # Fit the cox model
-cox_model <- drive_dates[,coxph(Surv(time=days, failed) ~ 1 + model, x=T)]
+cox_model <- drive_dates[,survival::coxph(survival::Surv(time=days, failed) ~ 1 + model, x=T)]
+summary(cox_model)
+survival::cox.zph(cox_model)
+
+# Fit exponential survival model
+exp_model <- drive_dates[days>0, survival::survreg(survival::Surv(time=days, failed) ~ model, dist = "exponential")]
+
 
 # Extract cox model coefficients
 # These coefficients are "hazard ratios".  Lower hazard is better
 cf <- summary(cox_model)
-cf <- data.table(
+cf <- data.table::data.table(
   model=row.names(coef(cf)),
   coef(cf),
   cf$conf.int[,c('lower .95', 'upper .95')]
