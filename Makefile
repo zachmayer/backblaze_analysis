@@ -64,6 +64,9 @@ $(DATA_DIR)/%.csv: $(DOWNLOAD_DIR)/data_%.zip code/unzip_data.R
 
 results/drive_dates.csv: $(CSV_FILES) code/combine_data.R
 	Rscript code/combine_data.R --input $(CSV_FILES)
+	
+results/survival.csv: results/drive_dates.csv code/survival.R
+	Rscript code/survival.R
 
 # Define make targets
 .PHONY: all
@@ -88,6 +91,9 @@ unzip_data: $(CSV_FILES)
 
 .PHONY: combine_data
 combine_data: results/drive_dates.csv
+
+.PHONY: analyze_data
+analyze_data: results/survival.csv
 
 .PHONY: analyze_data
 analyze_data: 

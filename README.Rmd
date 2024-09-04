@@ -12,48 +12,42 @@ output:
 knitr::opts_chunk$set(echo = FALSE)
 
 # Libraries
-library(data.table)
 library(ggplot2)
 library(ggthemes)
 library(survival)
-library(survminer)
-source('code/helpers.r')
 
 # Globals
+days_to_year <- 365.2425
 top_n <- 25
-min_unique_drives <- 1200
 file_size <- utils:::format.object_size(file.size('drive_dates.csv'), 'Mb', digits=0)
+custom_palette <- c(
+  "#1f78b4", "#ff7f00", "#6a3d9a", "#33a02c", "#e31a1c", "#b15928",
+  "#a6cee3", "#fdbf6f", "#cab2d6", "#b2df8a", "#fb9a99", "black",
+  "grey1", "grey10", "grey25", "grey50", "grey75", "grey100"
+)
 
 # Load data
-dat = fread('results/survival_results.csv')
-drive_dates = fread('results/drive_dates_clean.csv')
-
-capacity_order = fread('results/capacity_order.csv')
-setorder(capacity_order, -capacity)
-capacity_order[,size :=  factor(size, levels=size, ordered=T)]
-
-capacity_map = fread('results/capacity_map.csv')
-capacity_map = merge(capacity_map, capacity_order, by='capacity')
-
+dat = data.table::fread('results/survival.csv')
+drive_dates = data.table::fread('results/drive_dates.csv')
+drive_dates[,days := as.numeric(max_date - min_date)]
 cox_model = readRDS('results/cox_model.rds')
 
 # Subset data
 dat = dat[surv_5yr_lower>0,]
-dat = dat[n_unique >= min_unique_drives,]
 
 # Order factors
 dat[,model := factor(model, levels=model[order(-surv_5yr_lower, -surv_5yr, surv_5yr_upper)], ordered=T)]
-dat[,size := factor(size, levels=capacity_order[['size']], ordered=T)]
+drive_dates[,model := factor(model, levels=model[order(-surv_5yr_lower, -surv_5yr, surv_5yr_upper)], ordered=T)]
 
 # Choose best drive
-best_drive_by_size <- dat[!duplicated(size),]
-best_drive = dat[1, model]
+best_drive_by_size <- dat[!duplicated(capacity_tb),]
+best_drive = dat[1, as.character(model)]
 best_drive_surv = dat[1, sprintf("%1.2f%%", 100*surv_5yr_lower)]
 
 # Make a dataframe to use later in survival plots
 model_list <- best_drive_by_size[, model]
-plot_dat <- drive_dates[model %in% model_list,]
-plot_dat <- merge(plot_dat, capacity_map, by='model')
+plot_dat <- drive_dates[model %in% model_list,][capacity_tb >= 2,]
+plot_dat[,capacity_tb := factor(capacity_tb, levels=rev(sort(unique(capacity_tb))))]
 ```
 
 # Data Sources
@@ -70,7 +64,7 @@ knitr::kable(
   dat[1:top_n,
     list(
       model, 
-      size,
+      capacity_tb,
       N=n_unique,
       drive_days,
       failures=failed,
@@ -82,7 +76,7 @@ knitr::kable(
 )
 ```
 * **model** is the drive model
-* **size** is the size of the drive
+* **capacity_tb** is the size of the drive
 * **N** is the number of unique drives in the analysis
 * **drive_days** is the total number of days that we've observed for drives of this model in the sample
 * **failures** is the number of failures observed so far
@@ -97,7 +91,7 @@ knitr::kable(
   best_drive_by_size[,
     list(
       model, 
-      size,
+      capacity_tb,
       N=n_unique,
       drive_days,
       failures=failed,
@@ -124,8 +118,8 @@ The Cox model is semi-parametric.  It assumes a non-parametric, baseline hazard 
 Here is a plot of the survival for each of the best drive models.  Each curve ends with the oldest drive we've observed (these are called [Kaplan–Meier](https://en.wikipedia.org/wiki/Kaplan%E2%80%93Meier_estimator) curves):
 
 ```{r km_curves, echo=FALSE, warning=FALSE}
-plot_model <- plot_dat[, survfit(Surv(time=days, failed) ~ 1 + size)]
-out <- ggsurvplot(
+plot_model <- plot_dat[, survival::survfit(survival::Surv(time=days, failed) ~ 1 + capacity_tb)]
+out <- survminer::ggsurvplot(
   plot_model, data=plot_dat, 
   palette = custom_palette, conf.int = F, legend='top', censor=F,
   xlim=days_to_year * c(0, 5), ylim=c(.93, 1.0), 
@@ -137,8 +131,8 @@ print(out)
 The "proportional hazards" assumption from the Cox model allows us to extend these curves and estimate survival times at 5 years for all of the drives:
 
 ```{r cox_curves, echo=FALSE, warning=FALSE}
-sizes <- best_drive_by_size[,sort(size)]
-newdata <- data.table(model=as.character(model_list[best_drive_by_size[,order(size)]]))
+capacity_tb <- best_drive_by_size[,sort(capacity_tb)]
+newdata <- data.table::data.table(model=as.character(model_list[best_drive_by_size[,order(capacity_tb)]]))
 plot_model <- survfit(cox_model, newdata=newdata)
 out <- ggsurvplot(
   plot_model, data=plot_dat, legend.labs=sizes,

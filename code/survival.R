@@ -42,7 +42,7 @@ cf[, surv_5yr_upper := surv_5_year$upper[1,]]
 dat <- drive_dates[,list(
   n_unique=length(collapse::funique(serial_number)),
   drive_days = sum(days),
-  size = max(capacity_tb),
+  capacity_tb = max(capacity_tb),
   naive_age_med = as.numeric(median(days)),
   naive_age_mean = as.numeric(mean(days)),
   failed = sum(failed)
@@ -54,9 +54,9 @@ dat <- merge(dat, cf, by='model', all=F)
 dat <- dat[order(
   -surv_5yr_lower, -surv_5yr, surv_5yr_upper,
   -years_97pct,
-  -drive_days, -n_unique, failed, -size),]
+  -drive_days, -n_unique, failed, -capacity_tb),]
 dat <- dat[, list(
-  model, size, n_unique,
+  model, capacity_tb, n_unique,
   drive_days, failed, years_97pct,
   surv_5yr_lower, surv_5yr, surv_5yr_upper)]
 
