@@ -12,7 +12,7 @@ help:
 	@echo "  clean_data       Remove all processed CSV files."
 	@echo "  print_files      Print the list of files for debugging."
 	@echo
-	@echo "Run make clean && make -j8 all to download/process the data in parallel."
+	@echo "Run make clean && make -j16 all to download/process the data in parallel."
 
 # Configuration
 BASE_URL := https://f001.backblazeb2.com/file/Backblaze-Hard-Drive-Data/
@@ -46,7 +46,11 @@ $(ALL_FILES): $(DOWNLOAD_DIR)/%.zip:
 # Note that for the smart stats stats, different files have different columns
 # So if we want to process smart stats, we need much more complicated logic.
 # For this script we just want to analyze failure rates, so we drop the smart stats
-# trap 'rm -rf "$$TEMP_DIR"' EXIT;
+# Add trap 'rm -rf "$$TEMP_DIR"' EXIT; at the start to delete tempfiles
+# Takes about 4 minutes with 8 cores
+# ...Bad input files: data/Q1_2017/2017-01-30.csv — ???
+# ...Bad input files: data/2014/2014-11-02.csv — DST ends lol
+# ...Bad input files: data/2015/2015-11-01.csv — DST ends lol
 CSV_FILES := $(patsubst $(DOWNLOAD_DIR)/data_%.zip,$(DATA_DIR)/%.csv,$(ALL_FILES))
 $(DATA_DIR)/%.csv: $(DOWNLOAD_DIR)/data_%.zip code/process_csv_files.R | $(DATA_DIR)
 	@echo "Processing $< ... $(shell date '+%Y-%m-%d %H:%M:%S')"
@@ -73,8 +77,8 @@ print_files:
 .PHONY: download_data
 download_data: $(ALL_FILES)
 
-.PHONY: process_data
-process_data: $(CSV_FILES)
+.PHONY: unzip_data
+unzip_data: $(CSV_FILES)
 
 .PHONY: all
-all: download_data process_data
+all: download_data unzip_data
