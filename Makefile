@@ -71,8 +71,8 @@ all: download_data unzip_data combine_data analyze_data
 
 .PHONY: clean
 clean:
-	find $(DATA_DIR) -mindepth 1 -delete
-	find $(RESULTS_DIR) -mindepth 1 -delete
+	find $(DATA_DIR) -mindepth 1 ! -name '.gitignore' -delete
+	find $(RESULTS_DIR) -mindepth 1 ! -name '.gitignore' -delete
 
 .PHONY: print_files
 print_files:

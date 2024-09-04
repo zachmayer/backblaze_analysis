@@ -32,7 +32,6 @@ dt_list <- apply_fun(
 
 # Combine into one data.table
 dt <- data.table::rbindlist(dt_list, use.names=TRUE, fill=TRUE)
-if (args$verbose) cat("...Processing", args$input, "successful.\n")
 
 # Set keys
 keys <- "serial_number"
@@ -85,4 +84,4 @@ dt <- dt[, list(
   first_fail = suppressWarnings(min(first_fail, na.rm=TRUE))
 ), by=keys]
 
-fwrite(drive_dates, 'results/drive_dates.csv')
+data.table::fwrite(dt, 'results/drive_dates.csv')
