@@ -37,41 +37,41 @@ things.
 I chose to order the drives by their expected 5 year survival rate. I
 calculated a 95% confidence interval on the 5-year survival rate, and I
 used that interval to sort the drives. Based on this analysis, the wdc
-wuh721816ale6l0 is the most reliable drive model in our data, with an
-estimated 5-year survival rate that is at least 99.78%.
+wuh721816ale6l4 is the most reliable drive model in our data, with an
+estimated 5-year survival rate that is at least 97.49%.
 
 The top 25 drives from this analysis are:
 
-| model                   | size  |     N | drive_days | failures | years_97pct | surv_5yr_lo | surv_5yr | surv_5yr_hi |
-|:------------------------|:------|------:|-----------:|---------:|:------------|:------------|:---------|:------------|
-| wdc wuh721816ale6l0     | 16 TB |  2705 |    1942091 |        7 | 8.2         | 99.78%      | 99.89%   | 99.95%      |
-| hgst huh721212ale600    | 12 TB |  2644 |    3769755 |       32 | 6.4         | 99.69%      | 99.78%   | 99.84%      |
-| wdc wuh721414ale6l4     | 14 TB |  8527 |    8545174 |       77 | 6.2         | 99.68%      | 99.75%   | 99.80%      |
-| hgst hms5c4040ale640    | 4 TB  |  8723 |   17769580 |      251 | 5.4         | 99.62%      | 99.66%   | 99.70%      |
-| wdc wuh721816ale6l4     | 16 TB | 18050 |    5229946 |       46 | 5.1         | 99.59%      | 99.69%   | 99.77%      |
-| hgst huh721212ale604    | 12 TB | 13408 |   11998782 |      189 | 4.1         | 99.48%      | 99.55%   | 99.61%      |
-| hitachi hds5c4040ale630 | 4 TB  |  2719 |    4643282 |       89 | 3.7         | 99.41%      | 99.52%   | 99.61%      |
-| toshiba mg08aca16tey    | 16 TB |  5347 |    3412349 |       54 | 3.6         | 99.37%      | 99.52%   | 99.63%      |
-| hitachi hds5c3030ala630 | 3 TB  |  4664 |    6934573 |      150 | 3.5         | 99.35%      | 99.45%   | 99.53%      |
-| st6000dx000             | 6 TB  |  1939 |    4153460 |       99 | 3.4         | 99.32%      | 99.44%   | 99.54%      |
-| st12000nm001g           | 12 TB | 13455 |   13105533 |      313 | 3.1         | 99.25%      | 99.33%   | 99.40%      |
-| st16000nm001g           | 16 TB | 27832 |   14501238 |      319 | 3.1         | 99.25%      | 99.33%   | 99.40%      |
-| hgst huh721212aln604    | 12 TB | 11049 |   17674963 |      487 | 3.1         | 99.24%      | 99.31%   | 99.37%      |
-| toshiba mg07aca14ta     | 14 TB | 39230 |   40713710 |     1083 | 3.0         | 99.22%      | 99.26%   | 99.31%      |
-| hgst huh728080ale600    | 8 TB  |  1218 |    2307395 |       61 | 2.8         | 99.17%      | 99.35%   | 99.50%      |
-| toshiba mg08aca16ta     | 16 TB | 22966 |    3059385 |       66 | 2.7         | 99.13%      | 99.31%   | 99.46%      |
-| st8000dm002             | 8 TB  | 10300 |   25052826 |      990 | 2.5         | 99.04%      | 99.10%   | 99.16%      |
-| st14000nm001g           | 14 TB | 11153 |   10362522 |      370 | 2.2         | 98.88%      | 98.99%   | 99.09%      |
-| toshiba mg08aca16te     | 16 TB |  6077 |    4106357 |      144 | 2.0         | 98.77%      | 98.95%   | 99.11%      |
-| st8000nm0055            | 8 TB  | 15680 |   32835683 |     1632 | 2.0         | 98.74%      | 98.82%   | 98.88%      |
-| hitachi hds722020ala330 | 2 TB  |  4774 |    5675646 |      235 | 1.9         | 98.71%      | 98.87%   | 99.01%      |
-| st12000nm0008           | 12 TB | 20791 |   25714467 |     1223 | 1.9         | 98.65%      | 98.73%   | 98.81%      |
-| st12000nm0007           | 12 TB | 38838 |   36631080 |     2085 | 1.5         | 98.32%      | 98.41%   | 98.48%      |
-| st4000dm000             | 4 TB  | 37040 |   78965475 |     5556 | 1.5         | 98.32%      | 98.39%   | 98.46%      |
-| st10000nm0086           | 10 TB |  1304 |    2625375 |      165 | 1.5         | 98.23%      | 98.49%   | 98.70%      |
+| model | capacity_tb | N | drive_days | failures | years_97pct | surv_5yr_lo | surv_5yr | surv_5yr_hi |
+|:---|:---|---:|---:|---:|:---|:---|:---|:---|
+| wdc wuh721816ale6l4 | 16 | 26506 | 11603684 | 101 | 5.7 | 97.49% | 97.93% | 98.30% |
+| wdc wuh721414ale6l4 | 14 | 8603 | 10867094 | 113 | 5.6 | 97.43% | 97.86% | 98.22% |
+| hgst hms5c4040ale640 | 4 | 8716 | 18224627 | 253 | 5.4 | 97.30% | 97.61% | 97.89% |
+| hgst huh721212ale600 | 12 | 2673 | 4483664 | 61 | 4.8 | 96.80% | 97.50% | 98.05% |
+| wdc wuh721816ale6l0 | 16 | 3069 | 2772374 | 37 | 4.0 | 96.03% | 97.11% | 97.90% |
+| hitachi hds5c4040ale630 | 4 | 2719 | 4643856 | 89 | 3.8 | 95.73% | 96.52% | 97.16% |
+| st6000dx000 | 6 | 1939 | 4330559 | 100 | 3.6 | 95.26% | 96.09% | 96.78% |
+| hitachi hds5c3030ala630 | 3 | 4664 | 6934573 | 150 | 3.5 | 95.19% | 95.88% | 96.48% |
+| st16000nm001g | 16 | 34293 | 22614411 | 480 | 3.4 | 94.90% | 95.33% | 95.73% |
+| toshiba mg07aca14ta | 14 | 39365 | 51123732 | 1376 | 3.1 | 94.41% | 94.70% | 94.97% |
+| st12000nm001g | 12 | 13627 | 16705713 | 434 | 3.1 | 94.32% | 94.82% | 95.28% |
+| hgst huh721212ale604 | 12 | 13519 | 15607978 | 392 | 3.1 | 94.29% | 94.82% | 95.30% |
+| hgst huh728080ale600 | 8 | 1218 | 2609201 | 73 | 3.0 | 94.18% | 95.34% | 96.28% |
+| toshiba mg08aca16tey | 16 | 5347 | 4846164 | 125 | 2.7 | 93.50% | 94.52% | 95.39% |
+| st8000dm002 | 8 | 10307 | 27580788 | 1111 | 2.7 | 93.41% | 93.79% | 94.15% |
+| hgst huh721212aln604 | 12 | 11422 | 20559877 | 882 | 2.3 | 92.06% | 92.55% | 93.01% |
+| toshiba mg08aca16ta | 16 | 39184 | 12456523 | 361 | 2.2 | 91.94% | 92.73% | 93.44% |
+| toshiba mg08aca16te | 16 | 6130 | 5737006 | 192 | 2.2 | 91.87% | 92.91% | 93.82% |
+| toshiba md04aba400v | 4 | 150 | 378365 | 11 | 2.2 | 91.75% | 95.32% | 97.39% |
+| st14000nm001g | 14 | 11177 | 13299198 | 504 | 2.2 | 91.69% | 92.37% | 93.00% |
+| st8000nm0055 | 8 | 15680 | 36632508 | 1893 | 2.1 | 91.46% | 91.84% | 92.20% |
+| st16000nm002j | 16 | 468 | 259866 | 4 | 2.0 | 90.94% | 96.46% | 98.66% |
+| hitachi hds722020ala330 | 2 | 4774 | 5675646 | 235 | 1.9 | 90.54% | 91.63% | 92.61% |
+| wdc wuh722222ale6l4 | 22 | 13244 | 1279877 | 42 | 1.8 | 90.00% | 92.52% | 94.44% |
+| st12000nm0008 | 12 | 20955 | 31032423 | 1615 | 1.8 | 89.97% | 90.43% | 90.87% |
 
 - **model** is the drive model
-- **size** is the size of the drive
+- **capacity_tb** is the size of the drive
 - **N** is the number of unique drives in the analysis
 - **drive_days** is the total number of days that we’ve observed for
   drives of this model in the sample
@@ -84,20 +84,20 @@ The top 25 drives from this analysis are:
 - **surv_5yr_hi** is the upper bound of the 95% confidence interval of
   the 5-year survival rate
 
-To narrow down the data, we can just look at the best drive by size
-(excluding models that have fewer than 1200):
-
-| model                   | size  |    N | drive_days | failures | years_97pct | surv_5yr_lo | surv_5yr | surv_5yr_hi |
-|:------------------------|:------|-----:|-----------:|---------:|:------------|:------------|:---------|:------------|
-| wdc wuh721816ale6l0     | 16 TB | 2705 |    1942091 |        7 | 8.2         | 99.78%      | 99.89%   | 99.95%      |
-| hgst huh721212ale600    | 12 TB | 2644 |    3769755 |       32 | 6.4         | 99.69%      | 99.78%   | 99.84%      |
-| wdc wuh721414ale6l4     | 14 TB | 8527 |    8545174 |       77 | 6.2         | 99.68%      | 99.75%   | 99.80%      |
-| hgst hms5c4040ale640    | 4 TB  | 8723 |   17769580 |      251 | 5.4         | 99.62%      | 99.66%   | 99.70%      |
-| hitachi hds5c3030ala630 | 3 TB  | 4664 |    6934573 |      150 | 3.5         | 99.35%      | 99.45%   | 99.53%      |
-| st6000dx000             | 6 TB  | 1939 |    4153460 |       99 | 3.4         | 99.32%      | 99.44%   | 99.54%      |
-| hgst huh728080ale600    | 8 TB  | 1218 |    2307395 |       61 | 2.8         | 99.17%      | 99.35%   | 99.50%      |
-| hitachi hds722020ala330 | 2 TB  | 4774 |    5675646 |      235 | 1.9         | 98.71%      | 98.87%   | 99.01%      |
-| st10000nm0086           | 10 TB | 1304 |    2625375 |      165 | 1.5         | 98.23%      | 98.49%   | 98.70%      |
+| model | capacity_tb | N | drive_days | failures | years_97pct | surv_5yr_lo | surv_5yr | surv_5yr_hi |
+|:---|---:|---:|---:|---:|:---|:---|:---|:---|
+| wdc wuh721816ale6l4 | 16 | 26506 | 11603684 | 101 | 5.7 | 97.49% | 97.93% | 98.30% |
+| wdc wuh721414ale6l4 | 14 | 8603 | 10867094 | 113 | 5.6 | 97.43% | 97.86% | 98.22% |
+| hgst hms5c4040ale640 | 4 | 8716 | 18224627 | 253 | 5.4 | 97.30% | 97.61% | 97.89% |
+| hgst huh721212ale600 | 12 | 2673 | 4483664 | 61 | 4.8 | 96.80% | 97.50% | 98.05% |
+| st6000dx000 | 6 | 1939 | 4330559 | 100 | 3.6 | 95.26% | 96.09% | 96.78% |
+| hitachi hds5c3030ala630 | 3 | 4664 | 6934573 | 150 | 3.5 | 95.19% | 95.88% | 96.48% |
+| hgst huh728080ale600 | 8 | 1218 | 2609201 | 73 | 3.0 | 94.18% | 95.34% | 96.28% |
+| hitachi hds722020ala330 | 2 | 4774 | 5675646 | 235 | 1.9 | 90.54% | 91.63% | 92.61% |
+| wdc wuh722222ale6l4 | 22 | 13244 | 1279877 | 42 | 1.8 | 90.00% | 92.52% | 94.44% |
+| st10000nm0086 | 10 | 1304 | 2924650 | 202 | 1.5 | 87.58% | 89.09% | 90.44% |
+| toshiba md04aba500v | 5 | 47 | 67138 | 2 | 1.0 | 80.02% | 94.34% | 98.58% |
+| st18000nm000j | 18 | 70 | 82370 | 10 | 0.5 | 63.68% | 77.94% | 87.68% |
 
 All of these drives have a very high 5-year survival rate, and I’d feel
 pretty confident buying any of them.
@@ -137,13 +137,13 @@ curve ends with the oldest drive we’ve observed (these are called
 [Kaplan–Meier](https://en.wikipedia.org/wiki/Kaplan%E2%80%93Meier_estimator)
 curves):
 
-![](README_files/figure-gfm/km_curves-1.png)<!-- -->
+<img src="README_files/figure-gfm/km_curves-1.png" width="4200" />
 
 The “proportional hazards” assumption from the Cox model allows us to
 extend these curves and estimate survival times at 5 years for all of
 the drives:
 
-![](README_files/figure-gfm/cox_curves-1.png)<!-- -->
+<img src="README_files/figure-gfm/cox_curves-1.png" width="4200" />
 
 This plot doesn’t have the confidence intervals, which are wider for the
 drives with less data.
@@ -189,9 +189,9 @@ Any of the top 25 drives are likely safe to buy, and are very unlikely
 to fail.
 
 There are some drives in this data I plan to avoid. For example, the
-st3000dm001 has a 5 year survival of 80.3%. This is honestly probably
+st3000dm001 has a 5 year survival of 19.0%. This is honestly probably
 fine for my purposes, but maybe I’d be a little nervous to buy a drive
-with a 1-in-5 chance of dying within 5 years.
+with a 1-in-1 chance of dying within 5 years.
 
 <figure>
 <img src="https://imgs.xkcd.com/comics/nerd_sniping.png"

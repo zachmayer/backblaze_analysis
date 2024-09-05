@@ -68,6 +68,9 @@ results/drive_dates.csv: $(CSV_FILES) code/combine_data.R
 results/survival.csv: results/drive_dates.csv code/survival.R
 	Rscript code/survival.R
 
+README.md: README.Rmd results/survival.csv
+	Rscript -e "rmarkdown::render('README.Rmd', 'github_document', clean=TRUE)"
+
 # Define make targets
 .PHONY: all
 all: download_data unzip_data combine_data analyze_data
@@ -92,8 +95,5 @@ unzip_data: $(CSV_FILES)
 .PHONY: combine_data
 combine_data: results/drive_dates.csv
 
-.PHONY: analyze_data
-analyze_data: results/survival.csv
-
-.PHONY: analyze_data
-analyze_data: 
+.PHONY: analyze_data 
+analyze_data: results/survival.csv README.md
