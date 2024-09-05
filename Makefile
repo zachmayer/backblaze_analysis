@@ -1,3 +1,4 @@
+# TODO: ADD CI OF SOME MINIMAL KIND
 
 # TODO: new make target for smart stats
 # For each serial, lookup failure time or max time.
