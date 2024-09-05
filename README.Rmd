@@ -8,6 +8,10 @@ output:
 
 ```{r setup, include=FALSE}
 
+# TODO:
+# FIX COX PLOT COLORS
+# FIX FACTOR HANDLING
+
 # Knitr setup
 knitr::opts_chunk$set(
   echo = FALSE,
