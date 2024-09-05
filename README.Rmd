@@ -22,7 +22,6 @@ knitr::opts_chunk$set(
   dpi = 600,
   fig.retina = 2 
 )
-library(data.table)
 
 # Globals
 days_to_year <- 365.2425
@@ -35,18 +34,26 @@ custom_palette <- c(
 )
 
 # Load data
-dat = data.table::fread('results/survival.csv')[capacity_tb >= 2,]
-drive_dates = data.table::fread('results/drive_dates.csv')[capacity_tb >= 2,]
-drive_dates[,days := as.numeric(max_date - min_date)]
 cox_model = readRDS('results/cox_model.rds')
+dat = data.table::fread('results/survival.csv')
+drive_dates = data.table::fread('results/drive_dates.csv')
+drive_dates[,days := as.numeric(max_date - min_date)]
 
-# Subset data
-dat = dat[surv_5yr_lower>0,]
+# Drop capacities with low data — they clutter the plots
+drives_by_cap <- dat[,list(drives=sum(n_unique)), by=capacity_tb][order(-drives),]
+caps_to_keep <- drives_by_cap[drives > 999, capacity_tb]
+dat <- dat[capacity_tb %in% caps_to_keep,]
+drive_dates <- drive_dates[capacity_tb %in% caps_to_keep,]
 
-# Order factors
-levs = dat[,model[order(-surv_5yr_lower, -surv_5yr, surv_5yr_upper)]]
-dat[,model := factor(model, levels=levs, ordered=T)]
-drive_dates[,model := factor(model, levels=levs, ordered=T)]
+# Sort model factors by survival rates
+model_levels = dat[,model[order(-surv_5yr_lower, -surv_5yr, surv_5yr_upper)]]
+dat[,model := factor(model, levels=model_levels, ordered=T)]
+drive_dates[,model := factor(model, levels=model_levels, ordered=T)]
+
+# Sort capacity factors by size
+capacity_levels = dat[,rev(sort(unique(capacity_tb)))]
+dat[,capacity_tb := factor(capacity_tb, levels=capacity_levels, ordered=T)]
+drive_dates[,capacity_tb := factor(capacity_tb, levels=capacity_levels, ordered=T)]
 
 # Choose best drive
 best_drive_by_size <- dat[!duplicated(capacity_tb),]
@@ -56,11 +63,6 @@ best_drive_surv = dat[1, sprintf("%1.2f%%", 100*surv_5yr_lower)]
 # Make a dataframe to use later in survival plots
 model_list <- best_drive_by_size[, model]
 plot_dat <- drive_dates[model %in% model_list,]
-
-# Setup factors -- think about this
-levs = plot_dat[,rev(sort(unique(capacity_tb)))]
-plot_dat[,capacity_tb := factor(capacity_tb, levels=levs)]
-dat[,capacity_tb := factor(capacity_tb, levels=levs)]
 ```
 
 # Data Sources
@@ -143,11 +145,23 @@ print(out)
 The "proportional hazards" assumption from the Cox model allows us to extend these curves and estimate survival times at 5 years for all of the drives:
 
 ```{r cox_curves, echo=FALSE, warning=FALSE}
-sizes <- best_drive_by_size[,rev(sort(capacity_tb))]
-newdata <- data.table::data.table(model=as.character(model_list[best_drive_by_size[,order(capacity_tb)]]))
-plot_model <- survival::survfit(cox_model, newdata=newdata)
+# The cox model orders levels alphabetically
+# We need to map the desired order to the alpha order
+alpha_order <- cox_model$xlevels$model
+alpha_order <- alpha_order[alpha_order %in% model_list]
+desired_order <- best_drive_by_size[order(capacity_tb), as.character(model)]
+
+named_palette <- setNames(custom_palette, desired_order)
+reordered_palette <- named_palette[alpha_order]
+reordered_palette <- unname(reordered_palette)
+
+# Plot survival curves for just the best drives by capacity
+plot_model <- survival::survfit(cox_model, best_drive_by_size[, list(model = as.character(model))])
+colnames(plot_model$surv) <- stringi::stri_pad_left(order(best_drive_by_size[['capacity_tb']]), 2, '0')
+
+# Actually plot
 out <- survminer::ggsurvplot(
-  plot_model, data=plot_dat, legend.labs=sizes,
+  plot_model, data=best_drive_by_size,
   palette = custom_palette, conf.int = F, legend='top', censor=F,
   xlim=days_to_year * c(0, 5), ylim=c(.90, 1.0), 
   xlab = 'Time (years)', title='Cox Proportional Hazards Survival Curves',

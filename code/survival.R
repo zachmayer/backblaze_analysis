@@ -12,9 +12,6 @@ drive_dates[,model := relevel(model, ref=ref_level)]
 # Fit the cox model.  Takes about 2 mins
 cox_model <- drive_dates[,survival::coxph(survival::Surv(time=days, failed) ~ 1 + model, x=T)]
 
-# Fit exponential survival model
-exp_model <- drive_dates[days>0, survival::survreg(survival::Surv(time=days, failed) ~ model, dist = "exponential")]
-
 # Extract cox model coefficients
 # These coefficients are "hazard ratios".  Lower hazard is better
 cf <- summary(cox_model)
