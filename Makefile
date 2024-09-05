@@ -1,5 +1,3 @@
-# TODO: plot colors still wrong
-
 # TODO: review and revise readme text
 
 # TODO: ADD CI OF SOME MINIMAL KIND
