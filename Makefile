@@ -10,6 +10,8 @@
 # combine together
 # consider as covariates
 
+# TODO: new make target to grab model prices on ebay to compute cost effectiveness of each drive
+
 # Default target
 .PHONY: help
 help:
