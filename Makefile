@@ -1,3 +1,5 @@
+# TODO: review and revise readme text
+
 # TODO: ADD CI OF SOME MINIMAL KIND
 
 # TODO: new make target for smart stats
