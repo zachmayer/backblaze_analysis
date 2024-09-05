@@ -1,3 +1,12 @@
+
+# TODO: new make target for smart stats
+# For each serial, lookup failure time or max time.
+# Find the data file the day before failure/the day of max time
+# Pull smart stats from that file
+# write out to a csv file per serial
+# combine together
+# consider as covariates
+
 # Default target
 .PHONY: help
 help:

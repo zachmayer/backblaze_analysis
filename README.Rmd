@@ -7,11 +7,6 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-
-# TODO:
-# FIX COX PLOT COLORS
-# FIX FACTOR HANDLING
-
 # Knitr setup
 knitr::opts_chunk$set(
   echo = FALSE,
@@ -45,15 +40,9 @@ caps_to_keep <- drives_by_cap[drives > 999, capacity_tb]
 dat <- dat[capacity_tb %in% caps_to_keep,]
 drive_dates <- drive_dates[capacity_tb %in% caps_to_keep,]
 
-# Sort model factors by survival rates
-model_levels = dat[,model[order(-surv_5yr_lower, -surv_5yr, surv_5yr_upper)]]
-dat[,model := factor(model, levels=model_levels, ordered=T)]
-drive_dates[,model := factor(model, levels=model_levels, ordered=T)]
-
 # Sort capacity factors by size
-capacity_levels = dat[,rev(sort(unique(capacity_tb)))]
-dat[,capacity_tb := factor(capacity_tb, levels=capacity_levels, ordered=T)]
-drive_dates[,capacity_tb := factor(capacity_tb, levels=capacity_levels, ordered=T)]
+dat[,capacity_tb := stringi::stri_pad_left(capacity_tb, 2, '0')]
+drive_dates[,capacity_tb := stringi::stri_pad_left(capacity_tb, 2, '0')]
 
 # Choose best drive
 best_drive_by_size <- dat[!duplicated(capacity_tb),]
@@ -145,19 +134,9 @@ print(out)
 The "proportional hazards" assumption from the Cox model allows us to extend these curves and estimate survival times at 5 years for all of the drives:
 
 ```{r cox_curves, echo=FALSE, warning=FALSE}
-# The cox model orders levels alphabetically
-# We need to map the desired order to the alpha order
-alpha_order <- cox_model$xlevels$model
-alpha_order <- alpha_order[alpha_order %in% model_list]
-desired_order <- best_drive_by_size[order(capacity_tb), as.character(model)]
-
-named_palette <- setNames(custom_palette, desired_order)
-reordered_palette <- named_palette[alpha_order]
-reordered_palette <- unname(reordered_palette)
-
 # Plot survival curves for just the best drives by capacity
 plot_model <- survival::survfit(cox_model, best_drive_by_size[, list(model = as.character(model))])
-colnames(plot_model$surv) <- stringi::stri_pad_left(order(best_drive_by_size[['capacity_tb']]), 2, '0')
+colnames(plot_model$surv) <- best_drive_by_size$capacity_tb
 
 # Actually plot
 out <- survminer::ggsurvplot(

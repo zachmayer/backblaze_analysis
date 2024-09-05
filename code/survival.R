@@ -1,16 +1,26 @@
 # Load data
-drive_dates <- data.table::fread('results/drive_dates.csv')[capacity_tb >= 1,]  # Exclude small drives
+drive_dates <- data.table::fread('results/drive_dates.csv')[capacity_tb >= 2,]  # Exclude small drives
 
 # Calculate time to failure or time to censoring
 drive_dates[,days := as.numeric(max_date - min_date)]
 
 # Choose the "reference" class based
-ref_level <- 'hgst hms5c4040ble640'  # Reliable 4TB drive with lots of drives and drive days
+ref_level <- 'wdc hms5c4040ble640'  # Reliable 4TB drive with lots of drives and drive days
 drive_dates[,model := factor(model)]
 drive_dates[,model := relevel(model, ref=ref_level)]
 
+# Kaplan-Meier survival curves
+km_model <- drive_dates[,survival::survfit(survival::Surv(time=days, failed) ~ 1 + model)]
+
 # Fit the cox model.  Takes about 2 mins
 cox_model <- drive_dates[,survival::coxph(survival::Surv(time=days, failed) ~ 1 + model, x=T)]
+
+
+# Fit an AFT model
+aft_model <- drive_dates[days>0, survival::survreg(survival::Surv(time=days, failed) ~ 1 + model, dist='exponential', x=T)]
+
+AIC(cox_model)
+AIC(aft_model)
 
 # Extract cox model coefficients
 # These coefficients are "hazard ratios".  Lower hazard is better

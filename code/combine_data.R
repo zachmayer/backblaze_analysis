@@ -90,5 +90,13 @@ dt[is.finite(first_fail), max_date := first_fail]
 dt[,first_fail := NULL]
 stopifnot(dt[,all(max_date >= min_date)])
 
+# Recode models
+# hitachi bought hgst's disk business
+# then wdc bought hitachi disk business
+dt[,model := stringi::stri_replace_all_fixed(model, 'hgst ', 'wdc ')]
+dt[,model := stringi::stri_replace_all_fixed(model, 'hitachi ', 'wdc ')]
+dt[model == "wuh721816ale6l4", model := "wdc wuh721816ale6l4"]
+dt[,sort(unique(model))]
+
 # Save
 data.table::fwrite(dt, 'results/drive_dates.csv')
