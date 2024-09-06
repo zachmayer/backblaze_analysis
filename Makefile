@@ -86,21 +86,6 @@ results/survival.csv: results/drive_dates.csv code/survival.R
 README.md: README.Rmd results/survival.csv
 	Rscript -e "rmarkdown::render('README.Rmd', 'github_document', clean=TRUE)"
 
-# New targets for eBay price checking
-MODELS_FILE := results/unique_models.txt
-PRICES_FILE := results/model_prices.json
-
-$(MODELS_FILE): results/survival.csv
-	awk -F, 'NR>1 {print $$1}' $< > $@
-
-.PHONY: check_prices
-check_prices: $(MODELS_FILE)
-	python ebay_price_checker.py $(MODELS_FILE) $(PRICES_FILE)
-
-.PHONY: check_price_%
-check_price_%: $(MODELS_FILE)
-	grep -q "^$*$$" $(MODELS_FILE) && python ebay_price_checker.py <(echo "$*") results/price_$*.json || (echo "Model $* not found in $(MODELS_FILE)"; exit 1)
-
 # Define make targets
 .PHONY: all
 all: download_data unzip_data combine_data analyze_data

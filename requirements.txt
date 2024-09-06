@@ -1,6 +1,3 @@
-python-ebay==0.2.0b5dev
 pandas==2.2.2
 ipython==8.27.0
-python-dotenv==1.0.1
 requests==2.32.3
-ebay-rest==1.0.3
