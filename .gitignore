@@ -1,9 +1,3 @@
-# Data files
-data/*
-zip_data/*
-results/all_data.csv
-results/last_day_data.csv
-
 # History files
 .Rhistory
 .Rapp.history
@@ -43,3 +37,6 @@ vignettes/*.pdf
 
 # R Environment Variables
 .Renviron
+
+# Mac
+.DS_Store

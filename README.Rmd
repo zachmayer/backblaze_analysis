@@ -7,97 +7,72 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-
 # Knitr setup
-knitr::opts_chunk$set(echo = FALSE)
-
-# Libraries
-library(data.table)
-library(ggplot2)
-library(ggthemes)
-library(survival)
-library(survminer)
-source('code/helpers.r')
+knitr::opts_chunk$set(
+  echo = FALSE,
+  warning = FALSE,
+  message = FALSE,
+  collapse = TRUE,
+  comment = "#>",
+  dpi = 600,
+  fig.retina = 2 
+)
 
 # Globals
-top_n <- 25
-min_unique_drives <- 1200
-file_size <- utils:::format.object_size(file.size('drive_dates.csv'), 'Mb', digits=0)
+days_to_year <- 365.2425
+file_size <- utils:::format.object_size(file.size('results/drive_dates.csv'), 'Mb', digits=0)
+
+custom_palette <- c(
+  "#1f78b4", "#ff7f00", "#6a3d9a", "#33a02c", "#e31a1c", "#b15928",
+  "#a6cee3", "#fdbf6f", "#cab2d6", "#b2df8a", "#fb9a99", "black",
+  "grey10", "grey20", "grey30", "grey40", "grey50"
+)
+
+min_unique_drives <- 50
 
 # Load data
-dat = fread('results/survival_results.csv')
-drive_dates = fread('results/drive_dates_clean.csv')
-
-capacity_order = fread('results/capacity_order.csv')
-setorder(capacity_order, -capacity)
-capacity_order[,size :=  factor(size, levels=size, ordered=T)]
-
-capacity_map = fread('results/capacity_map.csv')
-capacity_map = merge(capacity_map, capacity_order, by='capacity')
-
 cox_model = readRDS('results/cox_model.rds')
+dat = data.table::fread('results/survival.csv')
+drive_dates = data.table::fread('results/drive_dates.csv')
+drive_dates[,days := as.numeric(max_date - min_date)]
 
-# Subset data
-dat = dat[surv_5yr_lower>0,]
-dat = dat[n_unique >= min_unique_drives,]
+# Drop capacities with low data — they clutter the plots
+drives_by_cap <- dat[,list(n_drives=sum(n_unique)), by=capacity_tb][order(-n_drives),]
+caps_to_keep <- drives_by_cap[n_drives > min_unique_drives, capacity_tb]
+dat <- dat[capacity_tb %in% caps_to_keep,]
+drive_dates <- drive_dates[capacity_tb %in% caps_to_keep,]
 
-# Order factors
-dat[,model := factor(model, levels=model[order(-surv_5yr_lower, -surv_5yr, surv_5yr_upper)], ordered=T)]
-dat[,size := factor(size, levels=capacity_order[['size']], ordered=T)]
+# Sort capacity factors by size
+dat[,capacity_tb := stringi::stri_pad_left(capacity_tb, 2, '0')]
+drive_dates[,capacity_tb := stringi::stri_pad_left(capacity_tb, 2, '0')]
 
 # Choose best drive
-best_drive_by_size <- dat[!duplicated(size),]
-best_drive = dat[1, model]
+best_drive_by_size <- dat[!duplicated(capacity_tb),]
+best_drive = dat[1, as.character(model)]
 best_drive_surv = dat[1, sprintf("%1.2f%%", 100*surv_5yr_lower)]
 
 # Make a dataframe to use later in survival plots
 model_list <- best_drive_by_size[, model]
 plot_dat <- drive_dates[model %in% model_list,]
-plot_dat <- merge(plot_dat, capacity_map, by='model')
 ```
 
 # Data Sources
-I'm buying a hard drive for backups, and I want to buy a drive that's not going to fail. I'm going to use data from [BackBlaze](https://www.backblaze.com/b2/hard-drive-test-data.html#downloading-the-raw-hard-drive-test-data) to assess drive reliability. Backblaze [did their own analysis](https://www.backblaze.com/blog/backblaze-hard-drive-stats-q1-2020/) of drive failures, but I don't like their approach for 2 reasons:    
-1. Their "annualized failure rate" `Drive Failures / (Drive Days / 365)` assumes that failure rates are constant over time.  E.g. this assumption means that observing 1 drive for 100 days gives you the exact same information as observing 100 drives for 1 day. If drives fail at a constant rate over time, this is fine, but I suspect that drives actually fail at a higher rate early in their lives. So their analysis is biased against newer drives.    
-2. I want to compute a confidence interval of some kind, so I can select a drive that both has a low failure rate, but also enough observations to make me confident in this failure rate.  For example, if I have a drive that's been observed for 1 day with 0 failures, I probably don't want to buy it, despite it's zero percent failure rate.  [This blog post](https://www.evanmiller.org/how-not-to-sort-by-average-rating.html) has some good details on why confidence intervals are useful for sorting things.   
+I'm buying a hard drive for backups, and I want to buy a drive that's not going to fail. I'm going to use data from [BackBlaze](https://www.backblaze.com/b2/hard-drive-test-data.html#downloading-the-raw-hard-drive-test-data) to assess drive reliability. Backblaze [did their own analysis](https://www.backblaze.com/blog/backblaze-drive-stats-for-q2-2024/) of drive failures, but I don't like their approach for 2 reasons:    
+
+1. Their "annualized failure rate" `Drive Failures / (Drive Days / 365)` assumes that failure rates are constant over time. E.g. this assumption means that observing 1 drive for 100 days gives you the exact same information as observing 100 drives for 1 day. If drives fail at a constant rate over time, this is fine, but I suspect that drives actually fail at a higher rate early in their lives. So their analysis is biased against newer drives.    
+2. I want to compute a confidence interval, so I can select a drive where we have enough observations to be very confident in a low failure rate. For example, if I have a model drive that's been observed for one drive for 1 day with 0 failures, I probably don't want to buy it, despite it's zero percent failure rate. I'd rather buy a drive model thats been observed for 100 drives for 1000 days with one failure. [This blog post](https://www.evanmiller.org/how-not-to-sort-by-average-rating.html) has some good details on why confidence intervals are useful for sorting things.    
 
 # Results
-I chose to order the drives by their expected 5 year survival rate. I calculated a 95% confidence interval on the 5-year survival rate, and I used that interval to sort the drives. Based on this analysis, the `r best_drive` is the most reliable drive model in our data, with an estimated 5-year survival rate that is at least `r best_drive_surv`.
+I chose to order the drives by their expected 5 year survival rate. I calculated a 95% confidence interval on the 5-year survival rate, and I used that interval to sort the drives. Based on this analysis, the `r best_drive` is the most reliable drive model in our data, with an estimated 5-year survival rate that is at least `r best_drive_surv`. (In other words we are 95% confident that the `r best_drive` will last at least `r best_drive_surv` years).
 
-The top `r top_n` drives from this analysis are:
-```{r top_50, echo=FALSE}
-knitr::kable(
-  dat[1:top_n,
-    list(
-      model, 
-      size,
-      N=n_unique,
-      drive_days,
-      failures=failed,
-      years_97pct=sprintf("%1.1f", years_97pct),
-      surv_5yr_lo=sprintf("%1.2f%%", 100*surv_5yr_lower),
-      surv_5yr=sprintf("%1.2f%%", 100*surv_5yr),
-      surv_5yr_hi=sprintf("%1.2f%%", 100*surv_5yr_upper)
-    )]
-)
-```
-* **model** is the drive model
-* **size** is the size of the drive
-* **N** is the number of unique drives in the analysis
-* **drive_days** is the total number of days that we've observed for drives of this model in the sample
-* **failures** is the number of failures observed so far
-* **years_97pct** is the expected number of years 97% of these drives will last
-* **surv_5yr_lo** is the lower bound of the 95% confidence interval of the 5-year survival rate
-* **surv_5yr** is the 5-year survival rate
-* **surv_5yr_hi** is the upper bound of the 95% confidence interval of the 5-year survival rate
+Here are the top drives from this analysis, by size. (for example, many manufacturers have drives in the 16TB range that are very reliable, but I'm only showing the single best model in this size range).
 
-To narrow down the data, we can just look at the best drive by size (excluding models that have fewer than `r min_unique_drives`):
 ```{r best_by_size, echo=FALSE}
 knitr::kable(
   best_drive_by_size[,
     list(
       model, 
-      size,
+      capacity_tb,
       N=n_unique,
       drive_days,
       failures=failed,
@@ -108,27 +83,37 @@ knitr::kable(
     )]
 )
 ```
+Data details:    
 
-All of these drives have a very high 5-year survival rate, and I'd feel pretty confident buying any of them.
+* **model** is the drive model.    
+* **capacity_tb** is the size of the drive.    
+* **N** is the number of unique drives in the analysis.    
+* **drive_days** is the total number of days that we've observed for drives of this model in the sample.    
+* **failures** is the number of failures observed so far.    
+* **years_97pct** Is the 97th percentile survival time for the drives. 97% of the drives will last at least this long.    
+* **surv_5yr_lo** is the lower bound of the 95% confidence interval of the 5-year survival rate.    
+* **surv_5yr** is the 5-year survival rate.    
+* **surv_5yr_hi** is the upper bound of the 95% confidence interval of the 5-year survival rate.    
 
 # Technical Details
-Survival analysis is a little weird, because you don't observe the full distribution of your data.  This makes some traditional statistics impossible to calculate. For example, until you observe every hard drive in the sample fail, you can't know the mean time to failure.  (If you have one drive left that hasn't failed yet, and becomes an outlier in survival time, that might have a big impact on mean survival time.)
+Survival analysis is a little weird, because you don't observe the full distribution of the data. This makes some traditional statistics impossible to calculate. For example, until you observe every hard drive in the sample fail, you can't know the mean time to failure: if you have one drive left that hasn't failed, and becomes an outlier in survival time, that might have a big impact on mean survival time. To find the median survival time, you need to wait for half of the drives in your sample fail, which can take a decade or more!
 
-Here's the thing: these drives are **so reliable**, that even after 5+ years of observation, we've barely observed the distribution of failures! (This is a good thing, but it makes it hard to chose between drives!).
+Modern hard drives are **so reliable**, that even after 5+ years of observation, we've barely observed the distribution of failures! (This is a good thing, but it makes it hard to chose between drives!).
 
-I fit a [Cox Proportional Hazard model](https://en.wikipedia.org/wiki/Proportional_hazards_model) to this data, which enabled me to estimate 5 years survival rates for all of the drives, as well as a confidence interval on that rate.  The confidence interval narrows as you observe more drives and as you observe those drives for a longer time.
+To compare models with different observational periods (e.g. 22 TB vs 4TB drives), I fit a [Cox Proportional Hazard model](https://en.wikipedia.org/wiki/Proportional_hazards_model). This enabled me to estimate 5 years survival rates for all of the drives, as well as a confidence interval on that rate. The confidence interval narrows as you observe more drives and as you observe those drives for a longer time.
 
-The Cox model is semi-parametric.  It assumes a non-parametric, baseline hazard rate that is the same for all drives.  It then fits a single parameter for each drive that is a multiple on that baseline hazard rate.  So every drive has the same "shape" for its survival curve, but multiplied by a fixed coefficient per model that makes that "shape" steeper or shallower.
+The Cox model is semi-parametric. It assumes a non-parametric, baseline hazard rate that is the same for all drives. It then fits a single parameter for each drive that is a multiple on that baseline hazard rate. So every drive has the same "shape" for its survival curve, but multiplied by a fixed coefficient per model that makes that "shape" steeper or shallower.
 
 # Plots
-Here is a plot of the survival for each of the best drive models.  Each curve ends with the oldest drive we've observed (these are called [Kaplan–Meier](https://en.wikipedia.org/wiki/Kaplan%E2%80%93Meier_estimator) curves):
+Here is a plot of the survival for each of the best drive models. 
+Each curve ends with the oldest drive we've observed (these are called [Kaplan–Meier](https://en.wikipedia.org/wiki/Kaplan%E2%80%93Meier_estimator) curves):
 
 ```{r km_curves, echo=FALSE, warning=FALSE}
-plot_model <- plot_dat[, survfit(Surv(time=days, failed) ~ 1 + size)]
-out <- ggsurvplot(
+plot_model <- plot_dat[, survival::survfit(survival::Surv(time=days, failed) ~ 1 + capacity_tb)]
+out <- survminer::ggsurvplot(
   plot_model, data=plot_dat, 
   palette = custom_palette, conf.int = F, legend='top', censor=F,
-  xlim=days_to_year * c(0, 5), ylim=c(.93, 1.0), 
+  xlim=days_to_year * c(0, 5), ylim=c(.90, 1.0), 
   xlab = 'Time (years)', title='Kaplan-Meier Survival Curves',
   break.x.by=days_to_year, xscale=days_to_year)
 print(out)
@@ -137,39 +122,58 @@ print(out)
 The "proportional hazards" assumption from the Cox model allows us to extend these curves and estimate survival times at 5 years for all of the drives:
 
 ```{r cox_curves, echo=FALSE, warning=FALSE}
-sizes <- best_drive_by_size[,sort(size)]
-newdata <- data.table(model=as.character(model_list[best_drive_by_size[,order(size)]]))
-plot_model <- survfit(cox_model, newdata=newdata)
-out <- ggsurvplot(
-  plot_model, data=plot_dat, legend.labs=sizes,
+# Plot survival curves for just the best drives by capacity
+plot_model <- survival::survfit(cox_model, best_drive_by_size[, list(model = as.character(model))])
+colnames(plot_model$surv) <- best_drive_by_size$capacity_tb
+
+# Actually plot
+out <- survminer::ggsurvplot(
+  plot_model, data=best_drive_by_size,
   palette = custom_palette, conf.int = F, legend='top', censor=F,
-  xlim=days_to_year * c(0, 5), ylim=c(.93, 1.0), 
+  xlim=days_to_year * c(0, 5), ylim=c(.90, 1.0), 
   xlab = 'Time (years)', title='Cox Proportional Hazards Survival Curves',
   break.x.by=days_to_year, xscale=days_to_year)
 print(out)
 ```
 
-This plot doesn't have the confidence intervals, which are wider for the drives with less data.
+Note that the curves all have the same shape, but each model has a different slope. Compare this plot to the Kaplan-Meier plot above: The proportional hazards assumption works pretty well, but isn't perfect.
+
+# Full Data
+Here are the full results for all drives. (I excluded drives that are less than 2TB).
+```{r all_drives, echo=FALSE}
+knitr::kable(
+  dat[model != "00md00",
+    list(
+      model, 
+      capacity_tb,
+      N=n_unique,
+      drive_days,
+      failures=failed,
+      years_97pct=sprintf("%1.1f", years_97pct),
+      surv_5yr_lo=sprintf("%1.2f%%", 100*surv_5yr_lower),
+      surv_5yr=sprintf("%1.2f%%", 100*surv_5yr),
+      surv_5yr_hi=sprintf("%1.2f%%", 100*surv_5yr_upper)
+    )]
+)
+```
+Note that some drives have a very low sample size, which gives them a very wide confidence interval. More data are needed for these drives to draw conclusions about their survival rates.
 
 # Replicating my results
-[drive_dates.csv](results/drive_dates.csv) has the cleaned up data from backblaze, with each drive, its model, when it was installed, when it failed (NA for drives that have not failed) and when it was last observed.
+[results/drive_dates.csv](results/drive_dates.csv) has the cleaned up data from backblaze, with each drive by serial number, its model, when it was installed, when it was last observed, and whether it failed.
+```{r data, echo=FALSE}
+knitr::kable(head(data.table::fread("results/drive_dates.csv")[order(-max_date, min_date),], 10L))
+```
 
-[README.Rmd](README.Rmd) has the code to run this analysis and generate this [README.md](README.md) file you are reading right now. Use [RStudio](https://rstudio.com/products/rstudio/download/) to `knit` the `Rmd` file into a `md` file, which github will then render nicely for you.
+I use a [Makefile](Makefile) to automate the analysis. Run `make help` for more info, or just run `make all` to download the data, unzip and combine it, run the survival analysis and generate the [README.md](README.md). The download is 50+ GB, so it takes a while, but you only need to do it once.
 
-If you want to get the raw data before it was cleaned up into [all_data.csv](results/all_data.csv), you'll need at least 70GB of free hard drive space.  I also suggest opening [backblaze_analysis.Rproj](backblaze_analysis.Rproj) in RStudio.    
-1.  Run [1_download_data.R](code/1_download_data.R) to download the data (almost 10.5 GB).    
-2.  Run [2_unzip_data.R](code/2_unzip_data.R) to unzip the data (almost 55 GB).    
-3.  Run [3_assemble_data.R](code/3_assemble_data.R) to "compress" the data, which generates [all_data.csv](all_data.csv).    
-4.  Run [4_survival_analysis.R](code/4_survival_analysis.R) to calculate 5 year survival.
-
-An interesting note about this data: It's 55GB uncompressed, and contains a whole bunch of irrelevant information.  It was very interesting to me that I could compress a 55GB dataset to `r file_size`, while still keeping **all** of the relevant information for modeling.  (In other words, this dataset was 4,000x larger than it needed to be). I think this is another example of how good data structures are essential for data science is.
+An interesting note about this data: It's 55GB uncompressed, and contains a whole bunch of irrelevant information. It was very interesting to me that I could compress a 55GB dataset to `r file_size`, while still keeping **all** of the relevant information for modeling. (In other words, this dataset was thousands of times larger than it needed to be!). I think this is another example of how good data structures are essential for data science.
 
 # Erratum
 ```{r bad_drives, echo=FALSE}
-bad_drive <- dat[n_unique>999,][which.min(surv_5yr_upper),]
+bad_drive <- dat[n_unique>100,][which.min(surv_5yr_upper),]
 ```
-I'm probably way over-thinking this, but it was fun to analyze the data.  Any of the top `r top_n` drives are likely safe to buy, and are very unlikely to fail.
+I'm probably way over-thinking this, but it was fun to analyze the data.
 
-There are some drives in this data I plan to avoid.  For example, the `r bad_drive$model` has a 5 year survival of `r sprintf("%1.1f%%", 100*bad_drive$surv_5yr)`.  This is honestly probably fine for my purposes, but maybe I'd be a little nervous to buy a drive with a 1-in-`r round(1 / (1 - bad_drive$surv_5yr))` chance of dying within 5 years.
+There are some drives in this data I plan to avoid. For example, the `r bad_drive$model` has a 5 year survival of `r sprintf("%1.1f%%", 100*bad_drive$surv_5yr)`. I'd be a little nervous to buy this drive. [Backblaze](https://www.backblaze.com/blog/3tb-hard-drive-failure/) has a good analysis of issues with 3TB drives on their blog.
 
-![I nerd sniped myself](https://imgs.xkcd.com/comics/nerd_sniping.png)
+[![I nerd sniped myself](https://imgs.xkcd.com/comics/nerd_sniping.png)](https://xkcd.com/356/)
