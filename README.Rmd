@@ -154,9 +154,8 @@ prices <- data.table::merge.data.table(prices, dat, by='model', all.x=T)
 prices[,cost_per_tb := price / as.numeric(capacity_tb)]
 prices[,cost_per_tb_5yr := cost_per_tb / surv_5yr_lower]
 prices <- prices[order(cost_per_tb_5yr),]
-prices <- prices[,list(model, price, capacity_tb, surv_5yr_lower=surv_5yr_lower*100, cost_per_tb, cost_per_tb_5yr)]
+prices <- prices[,list(model = ebay_url(model), price, capacity_tb, surv_5yr_lower=surv_5yr_lower*100, cost_per_tb, cost_per_tb_5yr)]
 best_model <- prices[1,]
-best_model_name <- 
 knitr::kable(prices, digits=1)
 ```
 
@@ -170,7 +169,7 @@ Here are the full results for all drives. (I excluded drives that are less than 
 knitr::kable(
   dat[model != "00md00",
     list(
-      model = ebay_url(model), 
+      model,
       capacity_tb,
       N=n_unique,
       drive_days,
