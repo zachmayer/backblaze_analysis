@@ -1,0 +1,81 @@
+wdc wuh721816ale6l4
+wdc wuh721414ale6l4
+wdc hms5c4040ale640
+wdc huh721212ale600
+wdc wuh721816ale6l0
+wdc hds5c4040ale630
+st6000dx000
+wdc hds5c3030ala630
+st16000nm001g
+toshiba mg07aca14ta
+st12000nm001g
+wdc huh721212ale604
+wdc huh728080ale600
+toshiba mg08aca16tey
+st8000dm002
+wdc huh721212aln604
+toshiba mg08aca16ta
+toshiba mg08aca16te
+toshiba md04aba400v
+st14000nm001g
+st8000nm0055
+st16000nm002j
+wdc hds722020ala330
+st12000nm0008
+wdc wuh722222ale6l4
+wdc hds723030ala640
+st4000dm000
+toshiba mg07aca14tey
+st8000nm000a
+st10000nm0086
+st12000nm0007
+toshiba md04aba500v
+wdc hds724040ale640
+wdc hus726040ale610
+wdc wd40efrx
+wdc wd60efrx
+st8000dm005
+wdc wd30efrx
+toshiba dt01aca300
+st4000dm005
+st14000nm0138
+st33000651as
+st18000nm000j
+toshiba hdwf180
+st12000nm000j
+wdc huh728080ale604
+wdc wd30ezrx
+st4000dx000
+wdc wd20efrx
+st10000nm001g
+st32000542as
+wdc hds723030ble640
+st14000nm0018
+st4000dm004
+wdc hus728t8tale6l4
+st14000nm000j
+st4000dm001
+seagate barracuda ssd za2000cm10002
+wdc hds723020bla642
+st3000dm001
+st12000nm0117
+st2000vn000
+wdc wd30ezrs
+st2000dm001
+st320005xxxx
+st4000dx002
+st8000dm004
+st2000dl001
+st2000dl003
+00md00
+toshiba mg10aca20te
+wdc hus726040aln610
+st16000nm000j
+st12000nm003g
+st16000nm005g
+wdc hds5c3030ble630
+st6000dm001
+st6000dm004
+toshiba hdwe160
+wdc huh721010ale600
+wdc hms5c4040ble641
