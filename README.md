@@ -16,23 +16,26 @@ not going to fail. I’m going to use data from
 [BackBlaze](https://www.backblaze.com/b2/hard-drive-test-data.html#downloading-the-raw-hard-drive-test-data)
 to assess drive reliability. Backblaze [did their own
 analysis](https://www.backblaze.com/blog/backblaze-drive-stats-for-q2-2024/)
-of drive failures, but I don’t like their approach for 2 reasons:  
-1. Their “annualized failure rate” `Drive Failures / (Drive Days / 365)`
-assumes that failure rates are constant over time. E.g. this assumption
-means that observing 1 drive for 100 days gives you the exact same
-information as observing 100 drives for 1 day. If drives fail at a
-constant rate over time, this is fine, but I suspect that drives
-actually fail at a higher rate early in their lives. So their analysis
-is biased against newer drives. 2. I want to compute a confidence
-interval, so I can select a drive where we have enough observations to
-be very confident in a low failure rate. For example, if I have a model
-drive that’s been observed for one drive for 1 day with 0 failures, I
-probably don’t want to buy it, despite it’s zero percent failure rate.
-I’d rather buy a drive model thats been observed for 100 drives for 1000
-days with one failure. [This blog
-post](https://www.evanmiller.org/how-not-to-sort-by-average-rating.html)
-has some good details on why confidence intervals are useful for sorting
-things.
+of drive failures, but I don’t like their approach for 2 reasons:
+
+1.  Their “annualized failure rate”
+    `Drive Failures / (Drive Days / 365)` assumes that failure rates are
+    constant over time. E.g. this assumption means that observing 1
+    drive for 100 days gives you the exact same information as observing
+    100 drives for 1 day. If drives fail at a constant rate over time,
+    this is fine, but I suspect that drives actually fail at a higher
+    rate early in their lives. So their analysis is biased against newer
+    drives.  
+2.  I want to compute a confidence interval, so I can select a drive
+    where we have enough observations to be very confident in a low
+    failure rate. For example, if I have a model drive that’s been
+    observed for one drive for 1 day with 0 failures, I probably don’t
+    want to buy it, despite it’s zero percent failure rate. I’d rather
+    buy a drive model thats been observed for 100 drives for 1000 days
+    with one failure. [This blog
+    post](https://www.evanmiller.org/how-not-to-sort-by-average-rating.html)
+    has some good details on why confidence intervals are useful for
+    sorting things.
 
 # Results
 
@@ -62,16 +65,21 @@ I’m only showing the single best model in this size range).
 | st10000nm0086 | 10 | 1304 | 2924650 | 202 | 1.5 | 87.58% | 89.09% | 90.44% |
 | st18000nm000j | 18 | 70 | 82370 | 10 | 0.5 | 63.65% | 77.91% | 87.67% |
 
-Data details: \* **model** is the drive model. \* **capacity_tb** is the
-size of the drive. \* **N** is the number of unique drives in the
-analysis. \* **drive_days** is the total number of days that we’ve
-observed for drives of this model in the sample. \* **failures** is the
-number of failures observed so far. \* **years_97pct** Is the 97th
-percentile survival time for the drives. 97% of the drives will last at
-least this long. \* **surv_5yr_lo** is the lower bound of the 95%
-confidence interval of the 5-year survival rate. \* **surv_5yr** is the
-5-year survival rate. \* **surv_5yr_hi** is the upper bound of the 95%
-confidence interval of the 5-year survival rate.
+Data details:
+
+- **model** is the drive model.  
+- **capacity_tb** is the size of the drive.  
+- **N** is the number of unique drives in the analysis.  
+- **drive_days** is the total number of days that we’ve observed for
+  drives of this model in the sample.  
+- **failures** is the number of failures observed so far.  
+- **years_97pct** Is the 97th percentile survival time for the drives.
+  97% of the drives will last at least this long.  
+- **surv_5yr_lo** is the lower bound of the 95% confidence interval of
+  the 5-year survival rate.  
+- **surv_5yr** is the 5-year survival rate.  
+- **surv_5yr_hi** is the upper bound of the 95% confidence interval of
+  the 5-year survival rate.
 
 # Technical Details
 
