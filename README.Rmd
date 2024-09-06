@@ -142,9 +142,17 @@ Note that the curves all have the same shape, but each model has a different slo
 I manually gatherted some [hard drive prices](prices.csv) from ebay and amazon. I limited this search to drives with >70% expected 5 years survival, as I want to buy drives that are unlikely to fail on me. I can then use the price data to calculate the cost to store 1TB of data for 5 years for each drive. Note that these prices could be wrong, and also not that only one drive may be available at the given price.
 
 ```{r prices, echo=FALSE}
+sprintf_vec <- function(fmt, ...) {
+  args <- list(...)
+  if (length(args) == 1 && is.vector(args[[1]])) {
+    args <- as.list(args[[1]])
+  }
+  do.call(sprintf, c(fmt = fmt, args))
+}
+
 ebay_url <- function(x, text=x){
   x = rev(stringi::stri_split_fixed(x, ' ')[[1]])[1]
-  sprintf("[%s](https://www.ebay.com/sch/i.html?_from=R40&_nkw=%s&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000|1500)", text, x)
+  sprintf_vec("[%s](https://www.ebay.com/sch/i.html?_from=R40&_nkw=%s&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000|1500)", text, x)
 }
 
 prices <- data.table::fread('prices.csv')
@@ -159,8 +167,6 @@ knitr::kable(prices, digits=1)
 ```
 
 According to this analysis, the most cost effective drive is the `r best_model$model`, which costs `r best_model$price` and has a 5 year survival rate of `r sprintf("%1.1f%%", 100*best_model$surv_5yr_lower)`. This drive costs `r sprintf("$%1.2f", best_model$cost_per_tb)` per TB, and `r sprintf("$%1.2f", best_model$cost_per_tb_5yr)` to store 1 TB for 5 years.
-
-`r ebay_url(best_model$model, "Check prices on ebay")`.
 
 Again, the price data is probably incorrect, but its still an interesting analysis.
 

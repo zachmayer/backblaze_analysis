@@ -145,9 +145,6 @@ st14000nm001g, which costs 119.99 and has a 5 year survival rate of
 9168.1%. This drive costs \$8.57 per TB, and \$9.35 to store 1 TB for 5
 years.
 
-[Check prices on
-ebay](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st14000nm001g&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500).
-
 Again, the price data is probably incorrect, but its still an
 interesting analysis.
 
