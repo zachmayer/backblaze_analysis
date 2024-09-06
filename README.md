@@ -155,84 +155,84 @@ less than 2TB).
 
 | model | capacity_tb | N | drive_days | failures | years_97pct | surv_5yr_lo | surv_5yr | surv_5yr_hi |
 |:---|:---|---:|---:|---:|:---|:---|:---|:---|
-| [wuh721816ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 16 | 26602 | 11616742 | 102 | 5.7 | 97.46% | 97.91% | 98.28% |
-| [wuh721816ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 14 | 8603 | 10867094 | 113 | 5.6 | 97.43% | 97.86% | 98.22% |
-| [wuh721816ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 04 | 8716 | 18224627 | 253 | 5.4 | 97.30% | 97.61% | 97.89% |
-| [wuh721816ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 12 | 2673 | 4483664 | 61 | 4.8 | 96.80% | 97.50% | 98.05% |
-| [wuh721816ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 16 | 3069 | 2772374 | 37 | 4.0 | 96.02% | 97.10% | 97.89% |
-| [wuh721816ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 04 | 2837 | 4790383 | 95 | 3.8 | 95.61% | 96.40% | 97.04% |
-| [wuh721816ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 06 | 1939 | 4330559 | 100 | 3.6 | 95.25% | 96.09% | 96.78% |
-| [wuh721816ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 03 | 4664 | 6934573 | 150 | 3.5 | 95.18% | 95.88% | 96.48% |
-| [wuh721816ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 16 | 34293 | 22614411 | 480 | 3.4 | 94.88% | 95.32% | 95.72% |
-| [wuh721816ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 14 | 39365 | 51123732 | 1376 | 3.1 | 94.40% | 94.69% | 94.96% |
-| [wuh721816ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 12 | 13627 | 16705713 | 434 | 3.1 | 94.31% | 94.82% | 95.27% |
-| [wuh721816ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 12 | 13519 | 15607978 | 392 | 3.1 | 94.28% | 94.81% | 95.30% |
-| [wuh721816ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 08 | 1218 | 2609201 | 73 | 3.0 | 94.18% | 95.34% | 96.28% |
-| [wuh721816ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 16 | 5347 | 4846164 | 125 | 2.7 | 93.48% | 94.51% | 95.37% |
-| [wuh721816ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 08 | 10307 | 27580788 | 1111 | 2.7 | 93.41% | 93.79% | 94.15% |
-| [wuh721816ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 12 | 11422 | 20559877 | 882 | 2.3 | 92.06% | 92.55% | 93.01% |
-| [wuh721816ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 16 | 39184 | 12456523 | 361 | 2.2 | 91.88% | 92.67% | 93.39% |
-| [wuh721816ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 16 | 6130 | 5737006 | 192 | 2.2 | 91.84% | 92.89% | 93.81% |
-| [wuh721816ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 04 | 150 | 378365 | 11 | 2.2 | 91.74% | 95.32% | 97.39% |
-| [wuh721816ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 14 | 11177 | 13299198 | 504 | 2.2 | 91.68% | 92.36% | 92.98% |
-| [wuh721816ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 08 | 15680 | 36632508 | 1893 | 2.1 | 91.46% | 91.84% | 92.20% |
-| [wuh721816ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 16 | 468 | 259866 | 4 | 2.0 | 90.91% | 96.45% | 98.66% |
-| [wuh721816ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 02 | 4774 | 5675646 | 235 | 1.9 | 90.53% | 91.62% | 92.60% |
-| [wuh721816ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 12 | 20955 | 31032423 | 1615 | 1.8 | 89.96% | 90.42% | 90.87% |
-| [wuh721816ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 22 | 13244 | 1279877 | 42 | 1.8 | 89.85% | 92.40% | 94.36% |
-| [wuh721816ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 03 | 1048 | 1495337 | 73 | 1.6 | 88.62% | 90.84% | 92.65% |
-| [wuh721816ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 04 | 37040 | 81347421 | 5770 | 1.6 | 88.51% | 88.83% | 89.14% |
-| [wuh721816ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 14 | 738 | 692480 | 28 | 1.6 | 88.22% | 91.69% | 94.20% |
-| [wuh721816ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 08 | 249 | 128292 | 1 | 1.5 | 88.20% | 98.18% | 99.74% |
-| [wuh721816ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 10 | 1304 | 2924650 | 202 | 1.5 | 87.58% | 89.09% | 90.44% |
-| [wuh721816ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 12 | 38842 | 36947060 | 2173 | 1.5 | 87.48% | 88.00% | 88.51% |
-| [wuh721816ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 04 | 45 | 64934 | 2 | 1.0 | 79.20% | 94.08% | 98.51% |
-| [wuh721816ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 04 | 55 | 69213 | 3 | 1.0 | 79.16% | 92.49% | 97.56% |
-| [wuh721816ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 04 | 50 | 77099 | 4 | 0.9 | 77.59% | 90.65% | 96.44% |
-| [wuh721816ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 06 | 499 | 692834 | 72 | 0.9 | 77.55% | 81.68% | 85.20% |
-| [wuh721816ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 08 | 27 | 53730 | 3 | 0.8 | 75.01% | 90.77% | 96.99% |
-| [wuh721816ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 03 | 1335 | 1365902 | 174 | 0.8 | 73.54% | 76.71% | 79.61% |
-| [wuh721816ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 03 | 60 | 78820 | 7 | 0.6 | 70.16% | 84.05% | 92.19% |
-| [wuh721816ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 04 | 90 | 95987 | 11 | 0.6 | 69.16% | 81.19% | 89.25% |
-| [wuh721816ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 14 | 1690 | 1951778 | 317 | 0.6 | 68.21% | 70.99% | 73.62% |
-| [wuh721816ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 03 | 351 | 241851 | 31 | 0.6 | 66.53% | 74.90% | 81.75% |
-| [wuh721816ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 18 | 70 | 82370 | 10 | 0.5 | 63.65% | 77.91% | 87.67% |
-| [wuh721816ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 08 | 69 | 65254 | 9 | 0.4 | 60.88% | 76.61% | 87.33% |
-| [wuh721816ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 12 | 482 | 74238 | 7 | 0.4 | 60.47% | 77.96% | 89.10% |
-| [wuh721816ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 08 | 98 | 77317 | 10 | 0.4 | 59.18% | 74.76% | 85.82% |
-| [wuh721816ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 03 | 500 | 149891 | 22 | 0.3 | 54.14% | 66.31% | 76.65% |
-| [wuh721816ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 04 | 222 | 305172 | 81 | 0.3 | 52.70% | 59.57% | 66.08% |
-| [wuh721816ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 02 | 167 | 88330 | 15 | 0.3 | 52.05% | 66.77% | 78.81% |
-| [wuh721816ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 10 | 29 | 23056 | 2 | 0.3 | 50.56% | 82.44% | 95.57% |
-| [wuh721816ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 02 | 385 | 147014 | 33 | 0.2 | 46.35% | 57.43% | 67.81% |
-| [wuh721816ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 03 | 10 | 14225 | 1 | 0.2 | 45.21% | 87.06% | 98.21% |
-| [wuh721816ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 14 | 80 | 52551 | 12 | 0.2 | 41.31% | 59.29% | 75.08% |
-| [wuh721816ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 04 | 20 | 13505 | 1 | 0.1 | 38.97% | 84.33% | 97.84% |
-| [wuh721816ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 08 | 20 | 13248 | 1 | 0.1 | 38.39% | 84.05% | 97.81% |
-| [wuh721816ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 14 | 143 | 26784 | 5 | 0.1 | 33.15% | 60.27% | 82.27% |
-| [wuh721816ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 04 | 425 | 95868 | 34 | 0.1 | 25.86% | 37.26% | 50.29% |
-| [wuh721816ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 02 | 4 | 6645 | 1 | 0.1 | 24.80% | 75.70% | 96.71% |
-| [wuh721816ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 02 | 11 | 9985 | 3 | 0.1 | 18.89% | 52.09% | 83.54% |
-| [wuh721816ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 03 | 4707 | 2463925 | 1708 | 0.1 | 17.25% | 18.88% | 20.62% |
-| [wuh721816ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 12 | 30 | 13805 | 7 | 0.1 | 14.78% | 36.11% | 64.81% |
-| [wuh721816ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 02 | 10 | 4920 | 2 | 0.0 | 6.48% | 37.76% | 84.15% |
-| [wuh721816ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 03 | 18 | 5421 | 2 | 0.0 | 5.53% | 35.29% | 83.55% |
-| [wuh721816ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 02 | 8 | 2510 | 1 | 0.0 | 1.92% | 33.21% | 92.67% |
-| [wuh721816ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 02 | 18 | 6256 | 7 | 0.0 | 0.50% | 4.96% | 35.21% |
-| [wuh721816ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 04 | 7 | 2337 | 4 | 0.0 | 0.02% | 1.53% | 49.92% |
-| [wuh721816ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 08 | 7 | 2823 | 7 | 0.0 | 0.01% | 0.35% | 19.01% |
-| [wuh721816ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 02 | 12 | 1556 | 5 | 0.0 | 0.00% | 0.09% | 29.71% |
-| [wuh721816ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 02 | 17 | 1278 | 8 | 0.0 | 0.00% | 0.00% | 1.24% |
-| [wuh721816ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 04 | 19 | 4483 | 0 | 0.0 | 0.00% | 100.00% | 100.00% |
-| [wuh721816ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 16 | 62 | 15848 | 0 | 0.0 | 0.00% | 100.00% | 100.00% |
-| [wuh721816ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 12 | 5 | 2031 | 0 | 0.0 | 0.00% | 100.00% | 100.00% |
-| [wuh721816ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 16 | 26 | 33182 | 0 | 0.0 | 0.00% | 100.00% | 100.00% |
-| [wuh721816ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 03 | 1 | 1477 | 0 | 0.0 | 0.00% | 100.00% | 100.00% |
-| [wuh721816ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 06 | 15 | 17510 | 0 | 0.0 | 0.00% | 100.00% | 100.00% |
-| [wuh721816ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 06 | 3 | 2761 | 0 | 0.0 | 0.00% | 100.00% | 100.00% |
-| [wuh721816ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 06 | 10 | 10437 | 0 | 0.0 | 0.00% | 100.00% | 100.00% |
-| [wuh721816ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 10 | 20 | 40104 | 0 | 0.0 | 0.00% | 100.00% | 100.00% |
-| [wuh721816ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 04 | 1 | 2070 | 0 | 0.0 | 0.00% | 100.00% | 100.00% |
+| [wdc wuh721816ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 16 | 26602 | 11616742 | 102 | 5.7 | 97.46% | 97.91% | 98.28% |
+| [wdc wuh721414ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721414ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 14 | 8603 | 10867094 | 113 | 5.6 | 97.43% | 97.86% | 98.22% |
+| [wdc hms5c4040ale640](https://www.ebay.com/sch/i.html?_from=R40&_nkw=hms5c4040ale640&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 04 | 8716 | 18224627 | 253 | 5.4 | 97.30% | 97.61% | 97.89% |
+| [wdc huh721212ale600](https://www.ebay.com/sch/i.html?_from=R40&_nkw=huh721212ale600&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 12 | 2673 | 4483664 | 61 | 4.8 | 96.80% | 97.50% | 98.05% |
+| [wdc wuh721816ale6l0](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l0&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 16 | 3069 | 2772374 | 37 | 4.0 | 96.02% | 97.10% | 97.89% |
+| [wdc hds5c4040ale630](https://www.ebay.com/sch/i.html?_from=R40&_nkw=hds5c4040ale630&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 04 | 2837 | 4790383 | 95 | 3.8 | 95.61% | 96.40% | 97.04% |
+| [st6000dx000](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st6000dx000&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 06 | 1939 | 4330559 | 100 | 3.6 | 95.25% | 96.09% | 96.78% |
+| [wdc hds5c3030ala630](https://www.ebay.com/sch/i.html?_from=R40&_nkw=hds5c3030ala630&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 03 | 4664 | 6934573 | 150 | 3.5 | 95.18% | 95.88% | 96.48% |
+| [st16000nm001g](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st16000nm001g&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 16 | 34293 | 22614411 | 480 | 3.4 | 94.88% | 95.32% | 95.72% |
+| [toshiba mg07aca14ta](https://www.ebay.com/sch/i.html?_from=R40&_nkw=mg07aca14ta&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 14 | 39365 | 51123732 | 1376 | 3.1 | 94.40% | 94.69% | 94.96% |
+| [st12000nm001g](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st12000nm001g&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 12 | 13627 | 16705713 | 434 | 3.1 | 94.31% | 94.82% | 95.27% |
+| [wdc huh721212ale604](https://www.ebay.com/sch/i.html?_from=R40&_nkw=huh721212ale604&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 12 | 13519 | 15607978 | 392 | 3.1 | 94.28% | 94.81% | 95.30% |
+| [wdc huh728080ale600](https://www.ebay.com/sch/i.html?_from=R40&_nkw=huh728080ale600&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 08 | 1218 | 2609201 | 73 | 3.0 | 94.18% | 95.34% | 96.28% |
+| [toshiba mg08aca16tey](https://www.ebay.com/sch/i.html?_from=R40&_nkw=mg08aca16tey&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 16 | 5347 | 4846164 | 125 | 2.7 | 93.48% | 94.51% | 95.37% |
+| [st8000dm002](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st8000dm002&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 08 | 10307 | 27580788 | 1111 | 2.7 | 93.41% | 93.79% | 94.15% |
+| [wdc huh721212aln604](https://www.ebay.com/sch/i.html?_from=R40&_nkw=huh721212aln604&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 12 | 11422 | 20559877 | 882 | 2.3 | 92.06% | 92.55% | 93.01% |
+| [toshiba mg08aca16ta](https://www.ebay.com/sch/i.html?_from=R40&_nkw=mg08aca16ta&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 16 | 39184 | 12456523 | 361 | 2.2 | 91.88% | 92.67% | 93.39% |
+| [toshiba mg08aca16te](https://www.ebay.com/sch/i.html?_from=R40&_nkw=mg08aca16te&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 16 | 6130 | 5737006 | 192 | 2.2 | 91.84% | 92.89% | 93.81% |
+| [toshiba md04aba400v](https://www.ebay.com/sch/i.html?_from=R40&_nkw=md04aba400v&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 04 | 150 | 378365 | 11 | 2.2 | 91.74% | 95.32% | 97.39% |
+| [st14000nm001g](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st14000nm001g&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 14 | 11177 | 13299198 | 504 | 2.2 | 91.68% | 92.36% | 92.98% |
+| [st8000nm0055](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st8000nm0055&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 08 | 15680 | 36632508 | 1893 | 2.1 | 91.46% | 91.84% | 92.20% |
+| [st16000nm002j](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st16000nm002j&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 16 | 468 | 259866 | 4 | 2.0 | 90.91% | 96.45% | 98.66% |
+| [wdc hds722020ala330](https://www.ebay.com/sch/i.html?_from=R40&_nkw=hds722020ala330&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 02 | 4774 | 5675646 | 235 | 1.9 | 90.53% | 91.62% | 92.60% |
+| [st12000nm0008](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st12000nm0008&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 12 | 20955 | 31032423 | 1615 | 1.8 | 89.96% | 90.42% | 90.87% |
+| [wdc wuh722222ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh722222ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 22 | 13244 | 1279877 | 42 | 1.8 | 89.85% | 92.40% | 94.36% |
+| [wdc hds723030ala640](https://www.ebay.com/sch/i.html?_from=R40&_nkw=hds723030ala640&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 03 | 1048 | 1495337 | 73 | 1.6 | 88.62% | 90.84% | 92.65% |
+| [st4000dm000](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st4000dm000&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 04 | 37040 | 81347421 | 5770 | 1.6 | 88.51% | 88.83% | 89.14% |
+| [toshiba mg07aca14tey](https://www.ebay.com/sch/i.html?_from=R40&_nkw=mg07aca14tey&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 14 | 738 | 692480 | 28 | 1.6 | 88.22% | 91.69% | 94.20% |
+| [st8000nm000a](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st8000nm000a&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 08 | 249 | 128292 | 1 | 1.5 | 88.20% | 98.18% | 99.74% |
+| [st10000nm0086](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st10000nm0086&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 10 | 1304 | 2924650 | 202 | 1.5 | 87.58% | 89.09% | 90.44% |
+| [st12000nm0007](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st12000nm0007&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 12 | 38842 | 36947060 | 2173 | 1.5 | 87.48% | 88.00% | 88.51% |
+| [wdc hds724040ale640](https://www.ebay.com/sch/i.html?_from=R40&_nkw=hds724040ale640&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 04 | 45 | 64934 | 2 | 1.0 | 79.20% | 94.08% | 98.51% |
+| [wdc hus726040ale610](https://www.ebay.com/sch/i.html?_from=R40&_nkw=hus726040ale610&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 04 | 55 | 69213 | 3 | 1.0 | 79.16% | 92.49% | 97.56% |
+| [wdc wd40efrx](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wd40efrx&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 04 | 50 | 77099 | 4 | 0.9 | 77.59% | 90.65% | 96.44% |
+| [wdc wd60efrx](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wd60efrx&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 06 | 499 | 692834 | 72 | 0.9 | 77.55% | 81.68% | 85.20% |
+| [st8000dm005](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st8000dm005&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 08 | 27 | 53730 | 3 | 0.8 | 75.01% | 90.77% | 96.99% |
+| [wdc wd30efrx](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wd30efrx&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 03 | 1335 | 1365902 | 174 | 0.8 | 73.54% | 76.71% | 79.61% |
+| [toshiba dt01aca300](https://www.ebay.com/sch/i.html?_from=R40&_nkw=dt01aca300&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 03 | 60 | 78820 | 7 | 0.6 | 70.16% | 84.05% | 92.19% |
+| [st4000dm005](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st4000dm005&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 04 | 90 | 95987 | 11 | 0.6 | 69.16% | 81.19% | 89.25% |
+| [st14000nm0138](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st14000nm0138&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 14 | 1690 | 1951778 | 317 | 0.6 | 68.21% | 70.99% | 73.62% |
+| [st33000651as](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st33000651as&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 03 | 351 | 241851 | 31 | 0.6 | 66.53% | 74.90% | 81.75% |
+| [st18000nm000j](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st18000nm000j&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 18 | 70 | 82370 | 10 | 0.5 | 63.65% | 77.91% | 87.67% |
+| [toshiba hdwf180](https://www.ebay.com/sch/i.html?_from=R40&_nkw=hdwf180&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 08 | 69 | 65254 | 9 | 0.4 | 60.88% | 76.61% | 87.33% |
+| [st12000nm000j](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st12000nm000j&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 12 | 482 | 74238 | 7 | 0.4 | 60.47% | 77.96% | 89.10% |
+| [wdc huh728080ale604](https://www.ebay.com/sch/i.html?_from=R40&_nkw=huh728080ale604&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 08 | 98 | 77317 | 10 | 0.4 | 59.18% | 74.76% | 85.82% |
+| [wdc wd30ezrx](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wd30ezrx&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 03 | 500 | 149891 | 22 | 0.3 | 54.14% | 66.31% | 76.65% |
+| [st4000dx000](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st4000dx000&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 04 | 222 | 305172 | 81 | 0.3 | 52.70% | 59.57% | 66.08% |
+| [wdc wd20efrx](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wd20efrx&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 02 | 167 | 88330 | 15 | 0.3 | 52.05% | 66.77% | 78.81% |
+| [st10000nm001g](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st10000nm001g&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 10 | 29 | 23056 | 2 | 0.3 | 50.56% | 82.44% | 95.57% |
+| [st32000542as](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st32000542as&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 02 | 385 | 147014 | 33 | 0.2 | 46.35% | 57.43% | 67.81% |
+| [wdc hds723030ble640](https://www.ebay.com/sch/i.html?_from=R40&_nkw=hds723030ble640&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 03 | 10 | 14225 | 1 | 0.2 | 45.21% | 87.06% | 98.21% |
+| [st14000nm0018](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st14000nm0018&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 14 | 80 | 52551 | 12 | 0.2 | 41.31% | 59.29% | 75.08% |
+| [st4000dm004](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st4000dm004&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 04 | 20 | 13505 | 1 | 0.1 | 38.97% | 84.33% | 97.84% |
+| [wdc hus728t8tale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=hus728t8tale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 08 | 20 | 13248 | 1 | 0.1 | 38.39% | 84.05% | 97.81% |
+| [st14000nm000j](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st14000nm000j&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 14 | 143 | 26784 | 5 | 0.1 | 33.15% | 60.27% | 82.27% |
+| [st4000dm001](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st4000dm001&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 04 | 425 | 95868 | 34 | 0.1 | 25.86% | 37.26% | 50.29% |
+| [seagate barracuda ssd za2000cm10002](https://www.ebay.com/sch/i.html?_from=R40&_nkw=za2000cm10002&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 02 | 4 | 6645 | 1 | 0.1 | 24.80% | 75.70% | 96.71% |
+| [wdc hds723020bla642](https://www.ebay.com/sch/i.html?_from=R40&_nkw=hds723020bla642&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 02 | 11 | 9985 | 3 | 0.1 | 18.89% | 52.09% | 83.54% |
+| [st3000dm001](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st3000dm001&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 03 | 4707 | 2463925 | 1708 | 0.1 | 17.25% | 18.88% | 20.62% |
+| [st12000nm0117](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st12000nm0117&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 12 | 30 | 13805 | 7 | 0.1 | 14.78% | 36.11% | 64.81% |
+| [st2000vn000](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st2000vn000&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 02 | 10 | 4920 | 2 | 0.0 | 6.48% | 37.76% | 84.15% |
+| [wdc wd30ezrs](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wd30ezrs&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 03 | 18 | 5421 | 2 | 0.0 | 5.53% | 35.29% | 83.55% |
+| [st2000dm001](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st2000dm001&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 02 | 8 | 2510 | 1 | 0.0 | 1.92% | 33.21% | 92.67% |
+| [st320005xxxx](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st320005xxxx&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 02 | 18 | 6256 | 7 | 0.0 | 0.50% | 4.96% | 35.21% |
+| [st4000dx002](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st4000dx002&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 04 | 7 | 2337 | 4 | 0.0 | 0.02% | 1.53% | 49.92% |
+| [st8000dm004](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st8000dm004&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 08 | 7 | 2823 | 7 | 0.0 | 0.01% | 0.35% | 19.01% |
+| [st2000dl001](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st2000dl001&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 02 | 12 | 1556 | 5 | 0.0 | 0.00% | 0.09% | 29.71% |
+| [st2000dl003](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st2000dl003&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 02 | 17 | 1278 | 8 | 0.0 | 0.00% | 0.00% | 1.24% |
+| [wdc hus726040aln610](https://www.ebay.com/sch/i.html?_from=R40&_nkw=hus726040aln610&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 04 | 19 | 4483 | 0 | 0.0 | 0.00% | 100.00% | 100.00% |
+| [st16000nm000j](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st16000nm000j&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 16 | 62 | 15848 | 0 | 0.0 | 0.00% | 100.00% | 100.00% |
+| [st12000nm003g](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st12000nm003g&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 12 | 5 | 2031 | 0 | 0.0 | 0.00% | 100.00% | 100.00% |
+| [st16000nm005g](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st16000nm005g&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 16 | 26 | 33182 | 0 | 0.0 | 0.00% | 100.00% | 100.00% |
+| [wdc hds5c3030ble630](https://www.ebay.com/sch/i.html?_from=R40&_nkw=hds5c3030ble630&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 03 | 1 | 1477 | 0 | 0.0 | 0.00% | 100.00% | 100.00% |
+| [st6000dm001](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st6000dm001&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 06 | 15 | 17510 | 0 | 0.0 | 0.00% | 100.00% | 100.00% |
+| [st6000dm004](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st6000dm004&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 06 | 3 | 2761 | 0 | 0.0 | 0.00% | 100.00% | 100.00% |
+| [toshiba hdwe160](https://www.ebay.com/sch/i.html?_from=R40&_nkw=hdwe160&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 06 | 10 | 10437 | 0 | 0.0 | 0.00% | 100.00% | 100.00% |
+| [wdc huh721010ale600](https://www.ebay.com/sch/i.html?_from=R40&_nkw=huh721010ale600&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 10 | 20 | 40104 | 0 | 0.0 | 0.00% | 100.00% | 100.00% |
+| [wdc hms5c4040ble641](https://www.ebay.com/sch/i.html?_from=R40&_nkw=hms5c4040ble641&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 04 | 1 | 2070 | 0 | 0.0 | 0.00% | 100.00% | 100.00% |
 
 Note that some drives have a very low sample size, which gives them a
 very wide confidence interval. More data are needed for these drives to
