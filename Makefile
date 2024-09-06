@@ -86,6 +86,10 @@ results/survival.csv: results/drive_dates.csv code/survival.R
 README.md: README.Rmd results/survival.csv
 	Rscript -e "rmarkdown::render('README.Rmd', 'github_document', clean=TRUE)"
 
+# Only need to do this once to get the models to price check
+prices.csv:
+	Rscript -e "data.table::fwrite(data.table::fread('results/survival.csv')[surv_5yr_lower > 0.70,][order(-surv_5yr_lower), list(model, price=NA)], 'prices.csv')"
+
 # Define make targets
 .PHONY: all
 all: download_data unzip_data combine_data analyze_data

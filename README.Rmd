@@ -138,6 +138,27 @@ print(out)
 
 Note that the curves all have the same shape, but each model has a different slope. Compare this plot to the Kaplan-Meier plot above: The proportional hazards assumption works pretty well, but isn't perfect.
 
+# Cost effectiveness
+I manually gatherted some [hard drive prices](prices.csv) from ebay and amazon. I limited this search to drives with >70% expected 5 years survival, as I want to buy drives that are unlikely to fail on me. I can then use the price data to calculate the cost to store 1TB of data for 5 years for each drive. Note that these prices could be wrong, and also not that only one drive may be available at the given price.
+
+```{r prices, echo=FALSE}
+prices <- data.table::fread('prices.csv')
+prices <- data.table::merge.data.table(prices, dat, by='model', all.x=T)
+prices[,cost_per_tb := price / as.numeric(capacity_tb)]
+prices[,cost_per_tb_5yr := cost_per_tb / surv_5yr_lower]
+prices <- prices[order(cost_per_tb_5yr),]
+prices <- prices[,list(model, price, capacity_tb, surv_5yr_lower=surv_5yr_lower*100, cost_per_tb, cost_per_tb_5yr)]
+best_model <- prices[1,]
+best_model_name <- rev(stringi::stri_split_fixed(best_model$model, ' ')[[1]])[1]
+knitr::kable(prices, digits=1)
+```
+
+According to this analysis, the most cost effective drive is the `r best_model$model`, which costs `r best_model$price` and has a 5 year survival rate of `r sprintf("%1.1f%%", 100*best_model$surv_5yr_lower)`. This drive costs `r sprintf("$%1.2f", best_model$cost_per_tb)` per TB, and `r sprintf("$%1.2f", best_model$cost_per_tb_5yr)` to store 1 TB for 5 years.
+
+[Check prices on ebay](`r sprintf("https://www.ebay.com/sch/i.html?_from=R40&_nkw=%s&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000|1500", best_model_name)`).
+
+Again, the price data is probably incorrect, but its still an interesting analysis.
+
 # Full Data
 Here are the full results for all drives. (I excluded drives that are less than 2TB).
 ```{r all_drives, echo=FALSE}
