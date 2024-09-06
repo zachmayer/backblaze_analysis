@@ -87,10 +87,10 @@ Survival analysis is a little weird, because you don’t observe the full
 distribution of the data. This makes some traditional statistics
 impossible to calculate. For example, until you observe every hard drive
 in the sample fail, you can’t know the mean time to failure: if you have
-one drive left that hasn’t failed yet, and becomes an outlier in
-survival time, that might have a big impact on mean survival time. To
-find the median survival time, you need to observe half of the drives in
-your sample fail, which for some drives can take a decade or more!
+one drive left that hasn’t failed, and becomes an outlier in survival
+time, that might have a big impact on mean survival time. To find the
+median survival time, you need to wait for half of the drives in your
+sample fail, which can take a decade or more!
 
 Modern hard drives are **so reliable**, that even after 5+ years of
 observation, we’ve barely observed the distribution of failures! (This
@@ -216,7 +216,7 @@ less than 2TB).
 | wdc huh721010ale600 | 10 | 20 | 40104 | 0 | 0.0 | 0.00% | 100.00% | 100.00% |
 | wdc hms5c4040ble641 | 04 | 1 | 2070 | 0 | 0.0 | 0.00% | 100.00% | 100.00% |
 
-Note that some drives have a vert low sample size, which gives them a
+Note that some drives have a very low sample size, which gives them a
 very wide confidence interval. More data are needed for these drives to
 draw conclusions about their survival rates.
 
@@ -259,12 +259,9 @@ I’m probably way over-thinking this, but it was fun to analyze the data.
 
 There are some drives in this data I plan to avoid. For example, the
 st3000dm001 has a 5 year survival of 18.9%. I’d be a little nervous to
-buy a drive with a 1-in-1 chance of dying within 5 years.
+buy this drive.
 [Backblaze](https://www.backblaze.com/blog/3tb-hard-drive-failure/) has
 a good analysis of issues with 3TB drives on their blog.
 
-<figure>
-<img src="https://imgs.xkcd.com/comics/nerd_sniping.png"
-alt="I nerd sniped myself" />
-<figcaption aria-hidden="true">I nerd sniped myself</figcaption>
-</figure>
+[![I nerd sniped
+myself](https://imgs.xkcd.com/comics/nerd_sniping.png)](https://xkcd.com/356/)

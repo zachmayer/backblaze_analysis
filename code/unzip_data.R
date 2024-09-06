@@ -59,7 +59,7 @@ dt_list <- lapply(dt_list, function(x){
   out <- if(nrow(x) == 0) NULL else x
 })
 bad_files <- csv_files[sapply(dt_list, is.null)]
-if(length(bad_files) > 0) cat("...Bad input files:", bad_files, "\n")
+if(length(bad_files) > 0) cat("...Bad data files. Skipping:", bad_files, "\n")
 
 # Combine csv files
 dt <- data.table::rbindlist(dt_list, use.names=TRUE, fill=TRUE)

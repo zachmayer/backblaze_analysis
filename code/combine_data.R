@@ -66,7 +66,7 @@ dt[,model := clean_model_names(model)]
 ambiguous_model_data <- dt[, list(N=length(collapse::funique(model))), by='serial_number'][N>1,]
 data.table::setorder(ambiguous_model_data, -N)
 if(nrow(ambiguous_model_data) > 0) {
-  cat("...Drives with ambiguous model data:", ambiguous_model_data[["serial_number"]], "\n")
+  cat("...Drives serials with ambiguous model data. Using model from the latest date for:", ambiguous_model_data[["serial_number"]], "\n")
 }
 if(nrow(ambiguous_model_data) > 10L){
   warning("10+ drives with ambiguous capacity data. Check the data and scripts.")
@@ -77,7 +77,7 @@ if(nrow(ambiguous_model_data) > 100L){
 
 # Aggregate
 dt <- dt[, list(
-  capacity_tb = max(capacity_tb, na.rm=TRUE),  # For differing capacities, take the median excluding NAs
+  capacity_tb = max(capacity_tb, na.rm=TRUE),  # For differing capacities, take the max excluding NAs. Capacity can go down as drives fail.
   model = model[which.max(max_date)],  # For differing models, take the latest
   min_date = min(min_date),
   max_date = max(max_date),
@@ -96,7 +96,6 @@ stopifnot(dt[,all(max_date >= min_date)])
 dt[,model := stringi::stri_replace_all_fixed(model, 'hgst ', 'wdc ')]
 dt[,model := stringi::stri_replace_all_fixed(model, 'hitachi ', 'wdc ')]
 dt[model == "wuh721816ale6l4", model := "wdc wuh721816ale6l4"]
-dt[,sort(unique(model))]
 
 # Save
 data.table::fwrite(dt, 'results/drive_dates.csv')

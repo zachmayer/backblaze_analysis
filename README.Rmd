@@ -96,7 +96,7 @@ Data details:
 * **surv_5yr_hi** is the upper bound of the 95% confidence interval of the 5-year survival rate.    
 
 # Technical Details
-Survival analysis is a little weird, because you don't observe the full distribution of the data. This makes some traditional statistics impossible to calculate. For example, until you observe every hard drive in the sample fail, you can't know the mean time to failure: if you have one drive left that hasn't failed yet, and becomes an outlier in survival time, that might have a big impact on mean survival time. To find the median survival time, you need to observe half of the drives in your sample fail, which for some drives can take a decade or more!
+Survival analysis is a little weird, because you don't observe the full distribution of the data. This makes some traditional statistics impossible to calculate. For example, until you observe every hard drive in the sample fail, you can't know the mean time to failure: if you have one drive left that hasn't failed, and becomes an outlier in survival time, that might have a big impact on mean survival time. To find the median survival time, you need to wait for half of the drives in your sample fail, which can take a decade or more!
 
 Modern hard drives are **so reliable**, that even after 5+ years of observation, we've barely observed the distribution of failures! (This is a good thing, but it makes it hard to chose between drives!).
 
@@ -156,7 +156,7 @@ knitr::kable(
     )]
 )
 ```
-Note that some drives have a vert low sample size, which gives them a very wide confidence interval. More data are needed for these drives to draw conclusions about their survival rates.
+Note that some drives have a very low sample size, which gives them a very wide confidence interval. More data are needed for these drives to draw conclusions about their survival rates.
 
 # Replicating my results
 [results/drive_dates.csv](results/drive_dates.csv) has the cleaned up data from backblaze, with each drive by serial number, its model, when it was installed, when it was last observed, and whether it failed.
@@ -174,6 +174,6 @@ bad_drive <- dat[n_unique>100,][which.min(surv_5yr_upper),]
 ```
 I'm probably way over-thinking this, but it was fun to analyze the data.
 
-There are some drives in this data I plan to avoid. For example, the `r bad_drive$model` has a 5 year survival of `r sprintf("%1.1f%%", 100*bad_drive$surv_5yr)`. I'd be a little nervous to buy a drive with a 1-in-`r round(1 / (1 - bad_drive$surv_5yr))` chance of dying within 5 years. [Backblaze](https://www.backblaze.com/blog/3tb-hard-drive-failure/) has a good analysis of issues with 3TB drives on their blog.
+There are some drives in this data I plan to avoid. For example, the `r bad_drive$model` has a 5 year survival of `r sprintf("%1.1f%%", 100*bad_drive$surv_5yr)`. I'd be a little nervous to buy this drive. [Backblaze](https://www.backblaze.com/blog/3tb-hard-drive-failure/) has a good analysis of issues with 3TB drives on their blog.
 
-![I nerd sniped myself](https://imgs.xkcd.com/comics/nerd_sniping.png)
+[![I nerd sniped myself](https://imgs.xkcd.com/comics/nerd_sniping.png)](https://xkcd.com/356/)
