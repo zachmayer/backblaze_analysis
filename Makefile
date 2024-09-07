@@ -83,7 +83,7 @@ results/drive_dates.csv: $(CSV_FILES) code/combine_data.R
 results/survival.csv: results/drive_dates.csv code/survival.R
 	Rscript code/survival.R
 
-README.md: README.Rmd results/survival.csv
+README.md: README.Rmd results/survival.csv prices.csv
 	Rscript -e "rmarkdown::render('README.Rmd', 'github_document', clean=TRUE)"
 
 # Only need to do this once to get the models to price check
