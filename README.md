@@ -89,9 +89,11 @@ distribution of the data. This makes some traditional statistics
 impossible to calculate. For example, until you observe every hard drive
 in the sample fail, you can’t know the mean time to failure: if you have
 one drive left that hasn’t failed, and becomes an outlier in survival
-time, that might have a big impact on mean survival time. To find the
-median survival time, you need to wait for half of the drives in your
-sample fail, which can take a decade or more!
+time, that might have a big impact on mean survival time. You won’t know
+the true mean until that last drive fails.
+
+Similarly, to find the median survival time, you need to wait for half
+of the drives in your sample fail, which can take a decade or more!
 
 Modern hard drives are **so reliable**, that even after 5+ years of
 observation, we’ve barely observed the distribution of failures! (This
