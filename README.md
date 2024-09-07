@@ -282,8 +282,8 @@ draw conclusions about their survival rates.
 # Replicating my results
 
 [results/drive_dates.csv](results/drive_dates.csv) has the cleaned up
-data from backblaze, with each drive by serial number, its model, when
-it was installed, when it was last observed, and whether it failed.
+data from backblaze, with each drive by serial number, model, when it
+was installed, when it was last observed, and whether it failed.
 
 | serial_number  | capacity_tb | model               | min_date   | max_date   | failed |
 |:---------------|------------:|:--------------------|:-----------|:-----------|-------:|

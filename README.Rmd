@@ -186,7 +186,7 @@ knitr::kable(
 Note that some drives have a very low sample size, which gives them a very wide confidence interval. More data are needed for these drives to draw conclusions about their survival rates.
 
 # Replicating my results
-[results/drive_dates.csv](results/drive_dates.csv) has the cleaned up data from backblaze, with each drive by serial number, its model, when it was installed, when it was last observed, and whether it failed.
+[results/drive_dates.csv](results/drive_dates.csv) has the cleaned up data from backblaze, with each drive by serial number, model, when it was installed, when it was last observed, and whether it failed.
 ```{r data, echo=FALSE}
 knitr::kable(head(data.table::fread("results/drive_dates.csv")[order(-max_date, min_date),], 10L))
 ```
