@@ -45,8 +45,8 @@ calculated a 95% confidence interval on the 5-year survival rate, and I
 used that interval to sort the drives. Based on this analysis, the wdc
 wuh721816ale6l4 is the most reliable drive model in our data, with an
 estimated 5-year survival rate that is at least 97.46%. (In other words
-we are 95% confident that the wdc wuh721816ale6l4 will last at least
-97.46% years).
+we are 95% confident that at least 97.46% of the wdc wuh721816ale6l4’s’
+will last at least \` years).
 
 Here are the top drives from this analysis, by size. (for example, many
 manufacturers have drives in the 16TB range that are very reliable, but
