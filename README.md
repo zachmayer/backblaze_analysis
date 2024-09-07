@@ -43,10 +43,10 @@ of drive failures, but I don’t like their approach for 2 reasons:
 I chose to order the drives by their expected 5 year survival rate. I
 calculated a 95% confidence interval on the 5-year survival rate, and I
 used that interval to sort the drives. Based on this analysis, the wdc
-wuh721816ale6l4 is the most reliable drive model in our data, with an
+wuh721816ale6l4 is the most reliable model in our data, with an
 estimated 5-year survival rate that is at least 97.46%. (In other words
-we are 95% confident that the wdc wuh721816ale6l4 will last at least
-97.46% years).
+we are 95% confident that at least 97.46% of the wdc wuh721816ale6l4’s
+will last at least 5 years).
 
 Here are the top drives from this analysis, by size. (for example, many
 manufacturers have drives in the 16TB range that are very reliable, but
@@ -89,9 +89,11 @@ distribution of the data. This makes some traditional statistics
 impossible to calculate. For example, until you observe every hard drive
 in the sample fail, you can’t know the mean time to failure: if you have
 one drive left that hasn’t failed, and becomes an outlier in survival
-time, that might have a big impact on mean survival time. To find the
-median survival time, you need to wait for half of the drives in your
-sample fail, which can take a decade or more!
+time, that might have a big impact on mean survival time. You won’t know
+the true mean until that last drive fails.
+
+Similarly, to find the median survival time, you need to wait for half
+of the drives in your sample fail, which can take a decade or more!
 
 Modern hard drives are **so reliable**, that even after 5+ years of
 observation, we’ve barely observed the distribution of failures! (This
@@ -142,15 +144,17 @@ not that only one drive may be available at the given price.
 
 | model | price | capacity_tb | surv_5yr_lower | cost_per_tb | cost_per_tb_5yr |
 |:---|---:|:---|---:|---:|---:|
-| [st14000nm001g](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st14000nm001g&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 120.0 | 14 | 91.7 | 8.6 | 9.3 |
 | [st16000nm001g](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st16000nm001g&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 165.0 | 16 | 94.9 | 10.3 | 10.9 |
 | [st12000nm001g](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st12000nm001g&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 126.0 | 12 | 94.3 | 10.5 | 11.1 |
 | [st12000nm0008](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st12000nm0008&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 122.0 | 12 | 90.0 | 10.2 | 11.3 |
+| [st14000nm001g](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st14000nm001g&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 149.9 | 14 | 91.7 | 10.7 | 11.7 |
 | [wdc huh721212ale600](https://www.ebay.com/sch/i.html?_from=R40&_nkw=huh721212ale600&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 148.8 | 12 | 96.8 | 12.4 | 12.8 |
 | [wdc wuh721414ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721414ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 179.0 | 14 | 97.4 | 12.8 | 13.1 |
+| [wdc wuh721816ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 209.0 | 16 | 97.5 | 13.1 | 13.4 |
 | [wdc huh728080ale600](https://www.ebay.com/sch/i.html?_from=R40&_nkw=huh728080ale600&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 101.2 | 08 | 94.2 | 12.6 | 13.4 |
 | [st4000dm000](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st4000dm000&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 48.0 | 04 | 88.5 | 12.0 | 13.6 |
 | [toshiba mg08aca16te](https://www.ebay.com/sch/i.html?_from=R40&_nkw=mg08aca16te&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 200.0 | 16 | 91.8 | 12.5 | 13.6 |
+| [wdc hds722020ala330](https://www.ebay.com/sch/i.html?_from=R40&_nkw=hds722020ala330&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 25.1 | 02 | 90.5 | 12.6 | 13.9 |
 | [st6000dx000](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st6000dx000&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 85.0 | 06 | 95.3 | 14.2 | 14.9 |
 | [st8000nm0055](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st8000nm0055&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 109.0 | 08 | 91.5 | 13.6 | 14.9 |
 | [wdc wuh721816ale6l0](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l0&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 229.9 | 16 | 96.0 | 14.4 | 15.0 |
@@ -158,38 +162,37 @@ not that only one drive may be available at the given price.
 | [toshiba mg08aca16tey](https://www.ebay.com/sch/i.html?_from=R40&_nkw=mg08aca16tey&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 229.9 | 16 | 93.5 | 14.4 | 15.4 |
 | [st12000nm0007](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st12000nm0007&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 162.0 | 12 | 87.5 | 13.5 | 15.4 |
 | [st16000nm002j](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st16000nm002j&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 225.0 | 16 | 90.9 | 14.1 | 15.5 |
+| [wdc hus726040ale610](https://www.ebay.com/sch/i.html?_from=R40&_nkw=hus726040ale610&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 50.1 | 04 | 79.2 | 12.5 | 15.8 |
 | [st8000nm000a](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st8000nm000a&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 111.8 | 08 | 88.2 | 14.0 | 15.8 |
+| [wdc hds5c3030ala630](https://www.ebay.com/sch/i.html?_from=R40&_nkw=hds5c3030ala630&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 45.7 | 03 | 95.2 | 15.2 | 16.0 |
 | [st8000dm002](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st8000dm002&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 119.7 | 08 | 93.4 | 15.0 | 16.0 |
 | [wdc huh721212ale604](https://www.ebay.com/sch/i.html?_from=R40&_nkw=huh721212ale604&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 199.0 | 12 | 94.3 | 16.6 | 17.6 |
-| [wdc wuh721816ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 278.0 | 16 | 97.5 | 17.4 | 17.8 |
-| [wdc wd60efrx](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wd60efrx&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 100.0 | 06 | 77.5 | 16.7 | 21.5 |
 | [toshiba dt01aca300](https://www.ebay.com/sch/i.html?_from=R40&_nkw=dt01aca300&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 45.5 | 03 | 70.2 | 15.2 | 21.6 |
 | [wdc hds724040ale640](https://www.ebay.com/sch/i.html?_from=R40&_nkw=hds724040ale640&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 69.0 | 04 | 79.2 | 17.2 | 21.8 |
-| [wdc hus726040ale610](https://www.ebay.com/sch/i.html?_from=R40&_nkw=hus726040ale610&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 69.0 | 04 | 79.2 | 17.2 | 21.8 |
 | [wdc hds723030ala640](https://www.ebay.com/sch/i.html?_from=R40&_nkw=hds723030ala640&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 59.8 | 03 | 88.6 | 19.9 | 22.5 |
 | [wdc wuh722222ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh722222ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 450.0 | 22 | 89.8 | 20.5 | 22.8 |
-| [wdc hds5c3030ala630](https://www.ebay.com/sch/i.html?_from=R40&_nkw=hds5c3030ala630&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 69.0 | 03 | 95.2 | 23.0 | 24.2 |
+| [wdc wd30efrx](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wd30efrx&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 54.0 | 03 | 73.5 | 18.0 | 24.5 |
 | [wdc wd40efrx](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wd40efrx&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 79.5 | 04 | 77.6 | 19.9 | 25.6 |
 | [wdc hms5c4040ale640](https://www.ebay.com/sch/i.html?_from=R40&_nkw=hms5c4040ale640&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 102.0 | 04 | 97.3 | 25.5 | 26.2 |
+| [wdc wd60efrx](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wd60efrx&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 125.0 | 06 | 77.5 | 20.8 | 26.9 |
 | [toshiba mg08aca16ta](https://www.ebay.com/sch/i.html?_from=R40&_nkw=mg08aca16ta&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 415.0 | 16 | 91.9 | 25.9 | 28.2 |
-| [wdc wd30efrx](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wd30efrx&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 65.0 | 03 | 73.5 | 21.7 | 29.5 |
-| [wdc hds722020ala330](https://www.ebay.com/sch/i.html?_from=R40&_nkw=hds722020ala330&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 67.4 | 02 | 90.5 | 33.7 | 37.3 |
 | [wdc huh721212aln604](https://www.ebay.com/sch/i.html?_from=R40&_nkw=huh721212aln604&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 418.0 | 12 | 92.1 | 34.8 | 37.8 |
 | [wdc hds5c4040ale630](https://www.ebay.com/sch/i.html?_from=R40&_nkw=hds5c4040ale630&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 180.0 | 04 | 95.6 | 45.0 | 47.1 |
-| [st8000dm005](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st8000dm005&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 554.9 | 08 | 75.0 | 69.4 | 92.5 |
+| [st8000dm005](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st8000dm005&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 603.8 | 08 | 75.0 | 75.5 | 100.6 |
 
 According to this analysis, the most cost effective drive is the
-[st14000nm001g](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st14000nm001g&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500),
-which costs 119.99 and has a 5 year survival rate of 9168.1%. This drive
-costs \$8.57 per TB, and \$9.35 to store 1 TB for 5 years.
+[st16000nm001g](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st16000nm001g&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500),
+which costs \$165 and has a 5 year survival rate of 94.9%. This drive
+costs \$10.87 to store 1 TB for 5 years (this price includes the
+probability of failure).
 
 Again, the price data is probably incorrect, but its still an
 interesting analysis.
 
 # Full Data
 
-Here are the full results for all drives. (I excluded drives that are
-less than 2TB).
+Here are the full results for all drives, excluding drives that are less
+than 2TB:
 
 | model | capacity_tb | N | drive_days | failures | years_97pct | surv_5yr_lo | surv_5yr | surv_5yr_hi |
 |:---|:---|---:|---:|---:|:---|:---|:---|:---|
@@ -279,8 +282,8 @@ draw conclusions about their survival rates.
 # Replicating my results
 
 [results/drive_dates.csv](results/drive_dates.csv) has the cleaned up
-data from backblaze, with each drive by serial number, its model, when
-it was installed, when it was last observed, and whether it failed.
+data from backblaze, with each drive by serial number, model, when it
+was installed, when it was last observed, and whether it failed.
 
 | serial_number  | capacity_tb | model               | min_date   | max_date   | failed |
 |:---------------|------------:|:--------------------|:-----------|:-----------|-------:|

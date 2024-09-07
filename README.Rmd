@@ -63,7 +63,7 @@ I'm buying a hard drive for backups, and I want to buy a drive that's not going 
 2. I want to compute a confidence interval, so I can select a drive where we have enough observations to be very confident in a low failure rate. For example, if I have a model drive that's been observed for one drive for 1 day with 0 failures, I probably don't want to buy it, despite it's zero percent failure rate. I'd rather buy a drive model thats been observed for 100 drives for 1000 days with one failure. [This blog post](https://www.evanmiller.org/how-not-to-sort-by-average-rating.html) has some good details on why confidence intervals are useful for sorting things.    
 
 # Results
-I chose to order the drives by their expected 5 year survival rate. I calculated a 95% confidence interval on the 5-year survival rate, and I used that interval to sort the drives. Based on this analysis, the `r best_drive` is the most reliable drive model in our data, with an estimated 5-year survival rate that is at least `r best_drive_surv`. (In other words we are 95% confident that the `r best_drive` will last at least `r best_drive_surv` years).
+I chose to order the drives by their expected 5 year survival rate. I calculated a 95% confidence interval on the 5-year survival rate, and I used that interval to sort the drives. Based on this analysis, the `r best_drive` is the most reliable model in our data, with an estimated 5-year survival rate that is at least `r best_drive_surv`. (In other words we are 95% confident that at least `r best_drive_surv` of the `r best_drive`'s will last at least 5 years).
 
 Here are the top drives from this analysis, by size. (for example, many manufacturers have drives in the 16TB range that are very reliable, but I'm only showing the single best model in this size range).
 
@@ -96,7 +96,9 @@ Data details:
 * **surv_5yr_hi** is the upper bound of the 95% confidence interval of the 5-year survival rate.    
 
 # Technical Details
-Survival analysis is a little weird, because you don't observe the full distribution of the data. This makes some traditional statistics impossible to calculate. For example, until you observe every hard drive in the sample fail, you can't know the mean time to failure: if you have one drive left that hasn't failed, and becomes an outlier in survival time, that might have a big impact on mean survival time. To find the median survival time, you need to wait for half of the drives in your sample fail, which can take a decade or more!
+Survival analysis is a little weird, because you don't observe the full distribution of the data. This makes some traditional statistics impossible to calculate. For example, until you observe every hard drive in the sample fail, you can't know the mean time to failure: if you have one drive left that hasn't failed, and becomes an outlier in survival time, that might have a big impact on mean survival time. You won't know the true mean until that last drive fails.
+
+Similarly, to find the median survival time, you need to wait for half of the drives in your sample fail, which can take a decade or more!
 
 Modern hard drives are **so reliable**, that even after 5+ years of observation, we've barely observed the distribution of failures! (This is a good thing, but it makes it hard to chose between drives!).
 
@@ -159,12 +161,12 @@ best_model <- prices[1,]
 knitr::kable(prices, digits=1)
 ```
 
-According to this analysis, the most cost effective drive is the `r best_model$model`, which costs `r best_model$price` and has a 5 year survival rate of `r sprintf("%1.1f%%", 100*best_model$surv_5yr_lower)`. This drive costs `r sprintf("$%1.2f", best_model$cost_per_tb)` per TB, and `r sprintf("$%1.2f", best_model$cost_per_tb_5yr)` to store 1 TB for 5 years.
+According to this analysis, the most cost effective drive is the `r best_model$model`, which costs $`r best_model$price` and has a 5 year survival rate of `r sprintf("%1.1f%%", best_model$surv_5yr_lower)`. This drive costs `r sprintf("$%1.2f", best_model$cost_per_tb_5yr)` to store 1 TB for 5 years (this price includes the probability of failure).
 
 Again, the price data is probably incorrect, but its still an interesting analysis.
 
 # Full Data
-Here are the full results for all drives. (I excluded drives that are less than 2TB).
+Here are the full results for all drives, excluding drives that are less than 2TB:
 ```{r all_drives, echo=FALSE}
 knitr::kable(
   dat[model != "00md00",
@@ -184,7 +186,7 @@ knitr::kable(
 Note that some drives have a very low sample size, which gives them a very wide confidence interval. More data are needed for these drives to draw conclusions about their survival rates.
 
 # Replicating my results
-[results/drive_dates.csv](results/drive_dates.csv) has the cleaned up data from backblaze, with each drive by serial number, its model, when it was installed, when it was last observed, and whether it failed.
+[results/drive_dates.csv](results/drive_dates.csv) has the cleaned up data from backblaze, with each drive by serial number, model, when it was installed, when it was last observed, and whether it failed.
 ```{r data, echo=FALSE}
 knitr::kable(head(data.table::fread("results/drive_dates.csv")[order(-max_date, min_date),], 10L))
 ```
