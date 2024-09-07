@@ -43,7 +43,7 @@ of drive failures, but I don’t like their approach for 2 reasons:
 I chose to order the drives by their expected 5 year survival rate. I
 calculated a 95% confidence interval on the 5-year survival rate, and I
 used that interval to sort the drives. Based on this analysis, the wdc
-wuh721816ale6l4 is the most reliable drive model in our data, with an
+wuh721816ale6l4 is the most reliable model in our data, with an
 estimated 5-year survival rate that is at least 97.46%. (In other words
 we are 95% confident that at least 97.46% of the wdc wuh721816ale6l4’s
 will last at least 5 years).
