@@ -166,7 +166,7 @@ According to this analysis, the most cost effective drive is the `r best_model$m
 Again, the price data is probably incorrect, but its still an interesting analysis.
 
 # Full Data
-Here are the full results for all drives. (I excluded drives that are less than 2TB).
+Here are the full results for all drives, excluding drives that are less than 2TB:
 ```{r all_drives, echo=FALSE}
 knitr::kable(
   dat[model != "00md00",

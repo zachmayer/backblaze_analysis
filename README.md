@@ -191,8 +191,8 @@ interesting analysis.
 
 # Full Data
 
-Here are the full results for all drives. (I excluded drives that are
-less than 2TB).
+Here are the full results for all drives, excluding drives that are less
+than 2TB:
 
 | model | capacity_tb | N | drive_days | failures | years_97pct | surv_5yr_lo | surv_5yr | surv_5yr_hi |
 |:---|:---|---:|---:|---:|:---|:---|:---|:---|
