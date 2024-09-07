@@ -180,8 +180,9 @@ not that only one drive may be available at the given price.
 
 According to this analysis, the most cost effective drive is the
 [st16000nm001g](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st16000nm001g&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500),
-which costs 165 and has a 5 year survival rate of 9487.9%. This drive
-costs \$10.31 per TB, and \$10.87 to store 1 TB for 5 years.
+which costs \$165 and has a 5 year survival rate of 94.9%. This drive
+costs \$10.87 to store 1 TB for 5 years (this price includes the
+probability of failure).
 
 Again, the price data is probably incorrect, but its still an
 interesting analysis.

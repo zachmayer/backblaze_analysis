@@ -159,7 +159,7 @@ best_model <- prices[1,]
 knitr::kable(prices, digits=1)
 ```
 
-According to this analysis, the most cost effective drive is the `r best_model$model`, which costs `r best_model$price` and has a 5 year survival rate of `r sprintf("%1.1f%%", 100*best_model$surv_5yr_lower)`. This drive costs `r sprintf("$%1.2f", best_model$cost_per_tb)` per TB, and `r sprintf("$%1.2f", best_model$cost_per_tb_5yr)` to store 1 TB for 5 years.
+According to this analysis, the most cost effective drive is the `r best_model$model`, which costs $`r best_model$price` and has a 5 year survival rate of `r sprintf("%1.1f%%", best_model$surv_5yr_lower)`. This drive costs `r sprintf("$%1.2f", best_model$cost_per_tb_5yr)` to store 1 TB for 5 years (this price includes the probability of failure).
 
 Again, the price data is probably incorrect, but its still an interesting analysis.
 
