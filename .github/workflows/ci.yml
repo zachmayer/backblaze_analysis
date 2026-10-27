@@ -1,6 +1,6 @@
 name: ci
 
-# The only check: requirements.txt still installs and imports. Dependabot's
+# The only check: the uv lockfile still installs and imports. Dependabot's
 # security bumps merge once it passes.
 on:
   pull_request:
@@ -16,9 +16,8 @@ jobs:
         with:
           persist-credentials: false
       - uses: astral-sh/setup-uv@1c37ad07a6a961277cf70c0d37d6f313000f5884 # v10.3.0
-      # 3.12: newest Python pandas 2.2.2 ships wheels for; 3.14 builds it from source and fails.
-      - run: uv venv --python 3.12
-      - run: uv pip install -r requirements.txt
+      # pyproject.toml caps Python at 3.12, the newest pandas 2.2.2 ships wheels for.
+      - run: uv sync --locked
       - run: .venv/bin/python -c "import IPython, pandas, requests"
 
   # Dependabot's PRs merge themselves. This job checks nothing out, so the PR's

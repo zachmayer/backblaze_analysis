@@ -1,7 +1,3 @@
-# TODO: ADD CI OF SOME MINIMAL KIND:
-# - Spellcheck
-# - markdown lint
-
 # TODO: new make target for smart stats
 # For each serial, lookup failure time or max time.
 # Find the data file the day before failure/the day of max time
@@ -105,7 +101,7 @@ install_r:
 
 .PHONY: install_py
 install_py:
-	pip3 install -r requirements.txt
+	uv sync
 
 .PHONY: install
 install: install_r install_py
