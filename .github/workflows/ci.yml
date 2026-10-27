@@ -1,0 +1,42 @@
+name: ci
+
+# The only check: requirements.txt still installs and imports. Dependabot's
+# security bumps merge once it passes.
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@1c37ad07a6a961277cf70c0d37d6f313000f5884 # v10.3.0
+      - run: uv venv
+      - run: uv pip install -r requirements.txt
+      - run: .venv/bin/python -c "import IPython, pandas, requests"
+
+  # Dependabot's PRs merge themselves. This job checks nothing out, so the PR's
+  # code never runs with this write token, and --match-head-commit refuses a
+  # head that moved after this run saw it.
+  merge-dependabot:
+    needs: [install]
+    # Both: the author alone would merge a commit someone else pushed onto
+    # Dependabot's branch; the actor alone, Dependabot acting on someone else's PR.
+    if: >-
+      github.event.pull_request.user.login == 'dependabot[bot]'
+      && github.actor == 'dependabot[bot]'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - run: gh pr merge --squash --match-head-commit "$PR_HEAD_SHA" "$PR_URL"
+        env:
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          GH_TOKEN: ${{ github.token }}
