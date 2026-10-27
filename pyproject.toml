@@ -1,0 +1,14 @@
+[project]
+name = "backblaze-analysis"
+version = "0.1.0"
+description = "Interactive Python tools for the Backblaze hard drive survival analysis"
+# 3.12: newest Python pandas 2.2.2 ships wheels for; 3.13+ builds it from source.
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "ipython==8.27.0",
+    "pandas==2.2.2",
+    "requests==2.33.0",
+]
+
+[tool.uv]
+package = false
