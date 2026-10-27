@@ -141,7 +141,7 @@ print(out)
 Note that the curves all have the same shape, but each model has a different slope. Compare this plot to the Kaplan-Meier plot above: The proportional hazards assumption works pretty well, but isn't perfect.
 
 # Cost effectiveness
-I manually gatherted some [hard drive prices](prices.csv) from ebay and amazon. I limited this search to drives with >70% expected 5 years survival, as I want to buy drives that are unlikely to fail on me. I can then use the price data to calculate the cost to store 1TB of data for 5 years for each drive. Note that these prices could be wrong, and also not that only one drive may be available at the given price.
+[Hard drive prices](prices.csv) are the median of current US listings (eBay Buy It Now, Amazon, Newegg, and drive resellers), new condition where available, gathered on 2026-10-27 by one GPT-6.1 Terra web search per drive model. Every listing behind each median is in [price_listings.csv](price_listings.csv). I use the price data to calculate the cost to store 1TB of data for 5 years for each drive, limited to drives with >70% expected 5 year survival, as I want to buy drives that are unlikely to fail on me. Note that these prices could be wrong, some medians rest on a single listing, and only one drive may be available at the given price.
 
 ```{r prices, echo=FALSE}
 ebay_url <- function(x, text=x){
@@ -153,6 +153,7 @@ ebay_url <- function(x, text=x){
 
 prices <- data.table::fread('prices.csv')
 prices <- data.table::merge.data.table(prices, dat, by='model', all.x=T)
+prices <- prices[surv_5yr_lower > 0.70,]
 prices[,cost_per_tb := price / as.numeric(capacity_tb)]
 prices[,cost_per_tb_5yr := cost_per_tb / surv_5yr_lower]
 prices <- prices[order(cost_per_tb_5yr),]

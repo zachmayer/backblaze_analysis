@@ -138,55 +138,72 @@ proportional hazards assumption works pretty well, but isn’t perfect.
 
 # Cost effectiveness
 
-I manually gatherted some [hard drive prices](prices.csv) from ebay and
-amazon. I limited this search to drives with \>70% expected 5 years
-survival, as I want to buy drives that are unlikely to fail on me. I can
-then use the price data to calculate the cost to store 1TB of data for 5
-years for each drive. Note that these prices could be wrong, and also
-not that only one drive may be available at the given price.
+[Hard drive prices](prices.csv) are the median of current US listings
+(eBay Buy It Now, Amazon, Newegg, and drive resellers), new condition
+where available, gathered on 2026-10-27 by one GPT-6.1 Terra web search
+per drive model. Every listing behind each median is in
+[price_listings.csv](price_listings.csv). I use the price data to
+calculate the cost to store 1TB of data for 5 years for each drive,
+limited to drives with \>70% expected 5 year survival, as I want to buy
+drives that are unlikely to fail on me. Note that these prices could be
+wrong, some medians rest on a single listing, and only one drive may be
+available at the given price.
 
 | model | price | capacity_tb | surv_5yr_lower | cost_per_tb | cost_per_tb_5yr |
 |:---|---:|:---|---:|---:|---:|
-| [st16000nm001g](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st16000nm001g&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 165.0 | 16 | 96.2 | 10.3 | 10.7 |
-| [st12000nm001g](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st12000nm001g&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 126.0 | 12 | 95.0 | 10.5 | 11.1 |
-| [st12000nm0008](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st12000nm0008&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 122.0 | 12 | 90.5 | 10.2 | 11.2 |
-| [st14000nm001g](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st14000nm001g&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 149.9 | 14 | 93.1 | 10.7 | 11.5 |
-| [wdc huh721212ale600](https://www.ebay.com/sch/i.html?_from=R40&_nkw=huh721212ale600&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 148.8 | 12 | 96.8 | 12.4 | 12.8 |
-| [wdc wuh721414ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721414ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 179.0 | 14 | 97.1 | 12.8 | 13.2 |
-| [toshiba mg08aca16te](https://www.ebay.com/sch/i.html?_from=R40&_nkw=mg08aca16te&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 200.0 | 16 | 93.2 | 12.5 | 13.4 |
-| [st4000dm000](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st4000dm000&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 48.0 | 04 | 89.1 | 12.0 | 13.5 |
-| [wdc huh728080ale600](https://www.ebay.com/sch/i.html?_from=R40&_nkw=huh728080ale600&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 101.2 | 08 | 93.5 | 12.6 | 13.5 |
-| [wdc wuh721816ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 209.0 | 16 | 96.5 | 13.1 | 13.5 |
-| [wdc hds722020ala330](https://www.ebay.com/sch/i.html?_from=R40&_nkw=hds722020ala330&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 25.1 | 02 | 90.5 | 12.6 | 13.9 |
-| [st8000nm0055](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st8000nm0055&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 109.0 | 08 | 92.0 | 13.6 | 14.8 |
-| [st6000dx000](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st6000dx000&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 85.0 | 06 | 95.6 | 14.2 | 14.8 |
-| [st8000nm000a](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st8000nm000a&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 111.8 | 08 | 94.1 | 14.0 | 14.9 |
-| [st16000nm002j](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st16000nm002j&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 225.0 | 16 | 93.9 | 14.1 | 15.0 |
-| [wdc wuh721816ale6l0](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l0&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 229.9 | 16 | 93.3 | 14.4 | 15.4 |
-| [st10000nm0086](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st10000nm0086&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 133.0 | 10 | 86.3 | 13.3 | 15.4 |
-| [st12000nm0007](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st12000nm0007&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 162.0 | 12 | 87.2 | 13.5 | 15.5 |
-| [wdc hus726040ale610](https://www.ebay.com/sch/i.html?_from=R40&_nkw=hus726040ale610&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 50.1 | 04 | 80.6 | 12.5 | 15.5 |
-| [st8000dm002](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st8000dm002&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 119.7 | 08 | 93.8 | 15.0 | 16.0 |
-| [wdc hds5c3030ala630](https://www.ebay.com/sch/i.html?_from=R40&_nkw=hds5c3030ala630&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 45.7 | 03 | 95.2 | 15.2 | 16.0 |
-| [toshiba mg08aca16tey](https://www.ebay.com/sch/i.html?_from=R40&_nkw=mg08aca16tey&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 229.9 | 16 | 87.6 | 14.4 | 16.4 |
-| [wdc huh721212ale604](https://www.ebay.com/sch/i.html?_from=R40&_nkw=huh721212ale604&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 199.0 | 12 | 91.2 | 16.6 | 18.2 |
-| [wdc wuh722222ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh722222ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 450.0 | 22 | 96.0 | 20.5 | 21.3 |
-| [toshiba dt01aca300](https://www.ebay.com/sch/i.html?_from=R40&_nkw=dt01aca300&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 45.5 | 03 | 70.1 | 15.2 | 21.6 |
-| [wdc hds724040ale640](https://www.ebay.com/sch/i.html?_from=R40&_nkw=hds724040ale640&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 69.0 | 04 | 79.4 | 17.2 | 21.7 |
-| [wdc hds723030ala640](https://www.ebay.com/sch/i.html?_from=R40&_nkw=hds723030ala640&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 59.8 | 03 | 88.6 | 19.9 | 22.5 |
-| [wdc wd30efrx](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wd30efrx&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 54.0 | 03 | 73.5 | 18.0 | 24.5 |
-| [wdc wd40efrx](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wd40efrx&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 79.5 | 04 | 77.5 | 19.9 | 25.6 |
-| [wdc hms5c4040ale640](https://www.ebay.com/sch/i.html?_from=R40&_nkw=hms5c4040ale640&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 102.0 | 04 | 97.5 | 25.5 | 26.2 |
-| [wdc wd60efrx](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wd60efrx&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 125.0 | 06 | 77.6 | 20.8 | 26.9 |
-| [toshiba mg08aca16ta](https://www.ebay.com/sch/i.html?_from=R40&_nkw=mg08aca16ta&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 415.0 | 16 | 93.5 | 25.9 | 27.7 |
-| [wdc huh721212aln604](https://www.ebay.com/sch/i.html?_from=R40&_nkw=huh721212aln604&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 418.0 | 12 | 89.8 | 34.8 | 38.8 |
-| [wdc hds5c4040ale630](https://www.ebay.com/sch/i.html?_from=R40&_nkw=hds5c4040ale630&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 180.0 | 04 | 95.6 | 45.0 | 47.1 |
-| [st8000dm005](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st8000dm005&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 603.8 | 08 | 82.7 | 75.5 | 91.3 |
+| [wdc wuh721414ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721414ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 438.0 | 14 | 97.1 | 31.3 | 32.2 |
+| [wdc hds5c3030ala630](https://www.ebay.com/sch/i.html?_from=R40&_nkw=hds5c3030ala630&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 95.0 | 03 | 95.2 | 31.7 | 33.3 |
+| [st6000dx000](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st6000dx000&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 223.6 | 06 | 95.6 | 37.3 | 39.0 |
+| [toshiba md04aba400v](https://www.ebay.com/sch/i.html?_from=R40&_nkw=md04aba400v&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 155.0 | 04 | 92.3 | 38.8 | 42.0 |
+| [wdc huh728080ale600](https://www.ebay.com/sch/i.html?_from=R40&_nkw=huh728080ale600&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 314.4 | 08 | 93.5 | 39.3 | 42.0 |
+| [st14000nm001g](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st14000nm001g&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 555.6 | 14 | 93.1 | 39.7 | 42.6 |
+| [wdc wuh721816ale6l0](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l0&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 643.5 | 16 | 93.3 | 40.2 | 43.1 |
+| [st16000nm001g](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st16000nm001g&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 666.0 | 16 | 96.2 | 41.6 | 43.3 |
+| [wdc hds722020ala330](https://www.ebay.com/sch/i.html?_from=R40&_nkw=hds722020ala330&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 78.6 | 02 | 90.5 | 39.3 | 43.4 |
+| [wdc wuh721816ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721816ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 673.5 | 16 | 96.5 | 42.1 | 43.6 |
+| [toshiba mg10aca20te](https://www.ebay.com/sch/i.html?_from=R40&_nkw=mg10aca20te&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 849.5 | 20 | 94.2 | 42.5 | 45.1 |
+| [wdc hds723030ala640](https://www.ebay.com/sch/i.html?_from=R40&_nkw=hds723030ala640&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 122.5 | 03 | 88.6 | 40.8 | 46.1 |
+| [toshiba mg11aca24te](https://www.ebay.com/sch/i.html?_from=R40&_nkw=mg11aca24te&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 1124.0 | 24 | 95.0 | 46.8 | 49.3 |
+| [toshiba mg08aca16ta](https://www.ebay.com/sch/i.html?_from=R40&_nkw=mg08aca16ta&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 744.7 | 16 | 93.5 | 46.5 | 49.8 |
+| [wdc hds724040ale640](https://www.ebay.com/sch/i.html?_from=R40&_nkw=hds724040ale640&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 162.0 | 04 | 79.4 | 40.5 | 51.0 |
+| [wdc huh721212ale600](https://www.ebay.com/sch/i.html?_from=R40&_nkw=huh721212ale600&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 599.0 | 12 | 96.8 | 49.9 | 51.6 |
+| [st10000nm0086](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st10000nm0086&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 445.0 | 10 | 86.3 | 44.5 | 51.6 |
+| [st16000nm002j](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st16000nm002j&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 775.0 | 16 | 93.9 | 48.4 | 51.6 |
+| [st8000dm002](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st8000dm002&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 389.0 | 08 | 93.8 | 48.6 | 51.9 |
+| [st14000nm000j](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st14000nm000j&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 596.0 | 14 | 81.9 | 42.6 | 52.0 |
+| [st12000nm0008](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st12000nm0008&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 566.0 | 12 | 90.5 | 47.2 | 52.1 |
+| [toshiba mg07aca14tey](https://www.ebay.com/sch/i.html?_from=R40&_nkw=mg07aca14tey&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 675.7 | 14 | 89.1 | 48.3 | 54.2 |
+| [st12000nm001g](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st12000nm001g&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 618.6 | 12 | 95.0 | 51.5 | 54.3 |
+| [st16000nm000j](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st16000nm000j&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 653.7 | 16 | 73.1 | 40.9 | 55.9 |
+| [toshiba mg08aca16tey](https://www.ebay.com/sch/i.html?_from=R40&_nkw=mg08aca16tey&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 784.0 | 16 | 87.6 | 49.0 | 55.9 |
+| [st12000nm0007](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st12000nm0007&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 595.0 | 12 | 87.2 | 49.6 | 56.9 |
+| [st8000nm0055](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st8000nm0055&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 427.5 | 08 | 92.0 | 53.4 | 58.1 |
+| [st18000nm000j](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st18000nm000j&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 800.0 | 18 | 76.4 | 44.4 | 58.2 |
+| [wdc huh721212ale604](https://www.ebay.com/sch/i.html?_from=R40&_nkw=huh721212ale604&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 649.0 | 12 | 91.2 | 54.1 | 59.3 |
+| [st4000dm000](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st4000dm000&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 213.0 | 04 | 89.1 | 53.2 | 59.7 |
+| [st12000nm000j](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st12000nm000j&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 648.0 | 12 | 90.0 | 54.0 | 60.0 |
+| [wdc wuh722626ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh722626ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 1435.5 | 26 | 91.9 | 55.2 | 60.1 |
+| [wdc huh721212aln604](https://www.ebay.com/sch/i.html?_from=R40&_nkw=huh721212aln604&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 649.0 | 12 | 89.8 | 54.1 | 60.2 |
+| [toshiba mg08aca16te](https://www.ebay.com/sch/i.html?_from=R40&_nkw=mg08aca16te&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 899.0 | 16 | 93.2 | 56.2 | 60.3 |
+| [toshiba mg07aca14ta](https://www.ebay.com/sch/i.html?_from=R40&_nkw=mg07aca14ta&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 811.9 | 14 | 94.9 | 58.0 | 61.1 |
+| [wdc hds5c4040ale630](https://www.ebay.com/sch/i.html?_from=R40&_nkw=hds5c4040ale630&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 261.5 | 04 | 95.6 | 65.4 | 68.4 |
+| [wdc wuh722222ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh722222ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 1459.0 | 22 | 96.0 | 66.3 | 69.1 |
+| [toshiba mg09aca16te](https://www.ebay.com/sch/i.html?_from=R40&_nkw=mg09aca16te&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 950.0 | 16 | 82.9 | 59.4 | 71.6 |
+| [st8000dm005](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st8000dm005&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 476.0 | 08 | 82.7 | 59.5 | 71.9 |
+| [wdc hms5c4040ale640](https://www.ebay.com/sch/i.html?_from=R40&_nkw=hms5c4040ale640&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 286.7 | 04 | 97.5 | 71.7 | 73.5 |
+| [wdc wd60efrx](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wd60efrx&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 347.5 | 06 | 77.6 | 57.9 | 74.7 |
+| [st8000nm000a](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st8000nm000a&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 588.5 | 08 | 94.1 | 73.6 | 78.2 |
+| [st24000nm002h](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st24000nm002h&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 1543.0 | 24 | 79.4 | 64.3 | 81.0 |
+| [wdc wd40efrx](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wd40efrx&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 259.0 | 04 | 77.5 | 64.8 | 83.6 |
+| [st10000nm001g](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st10000nm001g&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 599.6 | 10 | 71.5 | 60.0 | 83.8 |
+| [toshiba dt01aca300](https://www.ebay.com/sch/i.html?_from=R40&_nkw=dt01aca300&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 199.0 | 03 | 70.1 | 66.3 | 94.6 |
+| [wdc wd30efrx](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wd30efrx&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 267.2 | 03 | 73.5 | 89.1 | 121.2 |
+| [wdc hus726040ale610](https://www.ebay.com/sch/i.html?_from=R40&_nkw=hus726040ale610&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500) | 404.0 | 04 | 80.6 | 101.0 | 125.3 |
 
-According to this analysis, the most cost effective drive is the
-[st16000nm001g](https://www.ebay.com/sch/i.html?_from=R40&_nkw=st16000nm001g&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500),
-which costs \$165 and has a 5 year survival rate of 96.2%. This drive
-costs \$10.72 to store 1 TB for 5 years (this price includes the
+According to this analysis, the most cost effective drive is the [wdc
+wuh721414ale6l4](https://www.ebay.com/sch/i.html?_from=R40&_nkw=wuh721414ale6l4&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500),
+which costs \$438 and has a 5 year survival rate of 97.1%. This drive
+costs \$32.21 to store 1 TB for 5 years (this price includes the
 probability of failure).
 
 Again, the price data is probably incorrect, but its still an
