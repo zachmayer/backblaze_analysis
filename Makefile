@@ -28,7 +28,7 @@ help:
 
 # Configuration
 BASE_URL := https://f001.backblazeb2.com/file/Backblaze-Hard-Drive-Data/
-END_YEAR := 2024
+END_YEAR := 2026
 END_QUARTER := Q2
 
 # Directories
@@ -47,11 +47,14 @@ $(if $(filter $(1),$(END_YEAR)),\
 endef
 QUARTERLY_FILES := $(foreach year,$(shell seq 2016 $(END_YEAR)),$(call QUARTER_FILES,$(year)))
 
+# A failed or truncated download deletes its partial file instead of leaving it to look complete
+.DELETE_ON_ERROR:
+
 # Static pattern rule for downloading files
 ALL_FILES := $(YEARLY_FILES) $(QUARTERLY_FILES)
 $(ALL_FILES): $(DOWNLOAD_DIR)/%.zip:
 	@mkdir -p $(dir $@)
-	curl -o $@ $(BASE_URL)$(@F)
+	curl --fail -o $@ $(BASE_URL)$(@F)
 
 # Pattern rule for processing zip files to CSV
 # Only keeps the first 5 columns: date,serial_number,model,capacity_bytes,failure
