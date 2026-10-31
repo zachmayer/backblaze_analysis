@@ -6,7 +6,7 @@ description = "Interactive Python tools for the Backblaze hard drive survival an
 requires-python = ">=3.12,<3.13"
 dependencies = [
     "ipython==9.17.1",
-    "pandas==3.0.6",
+    "pandas==3.1.0",
     "requests==2.34.2",
 ]
 
