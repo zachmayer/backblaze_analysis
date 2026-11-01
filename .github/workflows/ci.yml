@@ -1,8 +1,10 @@
 name: ci
 
-# The only check: the uv lockfile still installs and imports. Dependabot's
-# security bumps merge once it passes.
+# Two checks: the uv lockfile still installs and imports, and zizmor finds no
+# workflow security flaws. Dependabot's security bumps merge once they pass.
 on:
+  push:
+    branches: [main]
   pull_request:
 
 permissions:
@@ -15,6 +17,15 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
+      # https://docs.zizmor.sh
+      # Audits every workflow in the repo and dependabot.yml for security
+      # flaws. The action pins zizmor itself, so new rules arrive only with a
+      # Dependabot bump, which merges only once they pass.
+      - uses: zizmorcore/zizmor-action@53290badfa369cb0bf7ad16342cb62c2fa47ac7b # v0.8.0
+        with:
+          min-severity: medium
+          advanced-security: false
+          annotations: true
       - uses: astral-sh/setup-uv@07a047e608db84b3d8c06cd9a7c7dcc9c355c18e # v10.3.2
       # pyproject.toml caps Python at 3.12, the newest pandas 2.2.2 ships wheels for.
       - run: uv sync --locked
@@ -25,11 +36,10 @@ jobs:
   # head that moved after this run saw it.
   merge-dependabot:
     needs: [install]
-    # Both: the author alone would merge a commit someone else pushed onto
-    # Dependabot's branch; the actor alone, Dependabot acting on someone else's PR.
-    if: >-
-      github.event.pull_request.user.login == 'dependabot[bot]'
-      && github.actor == 'dependabot[bot]'
+    # Only someone with write access can push to Dependabot's branch, and they
+    # can push to main anyway. Accepted: reopening a closed Dependabot PR, which
+    # Triage allows, gets it merged once the checks pass.
+    if: github.event_name == 'pull_request' && github.event.pull_request.user.login == 'dependabot[bot]'
     runs-on: ubuntu-latest
     permissions:
       contents: write
