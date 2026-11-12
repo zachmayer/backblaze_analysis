@@ -14,19 +14,19 @@ jobs:
   install:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
       # https://docs.zizmor.sh
       # Audits every workflow in the repo and dependabot.yml for security
       # flaws. The action pins zizmor itself, so new rules arrive only with a
       # Dependabot bump, which merges only once they pass.
-      - uses: zizmorcore/zizmor-action@53290badfa369cb0bf7ad16342cb62c2fa47ac7b # v0.8.0
+      - uses: zizmorcore/zizmor-action@v0.8.1
         with:
           min-severity: medium
           advanced-security: false
           annotations: true
-      - uses: astral-sh/setup-uv@68559e99cc807c1eb7e9238fd43a15bba460eec2 # v10.3.3
+      - uses: astral-sh/setup-uv@v10.3.3
       # pyproject.toml caps Python at 3.12, the newest pandas 2.2.2 ships wheels for.
       - run: uv sync --locked
       - run: .venv/bin/python -c "import IPython, pandas, requests"
@@ -40,7 +40,7 @@ jobs:
     # can push to main anyway. Accepted: reopening a closed Dependabot PR, which
     # Triage allows, gets it merged once the checks pass.
     if: github.event_name == 'pull_request' && github.event.pull_request.user.login == 'dependabot[bot]'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-slim
     permissions:
       contents: write
       pull-requests: write
